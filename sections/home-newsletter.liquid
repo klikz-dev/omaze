@@ -1,0 +1,40 @@
+{% assign s = section.settings %}
+
+<form id="oz-newsletter--signup" class="oz-form oz-newsletter-form oz-newsletter-form--footer">
+	<div class="oz-newsletter-wrapper">
+		<div class="oz-newsletter-form__title-container">
+			{% if s.newsletter_header != blank %}
+				<div class="oz-newsletter-form__title oz-section-title oz-centered">
+					{{- s.newsletter_header -}}
+				</div>
+			{% endif %}
+			{% if s.newsletter_copy != blank %}
+				<div class="oz-newsletter-form__desc oz-section-title__subtitle oz-color--dark-gray oz-centered">
+					{{- s.newsletter_copy -}}
+				</div>
+			{% endif %}
+		</div>
+		<div class="oz-field-wrap">
+			<input class="oz-input oz-newsletter-form__text-input js-newsletter-text-input jqvEmail" type="email" name="email" placeholder="Enter email address">
+		</div>
+		<input type="submit" class="oz-btn oz-btn--cta hoverable oz-newsletter-form__btn" value="Sign Me Up" name="subscribe">
+	</div>
+</form>
+
+{% schema %}
+{
+	"name": "Newsletter",
+	"settings": [
+		{
+			"type": "text",
+			"id": "newsletter_header",
+			"label": "Newsletter Header"
+		},
+		{
+			"type": "text",
+			"id": "newsletter_copy",
+			"label": "Newsletter Copy"
+		}
+	]
+}
+{% endschema %}

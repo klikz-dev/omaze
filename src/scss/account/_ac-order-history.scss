@@ -1,0 +1,34 @@
+/**
+ * account order history
+ */
+.ac-order-history {
+
+	// .ac-order-history th
+	// .ac-order-history td
+	th,
+	td {
+		font-size: rem(16);
+		text-transform: lowercase;
+
+		@include apply-to(desktop) {
+		    font-size: rem(18);
+		}
+	}
+
+	// .ac-order-history th
+	th {
+		background-color: $gray-13;
+		text-transform: lowercase;
+	}
+
+	// .ac-order-history td
+	td {
+		padding-left: rem(5);
+		padding-right: rem(5);
+	}
+
+	// .ac-order-history a
+	a {
+		text-decoration: underline;
+	}
+}

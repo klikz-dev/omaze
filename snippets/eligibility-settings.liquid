@@ -1,0 +1,9 @@
+<script type="text/javascript">
+    window.ozEligibilitySettings = {
+        restrictedCountries: '{{ settings.restrictedCountries }}'
+            .split(',')
+            .map((item) => item.trim().toUpperCase())
+            .filter((item) => item.length > 0),
+        eligibilityDate: new Date('{{ settings.restrictedStartDate }}'),
+    };
+</script>

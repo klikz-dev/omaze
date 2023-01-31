@@ -1,0 +1,60 @@
+.cardImage {
+    height: 138px;
+}
+
+.cardTitle {
+    height: 26px;
+}
+
+.cardDesc1 {
+    height: 16px;
+}
+
+.cardDesc2 {
+    height: 20px;
+}
+
+.cardDesc3 {
+    height: 20px;
+}
+
+.cards {
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+}
+
+@media only screen and (min-width: 720px) {
+    .container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .container {
+        max-width: 1104px;
+        margin: 0 auto;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .cardImage {
+        height: 144px;
+    }
+
+    .cardTitle {
+        height: 46px;
+    }
+
+    .cardDesc1 {
+        height: 17px;
+    }
+
+    .cardDesc2 {
+        height: 21px;
+    }
+
+    .cardDesc3 {
+        height: 21px;
+    }
+}

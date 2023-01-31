@@ -1,0 +1,19 @@
+<a href="#" class="oz-card{% if modifier %} oz-card--{{ modifier }}{% endif %}">
+	<div class="oz-card__img oz-card__section oz-card__section--full-width">
+		<div class="oz-card__intrinsic-ratio intrinsic-ratio intrinsic-ratio--card">
+			<img class="lazyload" data-sizes="auto" data-srcset="{% include 'c-responsive-image-url', responsive_img: cardImage, namespace: namespace %}" />
+		</div>
+	</div>
+	<div class="oz-card__content oz-card__section">
+		<p class="oz-card__sub-title">Support Wonder's</p>
+		<h3 class="oz-card__title">Choose Kind Tie-Dye Shirt</h3>
+	</div>
+	<div class="oz-card__footer oz-card__section">
+		<span class="oz-card__cta-label{% unless modifier == 'tall' %} oz-chevron--right-thick{% endunless %} secondary-font">
+			learn more
+			{% if modifier == 'tall' %}
+				<i class="fa fa-chevron-right" aria-hidden="true"></i>
+			{% endif %}
+		</span>
+	</div>
+</a>

@@ -1,0 +1,327 @@
+/**
+ * oz-section-banner
+ */
+
+.oz-section-banner {
+    width: 100%;
+    position: relative;
+    margin-bottom: 2.25em;
+
+    // .oz-section-banner__image-container
+    &__image-container {
+    	background-color: $black-2;
+
+    	img {
+    		position: absolute;
+    		width: 100%;
+    		height: auto;
+    		top: 0;
+    		bottom: 0;
+    		left: 0;
+    		right: 0;
+    	}
+    }
+
+	// .oz-section-banner__content
+    &__content {
+        width: 80%;
+        text-align: center;
+        margin: 0;
+        color: $white;
+        @include middle();
+
+		// .oz-section-banner__content .oz-btn
+        .oz-btn {
+            display: inline-block;
+            margin-top: rem(20);
+        }
+    }
+
+	// .oz-section-banner__wrapper
+	&__subtitle-wrapper {
+		padding: 0 rem(24);
+
+		@include apply-to(tablet) {
+			padding: 0 rem(60);
+		}
+	}
+
+	// .oz-section-banner__subtitle
+	&__subtitle {
+	    text-align: center;
+	    font-family: $primary-font;
+		font-style: italic;
+	    font-size: rem(16);
+	    font-weight: $light;
+
+	    @include apply-to(tablet) {
+	        font-size: rem(22);
+	    }
+	}
+}
+
+$animate: all 0.2s ease-in-out;
+
+body.rebrand {
+    .oz-homepage {
+
+        .oz-cafa-callout__about {
+            margin-bottom: 47px;
+            @include apply-to(phone) {
+                margin-bottom: 35px;
+            }
+        }
+
+        .oz-homepage__three-buttons, .oz-home-title {
+
+            padding: 0.35rem 3.125rem 1.3rem;
+            
+            @include apply-to(phone) {
+                padding-top:0;
+                padding-bottom: 0.5rem;
+            }
+
+            .oz-section-title {
+                font-family: $primary-font-rebrand;
+                font-size: 36px;
+                color: $new-grey-900;
+                line-height: normal;
+                margin-bottom: 23px;
+                
+                @include apply-to(phone) {
+                    width: 100%;
+                    font-size: 24px;
+                    line-height: 36px;
+                }
+            }
+        }
+
+        #shopify-section-home-curated-collections-data {
+            display: none;
+        }
+
+        #shopify-section-home-banner {
+
+            .oz-section-banner {
+                margin-bottom: 48px;
+                @include apply-to(phone) {
+                    margin-bottom: 33px;
+                }
+            }
+
+            .oz-section-banner__image-container.hide-phone {
+                padding-bottom: 39.6%;
+            }
+
+            .oz-section-banner__image-container.phone-only {
+                padding-bottom: 78.8%;
+            }
+
+            .oz-section-banner__content {
+                max-width: 800px;
+            }
+
+            .oz-section-title {
+                font-size: 64px;
+                font-family: $primary-font-rebrand;
+                line-height: 77px;
+                margin-bottom: 50px;
+
+                @include apply-to(phone) {
+                    font-size: 30px;
+                    line-height: 36px;
+                    margin-bottom: 23px;
+                }
+
+                span {
+                    display: block;
+                    font-size: 30px;
+                    line-height: 79px;   
+                
+                    @include apply-to(phone) {
+                        font-size: 18px;
+                        line-height: 44px;	
+                    }
+                }
+            }
+            .oz-btn {
+                background: $yellow-3;
+                font-family: $primary-font-rebrand;
+                color: $new-grey-900;
+                border-radius: 76px;
+                font-size: 20px;
+                letter-spacing: 0.015rem;
+                border: none;
+                padding-top: 8px;
+                height: 50px;
+                margin-top: 0;
+                margin-bottom: 16px;
+                width: auto;
+                min-width: 0;
+                padding-left: 32px;
+                padding-right: 32px;
+                
+                @include apply-to(phone) {
+                    height: 48px;
+                    margin-bottom: 9px;
+                    font-size: 18px;
+                }
+                
+                &:hover {
+                    background: $new-yellow-800;
+                }
+            }
+        }
+
+        .oz-homepage__impact {
+            background-color: $new-navy-700;
+            padding: 10px 0;
+            .oz-section-title {
+                font-family: $primary-font-rebrand;
+                font-size: 36px;
+                padding: 39px 0 22px;
+                letter-spacing: 0.015em;
+                @include apply-to(phone) {
+                    font-size: 24px;
+                    line-height: normal;
+                    padding: 13px 0 23px 0px;
+                    width: 90%;
+                }
+                span {
+                    color: $yellow-3;
+                }
+            }
+
+            .oz-slider__item {
+                margin: 0 12px;
+                @include apply-to(phone) {
+                    margin:0 8px;
+                }
+            }
+
+            .oz-slider__intrinsic-ratio {
+                @include apply-to(phone) {
+                    padding-bottom: 51%;
+                }
+            }
+
+            .oz-slider__title {
+                font-family: $primary-font-rebrand;
+                font-size: 36px;
+                bottom: 12%;
+                font-weight: bold;
+                @include apply-to(phone) {
+                    font-size: 20px;
+                }
+            }
+
+            .oz-slider__subtitle {
+                font-family: $primary-font-rebrand;
+                font-size: 20px;	
+                font-weight: bold;
+                padding: 29px 0 0 0;
+                min-height: 91px;	
+                @include apply-to(phone) {
+                    font-size: 16px;
+                    line-height: 23px;
+                    padding: 16px 0 0 0;
+                    min-height: 71px;	
+                }
+            }
+
+            .oz-slider .slick-arrow.slick-prev {
+                background-image: url("data:image/svg+xml,%3Csvg width='24' height='42' viewBox='0 0 24 42' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.910847 18.5442C-0.303617 19.7299 -0.303617 21.7246 0.910847 22.9103L19.0583 40.6282C20.1869 41.73 21.9606 41.73 23.0892 40.6282C24.3036 39.4424 24.3036 37.4478 23.0892 36.2621L7.16793 20.7368L23.0892 5.19246C24.3036 4.00675 24.3036 2.01211 23.0892 0.826392C21.9606 -0.275464 20.1869 -0.275464 19.0583 0.826392L0.910847 18.5442Z' fill='white'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: 44% 53%;
+            }
+
+            .oz-slider .slick-arrow.slick-next {
+                background-image: url("data:image/svg+xml,%3Csvg width='24' height='42' viewBox='0 0 24 42' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M23.0892 18.5442C24.3036 19.7299 24.3036 21.7246 23.0892 22.9103L4.9417 40.6282C3.81313 41.73 2.03942 41.73 0.910849 40.6282C-0.303616 39.4424 -0.303616 37.4478 0.910849 36.2621L16.8321 20.7368L0.910849 5.19246C-0.303616 4.00675 -0.303616 2.01211 0.910849 0.826392C2.03942 -0.275464 3.81313 -0.275464 4.9417 0.826392L23.0892 18.5442Z' fill='white'/%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                background-position: 71% 53%;
+            }
+
+            .oz-slider .slick-arrow.slick-next:before, .oz-slider .slick-arrow.slick-prev:before {
+                content: '';
+            }
+        }
+
+        #shopify-section-home-featured {
+
+            .oz-section-content {
+                margin: 0 1.875rem;
+            }
+
+            .oz-annotation-image {
+                padding: 24px 0 41px;
+                @include apply-to(phone) {
+                    padding: 30px 0 25px;
+                }
+            }
+
+            .oz-section-title {
+                font-family: $primary-font-rebrand;
+                font-size: 36px;
+
+                @include apply-to(phone) {
+                    font-size: 24px;
+                }	
+
+                &:first-letter {
+                    text-transform: uppercase
+                }
+
+                &:before {
+                    display: none;
+                }
+            }
+
+            .oz-btn__btn-wrap {
+                padding: 37px 0 57px;
+                @include apply-to(phone) {
+                    padding: 7px 0 66px;
+                }
+            }
+
+            .oz-btn__btn-wrap a {
+                color: $new-grey-900;
+                font-family: $primary-font-rebrand;
+                border-bottom: 4px $yellow-3 solid;
+                font-size: 20px;
+                letter-spacing: 0.015rem;
+                padding-top: 4px;
+                padding-bottom: 4px;
+                position: relative;
+
+                @include apply-to(phone) {
+                    font-size: 18px;
+                }
+
+                &:after {
+                    display: none;
+                }
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    bottom: -4px;
+                    width: 0px;
+                    height: 4px;
+                    margin: 5px 0 0;
+                    transition: $animate;
+                    transition-duration: 0.75s;
+                    opacity: 0;
+                    background-color: $yellow-3;
+                }
+        
+                &:hover {
+                    border-color: transparent;
+                    &:before {
+                        width: 100%;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }	
+}

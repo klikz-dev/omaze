@@ -1,0 +1,29 @@
+<section id="essentials" class="pv-essentials{% if meta.experience.end_date != blank %} has-counter{% endif %}">
+	<div class="pv-essentials__container">
+		{% include 'product-gallery' %}
+
+		<div class="pv-essential">
+			<div class="pv-essential__content">
+				{% include 'product-header' %}
+				{% include 'product-configurable' %}
+
+				{% if productStatus == 'closed' %}
+					<a class="oz-open-campaigns-link" href="/collections/shop">Check out our open campaigns</a>
+				{% endif %}
+
+				{% if meta.experience.end_date != blank and productStatus == 'active' %}
+					<div class="oz-campaign-tracking">
+						{% include 'product-experience-counter' %}
+						{% include 'items-sold-bar' %}
+					</div>
+				{% endif %}
+
+				{% include 'product-social' %}
+
+			</div>
+		</div>
+
+		{% include 'product-info-tabs', view: 'mobile' %}
+	</div>
+
+</section>

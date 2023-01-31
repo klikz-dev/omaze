@@ -1,0 +1,50 @@
+qa:
+  password: 2e4f87fef6604ef11001753bc64cdb51
+  theme_id: "75262820427"
+  store: omaze-qa.myshopify.com
+  ignore_files:
+    - config/theme_settings.json
+    - snippets/SEOManager-404.liquid
+    - snippets/SEOMetaManager.liquid
+    - snippets/shappify-bdl-load-bundle.liquid
+    - snippets/shappify-bdl-no-select.liquid
+    - templates/404.preSEOManager.liquid
+    - templates/search.SEOManagerProductMeta.liquid
+    - templates/search.SEOManagerTags.liquid
+    - snippets/shappify-bdl-no-select.liquid
+    - templates/404.preSEOManager.liquid
+    - templates/search.SEOManagerTags.liquid
+
+staging:
+  password: ede17b7a211a580d462e9faa3ae83a9f
+  theme_id: "31987400767"
+  store: omaze-stg.myshopify.com
+  ignore_files:
+    - config/theme_settings.json
+    - snippets/SEOManager-404.liquid
+    - snippets/SEOMetaManager.liquid
+    - snippets/shappify-bdl-load-bundle.liquid
+    - snippets/shappify-bdl-no-select.liquid
+    - templates/404.preSEOManager.liquid
+    - templates/search.SEOManagerProductMeta.liquid
+    - templates/search.SEOManagerTags.liquid
+    - snippets/shappify-bdl-no-select.liquid
+    - templates/404.preSEOManager.liquid
+    - templates/search.SEOManagerTags.liquid
+
+production:
+  password: replace_me
+  theme_id: "replace_me"
+  store: replace_me.com
+  ignore_files:
+    - config/theme_settings.json
+    - snippets/SEOManager-404.liquid
+    - snippets/SEOMetaManager.liquid
+    - snippets/shappify-bdl-load-bundle.liquid
+    - snippets/shappify-bdl-no-select.liquid
+    - templates/404.preSEOManager.liquid
+    - templates/search.SEOManagerProductMeta.liquid
+    - templates/search.SEOManagerTags.liquid
+    - snippets/shappify-bdl-no-select.liquid
+    - templates/404.preSEOManager.liquid
+    - templates/search.SEOManagerTags.liquid

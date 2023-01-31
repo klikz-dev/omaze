@@ -1,0 +1,35 @@
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title }}",
+  "image": "https:{{ featured_image | img_url: '348x' }}",
+  {% if page_description %}
+  "description": "{{ page_description }}",
+  {% endif %}
+  {% if product.vendor %}
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ product.vendor }}"
+  },
+  {% endif %}
+  {% comment %}
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.4",
+    "reviewCount": "89"
+  },
+  {% endcomment %}
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "USD",
+    "price": "{{ product.price | money_without_currency | remove: '.00' }}",
+    "itemCondition": "http://schema.org/New",
+    "availability": "{{ availability_meta }}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ shop.name }}"
+    }
+  }
+}
+</script>

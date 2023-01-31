@@ -1,0 +1,97 @@
+/**
+ * Social share section
+ */
+
+.oz-component-campaign-social {
+	text-align: center;
+	order: 3;
+
+	// .oz-component-campaign-social img
+	img {
+		height: rem(22);
+		margin: 0 rem(15);
+
+		@include apply-to(desktop) {
+			height: rem(28);
+			margin: 0 auto rem(10);
+		}
+	}
+}
+
+.oz-campaign-social {
+
+	// .oz-campaign-social__mobile
+	&__mobile {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		// .oz-campaign-social__mobile .oz-social-share__btn
+		.oz-social-share__btn {
+			width: rem(70);
+			font-size: rem(13);
+			padding: rem(6) rem(5);
+		}
+
+	}
+}
+
+.oz-social-share {
+	display: flex;
+	justify-content: space-around;
+
+	// .oz-social-share__btn
+	&__btn {
+		padding: rem(10) rem(15);
+		color: $white;
+		cursor: pointer;
+		border-radius: 3px;
+		font-family: $secondary-font;
+		text-decoration: none;
+		width: 48%;
+		transition: background-color .5s;
+
+		// .oz-social-share__btn--facebook
+		&--facebook {
+			background-color: $blue-6;
+
+			// .oz-social-share__btn--facebook .icon
+			.icon {
+				vertical-align: text-bottom;
+				font-size: rem(11);
+
+				@include apply-to(desktop) {
+					font-size: rem(14);
+					margin-right: rem(10);
+				}
+			}
+
+			// .oz-social-share__btn--facebook:hover
+			&:hover {
+				background-color: $blue-7;
+			}
+		}
+
+		// .oz-social-share__btn--twitter
+		&--twitter {
+			background-color: $blue-8;
+			margin-left: rem(10);
+
+			// .oz-social-share__btn--twitter .icon
+			.icon {
+				font-size: rem(13);
+
+				@include apply-to(desktop) {
+					font-size: rem(19);
+					vertical-align: bottom;
+					margin-right: rem(10);
+				}
+			}
+
+			// .oz-social-share__btn--twitter:hover
+			&:hover {
+				background-color: $blue-9;
+			}
+		}
+	}
+}

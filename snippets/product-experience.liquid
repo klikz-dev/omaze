@@ -1,0 +1,231 @@
+<!-- Detect and Load Features for Product-->
+{% include 'feature-detection-product' %}
+
+<!-- enterNowButtonAnchor is also used in the product-experience-details.liquid -->
+{% assign enterNowButtonAnchor = '#active-experience-app__donation-cards' %}
+
+<section id="pvExperience" class="columns oz-experience{% if productStatus == 'closed' %} experience--closed {% endif %}">
+    <div class="columns__one-right-rail {% if settings.closed_sweepstakes_winner_callouts_on %} exp-section-order {% endif %} columns__one-right-rail--fixed-right js-details-wrapper">
+        <div class="exp-details exp-details--closed">
+            {% if settings.closed_sweepstakes_winner_callouts_on %}
+                {% if productStatus == 'closed' %}
+                    <div id="oz-closed-sweepstakes__title">
+                        <div class="exp-title__loading">
+                            <div class="ozc-skeleton-box ozc-skeleton-box--1"></div>
+                            <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                            <div class="ozc-skeleton-box ozc-skeleton-box--3"></div>
+                            <div class="ozc-skeleton-box ozc-skeleton-box--4"></div>
+                            <div class="ozc-skeleton-box ozc-skeleton-box--5"></div>
+                            <div class="exp-skeleton-title ozc-skeleton-box"></div>
+                        </div>
+                    </div>
+                    <div id="oz-closed-sweepstakes__prize-details" class="oz-closed-sweepstakes__prize-details">
+                        <div class="exp-prize-details__loading">
+                            <div class="ozc-skeleton-box ozc-skeleton-box--1"></div>
+                            <div class="exp-skeleton-prize-details ozc-skeleton-box"></div>
+                        </div>
+                    </div>
+                    <div class="product-experience-winner--desktop">
+                        <div id="oz-closed-sweepstakes__winner--desktop" class="js-exp-winner">
+                            <div class="exp-winner__loading">
+                                <div class="ozc-skeleton-box ozc-skeleton-box--4"></div>
+                                <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                                <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                                <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                                <div class="exp-skeleton-winner ozc-skeleton-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <h2 class="oz-section-title__subtitle">
+                        Support {{ product.vendor }} and
+                    </h2>
+                    <h1 class="oz-page-title">
+                        {{- product.title -}}
+                    </h1>
+                    {% include 'product-experience-details', productStatus %}
+                {% endif %}
+            {% else %}
+                <h2 class="oz-section-title__subtitle">
+                    {% if productStatus == 'closed' %}
+                        Thanks to everyone who supported {{ product.vendor }} to...
+                    {% else %}
+                        Support {{ product.vendor }} and
+                    {% endif %}
+                </h2>
+                <h1 class="oz-page-title">
+                    {{- product.title -}}
+                </h1>
+                {% if productStatus == 'closed' %}
+                    <div id="oz-closed-sweepstakes__winner">
+                    </div>
+                {% else %}
+                    {% include 'product-experience-details', productStatus %}
+                {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    {% if settings.closed_sweepstakes_winner_callouts_on %}
+        {% if productStatus == 'closed' %}
+            <div class="product-experience-winner--mobile">
+                <div id="oz-closed-sweepstakes__winner--mobile" class="js-exp-winner">
+                    <div class="exp-winner__loading">
+                        <div class="ozc-skeleton-box ozc-skeleton-box--4"></div>
+                        <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                        <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                        <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                        <div class="exp-skeleton-winner ozc-skeleton-box"></div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% comment %} Product/Experience images {% endcomment %}
+    {% include 'product-experience-gallery', logo: meta.experience.charity_image, logoAlt: imgAlt %}
+
+    {% if productStatus == 'closed' %}
+
+        {% if settings.closed_sweepstakes_non_profit_section_on %}
+            <div id="oz-closed-sweepstakes__non-profit" class="oz-closed-sweepstakes__non-profit">
+                <div class="oz-closed-sweepstakes__non-profit__loading">
+                    <div class="oz-closed-sweepstakes__non-profit__loading__icon ozc-skeleton-box"></div>
+                    <div class="oz-closed-sweepstakes__non-profit__loading__header ozc-skeleton-box ozc-skeleton-box--4"></div>
+                    <div class="oz-closed-sweepstakes__non-profit__loading__total-raised ozc-skeleton-box"></div>
+                    <div class="oz-closed-sweepstakes__non-profit__loading__total-raised-caption ozc-skeleton-box ozc-skeleton-box--2"></div>
+                    <div  class="oz-closed-sweepstakes__non-profit__loading__container">
+                        <div>
+                            <div class="oz-closed-sweepstakes__non-profit__loading__logo ozc-skeleton-box"></div>
+                            <div class="oz-closed-sweepstakes__non-profit__loading__thank-you-1 ozc-skeleton-box ozc-skeleton-box--2"></div>
+                            <div class="oz-closed-sweepstakes__non-profit__loading__thank-you-2 ozc-skeleton-box ozc-skeleton-box--2"></div>
+                            <div class="oz-closed-sweepstakes__non-profit__loading__thank-you-3 ozc-skeleton-box ozc-skeleton-box--2"></div>
+                        </div>
+                        <div>
+                            <div class="oz-closed-sweepstakes__non-profit__loading__impact-container">
+                                <div class="oz-closed-sweepstakes__non-profit__loading__impact ozc-skeleton-box"></div>
+                                <div class="oz-closed-sweepstakes__non-profit__loading__impact-1 ozc-skeleton-box ozc-skeleton-box--3"></div>
+                                <div class="oz-closed-sweepstakes__non-profit__loading__impact-2 ozc-skeleton-box ozc-skeleton-box--3"></div>
+                                <div class="oz-closed-sweepstakes__non-profit__loading__impact-3 ozc-skeleton-box ozc-skeleton-box--3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <div id="oz-closed-sweepstakes__impact-media-assets" class="oz-closed-sweepstakes__impact-media-assets">
+            <div class="exp-impact-assets__loading">
+                <div class="ozc-skeleton-box ozc-skeleton-box--4"></div>
+                <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                <div class="ozc-skeleton-box ozc-skeleton-box--2"></div>
+                <div class="exp-skeleton-winner ozc-skeleton-box"></div>
+            </div>
+        </div>
+
+        {% include 'product-related' %}
+
+    {% endif %}
+
+    {% unless productStatus == 'closed' %}
+
+        {% comment %} CTA Button {% endcomment %}
+
+        <div class="columns__one-right-rail exp-donate-button-wrapper phone-only">
+            <div>
+                <div class="exp-donate-btns">
+                    <a href="{{ enterNowButtonAnchor }}" id="enter-now-button-mobile" class="js-grid-link exp-details__donate-btn oz-btn oz-btn--cta hoverable">
+                        Enter now
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="active-experience-app__donation-cards" class="columns__one-full-width"></div>
+    {% endunless %}
+
+    <div class="product-recommendations__container {% if settings.closed_sweepstakes_winner_callouts_on %} product-recommendations__container-closed--mobile {% endif %} ">
+        <div class="product-rec__container" data-prod-rec-container="{{ product.id }}"></div>
+        {% unless settings.feature_house_focus_on %}
+            <a href="/collections/experiences" class="product-recommendations__button js-product-recommendations__button">
+                Browse all experiences
+            </a>
+        {% endunless %}
+    </div>
+
+    {% include 'product-legal' %}
+
+    {% unless productStatus == 'closed' %}
+        <div class="hidden phone-only columns__one-right-rail exp-donate-button-wrapper exp-donate-button-wrapper--secondary">
+            <div>
+                <div class="exp-donate-btns">
+                    <a href="{{ enterNowButtonAnchor }}" id="enter-now-button-secondary" class="js-grid-link exp-details__donate-btn oz-btn oz-btn--cta">
+                        Enter now
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endunless %}
+</section>
+
+{% include 'skeleton-loading' %}
+
+<script>
+    (function (window) {
+        window.addEventListener('DOMContentLoaded', () => {
+            const productTags = {{ product.tags | json }};
+            const productConf = {
+                productId: {{ product.id }},
+                productStatus: "{{ productStatus }}",
+                productTags: productTags,
+            }
+
+            SDG.SkeletonLoading.init();
+            SDG.ProductExperience.init(productConf);
+
+            window.SDG.ContextualEmailCapture.load({
+                target: 'Product',
+                tags: productTags || [],
+            });
+        });
+    }(window));
+</script>
+
+{% if productStatus == 'closed' %}
+    <div id="js-closed-experience-app__root"></div>
+    <script>
+        (function setupOzClosedExperienceAppData () {
+            window.ozClosedExperienceApp = {
+                experience: {
+                    name: {{- product.title | json -}} || '',
+                    hasWinner: {{ meta.experience.has_winner | json }},
+                    projectedWinnerAnnounceDate: {{ meta.experience.winner_announce_date | json }},
+                    confirmedWinnerAnnounceDate: {{ meta.experience.confirmed_winner_announce_date | json }},
+                },
+                winner: {
+                    name: {{- meta.winner.name | json -}} || '',
+                    location: {{- meta.winner.location | json -}} || '',
+                    image: {{ meta.winner.image | json }} || '',
+                },
+                nonProfit: {
+                    name: {{- product.vendor | json -}} || '',
+                },
+                assets: {
+                    winnerBackgroundImage: '{{ "Bubbles_Winner_Experience.png" | asset_url }}',
+                    winnerPendingBackgroundImage: '{{ "Bubbles_Winner_Experience_Pending.png" | asset_url }}',
+                    ovalBackgroundDesktop: '{{ "OvalBackgroundDesktop.svg" | asset_url }}',
+                    ovalBackgroundMobile: '{{ "OvalBackgroundMobile.svg" | asset_url }}',
+                },
+                config: {
+                    env: '{{ settings.env }}',
+                    slug: '{{ product.handle }}',
+                }
+            };
+        })();
+    </script>
+    {% include 'ClosedExperienceApp' %}
+{% else %}
+    {% include 'active-experience-app-root' %}
+{% endif %}

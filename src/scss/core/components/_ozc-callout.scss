@@ -1,0 +1,17 @@
+.ozc-callout {
+    background: $blue-10;
+    margin-top: 45px;
+    margin-bottom: 45px;
+    margin-left: -$ozsgPagePaddingMobile;
+    margin-right: -$ozsgPagePaddingMobile;
+    padding: 40px $ozsgPagePaddingMobile;
+    text-align: center;
+
+    @include apply-to(desktop) {
+        margin-top: 100px;
+        margin-bottom: 100px;
+        margin-left: -$ozsgPagePaddingDesktop;
+        margin-right: -$ozsgPagePaddingDesktop;
+        padding: 56px 262px;
+    }
+}

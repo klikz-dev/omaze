@@ -1,0 +1,50 @@
+name: 03 (Auto) Build and Deploy to Stage
+
+on:
+  release:
+    types: [prereleased]
+
+env:
+  CI: true
+
+jobs:
+  build-deploy-Stg:
+    env:
+      SHOPIFY_ENV: staging
+    runs-on: [ubuntu-18.04]
+    steps:
+      - name: Git checkout
+        id: checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 14
+
+      - name: Setup .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.RELEASE_WORKFLOW_TOKEN }}" > ~/.npmrc
+
+      - name: Cache Node Modules
+        id: node-cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        id: deps
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Build Staging Theme
+        id: build-stg
+        run: npm run build:prod
+
+      - id: config-move
+        run: mv config.yml.sample config.yml
+
+      - name: Deploy to Stage
+        id: deploy-STG
+        uses: docker://jpteasdale/shopify-theme
+        with:
+          args: deploy --env ${{env.SHOPIFY_ENV}} --password ${{secrets.STG_SHOPIFY_THEME_PW}} --themeid ${{secrets.STG_SHOPIFY_THEME_ID}} --store ${{secrets.STG_SHOPIFY_STORE_URL}} --verbose --nodelete --timeout 90s

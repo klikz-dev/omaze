@@ -1,0 +1,59 @@
+{% comment %} Product Type {% endcomment %}
+{%- assign productType = product.type | downcase -%}
+{% include 'product-data' %}
+
+<section id="product" class="pv">
+	{% if productType == 'experience' %}
+		{% include 'product-experience' %}
+  	{% else %}
+		{% include 'product-essentials' %}
+  	{% endif %}
+</section>
+
+<script type="text/javascript">
+  window.addEventListener("load", function(){
+      const tags = {{ product.tags | json }} || [];
+      const restrictedCountries = window.ozEligibilitySettings.restrictedCountries;
+      const eligibilityDate = window.ozEligibilitySettings.eligibilityDate;
+      window.SDG.CountryRestrictions.checkEligibility(tags, restrictedCountries, eligibilityDate);
+    });
+</script>
+<script>
+  window.addEventListener('load', function() {
+    (function(window) {
+       // toggle cart
+       {% if settings.cart_active %}
+          window.SDG.CartHandler.AddToCartHandler();
+       {% else %}
+          window.addEvents();
+       {% endif %}
+
+    })(window);
+  }, false);
+</script>
+<!-- facebook app: start-->
+<script>
+  window.ozFacebookApiVersion = '{{ settings.facebook_api_version }}';
+  window.ozFacebookAppId = '{{ settings.facebook_app_id }}';
+
+  if (!window.ozFacebookApiVersion || !window.ozFacebookAppId) {
+    console.error('[Oz Settings]: missing settings facebook_api_version or facebook_app_id. Not setting window.fbAsyncInit.');
+  }
+
+  window.fbAsyncInit = function() {
+    const sdkVersion = window.ozFacebookApiVersion;
+    const facebookAppId = window.ozFacebookAppId;
+
+    if (!sdkVersion || !facebookAppId) {
+      return false;
+    }
+
+    FB.init({
+      appId: facebookAppId,
+      autoLogAppEvents: true,
+      xfbml: true,
+      version: `v${sdkVersion}`,
+    });
+  };
+</script>
+<!-- facebook app: end-->

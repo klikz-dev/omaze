@@ -1,0 +1,121 @@
+<div class="oz-collections-donations">
+    <header class="oz-section-banner oz-section-banner--hero">
+        <div class="oz-section-banner__image-container collection__hero-intrinsic-ratio intrinsic-ratio phone-only">
+            <div class="lazy-blur">
+                <img src="{{ collection.image | img_url: '375x262' }}"
+                    alt="{{ collection.image.alt }}" />
+                <img class="lazyload" data-sizes="auto" data-src="{{ collection.image | img_url: '375x262' }}"
+                    data-srcset="{% include 'c-responsive-image-url', responsive_img: collection.image %}"
+                    alt="{{ collection.image.alt }}" />
+            </div>
+        </div>
+        <div class="oz-section-banner__image-container collection__hero-intrinsic-ratio intrinsic-ratio desktop-and-tablet">
+            <div class="lazy-blur">
+                <img src="{{ collection.image | img_url: '812x254' }}"
+                    alt="{{ collection.image.alt }}" />
+                <img class="lazyload" data-sizes="auto" data-src="{{ collection.image | img_url: '812x254' }}"
+                    data-srcset="{% include 'c-responsive-image-url', responsive_img: collection.image %}"
+                    alt="{{ collection.image.alt }}" />
+            </div>
+        </div>
+    </header>
+
+    <section class="oz-collections-donations__description">{{- collection.description -}}</section>
+
+    <section class="oz-collections-donations__donate-to-all-wrapper">
+        {% assign delim = "|" %}
+
+        <!-- NOTE: Donation Pricing Options in cents -->
+        {% assign donationPricingOptions = '' | split: '' %}
+        {% assign count = collection.products_count %}
+        {% assign baseDonationPricingOptions = '100,500,1000' | split: ',' %}
+        {% for baseDonationPrice in baseDonationPricingOptions %}
+            {% assign donationPrice =  baseDonationPrice | times: count %}
+            {% capture donationPricingOptions %}{{ donationPricingOptions | join: delim }}{{ delim }}{{ donationPrice }}{% endcapture %}
+        {% endfor %}
+
+        {% assign donationPricingOptions = donationPricingOptions | split: delim %}
+
+        <!--
+            NOTE: Assuming 3rd Product Image is the Logo
+                Donation Product Images:
+                1. Hero
+                2. Additional Content Section Image
+                3. Cause Logo
+                n+ ignored
+        -->
+        {% assign causeLogoUrls = '' | split: '' %}
+        {% assign causeTitles = '' | split: '' %}
+        {% for product in collection.products %}
+            {% assign logo = product.images[2] %}
+            {% capture causeLogoUrls %}{{ causeLogoUrls | join: delim }}{{ delim }}{{ logo }}{% endcapture %}
+
+            {% assign title = product.title %}
+            {% capture causeTitles %}{{ causeTitles | join: delim }}{{ delim }}{{ title }}{% endcapture %}
+        {% endfor %}
+        {% assign causeLogoUrls = causeLogoUrls | split: delim %}
+        {% assign causeTitles = causeTitles | split: delim %}
+
+        {% include "donation-donate-to-all" %}
+    </section>
+
+    <section class="oz-collections-donations__callout">100% of net donations<sup>**</sup> support these causes, and we're waiving the Omaze fee.</section>
+
+    {% section 'donation-matching' %}
+
+    <section class="oz-divider"> <span>or</span></section>
+
+    <section class="oz-collections-donations__cards">
+        <h3>Choose one to support!</h3>
+
+        <div  class="oz-collections-donations-cards__list" id="results">
+            {% unless settings.collection_sweepstakes_enabled %}
+                {% paginate collection.products by 7 %}
+                <div class="card-collection AjaxinateLoop">
+                    {% for product in collection.products %}
+                    {% include 'donation-card' %}
+                    {% endfor %}
+                </div>
+                <div class="AjaxinatePagination">
+                    {% if paginate.next %}
+                    <div class="spinner">
+                        <a href="{{ paginate.next.url }}"></a>
+                        {% include 'experience-spinner' %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endpaginate %}
+            {% endunless %}
+        </div>
+    </section>
+
+    {% if settings.collection_sweepstakes_enabled %}
+        <div id="js-collection-app__root">
+            {% render 'collection-skeleton' %}
+        </div>
+        {% render 'skeleton-loading' %}
+        <script>
+            SDG.SkeletonLoading.init();
+        </script>
+    {% endif %}
+
+    {% include "donation-about-omaze" %}
+
+    {% section 'donation-matching--legal' %}
+</div>
+
+<script>
+    // NOTE: SDG.Collection.Products is not avail before liquid runs.
+    //       Temporarily store the products on window
+    //       which will be accessed when SDG.Collection is initialized
+    //       and then deleted.
+    window.products = [];
+
+
+    {% for product in collection.products %}
+    window.products.push({{ product | json }});
+    {% endfor %}
+</script>
+{% if settings.collection_sweepstakes_enabled %}
+    {% include 'CollectionApp' %}
+{% endif %}

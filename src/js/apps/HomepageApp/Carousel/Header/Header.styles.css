@@ -1,0 +1,11 @@
+.carouselTitle {
+    line-height: 26px;
+    letter-spacing: 0.32px;
+    margin-right: 20px;
+}
+
+@screen md {
+    .carouselTitle {
+        letter-spacing: 0.18px;
+    }
+}

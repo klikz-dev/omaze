@@ -1,0 +1,50 @@
+.ozsg {
+    .ozc-prize-card-simple {
+        padding:  16px 34px 26px 34px;
+        box-shadow: 1px 2px 4px 0 rgba(10, 0, 0, 0.15);
+        margin-bottom: 16px;
+
+        &.ozc-prize-card-simple--has-winner {
+            padding-bottom: 10px;
+
+            .ozc-prize-card-simple__title {
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    .ozc-prize-card-simple__icon {
+        height: 25px;
+        width: auto;
+        margin: 0 auto 10px auto;
+    }
+
+    .ozc-prize-card-simple__title {
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: .2px;
+        color: $blue-1;
+        margin-bottom: 16px;
+    }
+
+    .ozc-prize-card-simple__announcement-header {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: .3px;
+        font-weight: bold;
+    }
+
+    .ozc-prize-card-simple__announcement-winner {
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: .5px;
+        margin-bottom: 3px;
+    }
+
+    .ozc-prize-card-simple__announcement-date {
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: .4px;
+        font-style: italic;
+    }
+}

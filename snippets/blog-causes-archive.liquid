@@ -1,0 +1,39 @@
+<section class="oz-causes__charities columns__one-full-width">
+	<div class="oz-section-content">
+
+		{% paginate blogs.causes.articles by 40 %}
+
+			{%- capture isPagination -%}
+				{%- if paginate.next -%}
+					true
+				{%- else -%}
+					false
+				{%- endif %}
+			{%- endcapture -%}
+
+			<div class="oz-card__container AjaxinateLoop">
+
+				{% for article in blogs.causes.articles %}
+					{% include 'blog-causes-item' %}
+				{% endfor %}
+
+			</div>
+			<div class="oz-centered AjaxinatePagination">
+				{% if paginate.next %}
+			        <a href="{{ paginate.next.url }}"></a>
+			    {% endif %}
+			</div>
+
+		{% endpaginate %}
+
+	</div>
+</section>
+
+<div class="oz-about-page__links">
+	<div>
+		<a href="/collections/experiences">view our experiences</a>
+	</div>
+</div>
+<script>
+	var isPaginated = {{ isPagination | strip }};
+</script>

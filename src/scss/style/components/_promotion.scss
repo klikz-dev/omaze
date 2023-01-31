@@ -1,0 +1,87 @@
+/**
+ * Promotions
+ */
+
+.promo {
+	position: relative;
+	z-index: 1;
+
+	// .promo__link
+	&__link {
+		display: block;
+		height: rem(50);
+		overflow: hidden;
+		position: relative;
+	}
+
+	// .promo__text
+	&__text {
+		color: $secondary-color;
+		left: 0;
+		margin: 0 auto;
+		position: absolute;
+		right: 0;
+		text-align: center;
+		top: 50%;
+		transform: translateY(-50%);
+
+		// .promo__text::after
+		&::after {
+			content: '';
+			position: absolute;
+			border-top: rem(2) solid $pink-1;
+			border-right: rem(2) solid $pink-1;
+			transform: rotate(45deg) translateY(-50%);
+			height: rem(7);
+			width: rem(7);
+			top: 45%;
+			margin-left: rem(6);
+		}
+
+		// .promo__text--desktop
+		&--desktop {
+			display: none;
+
+			@include apply-to(tablet) {
+				display: block;
+			}
+		}
+		// .promo__text--mobile
+		&--mobile {
+			padding: 0 rem(15);
+			text-align: left;
+
+			@include apply-to(tablet) {
+				display: none;
+			}
+
+			&::after {
+				bottom: 0;
+				top: rem(24);
+			}
+		}
+	}
+
+	// .promo__image
+	&__image {
+		width: 100%;
+		min-height: rem(45);
+
+		// .promo__image--desktop
+		&--desktop {
+			display: none;
+
+			@include apply-to(tablet) {
+				display: block;
+			}
+		}
+
+		// .promo__image--mobile
+		&--mobile {
+
+			@include apply-to(tablet) {
+				display: none;
+			}
+		}
+	}
+}

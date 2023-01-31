@@ -1,0 +1,42 @@
+.container {
+    @apply flex flex-col items-center;
+}
+
+.sectionIcon {
+    width: 53px;
+    height: 50px;
+}
+
+.text {
+    @apply type-h4 font-secondary text-center mt-2;
+}
+
+@screen lg {
+    .text {
+        width: 552px;
+        font-size: 32px;
+        line-height: 40px;
+        letter-spacing: 0.235294px;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .sectionIcon {
+    display: none;
+}
+
+:global(.rebrand) .text {
+    margin: 0;
+    color: #000000;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 24px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+}
+
+@screen lg {
+    :global(.rebrand) .text {
+        font-size: 36px;
+    }
+}

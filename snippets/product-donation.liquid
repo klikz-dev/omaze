@@ -1,0 +1,138 @@
+<div class="columns">
+
+    <div class="columns__one-right-rail oz-experience-leader js-gallery-section">
+        <div class="exp-leader">
+            <div class="oz-donation__header">
+                <div class="oz-donation-hero oz-donation-hero__intrinsic-ratio intrinsic-ratio lqip-container phone-only">
+                    <div class="lazy-blur">
+                        <img src="{{ product.images.first | img_url: '375x262' }}" alt="{{ collection.title | append: ' Phone Hero Blur' }}" />
+                        <img
+                            class="lazyload"
+                            data-sizes="auto"
+                            data-src="{{ product.images.first | img_url: '375x262' }}"
+                            data-srcset="{% include 'c-responsive-image-url', responsive_img: product.images.first %}"
+                            alt="{{ collection.title | append: ' Phone Hero' }}"
+                        />
+                    </div>
+                </div>
+                <div class="oz-donation-hero oz-donation-hero__intrinsic-ratio intrinsic-ratio lqip-container desktop-and-tablet">
+                    <div class="lazy-blur">
+                        <img src="{{ product.images.first | img_url: '812x254' }}" alt="{{ collection.title | append: ' Desktop Hero Blur' }}"/>
+                        <img
+                            class="lazyload"
+                            data-sizes="auto"
+                            data-src="{{ product.images.first | img_url: '812x254' }}"
+                            data-srcset="{% include 'c-responsive-image-url', responsive_img: product.images.first %}"
+                            alt="{{ collection.title | append: ' Desktop Hero' }}"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns__one-right-rail columns__one-right-rail--fixed-right js-details-wrapper">
+        <div class="oz-donation__details">
+            <section class="oz-donation__title">
+                <h1>Support {{ product.title }}</h1>
+                <p>100% of net donations<sup>**</sup> support these causes, and we're waiving the Omaze fee.</p>
+            </section>
+            <section class="oz-donation__description">
+                {%- include 'h-description', description: product.description -%}
+            </section>
+            <section class="oz-donation__pricing-options">
+                <p class="oz-donation-pricing-options__selected-option">
+                    Select donation amount:
+                    <span class="js-selected-donation-amount"></span>
+                </p>
+                <div class="oz-donation-pricing-options__list">
+                    {% for option in product.variants %}
+
+                        {% comment %} don't show $1 variant {% endcomment %}
+                        {% if option.sku == 'donation_100' %}
+                            {% continue %}
+                        {% endif %%}
+
+                        <div class="oz-donation-pricing-option">
+                            <input
+                                id="pricing_option-{{ option.id }}"
+                                class="oz-donation__pricing-option-input"
+                                name="pricing_option"
+                                value="{{ option.id }}"
+                                type="radio"
+                                data-price="{{ option.price | money_without_trailing_zeros }}"
+                            >
+                            <label
+                                for="pricing_option-{{ option.id }}"
+                                class="oz-donation-pricing-option__label"
+                            >
+                                {{ option.price | money_without_trailing_zeros }}
+                            </label>
+                        </div>
+                {% endfor %}
+                </div>
+                <button id="oz-donation-donate-now-btn" class="oz-donation__button oz-btn">Donate now</button>
+            </section>
+            <section class="oz-donation__social-share">
+                <div id="js-donation-social-share"></div>
+                <h3>Maximize your impact! Spread the word.</h3>
+            </section>
+
+            {% include "donation-about-omaze" %}
+        </div>
+    </div>
+
+    <div class="columns__one-right-rail js-gallery-section">
+        <section class="oz-donation__how-help">
+            <div class="exp-info">
+                <!--
+                    NOTE: Using product.vendor for the "cause" this donation will be
+                        i.e. "...critical to COVID-19 relief" or "...critical to Hurricane Katrina relief"
+                -->
+                <div class="phone-only">
+                    <h2>How {{ product.title }} is critical to <span class="oz-donation-how-help__cause">{{ product.vendor }}</span> relief</h2>
+                </div>
+
+                <div class="oz-how-help__hero oz-how-help-hero__intrinsic-ratio intrinsic-ratio lqip-container phone-only">
+                    <div class="lazy-blur">
+                        <img src="{{ product.images[1] | img_url: '375x262' }}" alt="{{ collection.title | append: ' Phone How We Help Blur' }}" />
+                        <img
+                            class="lazyload"
+                            data-sizes="auto"
+                            data-src="{{ product.images[1] | img_url: '375x262' }}"
+                            data-srcset="{% include 'c-responsive-image-url', responsive_img: product.images[1] %}"
+                            alt="{{ collection.title | append: ' Phone How We Help' }}"
+                        />
+                    </div>
+                </div>
+                <div class="oz-how-help__hero oz-how-help-hero__intrinsic-ratio intrinsic-ratio lqip-container desktop-and-tablet">
+                    <div class="lazy-blur">
+                        <img src="{{ product.images[1] | img_url: '812x254' }}" alt="{{ collection.title | append: ' Desktop How We Help Blur' }}"/>
+                        <img
+                            class="lazyload"
+                            data-sizes="auto"
+                            data-src="{{ product.images[1] | img_url: '812x254' }}"
+                            data-srcset="{% include 'c-responsive-image-url', responsive_img: product.images[1] %}"
+                            alt="{{ collection.title | append: ' Desktop How We Help' }}"
+                        />
+                    </div>
+                </div>
+
+                <div class="oz-donation__subtitle desktop-only">
+                    <h2>How {{ product.title }} is critical to <span class="oz-donation-how-help__cause">{{ product.vendor }}</span> relief</h2>
+                </div>
+
+                <p>
+                    {{ PRODUCT_META.how_we_help_content }}
+                </p>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+    window.__OzDonationData = {
+        charityName: "{{ product.title }}",
+        causeName: "{{ product.vendor }}",
+    }
+</script>

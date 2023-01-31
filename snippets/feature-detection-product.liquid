@@ -1,0 +1,45 @@
+<script>
+    (function (window) {
+        const FEATURE_FLAGS = {
+            'combo-promotion': {{ settings['combo_promotion_enabled'] | json }},
+            'combo-promotion-blocked-countries': {{ settings['combo_promotion_ineligible_countries'] | json }},
+            'combo-promotion-blocked-regions': {{ settings['combo_promotion_ineligible_regions'] | json }},
+            'promotion-board': {{ settings['promotion_board_enabled'] | json }},
+            'promotion-board-blocked-countries': {{ settings['promotion_board_ineligible_countries'] | json }},
+            'promotion-board-blocked-regions': {{ settings['promotion_board_ineligible_regions'] | json }},
+            'banner-ad': {{ settings['banner_ad_enabled'] | json }},
+            'banner-ad-blocked-countries': {{ settings['banner_ad_ineligible_countries'] | json }},
+            'banner-ad-blocked-regions': {{ settings['banner_ad_ineligible_regions'] | json }},
+        };
+
+        function getQueryParams () {
+            if (!window.location.search) {
+                return {};
+            }
+
+            return window.location.search.substr(1).split('&').reduce((params, param) => {
+                const keyVal = param.split('=');
+
+                params[keyVal[0]] = keyVal[1];
+
+                return params;
+            }, {});
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = getQueryParams();
+
+            const conf = {
+                env: '{{ settings.env }}',
+                slug: '{{ product.handle }}',
+                productID: '{{ product.id }}',
+                productStatus: '{{ productStatus }}',
+                preview: !!params.preview,
+                featureFlags: FEATURE_FLAGS,
+                fameUpsellVariantSku: '{{ settings.fame_upsell_variant_sku }}'
+            };
+
+            SDG.Features.Loader.load(conf);
+        });
+    })(window);
+</script>

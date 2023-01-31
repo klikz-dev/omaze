@@ -1,0 +1,21 @@
+// Block Ellipsis
+// This mixin will add an ellipsis at the specified line
+
+@mixin block-ellipsis ($line-clamp: 2) {
+  // display properties
+  display: block;
+  display: -webkit-box;
+
+  max-width: 100%;
+
+  // line clamp properties
+  // the line-clamp property has been tested against non-webkit browsers like
+  // mozilla and it works just fine.
+  -webkit-line-clamp: $line-clamp;
+  line-clamp: $line-clamp;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

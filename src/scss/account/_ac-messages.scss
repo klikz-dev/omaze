@@ -1,0 +1,49 @@
+/**
+ * account messages
+ */
+.ac-message {
+	position: fixed;
+	z-index: 1;
+	background-color: $white;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: $black-1;
+	text-align: center;
+	padding: rem(16) 0;
+
+	// .ac-message p
+	p {
+		margin: 0;
+	}
+
+	// .ac-message a
+	a {
+		color: $black-1;
+		text-decoration: underline;
+	}
+
+	// .ac-message--error
+	// .ac-message--success
+	&--error,
+	&--success {
+
+		// .ac-message--error a
+		// .ac-message--success a
+		a {
+			color: $white;
+		}
+	}
+
+	// .ac-message--error
+	&--error {
+		background-color: $red-1;
+		color: $white;
+	}
+
+	// .ac-message--success
+	&--success {
+		background-color: $green-1;
+		color: $white;
+	}
+}

@@ -1,0 +1,95 @@
+section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    @include apply-to(desktop) {
+        margin-left: 0;
+    }
+}
+
+// NOTE: Donation (product) Detail Page Styles
+.oz-donation {
+    margin: 0;
+}
+
+.oz-donation__details {
+    @include apply-to(desktop) {
+        margin: 0 60px 30px 0;
+    }
+}
+
+.oz-donation__description {
+    margin-top: 12px;
+    margin-bottom: 25px;
+}
+
+// NOTE: About Omaze Component Styles
+//       used on donation (product) detail page
+//       and donation collecction page
+.oz-donations__about-wrapper {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 916px;
+
+    @include apply-to(desktop) {
+        max-width: 1024px;
+    }
+}
+
+.oz-donations__about {
+    transform: skewY(-5deg);
+    background-color: rgba(249, 228, 0, 0.16);
+    padding-bottom: 30px;
+    padding-top: 32px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @include apply-to(desktop) {
+        transform: skewY(-2deg);
+        padding-top: 44px;
+        padding-bottom: 44px;
+    }
+}
+
+.oz-donations__about h3 {
+    font-family: $primary-font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    letter-spacing: 0.533333px;
+    text-transform: uppercase;
+    transform: skewY(5deg);
+    margin: 0 auto;
+    padding: 8px;
+
+    @include apply-to(desktop) {
+        transform: skewY(2deg);
+        max-width: 622px;
+    }
+}
+
+.oz-donations__about p {
+    font-family: $primary-font;
+    font-size: 14px;
+    transform: skewY(5deg);
+    text-align: center;
+    margin: 0 auto;
+
+    @include apply-to(desktop) {
+        transform: skewY(2deg);
+        max-width: 625px;
+    }
+}
+
+.oz-donations__about a {
+    text-decoration: underline;
+}
+
+.oz-donations__about .oz-donations-about__asterisk {
+    margin-top: 22px;
+    font-style: italic;
+}

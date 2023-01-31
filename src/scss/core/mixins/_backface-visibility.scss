@@ -1,0 +1,10 @@
+/// Backface visibility
+/// Prevent browsers from flickering when using CSS 3D transforms.
+/// Default value is `visible`, but can be changed to `hidden`
+/// @param {String} $visibility - value to set to
+/// @output Vender prefixed values
+@mixin backface-visibility($visibility) {
+    -webkit-backface-visibility: $visibility;
+    -moz-backface-visibility: $visibility;
+    backface-visibility: $visibility;
+}

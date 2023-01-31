@@ -1,0 +1,9 @@
+{
+    "css" : "build/css/",
+    "pub" : "./assets/",
+    "scss" : "src/scss/",
+    "fonts": "src/fonts/",
+    "favicons": "src/favicons/",
+    "images": "src/images/",
+    "vendor": "src/vendor"
+}

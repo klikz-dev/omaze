@@ -1,0 +1,10 @@
+/* One off approved by design */
+.winnerPending {
+    background-color: #b7b7ff;
+    text-transform: uppercase;
+}
+
+:global(.rebrand) .winnerPending {
+    background-color: #85A7FF;
+    border-radius: 10px;
+}

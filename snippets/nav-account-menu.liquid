@@ -1,0 +1,26 @@
+{%- capture customerName -%}
+    {%- if customer -%}
+        {{ customer.first_name | default: "Omazer" }}
+    {%- else -%}
+        Omazer
+    {%- endif -%}
+{%- endcapture -%}
+
+<div class="oz-nav__account-menu">
+    <div class="account-menu__header">
+        <span class="oz-overflow-ellipsis">
+            Hi {{ customerName }}
+        </span>
+        <span>!</span>
+        <span id="oz_nav_btn_account_menu_close" class="mobile-only account-menu__close"></span>
+    </div>
+    <div class="account-menu__body">
+        <a href="/account#/experiences">Your Experiences</a>
+        <a href="/account?view=orders">Donation History</a>
+        <a href="/account#/settings">Account Settings</a>
+    </div>
+    <hr>
+    <div class="account-menu__footer">
+        <a href="/account/logout" class="js-nav-btn--logout">Log out</a>
+    </div>
+</div>

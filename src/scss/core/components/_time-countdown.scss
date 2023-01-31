@@ -1,0 +1,85 @@
+.ozc-time-countdown {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.ozc-time-countdown__header {
+    margin-bottom: 24px;
+
+    @include apply-to(desktop) {
+        min-width: 50px;
+        margin-bottom: 34px;
+    }
+}
+
+.ozc-time-countdown__body {
+    display: flex;
+    justify-content: center;
+}
+
+.ozc-time-countdown__item {
+    margin-right: 18px;
+    width: auto;
+}
+
+.ozc-time-countdown__item:last-child {
+    margin-right: 0;
+}
+
+.ozc-time-countdown__value-label {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: .3px;
+}
+
+.ozc-time-countdown__value {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.ozc-time-countdown__value span {
+    display: inline-block;
+    color: $gray-14;
+    background-color: #ebf9fc;
+    border: solid 1px $blue-1;
+    border-radius: 4px;
+    margin-right: 4px;
+
+    font-family: 'Clan', sans-serif;
+    min-width: 26px;
+    font-size: 26px;
+    line-height: 44px;
+    letter-spacing: .2px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    @include apply-to(desktop) {
+        min-width: 50px;
+        line-height: 67px;
+    }
+}
+
+.ozc-time-countdown .oz-counter__value span:last-child {
+    margin-right: 0;
+}
+
+.ozc-time-countdown__footer {
+    font-size: 18px;
+    margin-top: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: $black-2;
+
+    @include apply-to(desktop) {
+        font-size: 28px;
+        margin-top: 28px;
+    }
+}

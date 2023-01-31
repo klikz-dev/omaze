@@ -1,0 +1,77 @@
+name: 07 (Dispatch) Build and Deploy Specific Tag to Env
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to deploy'
+        required: true
+      env:
+        description: 'Environment to Deploy to (qa, stg, prd)'
+        required: true
+
+env:
+  CI: true
+
+jobs:
+  build-deploy-tag:
+    runs-on: [ubuntu-18.04]
+    steps:
+      - name: Git checkout
+        id: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: refs/tag/${{github.event.inputs.tag}}
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 14
+
+      - name: Setup .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.RELEASE_WORKFLOW_TOKEN }}" > ~/.npmrc
+
+      - name: Cache Node Modules
+        id: node-cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        id: deps
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      - if: ( "${{github.event.inputs.env}}" == "qa" )
+        name: Build development Theme
+        id: build-dev
+        run: npm run build:dev
+
+      - if: ( "${{github.event.inputs.env}}" != "qa" )
+        name: Build production Theme
+        id: build-prod
+        run: npm run build:prod
+
+      - id: config-move
+        run: mv config.yml.sample config.yml
+
+      - if: ( "${{github.event.inputs.env}}" == "qa" )
+        name: Deploy to QA
+        id: deploy-QA
+        uses: docker://jpteasdale/shopify-theme
+        with:
+          args: deploy --env qa --password ${{secrets.QA_SHOPIFY_THEME_PW}} --themeid ${{secrets.QA_SHOPIFY_THEME_ID}} --store ${{secrets.QA_SHOPIFY_STORE_URL}} --verbose --nodelete --timeout 90s
+
+      - if: ( "${{github.event.inputs.env}}" == "stg" )
+        name: Deploy to STG
+        id: deploy-STG
+        uses: docker://jpteasdale/shopify-theme
+        with:
+          args: deploy --env staging --password ${{secrets.STG_SHOPIFY_THEME_PW}} --themeid ${{secrets.STG_SHOPIFY_THEME_ID}} --store ${{secrets.STG_SHOPIFY_STORE_URL}} --verbose --nodelete --timeout 90s
+
+      - if: ( "${{github.event.inputs.env}}" == "prd" )
+        name: Deploy to PRD
+        id: deploy-PRD
+        uses: docker://jpteasdale/shopify-theme
+        with:
+          args: deploy --env production --password ${{secrets.PRD_SHOPIFY_THEME_PW}} --themeid ${{secrets.PRD_SHOPIFY_THEME_ID}} --store ${{secrets.PRD_SHOPIFY_STORE_URL}} --verbose --nodelete --timeout 90s

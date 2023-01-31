@@ -1,0 +1,68 @@
+/**
+ * oz-counter
+ */
+
+.oz-counter {
+	margin-top: rem(20);
+	margin-bottom: rem(5);
+	font-size: 0;
+	text-align: center;
+	min-width: rem(240);
+	font-family: $primary-font;
+
+	@include apply-to(tablet) {
+		margin-bottom: 55px;
+	}
+
+	// .oz-counter__title
+	&__title {
+		font-size: 1rem;
+		text-transform: uppercase;
+		color: $gray-7;
+		letter-spacing: 3px;
+		line-height: 2;
+		font-family: $primary-font;
+		font-weight: $light;
+	}
+
+	// .oz-counter__item,
+	// .oz-counter__dots
+	&__item,
+	&__dots {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	// .oz-counter__item
+	&__item {
+		width: rem(54);
+
+		@include apply-to(tablet) {
+			width: rem(60);
+		}
+	}
+
+	// .oz-counter__value,
+	// .oz-counter__dots
+	&__value,
+	&__dots {
+		line-height: 1;
+		font-family: $secondary-font;
+		font-size: 1.215rem;
+		text-transform: uppercase;
+
+		@include apply-to(tablet) {
+			font-size: 2rem;
+		}
+	}
+
+	// .oz-counter__type
+	&__type {
+		font-size: 0.8rem;
+
+		@include apply-to(tablet) {
+			padding-top: rem(5);
+			font-size: 1rem;
+		}
+	}
+}

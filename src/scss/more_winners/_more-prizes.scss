@@ -1,0 +1,43 @@
+.ozsg {
+    .ozc-more-winners-more-prizes {
+        &.ozc__panel--base {
+            margin-top: 0;
+        }
+
+        @include apply-to(desktop) {
+            text-align: center;
+        }
+
+        &__header {
+            margin-bottom: 16px;
+
+            @include apply-to(desktop) {
+                margin-bottom: 24px;
+            }
+        }
+
+        &__body {
+            margin-bottom: 16px;
+
+            @include apply-to(desktop) {
+                margin-bottom: 24px;
+            }
+        }
+
+        &__footer {
+            margin-top: 16px;
+        }
+
+        &__footer-title,
+        &__footer-body {
+            font-size: 18px;
+            line-height: 24px;
+            letter-spacing: .32px;
+        }
+
+        &__footer-title {
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+    }
+}

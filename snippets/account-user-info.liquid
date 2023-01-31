@@ -1,0 +1,26 @@
+<div>
+    <div class="contact-info-card">
+        <div class="contact-info-card__header">
+            <h3 class="contact-info-card__header__title">
+                About you
+            </h3>
+        </div>
+        <p class="contact-info-card__name">{{ customer.first_name }} {{ customer.last_name }}</p>
+        <p class="contact-info-card__email">{{ customer.email }}</p>
+    </div>
+
+    <div class="reset-password-card">
+            <div class="reset-password-card__header">sign in</div>
+            <div class="reset-password-card__field">
+                <p class="reset-password-card__label">Password:</p>
+                <div class="reset-password-card__value">
+                    <div class="reset-password-card__value__text">●●●●●●●●</div>
+                    <div class="reset-password-card__value__action">
+                        Reset password
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% include 'account-user-info-handler' %}

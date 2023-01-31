@@ -1,0 +1,196 @@
+.experience-dashboard-shim {
+    .ac-container {
+        padding: 0;
+    }
+
+    .Sidebar-host {
+        display: block;
+        position: fixed;
+        width: 258px;
+    }
+
+    .MembersProfile-host {
+        margin: 64px auto;
+        width: 360px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .ac-container {
+        margin-top: 0;
+    }
+
+    .Grid-host {
+        margin: 0 -8px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .GridRow-host {
+        width: 100%;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .GridCell-host {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .MembersProfile-sidebar {
+        position: relative;
+        min-height: 100vh;
+        width: 258px;
+        display: none;
+    }
+
+    .MembersProfile-sidebarDivider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background-color: rgba(26,26,26,.3);
+        width: 1px;
+        right: -12px;
+    }
+
+    .MembersProfile-content {
+        width: 328px;
+    }
+
+    .ac-breadcrumb {
+        padding-left: 0;
+    }
+
+    .ac-greeting {
+        padding-left: 0;
+    }
+
+    .account-helpful-link-card {
+        padding-left: 0;
+    }
+
+    .Header-host {
+        margin-bottom: 8px;
+    }
+
+    .Welcome-host {
+        font-family: Clan, Roboto, sans-serif;
+        letter-spacing: .18px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-top: 48px;
+        line-height: 1.5;
+    }
+
+    .Avatar-host {
+        width: 164px;
+        border-radius: 9999px;
+        overflow: hidden;
+        background-color: #00caf2;
+    }
+
+    .Avatar-avatarWrapper {
+        padding-top: 100%;
+        position: relative;
+    }
+
+    .Avatar-avatar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: National,Roboto,sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 100px;
+        line-height: 100px;
+        letter-spacing: .235294px;
+    }
+
+    .Avatar-avatar img {
+        width: 78%;
+        height: 78%;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .NavigationMenu-link {
+        padding-top: 24px;
+        font-family: National,Roboto,sans-serif;
+        letter-spacing: .32px;
+        font-size: 1.125rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        line-height: 1.5;
+    }
+
+    .NavigationMenu-link > a {
+        font-family: National,Roboto,sans-serif;
+        letter-spacing: .32px;
+        font-size: 1.125rem;
+    }
+
+    .NavigationMenu-active {
+        color: #ea2786;
+        font-weight: 700;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        .order-cards {
+            padding-left: 0;
+        }
+    }
+
+    @media only screen and (min-width: 704px) {
+        .MembersProfile-host {
+            width: 704px;
+        }
+
+        .MembersProfile-content {
+            width: 688px;
+        }
+    }
+
+    @media only screen and (min-width: 1152px) {
+        .MembersProfile-host {
+            width: 1152px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        .Grid-host {
+            margin: 0 -12px;
+        }
+
+        .GridCell-host {
+            margin-left: 12px;
+            margin-right: 12px;
+        }
+
+        .MembersProfile-sidebar {
+            display: block;
+        }
+
+        .MembersProfile-content {
+            margin-left: 106px;
+            width: 728px;
+        }
+
+        .Sidebar-host.bottom {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .Sidebar-host.scrollable {
+            position: relative;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+/**
+ * National Extrabold
+ * Article Causes
+ * Blog Detail
+ */
+
+@font-face {
+  font-family: 'National Extrabold';
+  font-style: normal;
+  font-weight: 400;
+  src: url('{{ "NationalExtrabold.woff" | asset_url }}') format("woff");
+}

@@ -1,0 +1,335 @@
+<script>
+function getFallbackProductsFromTemplate() {
+    let defaultProducts = [];
+    let modifiedProduct;
+
+    {% for product in collections["experiences"].products limit: 20 %}
+        modifiedProduct = {{ product | json }};
+
+        modifiedProduct.url = '{{ product.url | url_escape }}';
+        modifiedProduct.featured_image = '{{ product.featured_image }}' ? "{{ product.featured_image | img_url: 'master' }}" : '';
+        // add metafields data
+        modifiedProduct.metafields = {
+            hasWinner: {{ product.metafields.experience.has_winner | json }}
+        }
+
+        defaultProducts.push(modifiedProduct);
+    {% endfor %}
+
+    return defaultProducts;
+}
+    
+window.__OzShopifyCuratedCollectionsData = {
+    curated: {},
+    default: {
+        url: null,
+        title: 'Awesome Experiences',
+        products: []
+    },
+    fallback: {
+        url: '/collections/experiences',
+        title: 'Awesome Experiences',
+        products: getFallbackProductsFromTemplate()
+    }
+};
+</script>
+    
+<section class="columns__one-full-width oz-homepage__curated_collections">
+    <!-- DEFAULT BLOCK - HIDDEN BY DEFAULT -->
+    <section class="oz-homepage__curated_collection js-default-collection-section" style="display: none;">
+        <div class="product-rec__container js-carousel--id-default">
+            <div class="product-recommendations__list js-carousel-list--id-default"></div>
+        </div>
+
+        {% assign defaultCollectionId = section.settings.id | plus: 0 %}
+        {% assign defaultCollection = collections | where: "id", defaultCollectionId | first %}
+        <script>
+            window.__OzShopifyCuratedCollectionsData.default.url = "{{ defaultCollection.url }}";
+            </script>
+        {% if defaultCollection.products_count > 2 %}
+        {% for product in defaultCollection.products limit: 20 %}
+            <script>
+                    var modifiedProduct = {{ product | json }}
+                    // add metafields data
+                    modifiedProduct.metafields = {
+                        hasWinner: {{ product.metafields.experience.has_winner | json }}
+                    }
+                    window.__OzShopifyCuratedCollectionsData.default.products.push(modifiedProduct);
+                </script>
+            {% endfor %}
+        {% endif %}
+    </section>
+    
+<!-- CURATED COLLECTION BLOCKS -->
+{% for block in section.blocks %}
+    {% assign blockSettings = block.settings %}
+
+    {% if blockSettings %}
+        {% assign id = blockSettings.id | plus: 0 %}
+        {% assign title = blockSettings.title %}
+
+        {% if id and title %}
+            {% assign collection = collections | where: "id", id | first %}
+            {% if collection.products_count > 2 %}
+                <script>
+                    window.__OzShopifyCuratedCollectionsData.curated[{{ id }}] = {};
+                    window.__OzShopifyCuratedCollectionsData.curated[{{ id }}].products = [];
+                    // NOTE: we'll leverage these during the refactor
+                    window.__OzShopifyCuratedCollectionsData.curated[{{ id }}].url = "{{ collection.url }}";
+                    window.__OzShopifyCuratedCollectionsData.curated[{{ id }}].title = "{{ collection.title }}";
+                    window.__OzShopifyCuratedCollectionsData.curated[{{ id }}].blockTitle = "{{ title }}";
+                </script>
+
+                <section class="oz-homepage__curated_collection">
+                    <div class="product-rec__container js-carousel--id-{{ id }}">
+                        <div class="product-recommendations__list js-carousel-list--id-{{ id }}"></div>
+                    </div>
+
+                    {% for product in collection.products limit: 20 %}
+                        <script>
+                            var modifiedProduct = {{ product | json }}
+                            // add metafield data
+                            modifiedProduct.metafields = {
+                                hasWinner: {{ product.metafields.experience.has_winner | json }}
+                            }
+                            window.__OzShopifyCuratedCollectionsData.curated[{{ id }}].products.push(modifiedProduct);
+                        </script>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+</section>
+    
+{% assign ctaText = section.settings.cta_text %}
+{% assign ctaUrl = section.settings.cta_url %}
+{% if ctaText != blank or ctaUrl != blank %}
+    <section class="oz-homepage__curated-cta oz-btn__btn-wrap oz-centered">
+        <a href="{{ ctaUrl }}" class="oz-btn oz-btn--cta oz-btn--long">{{ ctaText }}</a>
+    </section>
+{% endif %}
+    
+{% schema %}
+    {
+        "name": "Curated Collection(s)",
+        "class": "home-curated-collection",
+        "settings": [
+            {
+                "type": "text",
+                "id": "id",
+                "label": "Default Collection ID"
+            }, {
+                "type": "text",
+                "id": "cta_text",
+                "label": "CTA Text"
+            }, {
+                "type": "url",
+                "id": "cta_url",
+                "label": "CTA Url"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "home_curated_collection",
+                "name": "Home Curated Collection",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Curated Collection Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "id",
+                        "label": "Curated Collection ID"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}
+    
+<script>
+// NOTE: this is necessary due to script loading issues
+const poller = setInterval(function() {
+    const SDGComponentType = typeof window.SDG.Component;
+    const JqueryType = typeof window.jQuery;
+
+    if (
+        SDGComponentType !== 'undefined' &&
+        JqueryType !== 'undefined'
+    ) {
+        clearInterval(poller);
+        loadSlickScript();
+    }
+}, 500);
+
+// NOTE: also due to the aforementioned note, as jQuery is a
+// dependency of Slick and hasn't loaded for this to initialize
+function loadSlickScript() {
+    const url = '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js';
+
+    window.jQuery.getScript(url, function() {
+        initCuratedCollections();
+    });
+}
+
+function initCuratedCollections() {
+    const MIN_CAROUSEL_PRODUCTS = 4;
+    const DEFAULT_COLLECTION_SECTION_CLASS = '.js-default-collection-section';
+    const DEFAULT_COLLECTION_SECTION_EL = document.querySelector(DEFAULT_COLLECTION_SECTION_CLASS);
+    const curatedCollectionsPageData = window.__OzShopifyCuratedCollectionsData;
+    const curatedCollectionsData = curatedCollectionsPageData.curated;
+    const defaultProductsData = curatedCollectionsPageData.default;
+    const defaultProductsList = defaultProductsData.products;
+    const fallbackProductsData = curatedCollectionsPageData.fallback;
+    const fallbackProductsList = fallbackProductsData.products;
+    const curatedCollectionIds = Object.keys(curatedCollectionsData);
+    const validCuratedCollections = [];
+
+    curatedCollectionIds.forEach(function(id) {
+        const collection = curatedCollectionsData[id];
+
+        if (!collection.products || collection.products.length < MIN_CAROUSEL_PRODUCTS) {
+            return false;
+        }
+
+        collection.id = id;
+
+        validCuratedCollections.push(collection);
+    });
+
+    // Render validCuratedCollections if exist.
+    if (validCuratedCollections.length) {
+        return validCuratedCollections.forEach(function(collection) {
+            initCarousel(collection);
+        });
+    }
+
+    // If no validCuratedCollections, render default carousel.
+    const collection = {
+        id: 'default',
+        products: defaultProductsList,
+        title: defaultProductsData.title,
+        url: defaultProductsData.url,
+    };
+
+    // If default collection too small, use fallback collection.
+    if (collection.products.length < MIN_CAROUSEL_PRODUCTS) {
+        collection.products = fallbackProductsList;
+        collection.url = fallbackProductsData.url;
+    }
+
+    // If still not enough products, exit.
+    if (collection.products.length < MIN_CAROUSEL_PRODUCTS) {
+        return false;
+    }
+
+    DEFAULT_COLLECTION_SECTION_EL.style.display = 'block';
+
+    return initCarousel(collection);
+}
+
+function setDefaultProductHeader(dataObj) {
+    const DEFAULT_COLLECTION_LINK_CLASS = '.js-default-collection-link';
+    const DEFAULT_COLLECTION_LINK_URL = dataObj.url;
+    const DEFAULT_COLLECTION_LINK_TITLE = dataObj.title;
+    const DEFAULT_COLLECTION_LINK_EL = document.querySelector(DEFAULT_COLLECTION_LINK_CLASS);
+
+    DEFAULT_COLLECTION_LINK_EL.innerText = DEFAULT_COLLECTION_LINK_TITLE;
+    DEFAULT_COLLECTION_LINK_EL.setAttribute('href', DEFAULT_COLLECTION_LINK_URL);
+}
+
+function initCarousel(collection) {
+    const CAROUSEL_HOOK_CLASS = `.js-carousel--id-${collection.id}`;
+    const CAROUSEL_LIST_CLASS = `.js-carousel-list--id-${collection.id}`;
+    const CURATED_COLLECTION_CAROUSEL_CONTAINER_EL = document.querySelector(CAROUSEL_HOOK_CLASS);
+
+    if (!CURATED_COLLECTION_CAROUSEL_CONTAINER_EL) {
+        return;
+    }
+
+    const CAROUSEL_LIST_EL = document.querySelector(CAROUSEL_LIST_CLASS);
+
+    renderCarousel(collection);
+
+    function renderProduct(product, cardNumber) {
+        let productUrl = product.url;
+
+        if (!productUrl) {
+            productUrl = `/products/${product.handle}`;
+        }
+
+        const card = new SDG.Component.ProductRecommendationCard({
+            title: product.title,
+            imageUrl: product.featured_image,
+            support: product.vendor,
+            url: productUrl,
+            id: product.id,
+            tags: product.tags,
+            hasWinner: product.metafields.hasWinner,
+        });
+
+        card.el.onclick = ()  => {
+            const data = {
+                    event: 'click',
+                    ga_category: 'Homepage Curated Collections',
+                    ga_action: 'Product Click',
+                    ga_label: `${collection.title} ${product.handle}`,
+                    ga_value: cardNumber,
+                }
+                SDG.Analytics.events.pushDataLayerEvent(data);
+        };
+
+        return card.el
+    }
+
+    function handleCollectionClick(collectionTitle) {
+        const data = {
+            event: 'click',
+            ga_category: 'Homepage Curated Collections',
+            ga_action: 'Collection Page Link',
+            ga_label: collectionTitle,
+        }
+
+        SDG.Analytics.events.pushDataLayerEvent(data);
+    }
+
+    function renderCarousel(collection) {
+        if (!collection || !collection.products || !collection.products.length) {
+            return false;
+        }
+
+        const productList = collection.products
+            .map((campaign, index) => {
+                return renderProduct(campaign, index + 1);
+            });
+
+        const headerLink = new SDG.Component.Element({
+            tag: 'a',
+            content: collection.blockTitle || collection.title,
+            attributes: {
+                href: collection.url,
+            },
+        });
+
+        const carousel = new SDG.Component.Carousel({
+            header: headerLink.el,
+            content: productList,
+            events: {
+                'beforeChange': SDG.Analytics.events.slickCuratedCollectionsCallback,
+            },
+        });
+
+        if (carousel && carousel.el) {
+            CAROUSEL_LIST_EL.appendChild(carousel.el);
+            carousel.init();
+
+            headerLink.el.addEventListener('click', () => {
+                handleCollectionClick(collection.title);
+            });
+        }
+    }
+}
+</script>

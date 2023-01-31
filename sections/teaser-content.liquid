@@ -1,0 +1,133 @@
+{% for block in section.blocks %}
+    {% assign b = block.settings %}
+    {% if page.handle == b.page_handle %}
+        {% style %}
+            .oz-section-teaser {
+                background-image: url({{b.background_img_mobile | img_url: '400x'}});
+            }
+
+            @media (min-width: 1099px) {
+                .oz-section-teaser {
+                    background-image: url({{b.background_img_desktop | img_url: '1440x'}});
+                }
+            }
+        {% endstyle %}
+
+        <section {{ block.shopify_attributes }} class="oz-section-teaser">
+            <!-- sign up -->
+            <div class="oz-section-teaser__signup">
+                <h1 class="oz-section-teaser__signup-headline">{{b.headline}}</h1>
+                <div class="oz-section-teaser__signup-body">{{b.body_copy}}</div>
+                <div class="oz-section-teaser__signup-form">
+                    <div class="email oz-field">
+                        <div class="oz-field__container">
+                            <input class="input" id="ozTeaserOptinCustomerEmail" type="email" />
+                            <label for="ozTeaserOptinCustomerEmail">Enter your email address</label>
+                        </div>
+                        <span class="email-error-message error hidden"></span>
+                    </div>
+                    <button class="oz-btn oz-btn--block" type="button">
+                        <span class="btn__label">Keep me posted</span>
+                        <img class="button-loader hidden" alt="loader" src="//images.omaze.com/web/assets/images/static/email/loader.svg">
+                    </button>
+                </div>
+                <div class="oz-section-teaser__signup-legal">{{b.legal_copy}}</div>
+            </div>
+
+            <!-- confirmation -->
+            <div class="oz-section-teaser__confirmation hidden">
+                <h1 class="oz-section-teaser__confirmation-headline">{{b.confirmation_headline}}</h1>
+                <div class="oz-section-teaser__confirmation-body">{{b.confirmation_body_copy}}</div>
+                <div class="oz-section-teaser__confirmation-link">
+                    <a class="oz-btn oz-btn--block" type="button" href="{{b.confirmation_cta_url}}">
+                        {{b.confirmation_cta_text}}
+                    </a>
+                </div>
+            </div>
+        </section>
+        {% break %}
+    {% endif %}
+{% endfor %}
+
+{% schema %}
+    {
+        "name": "Teaser Content",
+        "blocks": [{
+            "name" : "content",
+            "type": "Hero",
+            "settings": [
+                {
+                    "type": "page",
+                    "id": "page_handle",
+                    "label": "The pages where this content is shown"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "background_img_mobile",
+                    "label": "Background Image Mobile (aspect 1:1.53)"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "background_img_desktop",
+                    "label": "Background Image Desktop (aspect 1.94:1)"
+                },
+                {
+                    "type": "text",
+                    "id": "headline",
+                    "label": "Headline"
+                },
+                {
+                    "type": "html",
+                    "id": "body_copy",
+                    "label": "Body Copy"
+                },
+                {
+                    "type": "html",
+                    "id": "legal_copy",
+                    "label": "Legal Copy"
+                },
+                {
+                    "type": "text",
+                    "id": "email_lists",
+                    "label": "Email Lists (i.e. Master List,Other List,...)"
+                },
+                {
+                    "type": "text",
+                    "id": "confirmation_headline",
+                    "label": "Confirmation Headline",
+                    "default": "YOU'RE SIGNED UP!"
+                },
+                {
+                    "type": "html",
+                    "id": "confirmation_body_copy",
+                    "label": "Confirmation Body Copy",
+                    "default": "Support a great cause and find your dream today."
+                },
+                {
+                    "type": "text",
+                    "id": "confirmation_cta_text",
+                    "label": "Confirmation CTA Text",
+                    "default": "See experiences"
+                },
+                {
+                    "type": "text",
+                    "id": "confirmation_cta_url",
+                    "label": "Confirmation CTA URL",
+                    "default": "/collections/experiences"
+                }
+            ]
+        }]
+    }
+{% endschema %}
+
+<script>
+    (function (window) {
+        window.addEventListener('DOMContentLoaded', () => {
+            const config = {
+                sailthruEmailLists: "{{b.email_lists}}",
+            };
+            
+            SDG.Marketing.loadTeaser(config);
+        });
+    })(window);
+</script>

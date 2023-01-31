@@ -1,0 +1,74 @@
+/**
+ * image
+ */
+img {
+	max-width:100%;
+}
+
+/**
+ * intrinsic ratios
+ */
+.intrinsic-ratio {
+	@include intrinsic-ratio-base;
+
+	img {
+		display:block;
+		min-height:1px;
+		width:100%;
+	}
+
+	&--product { // .intrinsic-ratio--product
+		@include intrinsic-ratio-padding(1204/1586);
+	}
+}
+
+// loop through $intrinsic-ratios map
+@each $modifier, $value in $intrinsic-ratios {
+	.intrinsic-ratio--#{$modifier} {
+		@if type-of($value) == 'map' {
+			@each $breakpoint, $responsive-value in $value {
+				@if $breakpoint == null {
+					@include intrinsic-ratio-padding($responsive-value);
+				}
+				@else {
+					@include apply-to($breakpoint) {
+						@include intrinsic-ratio-padding($responsive-value);
+					}
+				}
+			}
+		}
+		@else {
+			@include intrinsic-ratio-padding($value);
+		}
+	}
+}
+
+/**
+ * intrinsic ratio fill
+ */
+.intrinsic-ratio__fill {
+	bottom:0;
+	display:flex;
+	left:0;
+	right:0;
+	position:absolute;
+	top:0;
+
+	&--bottom {
+		align-items:flex-end;
+	}
+
+	&--middle,
+	&--center {
+		align-items:center;
+	}
+
+	&--top {
+		align-items:flex-start
+	}
+
+	&-inner {
+		position:relative;
+		width:100%;
+	}
+}

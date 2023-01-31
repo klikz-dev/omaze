@@ -1,0 +1,156 @@
+.ozsg {
+
+    // TODO: remove once color styles implemented globally
+    color: $black-1;
+
+    body,
+    p {
+        font-family: $primary-font;
+        font-size: 18px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.33;
+        letter-spacing: 0.32px;
+        color: $black-1;
+
+        @include apply-to(desktop) {
+            font-size: 20px;
+            line-height: 1.6;
+            letter-spacing: 0.4px;
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-family: $secondary-font;
+        font-weight: 900;
+    }
+
+    h1 {
+        font-size: 32px;
+        font-weight: 900;
+        line-height: 1.5;
+        letter-spacing: 0.24px;
+        color: $black-2;
+
+        @include apply-to(desktop) {
+            font-size: 56px;
+            line-height: 1.29;
+            letter-spacing: 0.4px;
+        }
+    }
+
+    h2 {
+        font-size: 24px;
+        line-height: 1.33;
+        letter-spacing: 0.18px;
+        color: $black-2;
+
+        @include apply-to(desktop) {
+            font-size: 32px;
+            line-height: 1.25;
+            letter-spacing: 0.24px;
+        }
+    }
+
+    h3 {
+        font-size: 18px;
+        line-height: 1.33;
+        letter-spacing: 0.32px;
+
+        @include apply-to(desktop) {
+            font-size: 24px;
+            line-height: 1.33;
+            letter-spacing: 0.33px;
+        }
+    }
+
+    h4 {
+        font-size: 22px;
+        line-height: 1.33;
+        letter-spacing: 0.24px;
+        color: $black-2;
+        font-family: $primary-font-bold;
+
+        @include apply-to(desktop) {
+
+            // NOT IN STYLE GUIDE
+
+        }
+    }
+
+    // h3 mobile / h2 desktop
+    .h3-2 {
+        font-size: 18px;
+        line-height: 1.33;
+        letter-spacing: 0.32px;
+        color: $black-1;
+
+        @include apply-to(desktop) {
+            font-size: 32px;
+            line-height: 1.25;
+            letter-spacing: 0.24px;
+            color: $black-2;
+        }
+    }
+
+    .anchor-label {
+        font-family: $primary-font;
+        font-size: 18px;
+        font-weight: 900;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $black-2;
+    }
+
+    .caption {
+        font-family: $primary-font;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: italic;
+        font-stretch: normal;
+        line-height: 1.33;
+        letter-spacing: 0.4px;
+        color: $black-1;
+
+        @include apply-to(desktop) {
+            font-size: 16px;
+            line-height: 1.38;
+            letter-spacing: 0.53px;
+        }
+    }
+
+    .text-link {
+        font-family: $primary-font;
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $blue-1;
+    }
+
+    .text--bold {
+        font-weight: bold;
+    }
+
+    .text--italic {
+        font-style: italic;
+    }
+
+    .text--centered {
+        text-align: center;
+    }
+
+    .text--left {
+        text-align: left;
+    }
+
+    .text--right {
+        text-align: right;
+    }
+}

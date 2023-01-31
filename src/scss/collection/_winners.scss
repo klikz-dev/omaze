@@ -1,0 +1,47 @@
+/**
+ * Collection - Winners
+ */
+
+.collection-winners {
+    &__hero-intrinsic-ratio {
+        @include intrinsic-ratio-padding(16/5);
+    }
+
+    .oz-portfolio-banner {
+        margin-bottom: 32px;
+
+        @include apply-to(desktop) {
+            margin-bottom: 40px;
+        }
+    }
+
+    .oz-portfolio-section__experiences {
+        margin-top: 0;
+
+        .oz-simple-card {
+            @include apply-to(phone) {
+                margin-top: 0;
+                margin-bottom: 40px;
+            }
+        }
+    }
+}
+
+//rebrand css
+body.rebrand {
+    .optin-container {
+        margin-top: 0;
+    }
+
+    .oz-portfolio-section__experiences {
+        @include apply-to(tablet) {
+            margin-right: 0;
+        }
+        
+        .oz-simple-card {
+            @include apply-to(phone) {
+                margin-bottom: 30px;
+            }
+        }
+    }
+}

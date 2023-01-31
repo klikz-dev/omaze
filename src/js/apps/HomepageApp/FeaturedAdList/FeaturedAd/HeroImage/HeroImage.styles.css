@@ -1,0 +1,7 @@
+.desktopHero--blank {
+    background-color: var(--navy600);
+}
+
+.heroGradient {
+    background: linear-gradient(270deg, rgba(8, 31, 40, 0) -0.03%, rgba(8, 31, 40, 0) -0.02%, rgba(8, 31, 40, 0.7) 67.55%, rgba(8, 31, 40, 0.8) 100.03%);
+}

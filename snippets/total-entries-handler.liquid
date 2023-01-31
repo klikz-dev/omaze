@@ -1,0 +1,127 @@
+<script>
+    // To calculate the total entries for an order, we need to consider different cases such as:
+    // Was the order imported to shopify pre 2019?
+    // Was the order imported in 2019?
+    // Is it a standard shopify order?
+    // Does the customer have a loyalty bonus?
+    // Is the order a bonus entry?
+
+    const orderTags = {{ order.tags | json }};
+    const orderLineItems = {{ order.line_items | json }};
+
+    const isPre2019ImportedOrder = () => {
+        const OMAZE_TRASPORTER_TAG = '$omaze_transporter';
+
+        return orderTags &&
+            orderTags.length &&
+            orderTags.includes(OMAZE_TRASPORTER_TAG);
+    };
+
+    const is2019ImportedOrder = () => {
+        const OMAZE_LEGACY_TAG = '$omaze_legacy:true';
+
+        return orderTags && orderTags.includes(OMAZE_LEGACY_TAG);
+    };
+
+    const calcTotalImportedEntries = () => {
+        let totalImportedEntries = 0;
+        const OMAZE_RECONCILED_ENTRIES_TAG = '$omaze_legacy_reconciled_entries';
+        const foundReconciledEntriesTag = orderTags.find((tag) =>
+            tag.includes(OMAZE_RECONCILED_ENTRIES_TAG)
+        );
+
+        const total = Number(foundReconciledEntriesTag.split(':')[1]);
+        if (!Number.isNaN(total)) {
+            totalImportedEntries = total;
+        }
+
+        return totalImportedEntries;
+    };
+
+    const calcTotalShopifyEntries = () => {
+        let purchased = 0;
+        let total = 0;
+        const LEGACY_LOYALTY_TAG = 'legacy_loyalty';
+        const BONUS_ENTRIES = 'Bonus Entries';
+        const DEFAULT_TITLE = 'Default Title';
+
+
+        for (const lineItem of orderLineItems) {
+            // If there's a variant attached, and it's a standard amount, use that.
+            const SKU_SEPARATOR = '_';
+            const standardVariantAmount = lineItem.variant &&
+                lineItem.variant.sku &&
+                lineItem.variant.sku.split(SKU_SEPARATOR)[1];
+
+            if (standardVariantAmount) {
+                const parsed = Number(standardVariantAmount);
+                const quantity = Number(lineItem.quantity);
+                if (!Number.isNaN(parsed)) {
+                    purchased = parsed;
+                    total = total +  (parsed * quantity);
+                };
+            };
+
+            // Does the user qualify for loyalty bonus?
+            const IS_LOYALTY_BONUS =
+                lineItem.properties.length &&
+                lineItem.properties[0].name === LEGACY_LOYALTY_TAG &&
+                lineItem.properties[0].value === true;
+
+            if (IS_LOYALTY_BONUS) {
+                const level = lineItem.quantity;
+                const loyaltyEntries = purchased * level;
+                total = total + loyaltyEntries;
+            }
+
+            // Handle Bonus entries
+            // Bonus entries have a title of "Default Title" and lineItem.title": "Bonus Entries",
+            // We can get the num of entries in this case from the qty
+            const IS_BONUS_ENTRY =
+                lineItem.title === BONUS_ENTRIES &&
+                lineItem.variant &&
+                lineItem.variant.title === DEFAULT_TITLE;
+
+            if (IS_BONUS_ENTRY) {
+                total += Number(lineItem.quantity);
+            }
+        }
+
+        return total;
+    };
+
+    const hideTotalEntries = () => {
+        const TOTAL_ENTRIES_CONTAINER_ID = 'total-entries-container';
+
+        const totalEntriesEl = document.getElementById(TOTAL_ENTRIES_CONTAINER_ID);
+        totalEntriesEl.parentNode.removeChild(totalEntriesEl);
+    }
+
+    const calcTotalEntries = () => {
+        let total = 0;
+
+        if (isPre2019ImportedOrder()) {
+            // skip pre 2019 orders because we can't reliably get the entries
+            total = 0;
+            hideTotalEntries();
+        } else if(is2019ImportedOrder()) {
+            total = calcTotalImportedEntries();
+        } else {
+            total = calcTotalShopifyEntries();
+        }
+
+        return total;
+    };
+
+    const renderTotalEntries = () => {
+        const TOTAL_ENTRIES_ID = 'total-entries';
+        const totalEntries = calcTotalEntries();
+        const totalEntriesEl = document.getElementById(TOTAL_ENTRIES_ID);
+
+        if (totalEntriesEl) {
+            totalEntriesEl.innerHTML = `${totalEntries} chances to win`;
+        }
+    }
+
+    renderTotalEntries();
+</script>

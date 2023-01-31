@@ -1,0 +1,19 @@
+/*
+///////////////////////////////////////////////////////////
+Page
+///////////////////////////////////////////////////////////
+*/
+.page {
+	&__header {
+		padding-top:em(35) 0;
+		text-align:center;
+
+		@include apply-to(desktop) {
+			padding:em(51) 0;
+		}
+	}
+
+	&__container {
+		max-width:em(928);
+	}
+}

@@ -1,0 +1,15 @@
+{% if settings.cart_active %}
+    <a href="/cart" class="nav__cart js-nav__cart-analytics">
+        <img class="nav__cart-icon" src="{{ 'cart.svg' | asset_url }}" alt="Cart" />
+    </a>
+    {% if cart.item_count > 0 %}
+        <span class="nav__cart-count">{{ cart.item_count }}</span>
+    {% endif %}
+{% endif %}
+<script>
+    var navigationType = performance.navigation.type;
+    if (navigationType === 2) {
+        // If page was navigated to with the back button
+        location.reload();
+    }
+</script>

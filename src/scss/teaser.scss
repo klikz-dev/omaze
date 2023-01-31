@@ -1,0 +1,145 @@
+@import 'core/core';
+
+.oz-section-teaser {
+    display: flex;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-color: $gray-3;
+    background-size: cover;
+    padding: 30% 0 rem(24);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: rem(-3);
+
+    @include apply-to(desktop) {
+        justify-content: flex-start;
+        padding: 9% 13%;
+    }
+
+    &__intrinsic-ratio {
+        @include intrinsic-ratio-padding(1/1);
+
+        height: auto;
+        padding: 0;
+
+        &>img {
+            min-height: auto;
+        }
+    }
+
+    &__signup, &__confirmation {
+        color: $white;
+        background-color: $new-navy;
+        padding: rem(24);
+        width: 327px;
+
+        @include apply-to(tablet-portrait) {
+            top: 200px;
+        }
+
+        @include apply-to(tablet-landscape) {
+            top: 150px;
+        }
+
+        @include apply-to(desktop) {
+            padding: rem(32);
+            width: 446px;
+            left: 168px;
+            top: 223px;
+        }
+
+
+        &-headline {
+            font-size: rem(28);
+            line-height: rem(34);
+            letter-spacing: rem(0.32);
+            font-style: normal;
+            font-weight: 900;
+            margin: 0;
+
+            @include apply-to(desktop) {
+                font-size: rem(36);
+                line-height: rem(42);
+                margin-bottom: rem(24);
+            }
+        }
+
+        &-body {
+            font-family: $primary-font;
+            color: $white;
+            font-size: rem(16);
+            line-height: rem(20);
+            letter-spacing: rem(0.4);
+            font-style: normal;
+            font-weight: 500;
+            margin-top: rem(16);
+            margin-bottom: rem(16);
+
+            @include apply-to(desktop) {
+                margin-top: 0;
+                font-size: rem(18);
+                line-height: rem(22);
+                margin-bottom: rem(24);
+            }
+        }
+
+        &-form, &-link {
+            margin-bottom: rem(16);
+
+            &>.email {
+                margin-bottom: rem(24);
+            }
+
+            &>.oz-btn {
+                background: $yellow-3;
+                color: $black-2;
+
+                &:hover {
+                    background-color:$yellow-4;
+                }
+            }
+        }
+
+        &-legal {
+            font-family: $primary-font-italic;
+            color: $white;
+            font-size: rem(12);
+            line-height: rem(16);
+            letter-spacing: rem(0.4);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+    }
+
+    .email-error-message {
+        text-align: left;
+        padding-left: 14px;
+        font-size: 14px;
+        color: $white;
+    }
+
+    .oz-field.error {
+        .oz-field__container {
+            border-color: $red-1;
+        }
+        label {
+            color: $red-1;
+        }
+        .email-error-message {
+            display: block;
+        }
+    }
+
+    .button-loader {
+        width: 25%;
+        @include apply-to(desktop) {
+            width: 40%;
+        }
+    }
+
+    .btn-loading {
+        background-color: $yellow-3;
+    }
+}

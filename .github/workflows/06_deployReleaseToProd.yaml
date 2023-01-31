@@ -1,0 +1,49 @@
+name: 06 (Auto) Build and Deploy to Prod
+
+on:
+  release:
+    types: [released]
+
+env:
+  CI: true
+  SHOPIFY_ENV: production
+
+jobs:
+  build-deploy-Prod:
+    runs-on: [ubuntu-18.04]
+    steps:
+      - name: Git checkout
+        id: checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 14
+
+      - name: Setup .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.RELEASE_WORKFLOW_TOKEN }}" > ~/.npmrc
+
+      - name: Cache Node Modules
+        id: node-cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        id: deps
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Build Prod Theme
+        id: build-prd
+        run: npm run build:prod
+
+      - id: config-move
+        run: mv config.yml.sample config.yml
+
+      - name: Deploy to Prod
+        id: deploy-PRD
+        uses: docker://jpteasdale/shopify-theme
+        with:
+          args: deploy --env ${{env.SHOPIFY_ENV}} --password ${{secrets.PRD_SHOPIFY_THEME_PW}} --themeid ${{secrets.PRD_SHOPIFY_THEME_ID}} --store ${{secrets.PRD_SHOPIFY_STORE_URL}} --verbose --nodelete --timeout 90s

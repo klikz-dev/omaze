@@ -1,0 +1,47 @@
+{% if section.settings.matching_legal_info_enabled == 'yes' %}
+
+    {% for block in section.blocks %}
+        <p>
+            {{ block.settings.matching_legal_text }}
+        </p>
+    {% endfor %}
+
+{% endif %}
+
+{% schema %}
+    {
+        "name": "DTA - Matching: Legal",
+        "class": "oz-donation-donate-to-all__matching--legal",
+        "settings": [
+            {
+                "type": "select",
+                "id": "matching_legal_info_enabled",
+                "options": [
+                    {
+                        "value": "yes",
+                        "label": "Yes"
+                    },
+                    {
+                        "value": "no",
+                        "label": "No"
+                    }
+                ],
+                "label": "Matching Legal Info Visible?",
+                "default": "no"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "matching_legal",
+                "name": "Matching Legal Text",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "matching_legal_text",
+                        "label": "Matching Legal Text Block"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

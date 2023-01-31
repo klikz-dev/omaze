@@ -1,0 +1,33 @@
+/**
+ * oz-about-page__links
+ */
+
+.oz-about-page__links {
+
+	& > div {
+		width: 80%;
+		margin: rem(40) auto;
+
+		// TODO move to @extend
+		@include flexbox();
+		@include justify-content(space-around);
+
+		@include apply-to(tablet) {
+			max-width: rem(470);
+			margin: rem(90) auto;
+		}
+	}
+
+	a {
+		font-family: $secondary-font;
+		font-weight: $bold;
+		font-size: rem(14);
+		color: $pink-6;
+		text-decoration: underline;
+		text-transform: lowercase;
+
+		@include apply-to(tablet) {
+			font-size: rem(20);
+		}
+	}
+}

@@ -1,0 +1,20 @@
+/* Shopify CSS overrides taiwind hidden */
+.card2 {
+    display: none;
+}
+
+@screen md {
+    .card2 {
+        display: block;
+    }
+}
+
+.card3 {
+    display: none;
+}
+
+@screen lg {
+    .card3 {
+        display: block;
+    }
+}

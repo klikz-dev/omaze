@@ -1,0 +1,156 @@
+/**
+ * Homepage impact carousel
+ */
+
+.oz-homepage {
+
+    // .oz-homepage__impact
+    &__impact {
+        position: relative;
+        color: $white;
+        background: $black-4;
+        margin: rem(25) 0;
+        padding: rem(15) 0;
+
+        // .oz-homepage__impact .oz-section-title
+        .oz-section-title {
+            width: 80%;
+            margin: 0 auto;
+            padding: rem(25) 0;
+        }
+
+        // .oz-homepage__impact .oz-slider
+        .oz-slider {
+            overflow: hidden;
+
+            // .oz-homepage__impact .oz-slider__title
+            &__title {
+                position: absolute;
+                bottom: rem(15);
+                margin: 0;
+                font-size: rem(24);
+                font-family: $secondary-font;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                color: $white;
+
+                @include apply-to(tablet) {
+                    font-size: rem(45);
+                }
+            }
+
+            // .oz-homepage__impact .oz-slider__content
+            &__content {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            // .oz-homepage__impact .oz-slider__subtitle
+            &__subtitle {
+                white-space: normal;
+                padding: rem(25) 0;
+                margin: 0;
+                font-family: $secondary-font;
+                font-size: rem(14);
+                line-height: 1.3;
+                color: $white;
+
+                @include apply-to(desktop) {
+                    font-size: rem(16);
+                    padding: rem(25) 0;
+                }
+            }
+
+            // .oz-homepage__impact .oz-slider__item
+            &__item {
+                margin: 0 rem(8);
+                display: inline-block;
+            }
+
+            // .oz-homepage__impact .oz-slider__img
+            &__img {
+
+                // .oz-homepage__impact .oz-slider__img::before
+                &::before {
+                    background: transparent;
+                }
+
+                // .oz-homepage__impact .oz-slider__img img
+                img {
+                    border-radius: rem(10);
+                }
+
+                // .oz-homepage__impact .oz-slider__img .embed-container
+                .embed-container {
+                    border-radius: rem(10);
+                }
+            }
+
+            // .oz-homepage__impact .oz-slider__intrinsic-ratio
+            &__intrinsic-ratio {
+                @include intrinsic-ratio-padding(2/1);
+
+                img {
+                    position: absolute;
+                }
+            }
+
+            // .oz-homepage__impact .oz-slider .slick-slide
+            .slick-slide {
+                float: left;
+                height: 100%;
+            }
+
+            // .oz-homepage__impact .oz-slider .slick-arrow
+            .slick-arrow {
+                position: absolute;
+                transform: translateY(-50%);
+                top: 40%;
+                height: 100%;
+                width: 20%;
+
+                // .oz-homepage__impact .oz-slider .slick-arrow::before
+                &::before {
+                    color: $white;
+                    font-family: $primary-font;
+                    font-weight: $bold;
+                    font-size: rem(82);
+                }
+
+                // .oz-homepage__impact .oz-slider .slick-arrow.slick-prev
+                &.slick-prev {
+                    left: 0%;
+                    text-align: left;
+                    padding-left: rem(60);
+                }
+
+                // .oz-homepage__impact .oz-slider .slick-arrow.slick-next
+                &.slick-next {
+                    right: 0%;
+                    text-align: right;
+                    padding-right: rem(60);
+                }
+            }
+        }
+
+        // .oz-homepage__impact .embed-container
+        .embed-container {
+            position: relative;
+            padding-bottom: 50%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+
+            // .oz-homepage__impact .embed-container iframe,object,embed
+            iframe, object, embed {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

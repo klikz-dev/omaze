@@ -1,0 +1,37 @@
+
+.product-recommendations {
+    &__header{
+        opacity: 0.87;
+        font-family: $secondary-font;
+        font-size: 32px;
+        font-weight: 900;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.25;
+        margin: 0 auto;
+        letter-spacing: 0.24px;
+        color: $black-1;
+        text-align: center;
+
+        @include apply-to(phone) {
+            font-size: 24px;
+
+            span {
+                display: block;
+            }
+        }
+
+    }
+    &__sub-header{
+        font-size: 20px;
+        line-height: 1.6;
+        letter-spacing: 0.4px;
+        text-align: center;
+        margin: 16px auto 0;
+        color: $black-1;
+
+        @include apply-to(phone) {
+            font-size: 18px;
+        }
+    }
+}

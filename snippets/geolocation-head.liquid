@@ -1,0 +1,167 @@
+{% comment %}
+    usage:
+        * sets up window.ozGeolocation.getData() promise that returns geoData once ready
+        * getData() takes an optional 'waitLimit' argument, which will throw an error if data not returned in time
+            - @param {number} [waitLimit] - optional time to wait before throwing error (in milliseconds)
+
+        * example:
+
+            window.ozGeolocation
+                .getData(5000)
+                .then((data) => {
+                    * do stuff with geo data *
+                })
+                .catch((error) => {
+                    * triggered after 5 seconds *
+                    * triggered if error *
+                });
+
+        * other libs possibly dependent on ozGeolocation
+            * auth0: auth0.liquid is using the geo info to send the country_code value to Auth0 Universal Login
+                to be able to default the optIn value to true only for the US users
+            * country-restrictions.js: filtering products in carousels/collections based on country restrictions.
+{% endcomment %}
+
+<script type='text/javascript' id='oz-geolocation'>
+    (function (window) {
+        const GEO_API_URL = '{{ settings.oz_geolocation_api_url }}';
+
+        const GEO_COOKIE_PREFIX = 'oz__geo__';
+        const GEO_COOKIE_EXPIRE_DAYS = 30;
+
+        const GEO_KEY_MAP = {
+            IP: 'ip',
+            COUNTRY_CODE: 'country_code',
+            REGION_CODE: 'region_code',
+            CONTINENT_CODE: 'continent_code',
+        };
+
+        window.ozGeolocation = {};
+        window.ozGeolocation.getData = getData;
+
+        let cachedGetData;
+
+        function getData (timeLimitMs) {
+            cachedGetData = cachedGetData || retrieveGeoData();
+
+            const promises = [
+                cachedGetData,
+            ];
+
+            timeLimitMs = parseInt(timeLimitMs);
+
+            if (timeLimitMs) {
+                const shortCircuitPromise = shortCircuit(timeLimitMs);
+
+                promises.push(shortCircuitPromise);
+            }
+
+            return Promise.race(promises).then((value) => {
+                return value;
+            })
+            .catch((error) => {
+                return Promise.reject(error);
+            });
+        }
+
+        function shortCircuit (timeLimitMs) {
+            return new Promise((resolve, reject) => {
+                const message = `ozGeolocation getData shortCircuit at ${timeLimitMs} ms`;
+
+                setTimeout(reject, timeLimitMs, message);
+            });
+        }
+
+        function retrieveGeoData () {
+            return getCookieData()
+                .catch(fetchGeoData);
+        }
+
+        function getCookieName (key) {
+            return `${GEO_COOKIE_PREFIX}${key.toLowerCase()}`;
+        }
+
+        function getCookieData () {
+            const data = {};
+
+            Object.keys(GEO_KEY_MAP).forEach((key) => {
+                const name = getCookieName(key);
+                data[key] = window.ozCookieGet(name);
+            });
+
+            return validateData(data);
+        }
+
+        function fetchGeoData () {
+            if (!GEO_API_URL) {
+                console.error('[OZ GEOLOCATION fetchGeoData] GEO_API_URL missing');
+
+                return Promise.reject('fetchGeoData failed');
+            }
+
+            return fetch(GEO_API_URL)
+                .then((response) => {
+                    if (!response.ok) {
+                        return Promise.reject('fetchGeoData failed');
+                    }
+
+                    return response.json();
+                })
+                .then((response) => {
+                    return mapApiResponse(response);
+                })
+                .then(validateData)
+                .catch((error) => {
+                    console.error(`[OZ GEOLOCATION fetchGeoData]: ${error}`);
+
+                    return Promise.reject(error);
+                })
+        }
+
+        function mapApiResponse (data) {
+            const geoData = {}
+
+            Object.keys(GEO_KEY_MAP).forEach((key) => {
+                let value = data[GEO_KEY_MAP[key]];
+
+                if (typeof(value) === 'string') {
+                    value = value.toUpperCase().trim();
+                }
+
+                geoData[key] = value;
+            });
+
+            return geoData;
+        }
+
+        function validateData (data) {
+            const geoKeys = Object.keys(GEO_KEY_MAP);
+            const geoData = {};
+
+            geoKeys.forEach((key) => {
+                let value = data[key];
+
+                if (!value) {
+                    return false;
+                }
+
+                geoData[key] = value;
+            });
+
+            if (Object.keys(geoData).length !== geoKeys.length) {
+                return Promise.reject();
+            }
+
+            saveCookies(geoData);
+
+            return Promise.resolve(geoData);
+        }
+
+        function saveCookies (data) {
+            Object.keys(GEO_KEY_MAP).forEach((key) => {
+                const name = getCookieName(key);
+                window.ozCookieSet(name, data[key], GEO_COOKIE_EXPIRE_DAYS);
+            });
+        }
+    })(window);
+</script>

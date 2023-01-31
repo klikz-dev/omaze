@@ -1,0 +1,64 @@
+{% comment %} capture the content for header object {% endcomment %}
+{%- capture headerContent -%}{{ content_for_header }}{%- endcapture -%}
+{% assign userEmail = '' %}
+
+{% comment %} split the headerContent to retrieve the page url {% endcomment %}
+{%- assign pageUrl = headerContent | split:'"pageurl":"' | last |
+	split:'"' | first |
+	split:'?' | last |
+	replace:'\/','/' |
+	replace:'%20',' ' |
+	replace:'\u0026','&'
+-%}
+
+{% if pageUrl contains "email=" %}
+	{% assign userEmail = pageUrl | split:"email=" | last %}
+{% endif %}
+
+{% comment %} extra check to ensure only the user email is gotten from the query string {% endcomment %}
+{% if userEmail contains "&" %}
+	{% assign userEmail = userEmail | split:"&" | first %}
+{% endif %}
+
+<div class="oz-recover-account">
+	<div class="oz-recover-account__icon"></div>
+	<h2 class="oz-recover-account__header-text">{{ 'customer.recover_account.title' | t }}</h2>
+	<p class="oz-recover-account__message">{{'customer.recover_account.message_html' | t : email: userEmail }}</p>
+
+	<div class="oz-recover-account-call-out">
+		<h4 class="oz-recover-account-call-out__title">Didn't receive our email?</h4>
+		<p class="oz-recover-account-call-out__message">
+			Check you spam folder or reach out to our customer support team at <a href="mailto:weloveyou@omaze.com" class="oz-recover-account-call-out__link">weloveyou@omaze.com</a> for assistance.
+		</p>
+	</div>
+</div>
+
+<script>
+  (function () {
+	const email = '{{ userEmail }}';
+	const EMAIL_EL_SELECTOR = '.oz-recover-account__email';
+	const emailEl = document.querySelector(EMAIL_EL_SELECTOR);
+
+	if (!email) {
+		goToHomePage();
+
+		return;
+	}
+
+	if (emailEl) {
+		scaleEmailFont({maxTextLength: 30, desktopWidth: 1100});
+
+		return;
+	}
+
+	function goToHomePage() {
+		window.location.href = '/';
+	}
+
+	function scaleEmailFont(options) {
+		if (window.screen.width < options.desktopWidth && email.length > options.maxTextLength) {
+			emailEl.classList.add('oz-recover-account__email--small');
+		}
+	}
+  })();
+</script>

@@ -1,0 +1,169 @@
+.optin-container {
+    display: flex;
+    background-color: $blue-13;
+    padding: 24px;
+    position: relative;
+    flex-direction: column;
+    z-index: 1;
+    margin-top: 60px;
+
+    @include apply-to(desktop) {
+        padding: 25px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @include apply-to(tablet) {
+        padding: 39px 9px 32px 9px;
+    }
+
+    &__top {
+        &-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 900;
+            font-family: $secondary-font;
+            color: $black-2;
+            @include apply-to(desktop) {
+                font-size: 36px;
+                margin-right: 27px;
+            }
+        }
+    }
+
+    &__middle {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        max-width: 634px;
+
+        @include apply-to(tablet-only) {
+            margin: auto;
+        }
+
+        &-title {
+            padding: 16px 0 16px 0;
+            margin: 0;
+            font-size: 18px;
+            font-family: $primary-font;
+            color: $black-2;
+            font-style: italic;
+            @include apply-to(tablet-only) {
+                padding: 8px 0 20px 0;
+            }
+            @include apply-to(desktop) {
+                font-size: 24px;
+            }
+        }
+        &-form {
+            display: flex;
+            flex-direction: column;
+
+            .email {
+                margin-bottom: 8px;
+                width: 100%;
+                @include apply-to(desktop) {
+                    width: 351px;
+                    margin: 0 25px 0 0;
+                }
+                @include apply-to(tablet) {
+                    margin: 0 19px 0 0;
+                }
+            }
+            .button {
+                button {
+                    height: 58px;
+                }
+                @include apply-to(desktop) {
+                    width: 258px;
+                }
+                @include apply-to(tablet) {
+                    width: 246px;
+                }
+            }
+
+            @include apply-to(desktop) {
+                flex-direction: row;
+            }
+
+            @include apply-to(tablet) {
+                flex-direction: row;
+            }
+
+        }
+        &-subtext {
+            text-align: center;
+            padding: 16px 0 16px 0;
+            span {
+                font-size: 12px;
+                font-family: $primary-font;
+                color: $black-2;
+            }
+        }
+    }
+
+    .email-error-message {
+        display: none;
+        text-align: left;
+        padding-left: 14px;
+        font-size: 14px;
+        color: $red-1;
+    }
+
+    .oz-field.error {
+        .oz-field__container {
+            border-color: $red-1;
+        }
+        label {
+            color: $red-1;
+        }
+        .email-error-message {
+            display: block;
+        }
+    }
+
+    .button-loader {
+        width: 25%;
+        @include apply-to(desktop) {
+            width: 40%;
+        }
+    }
+
+    .btn-loading {
+        background-color: rgba(234, 39, 134, 0.7);
+    }
+
+}
+
+.optin-container-success {
+    display: block;
+    background-color: $blue-13;
+    padding: 50px 50px 70px 50px;
+    .title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 900;
+        margin: 0 0 17px 0;
+        font-family: $secondary-font;
+        color: $black-2;
+        @include apply-to(desktop) {
+            font-size: 36px;
+        }
+    }
+
+    .message {
+        text-align: center;
+        font-size: 18px;
+        margin: 0;
+        font-family: $primary-font;
+        color: $black-2;
+        @include apply-to(desktop) {
+            font-size: 24px;
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}

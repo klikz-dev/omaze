@@ -1,0 +1,20 @@
+/// oz-section-content
+.oz-section-content {
+    margin: 0 rem(30);
+
+    @include apply-to(tablet) {
+        margin: 0 rem(60);
+    }
+
+	// .oz-section-content--reset
+    &--reset {
+		margin-top: 0;
+    }
+}
+
+// rebrand
+body.rebrand {
+    .oz-section-content {
+        margin: 0 0;
+    }
+}

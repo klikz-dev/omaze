@@ -1,0 +1,43 @@
+name: 02 (Auto) Release Candidate Creation
+
+on:
+  push:
+    branches:
+      - integration
+    tags-ignore:
+      - '*'
+    paths-ignore:
+      - ".github/**"
+      - ".githooks/**"
+      - "**.md"
+
+jobs:
+  release:
+    name: 'Release to GitHub'
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_WORKFLOW_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: Setup .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.RELEASE_WORKFLOW_TOKEN }}" > ~/.npmrc
+
+      - name: Release to GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_WORKFLOW_TOKEN }}
+          GIT_AUTHOR_NAME: omaze-cicd
+          GIT_AUTHOR_EMAIL: info@omaze.com
+          GIT_COMMITTER_NAME: omaze-cicd
+          GIT_COMMITTER_EMAIL: info@omaze.com
+        run: |
+          npm install --no-save \
+            conventional-changelog-conventionalcommits
+          npx semantic-release

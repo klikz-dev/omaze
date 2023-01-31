@@ -1,0 +1,63 @@
+/**
+ * Collection - Featured
+ */
+
+.collection-featured {
+    // .collection-featured__hero-intrinsic-ratio
+     &__hero-intrinsic-ratio {
+         @include intrinsic-ratio-padding(16/5);
+     }
+ }
+
+// Omaze
+.oz-portfolio {
+    margin-bottom: 60px;
+
+    // .oz-portfolio-banner
+    &-banner {
+        margin-bottom: 30px	;
+    }
+
+    // .oz-portfolio-section
+    &-section {
+        margin: 0 30px;
+
+        // .oz-portfolio-section__content
+        &__content {
+            margin: 22px 24px;
+
+            @include apply-to(tablet) {
+                margin: 44px 134px;
+            }
+
+            @include apply-to(desktop) {
+                margin-left: 356px;
+                margin-right: 356px;
+            }
+        }
+    }
+}
+
+//rebrand
+body.rebrand {
+    .oz-portfolio {
+        // .oz-portfolio-banner
+        &-banner {
+            margin-bottom: 24px;
+        }
+    
+        // .oz-portfolio-section
+        &-section {
+            // .oz-portfolio-section__content
+            &__content {
+                @include apply-to(tablet) {
+                    margin: 32px 134px;
+                }
+
+                @include apply-to(mobile) {
+                    margin-bottom: 44px;
+                }
+            }
+        }
+    }
+}

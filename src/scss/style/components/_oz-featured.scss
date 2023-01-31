@@ -1,0 +1,55 @@
+/**
+ * Featured In
+ */
+
+.oz-homepage__featured-in {
+
+	// .oz-homepage__featured-in-image
+	&-image {
+	    height: 85px;
+    	width: 100%;
+
+    	&::-webkit-scrollbar {
+    		width: 0;
+    	}
+	}
+
+	// .oz-homepage__featured-in .oz-btn__btn-wrap
+	.oz-btn__btn-wrap {
+		padding: rem(50) rem(10);
+
+		a {
+			color: $pink-6;
+			font-family: "Clan", sans-serif;
+			font-size: rem(18);
+			font-weight: 700;
+
+			// .oz-btn__btn-wrap::after
+			&::after {
+				content: '';
+				position: relative;
+				display: inline-block;
+				vertical-align: middle;
+				color: inherit;
+				margin-top: rem(-1);
+				margin-left: rem(6);
+				width: rem(8);
+				height: rem(8);
+				border: rem(3) solid;
+				border-width: rem(3) rem(3) 0 0;
+				transform: rotate(45deg);
+			}
+		}
+	}
+
+	.in-the-news__logo-wall-imgx {
+		display: inline-block;
+		height: 100%;
+		width: auto;
+		max-width: inherit;
+	}
+
+	.oz-annotation-image {
+	    @include annotation-image(h2, asset('in-the-news.png'), 185px, 50px, -50px, -61px);
+	}
+}

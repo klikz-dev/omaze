@@ -1,0 +1,18 @@
+/**
+ * section header
+ */
+.section-header {
+	margin-bottom: em(35);
+	margin-top: em(30);
+	text-align: center;
+
+	@include apply-to(tablet) {
+		margin-bottom: em(50);
+	}
+
+	// .section-header__hdg
+	&__hdg {
+		margin: 0;
+		@include mqstyle('font-size', $size-section-header-hdg);
+	}
+}

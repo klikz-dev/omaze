@@ -1,0 +1,79 @@
+.oz-donation__pricing-options {
+    display: flex;
+    flex-flow: column;
+    margin-top: 0;
+}
+
+.oz-donation-pricing-options__selected-option {
+    font-family: $primary-font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.4px;
+    margin-bottom: 30px;
+}
+
+.oz-donation-pricing-options__selected-option span {
+    font-family: $primary-font;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.4px;
+}
+
+.oz-donation-pricing-options__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.oz-donation-pricing-option__label {
+    border: 2px solid #777;
+    color: #777 !important; /* TODO: fix !important / use color var (previous line too) */
+    font-weight: 400;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin: 8px;
+    cursor: pointer;
+
+    @include apply-to(desktop) {
+        padding: 12px 18px;
+        margin: 4px;
+    }
+}
+
+.oz-donation-pricing-option:first-of-type label.oz-donation-pricing-option__label {
+    margin-left: 0;
+}
+
+.oz-donation-pricing-option:last-of-type label.oz-donation-pricing-option__label {
+    margin-right: 0;
+}
+
+.oz-donation-pricing-option input[type=radio] {
+    position: absolute;
+    visibility: hidden;
+}
+
+.oz-donation-pricing-option input[type=radio]:checked + .oz-donation-pricing-option__label {
+    border: 2px solid $secondary-color;
+    color: $secondary-color !important; /* TODO: fix !important / use color var (previous line too) */
+}
+
+.oz-donation__pricing-options button {
+    margin-top: 20px;
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.oz-donation__button[disabled] {
+    background: #aaa;
+    cursor: default;
+}

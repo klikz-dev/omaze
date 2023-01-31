@@ -1,0 +1,45 @@
+{% comment %}
+  The liquid customer object will be defined on all pages if the customer is logged in.
+  https://help.shopify.com/en/themes/liquid/objects/customer
+
+  It cannot be passed through the JSON filter due to a circular reference. Each customer object contains an order object, which contains a customer object, etc.
+  We exclude all customer refences from the nested order object to avoid this.
+{% endcomment %}
+
+{% if customer %}
+    {
+        "logged_in": true,
+        "accepts_marketing": {{ customer.accepts_marketing | json }},
+        "addresses": {{ customer.addresses | json }},
+        "address_count": {{ customer.address_count | json }},
+        "default_address": {{ customer.default_address | json }},
+        "email": {{ customer.email | json }},
+        "first_name": {{ customer.first_name | json }},
+        "has_account": {{ customer.has_account | json }},
+        "id": {{ customer.id | json }},
+        "last_name": {{ customer.last_name | json }},
+        "last_order": {% include 'gtm-order.js', order: customer.last_order %},
+        "name": {{ customer.name | json }},
+        "orders_count": {{ customer.orders_count | json }},
+        "phone": {{ customer.phone | json }},
+        "tags": {{ customer.tags | json }},
+        "tax_exempt": {{ customer.tax_exempt | json }},
+        "total_spent": {{ customer.total_spent | json }},
+        "has_transacted": {% if customer.orders_count > 0 %}true{% else %}false{% endif %},
+        "new_customer": {% if customer.orders_count == 0 %}true{% else %}false{% endif %},
+
+        {% comment %}
+        Excluding "orders". Can reconsider if someone really needs it, but it seems excessive to send this much data.
+
+        "orders": [
+        {% for order in customer.orders %}
+            {% include 'gtm-order.js', order: order %},
+        {% endfor %}
+        ],
+        {% endcomment %}
+    }
+{% else %}
+    {
+        "logged_in": false
+    }
+{% endif %}

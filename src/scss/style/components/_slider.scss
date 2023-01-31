@@ -1,0 +1,106 @@
+/**
+ * oz slider
+ */
+
+.oz-slider {
+    position: relative;
+
+	// .oz-slider__placeholder
+    &__placeholder {
+        position: absolute;
+        background: $white;
+        top: 0;
+        left: 0;
+        opacity: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+	// .oz-slider__list
+    &__list {
+        opacity: 0;
+        white-space: nowrap;
+        text-align: center;
+		transition: opacity 0.36s ease-in;
+
+		// .oz-slider__list.slick-initialized
+        &.slick-initialized {
+            // NOTE: .99 opacity (rather than 1) to work in Safari
+            opacity: .99;
+        }
+
+		// .oz-slider__list .slick-track
+        .slick-track {
+            display: inline-block;
+        }
+    }
+
+	// .oz-slider .slick-arrow
+    .slick-arrow {
+        position: absolute;
+        top: 35%;
+        z-index: 5;
+        background: 0 0;
+        border: 0;
+        font-size: 0;
+
+        @include apply-to(tablet) {
+            top: 35%;
+        }
+
+		// .oz-slider .slick-arrow.slick-prev
+        &.slick-prev {
+            left: rem(-35);
+
+            &:before {
+                content: '<';
+                font-size: rem(50);
+                color: $gray-11;
+            }
+        }
+
+		// .oz-slider .slick-arrow.slick-next
+        &.slick-next {
+            right: -35px;
+
+            &:before {
+                content: '>';
+                font-size: rem(50);
+                color: $gray-11;
+            }
+        }
+
+		// .oz-slider .slick-arrow.slick-disabled
+        &.slick-disabled {
+            opacity: 0;
+        }
+    }
+
+	// .oz-slider .slick-dots
+    .slick-dots {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 5px;
+        text-align: center;
+        font-size: 0;
+        padding: 0;
+
+		// .oz-slider .slick-dots button
+        button {
+            width: rem(10);
+            height: rem(10);
+            border-radius: 50%;
+            font-size: 0;
+            border: 0;
+            padding: 0;
+        }
+
+		// .oz-slider .slick-dots li
+        li {
+            display: inline-block;
+            padding: 0 3px;
+            vertical-align: top;
+        }
+    }
+}

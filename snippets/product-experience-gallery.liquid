@@ -1,0 +1,85 @@
+{% for image in product.images %}
+	{% capture imageId %}{{ image.id }}{% endcapture %}
+	{% if imageId == meta.experience.image_1_id %}
+		<div class="columns__one-right-rail oz-experience-leader js-gallery-section">
+			<div class="exp-leader">
+				<div class="exp-leader__container js-video-wrapper">
+					<div class="exp-leader__cover js-custom-video-cover">
+						<div class="exp-leader__img lqip-container lazy-blur intrinsic-ratio intrinsic-ratio--product">
+							<img src="{{ image | img_url: '812x' }}" class="lqip-img">
+							<img class="lazyload" alt="" data-sizes="auto" data-src="{{ image | img_url: '812x' }}" data-srcset="{% include 'c-responsive-image-url', responsive_img: image %}">
+						</div>
+
+						{% unless productStatus == 'closed' %}
+							<div class="oz-info-banner oz-info-banner--pos-top exp-leader__info-banner js-days-left" data-end-date="{{ meta.experience.end_date }}">days left
+							</div>
+						{% endunless %}
+
+					</div>
+				</div>
+
+				{% if productStatus == 'closed' %}
+					<div class="oz-info-banner oz-info-banner--pos-top exp-leader__info-banner yellow-flag" data-end-date="{{ meta.experience.end_date }}"></div>
+				{% endif %}
+
+			</div>
+		</div>
+	{% elsif imageId == meta.experience.image_2_id %}
+		{% assign imgHdg = meta.experience.image_2_heading %}
+		{% assign imgText = meta.experience.image_2_text %}
+
+		<div class="columns__one-right-rail js-gallery-section">
+			<div class="exp-info">
+				<h2 class="oz-section-title">{{ imgHdg }}</h2>
+				<div class="exp-info__img-wrapper">
+					<img class="lazyload" data-sizes="auto" data-src="{{ image | img_url: '812x' }}" data-srcset="{% include 'c-responsive-image-url', responsive_img: image %}">
+				</div>
+
+				{% if imgText != blank %}
+					<div class="oz-wysigyg">
+						<p>
+						{{ imgText }}
+						</p>
+						<div class="oz-wysigyg__fame-callout">
+							<p>No donation or payment is necessary to enter or win this sweepstakes.</p>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	{% elsif imageId == meta.experience.image_3_id %}
+		{% assign imgHdg = meta.experience.image_3_heading %}
+		{% assign imgText = meta.experience.image_3_text %}
+		{% assign altText = meta.experience.image_3_alt %}
+
+		<div class="columns__one-right-rail js-gallery-section">
+			<div class="exp-info exp-benefit js-donate-btn-fixed-block">
+				<h2 class="oz-section-title">{{ imgHdg }}</h2>
+				<div class="exp-info__img-wrapper">
+					<img
+						class="lazyload"
+						data-sizes="auto"
+						data-src="{{ image | img_url: '812x' }}}"
+						data-srcset="{% include 'c-responsive-image-url', responsive_img: image %}"
+						alt="{{ altText }}"
+					>
+				</div>
+
+				{% if imgText != blank %}
+					<div class="oz-wysigyg">
+						<p>
+						{{ imgText }}
+						</p>
+					</div>
+				{% endif %}
+
+				{% if meta.experience.charity_image %}
+					<div class="exp-info__charity-logo-wrapper">
+						<img class="exp-info__charity-logo" src="{{ logo }}" alt="{{ logoAlt }}">
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	{% endif %}
+
+{% endfor %}

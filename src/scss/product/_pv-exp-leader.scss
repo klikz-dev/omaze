@@ -1,0 +1,110 @@
+/**
+ * Leading image of gallery
+ */
+
+ /**
+  * variables
+  */
+ $VERTICAL_SPACE: rem(30);
+ $HORIZ_SPACE: rem(60);
+ $ELEM_SPACE: rem(20);
+
+.exp-leader {
+    position: relative;
+    font-size: 1.5rem;
+
+    @include apply-to(desktop) {
+        margin: $HORIZ_SPACE
+                $HORIZ_SPACE
+                $VERTICAL_SPACE
+                $HORIZ_SPACE;
+        font-size: 2rem;
+    }
+
+	// .exp-leader__container
+    &__container {
+        position: relative;
+		overflow: hidden;
+    }
+
+	// .exp-leader__cover
+    &__cover {
+        z-index: 1;
+        transition: opacity 0.32s ease-in;
+    }
+
+    // place the banner in the top right
+    // .exp-leader__info-banner
+    &__info-banner {
+        opacity: 0;
+        transition: opacity 0.24s ease-in;
+    }
+
+	// .exp-leader__img
+    &__img {
+
+		// .exp-leader__img img
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: auto;
+        }
+    }
+
+	// .exp-leader__img__play-btn
+    &__play-btn {
+        opacity: 0;
+        @include middle;
+    }
+
+	// .exp-leader .js-video-player
+    .js-video-player--ready {
+
+		// .exp-leader .js-video-player--ready
+		&--ready {
+
+			// .exp-leader .js-video-player--ready .exp-leader__play
+			.exp-leader__play-btn {
+				opacity: 1;
+				transition: opacity 0.32s ease-in;
+			}
+		}
+
+		// .exp-leader .js-video-player--started
+		&--started {
+
+			// .exp-leader .js-video-player--started .exp-leader__cover
+	        .exp-leader__cover {
+	            opacity: 0;
+	        }
+		}
+
+		// .exp-leader .js-video-player--ended
+		&--ended {
+
+			// .exp-leader .js-video-player--ended .exp-leader__cover
+			.exp-leader__cover {
+	            opacity: 1;
+	        }
+		}
+    }
+}
+
+// rebrand css
+body.rebrand {
+    .exp-leader {
+        @include apply-to(tablet) {
+            margin: rem(48) rem(54) rem(32) rem(64);
+        }
+
+        &__img {
+            img:first-child {
+                filter: none;
+            }
+        }
+    }
+}

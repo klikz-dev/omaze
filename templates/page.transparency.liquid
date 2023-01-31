@@ -1,0 +1,42 @@
+{{ 'transparency.scss.css' | asset_url | stylesheet_tag }}
+<div class="oz-page oz-page--full transparency">
+	{% section 'transparency-hero' %}
+
+	<div data-content-block="0">
+		{% section 'transparency-content-block' %}
+	</div>
+
+  {% section 'transparency-content-callout' %}
+
+	<div data-content-block="1">
+		{% section 'transparency-content-block' %}
+	</div>
+
+	{% section 'transparency-content-image-one' %}
+	{% section 'transparency-testimonial-one' %}
+	<div data-content-block="2">
+		{% section 'transparency-content-block' %}
+	</div>
+	{% section 'transparency-testimonial-two' %}
+
+	{% section 'transparency-content-title-one' %}
+  {% section 'transparency-money-usage' %}
+	<div data-content-block="3">
+		{% section 'transparency-content-block' %}
+	</div>
+
+	{% section 'transparency-content-title-two' %}
+	{% section 'transparency-content-image-two' %}
+	<div data-content-block="4">
+		{% section 'transparency-content-block' %}
+	</div>
+	{% section 'transparency-testimonial-three' %}
+
+	{% section 'transparency-content-title-three' %}
+	<div data-content-block="5">
+		{% section 'transparency-content-block' %}
+	</div>
+
+	{% section 'transparency-donation-goal' %}
+	{% section 'transparency-link-list' %}
+</div>

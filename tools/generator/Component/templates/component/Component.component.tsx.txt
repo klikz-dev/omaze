@@ -1,0 +1,35 @@
+import { IFunctionComponent } from '@omaze/app';
+import React, { ReactElement } from 'react';
+
+import { namespace } from '{% namespacePath %}';
+
+import { displayName } from './{% componentName %}.qa';
+import { I{% componentName %}PresenterClassNames, {% componentName %}Presenter } from './{% componentName %}Presenter/{% componentName %}Presenter';
+
+export interface I{% componentName %}Props {
+    className?: string;
+    'data-testid'?: string;
+}
+
+export const {% componentName %}: IFunctionComponent<I{% componentName %}Props> = namespace.createComponent<I{% componentName %}Props>(
+    displayName,
+    (props: I{% componentName %}Props): ReactElement => {
+        const {
+            className,
+            'data-testid': dataTestId,
+        }: I{% componentName %}Props = props;
+
+        const presenter: {% componentName %}Presenter = new {% componentName %}Presenter({
+            className: className,
+            dataTestId: dataTestId,
+        });
+
+        const classNames: I{% componentName %}PresenterClassNames = presenter.getAllClassNames();
+
+        return (
+            <div data-testid={presenter.getTestId()} className={classNames.host}>
+                {% componentName %} works!
+            </div>
+        );
+    }
+);

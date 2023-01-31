@@ -1,0 +1,28 @@
+.host {
+    @apply flex w-screen bg-secondary-variant;
+
+    padding: 32px 24px 0 23px;
+}
+
+.innerWrapper {
+    @apply flex flex-col items-center overflow-hidden my-0 mx-auto;
+
+    max-width: 1104px;
+}
+
+@screen lg {
+    .host {
+        padding-top: 56px;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .host {
+    background-color: #F7FCFF;
+}
+
+@screen lg {
+    :global(.rebrand) .host {
+        padding-top: 32px;
+    }
+}

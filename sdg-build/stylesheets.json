@@ -1,0 +1,27 @@
+{
+    "list": [
+        "account",
+        "articles",
+        "blog",
+        "cart",
+        "checkout",
+        "collection",
+        "index",
+        "password",
+        "privacy",
+        "do_not_sell",
+        "product",
+        "rules",
+        "legal_pages",
+        "style",
+        "terms",
+        "thankyou",
+        "transparency",
+        "unavailable",
+        "product_suggestions",
+        "experience",
+        "disclosures",
+        "donation",
+        "teaser"
+    ]
+}

@@ -1,0 +1,106 @@
+{% layout none %}
+{
+    "domain": "{{ shop.domain }}",
+    "header": [{
+        "section": "main",
+        "links": [
+            {% for link in linklists.main-menu.links %}
+                {% if linklists[menu_name].links.size > 0 and settings[hide_menu] != true  %}
+                    {
+                        "url": "{{ link.url }}",
+                        "title": "{{ link.title }}",
+                        "subLinks": [
+                            {%- for sublink in linklists[menu_name].links -%}
+                                {
+                                    "url": "{{ sublink.url }}",
+                                    "title": "{{ sublink.title }}"
+                                }
+                                {% if forloop.last == false %}
+                                ,
+                                {%- endif -%}
+                            {%- endfor -%}
+                        ]
+                    }
+                    {% if forloop.last == false %}
+                    ,
+                    {%- endif -%}
+                {% else %}
+                    {
+                        "url": "{{ link.url }}",
+                        "title": "{{ link.title }}"
+                    }
+                    {% if forloop.last == false %}
+                    ,
+                    {%- endif -%}
+                {% endif %}
+            {% endfor %}
+        ]
+    }],
+    "header-account-unauthenticated": [{
+        "section": "Account",
+        "links": [
+            {
+                "url": "/account/login",
+                "title": "Login"
+            }
+        ]
+    }],
+    "header-account-authenticated": [{
+        "section": "Account",
+        "links": [
+            {
+                "url": "/account#/experiences",
+                "title": "Your Experiences"
+            },
+            {
+                "url": "/account?view=orders",
+                "title": "Donation History"
+            },
+            {
+                "url": "/account#/settings",
+                "title": "Account Settings"
+            }
+        ]
+    }],
+    "footer": [{    
+            "section": "Prizes",
+            "links": [
+                {% for link in linklists.footer-prizes.links %}
+                    {
+                        "url": "{{ link.url }}",
+                        "title": "{{ link.title }}"
+                    }
+                    {% if forloop.last == false %}
+                    ,
+                    {%- endif -%}
+                {% endfor %}
+            ]
+        }, {    
+            "section": "About",
+            "links": [
+                {% for link in linklists.footer-about.links %}
+                    {
+                        "url": "{{ link.url }}",
+                        "title": "{{ link.title }}"
+                    }
+                    {% if forloop.last == false %}
+                    ,
+                    {%- endif -%}
+                {% endfor %}
+            ]
+        }, {
+            "section": "Support",
+            "links": [
+                {% for link in linklists.footer-support.links %}
+                    {
+                        "url": "{{ link.url }}",
+                        "title": "{{ link.title }}"
+                    }
+                    {% if forloop.last == false %}
+                    ,
+                    {%- endif -%}
+                {% endfor %}
+            ]
+        }
+    ]
+}

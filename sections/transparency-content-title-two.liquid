@@ -1,0 +1,20 @@
+{% assign s = section.settings %}
+
+<section>
+  <div class="transparency__content-title">
+    <h2 id="transparency__content-title--two">{{- s.content_title -}}</h2>
+  </div>
+</section>
+ 
+{% schema %}
+{
+	"name": "Content Title Two",
+	"settings": [
+		{
+      "type": "text",
+      "id": "content_title",
+      "label": "Content Title"
+    }
+	]
+}
+{% endschema %}

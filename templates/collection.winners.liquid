@@ -1,0 +1,62 @@
+{% comment %}
+    To activate the React winners app (WinnersApp):
+
+    1.  Add build to webpack.config.
+        - in module.exports, add:
+            createBuild('WinnersApp', env)
+
+    2.  Include app root in liquid file.
+        - place markup below in collection.winners.liquid (check ID matches ID used in app):
+            <div id="js-winners-app__root"></div>
+            {% include "WinnersApp" %}
+                - the 'WinnersApp' snippet will be auto generated on app build (run npm start locally)
+{% endcomment %}
+
+<div class="oz-portfolio collection-winners">
+	<header class="oz-portfolio-banner oz-portfolio-banner--hero">
+	    <div class="phone-only">
+			<div class="intrinsic-ratio collection-winners__hero-intrinsic-ratio lazy-blur">
+				<img src="{{ collection.image | img_url: '518x162' }}" alt="{{ collection.title | append: ' Phone Hero Image Blur'}}" />
+				<img
+					class="lazyload"
+					data-sizes="auto"
+					data-src="{{ collection.image | img_url: '518x162' }}"
+					data-srcset="{% include 'c-responsive-image-url', responsive_img: collection.image %}"
+					alt="{{ collection.title | append: ' Phone Hero Image'}}"
+				/>
+			</div>
+	    </div>
+	    <div class="desktop-and-tablet">
+			<div class="intrinsic-ratio collection-winners__hero-intrinsic-ratio lazy-blur">
+				<img src="{{ collection.image | img_url: '1440x450' }}" alt="{{ collection.title | append: ' Desktop Hero Image Blur'}}" />
+				<img
+					class="lazyload"
+					data-sizes="auto"
+					data-src="{{ collection.image | img_url: '1440x450' }}"
+					data-srcset="{% include 'c-responsive-image-url', responsive_img: collection.image %}"
+					alt="{{ collection.title | append: ' Desktop Hero Image'}}"
+				/>
+			</div>
+	    </div>
+	</header>
+	<section class="oz-portfolio-section__content oz-wysigyg-text">
+		{{ collection.description }}
+    </section>
+  	<section class="oz-portfolio-section__experiences">
+    {% paginate collection.products by 4 %}
+    	<div class="card-collection AjaxinateLoop">
+    		{% for product in collection.products %}
+    			{% include 'product-grid-item' %}
+    		{% endfor %}
+    	</div>
+    	<div class="AjaxinatePagination">
+    		{% if paginate.next %}
+				<div class="spinner">
+					<a href="{{ paginate.next.url }}"></a>
+					{% include 'experience-spinner' %}
+				</div>
+    		{% endif %}
+    	</div>
+    {% endpaginate %}
+    </section>
+</div>

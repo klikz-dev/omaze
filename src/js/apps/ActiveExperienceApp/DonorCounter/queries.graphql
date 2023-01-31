@@ -1,0 +1,9 @@
+query GET_DONOR_COUNT($productID: Int!) {
+    getDonorsCount(productID: $productID) @rest (
+        endpoint: "donorCounter",
+        path: "/product/{args.productID}/donor-count",
+        method: "GET",
+    ) {
+        donor_count
+    }
+}

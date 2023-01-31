@@ -1,0 +1,54 @@
+/**
+ * oz experience
+ */
+
+.oz-experience {
+    position: relative;
+
+    @include apply-to(desktop) {
+        display: block;
+    }
+
+    // .oz-experience .oz-page-title
+    .oz-page-title {
+        font-size: 18px;
+        margin-bottom: 16px;
+
+        @include apply-to(tablet) {
+            font-size: 36px;
+            text-align: center;
+        }
+
+        @include apply-to(desktop) {
+            text-align: left;
+        }
+    }
+
+    // .oz-experience .oz-section-title
+    .oz-section-title {
+        text-transform: none;
+
+        @include apply-to(desktop) {
+            font-size: 36px;
+        }
+    }
+
+    // .oz-experience-how-it-works .promo-banner-column,
+    // .oz-experience .oz-experience-leader,
+    // .oz-experience .oz-component-promo-banner
+    .promo-banner-column,
+    .oz-experience-leader,
+    .oz-component-promo-banner {
+        order: -1;
+    }
+
+    // .oz-experience.promo-active
+    &.promo-active {
+        @include apply-to(desktop) {
+            .exp-leader,
+            .exp-details {
+                margin-top: 20px;
+            }
+        }
+    }
+}

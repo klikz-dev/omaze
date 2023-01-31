@@ -1,0 +1,53 @@
+{% assign s = section.settings %}
+
+<section class="oz-homepage__featured-in columns__one-full-width">
+	<div class="oz-section-content">
+		<div class="oz-section-title__wrapper oz-annotation-image">
+			<h2 class="oz-section-title">
+				featured in
+			</h2>
+		</div>
+
+		{%- if s.image != blank -%}
+			<div class="oz-overflow-x oz-centered oz-homepage__featured-in-image">
+				<img
+					alt="{{- s.image.alt -}}"
+					class="in-the-news__logo-wall-imgx lazyload"
+					data-src="{{ s.image | img_url: '812x339'}}"
+					data-srcset="{%- include 'c-responsive-image-url', responsive_img: s.image -%}"
+				/>
+			</div>
+		{%- endif -%}
+
+		{%- if s.cta != blank and s.cta_url != blank -%}
+			<div class="oz-btn__btn-wrap oz-centered">
+				<a href="{{- s.cta_url -}}" class="oz-homepage__featured-in-btn">
+					{{- s.cta -}}
+				</a>
+			</div>
+		{%- endif -%}
+	</div>
+</section>
+
+{% schema %}
+{
+	"name": "Featured In",
+	"settings": [
+		{
+			"type": "text",
+			"id": "cta",
+			"label": "CTA"
+		},
+		{
+			"type": "url",
+			"id": "cta_url",
+			"label": "CTA URL"
+		},
+		{
+			"type": "image_picker",
+			"id": "image",
+			"label": "Image"
+		}
+	]
+}
+{% endschema %}

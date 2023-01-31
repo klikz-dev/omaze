@@ -1,0 +1,81 @@
+.container {
+    @apply mt-1;
+}
+
+.title {
+    @apply type-subtitle2 underline;
+
+    letter-spacing: 0.4px;
+}
+
+.buttonContainer {
+    @apply p-0;
+}
+
+.buttonContainer:focus {
+    @apply outline-none;
+}
+
+.icon {
+    @apply inline-block ml-1/2 w-1;
+
+    transition: transform 0.3s ease;
+}
+
+.expandIcon {
+    transform: rotate(180deg);
+}
+
+.lineBreak {
+    @apply w-full my-2;
+    border: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.additionalWinner {
+    @apply type-subtitle2;
+    margin: 12px 0;
+    line-height: 16.8px;
+    letter-spacing: 0.4px;
+}
+
+.lastAdditionalWinner {
+    @apply mb-0;
+}
+
+/* rebrand css */
+:global(.rebrand) .buttonContainer {
+    text-decoration: none;
+}
+
+:global(.rebrand) .buttonContainer div {
+    padding: 0;
+}
+
+:global(.rebrand) .title {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1.5px solid #3B5C6B;
+    border-top: 0;
+}
+
+:global(.rebrand) .lineBreak {
+    margin-top: 20px;
+    margin-bottom: 16px;
+    border-top: 1px solid #CFDFE6;
+    border-bottom: 0;
+}
+
+:global(.rebrand) .additionalWinner {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+    margin: 8px 0;
+}

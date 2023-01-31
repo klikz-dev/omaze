@@ -1,0 +1,122 @@
+.header {
+    @apply type-rebrand-h4 font-bold;
+}
+
+.winnerName {
+    @apply type-overline my-1 uppercase break-all;
+}
+
+.winnerLocation {
+    @apply type-subtitle2 mb-2 break-all;
+}
+
+.winnerDate {
+    @apply type-subtitle2;
+}
+
+.winnerContent {
+    width: calc(100% - 120px);
+}
+
+.backgroundImage {
+    @apply relative p-2;
+    background-repeat: no-repeat  !important;
+    background-position: right 0 !important;
+    background-size: 145px !important;
+    z-index: 1;
+}
+
+.winnerImageContainer {
+    @apply absolute;
+    top: 16px;
+    right: -4px;
+    clip: rect(0, 108px, 132px, 0);
+}
+
+.winnerImage {
+    height: 132px;
+    width: 112px;
+    border-radius: 50%;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+
+@screen lg {
+    .winnerName {
+        @apply mt-2;
+    }
+
+    .winnerImageContainer {
+        top: 23px;
+        clip: rect(0, 112px, 143px, 0);
+    }
+
+    .winnerImage {
+        height: 136px;
+        width: 116px;
+    }
+
+    .backgroundImage {
+        background-size: 160px !important;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .backgroundImage {
+    background: none !important;
+    background-color: #F6FCFF !important;
+    padding: 10px 24px 16px;
+}
+
+:global(.rebrand) .header {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 32px;
+    line-height: 53px;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+}
+
+:global(.rebrand) .winnerName {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+:global(.rebrand) .winnerLocation {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    font-style: normal;
+}
+
+:global(.rebrand) .winnerDate {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+    font-style: italic;
+}
+
+:global(.rebrand) .winnerImageContainer {
+    top: 39px;
+    right: 24px;
+    background: transparent;
+}
+
+:global(.rebrand) .winnerImage {
+    width: 96px;
+    height: 106px;
+}

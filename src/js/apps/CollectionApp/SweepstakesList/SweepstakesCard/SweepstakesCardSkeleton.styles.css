@@ -1,0 +1,35 @@
+.cardImage {
+    height: 184px;
+}
+
+.cardDesc1 {
+    height: 16px;
+    width: 258px;
+}
+
+.cardDesc2 {
+    height: 20px;
+}
+
+.cardDesc3 {
+    height: 20px;
+}
+
+@screen lg {
+    .cardImage {
+        height: 196px;
+    }
+
+    .cardDesc1 {
+        height: 17px;
+        width: 275px;
+    }
+
+    .cardDesc2 {
+        height: 21px;
+    }
+
+    .cardDesc3 {
+        height: 21px;
+    }
+}

@@ -1,0 +1,16 @@
+/*
+///////////////////////////////////////////////////////////
+Social Links
+///////////////////////////////////////////////////////////
+*/
+.social-links {
+	text-align: center;
+
+	&__item { // .social-links__item
+		display: inline-block;
+	}
+
+	&__link { // .social-links__link
+		display: block;
+	}
+}

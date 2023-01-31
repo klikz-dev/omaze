@@ -1,0 +1,74 @@
+@keyframes showNotification {
+    0%   {
+        bottom: -110px;
+        display: none;
+    }
+    100% {bottom: 0;}
+}
+
+@keyframes hideNotification {
+    0% {
+        bottom: 0;
+    }
+    100%   {
+        bottom: -110px;
+    }
+}
+
+.notification-bar {
+    position: fixed;
+    height: 108px;
+    width: 100%;
+    background-color: $green-4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 100;
+}
+.notification-bar__show {
+    animation-name: showNotification;
+    animation-duration: 3s;
+    bottom: 0;
+}
+.notification-bar__hide {
+    animation-name: hideNotification;
+    animation-duration: 3s;
+    bottom: -110px;
+}
+.notification-bar__success, .notification-bar__failure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: $primary-font;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: $white;
+    margin: 0;
+}
+.notification-bar__success {
+    background-color: $green-4;
+}
+.notification-bar__failure {
+    background-color: $red-4;
+}
+.notification-bar__default {
+    display: none;
+}
+
+body.rebrand {
+    .notification-bar {
+        height: 83px;
+        p {
+            margin-bottom: 0;
+        }
+    }
+    .notification-bar__success {
+        background-color: #00844C;
+    }
+}

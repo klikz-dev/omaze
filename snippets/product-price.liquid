@@ -1,0 +1,8 @@
+<p id="productPrice" class="pv-price desktop-only">
+	<span class="pv-price__original js-price-original">
+		{{ product.price | money }}
+	</span>
+	<span class="pv-price__compare js-price-compare" style="display: none;">
+		{{ product.compare_at_price | money }}
+	</span>
+</p>

@@ -1,0 +1,68 @@
+{% assign s = section.settings %}
+
+{% if s.single_img_mobile != blank %}
+<div class="oz-section-banner__image-container oz-aspect--20-11 intrinsic-ratio causes__hero-intrinsic-ratio phone-only">
+	<div class="lazy-blur">
+		<img
+			src="{{ s.single_img_mobile | img_url: '720x395' }}"
+			alt="{{ blog.title | append: ' Phone Hero Blur'}}"
+		/>
+
+		<img
+			class="lazyload"
+			data-sizes="auto"
+			data-src="{{ s.single_img_mobile | img_url: '720x395' }}"
+			data-srcset="{% include 'c-responsive-image-url', responsive_img: s.single_img_mobile, namespace: 'img_url' %}"
+			alt="{{ blog.title | append: ' Phone Hero'}}"
+		/>
+	</div>
+</div>
+{% endif %}
+
+{% if s.single_img_desktop != blank %}
+<div class="oz-section-banner__image-container oz-aspect--16-5 intrinsic-ratio causes__hero-intrinsic-ratio desktop-and-tablet">
+	<div class="lazy-blur">
+		<img
+			src="{{ s.single_img_desktop | img_url: '812x254' }}"
+			alt="{{ blog.title | append: ' Desktop Hero Blur'}}"
+		/>
+		<img
+			class="lazyload"
+			data-sizes="auto"
+			data-src="{{ s.single_img_desktop | img_url: '812x254' }}"
+			data-srcset="{% include 'c-responsive-image-url', responsive_img: s.single_img_desktop, namespace: 'img_url' %}"
+			alt="{{ blog.title | append: ' Desktop Hero'}}"
+		/>
+	</div>
+</div>
+{% endif %}
+
+{% if s.header_title != blank %}
+<div class="oz-section-banner__content">
+	<h1 class="oz-page-title">{{- s.header_title -}}</h1>
+</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Causes: Hero",
+		"class": "oz-section-banner oz-section-banner--hero",
+		"settings": [
+			{
+				"type": "image_picker",
+				"id": "single_img_mobile",
+				"label": "Image Mobile (1370 x 772)"
+			},
+			{
+				"type": "image_picker",
+				"id": "single_img_desktop",
+				"label": "Image Desktop"
+			},
+			{
+				"type": "text",
+				"id": "header_title",
+				"label": "Header Title"
+			}
+		]
+	}
+{% endschema %}

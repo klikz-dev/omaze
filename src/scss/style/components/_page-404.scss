@@ -1,0 +1,108 @@
+/**
+ * 404 page
+ */
+
+ .page-404 {
+	background-image: linear-gradient(to bottom, #f7fdfe, #ebf9fc);
+	height: 100%;
+	// .page-404-wrapper
+	&-wrapper {
+		padding-top: rem(50);
+		max-width: rem(728);
+		margin: auto;
+		width: 100%;
+		height: 100%;
+
+		@include apply-to(desktop) {
+			padding-top: rem(56);
+		}
+		@include apply-to(phone) {
+			padding: rem(24);
+			padding-top: rem(31);
+		}
+	}
+
+	// .page-404-desktop-image
+	&-desktop-image {
+		object-fit: contain;
+	}
+
+	// .page-404-banner
+	&-banner {
+		min-height: rem(520);
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+
+		@include apply-to(tablet) {
+			min-height: 100%;
+		}
+	}
+}
+
+.page-404-text {
+	font-family: $primary-font;
+	margin: auto;
+	font-size: 18px;
+	max-width: 540px;
+	padding: rem(30);
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	color: $black-2;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+
+	&-header {
+		font-weight: bold;
+	}
+
+	@include apply-to(phone) {
+		padding: rem(20);
+		padding-top: rem(31);
+	}
+}
+.page-404-buttons {
+	align-self: center;
+	max-width: rem(540);
+	margin: 0 auto rem(100);
+	display: flex;
+	flex-wrap: wrap;
+	font-size: 20px;
+	font-weight: bold;
+	justify-content: space-between;
+	align-items: center;
+
+	&-experience {
+		padding: rem(17) rem(40);
+		border-radius: 4px;
+		text-align: center;
+		width: rem(258);
+		background-color: $pink-6;
+		color: $white;
+
+		@include apply-to(phone) {
+			width: rem(300);
+		}
+	}
+	&-home {
+		color: $pink-6;
+		text-align: center;
+		padding: rem(17) rem(40);
+		width: rem(258);
+		border-radius: 4px;
+		border: solid 1px $pink-6;
+
+		@include apply-to(phone) {
+			text-decoration: underline;
+			padding-top: rem(26);
+			border: none;
+		}
+	}
+
+	@include apply-to(phone) {
+		margin: 0 auto rem(32);
+		justify-content: center;
+	}
+}

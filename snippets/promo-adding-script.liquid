@@ -1,0 +1,114 @@
+<script>
+    const PRICE_ZERO = '0';
+    const PROMO = 'promo';
+    const TAG_SELECTOR = 'reduction-code__text';
+    const FIELD_ERROR_SELECTOR = 'field--error';
+    const CC_ERROR_SELECTOR = 'notice notice--error';
+
+    function createUpdatePayload(discountAmount, variants, quantity, price, sku, id, updates, finalUpdate){
+        finalUpdate[id] = quantity;
+        if (price == PRICE_ZERO && sku.includes(PROMO)) {
+            if (updates.hasOwnProperty(id)) {
+                updates[id] -= quantity;
+            } else {
+                updates[id] = -1 * quantity;
+            }
+        } else {
+            for (let i = variants.length - 1; i > 0; i--) {
+                const variant = variants[i];
+                if (variant.sku === `promo_${discountAmount}`) {
+                    const hasProperty = updates.hasOwnProperty(variant.id)
+                    if (hasProperty) {
+                        updates[variant.id] += quantity;
+                    } else {
+                        updates[variant.id] = quantity;
+                    }
+                    break
+                }
+
+            }
+        }
+    }
+
+    function createFinalUpdate(updates, finalUpdate){
+        let toUpdate = false;
+        Object.keys(updates).forEach((key) => {
+            if (updates[key] > 0) {
+                toUpdate = true;
+                if (finalUpdate[key]) {
+                    finalUpdate[key] += updates[key];
+                } else {
+                    finalUpdate[key] = updates[key];
+                }
+            }
+        })
+        return toUpdate;
+    }
+
+    function editReductionText() {
+        const NODES = document.getElementsByClassName(TAG_SELECTOR) || [];
+        for(let i=0; i < NODES.length; i++) {
+                const node = NODES[i];
+                const inner = node.innerHTML
+                const trimmed = inner.trim().split(" ")[0]
+                node.innerHTML = trimmed;
+        }
+    }
+
+    $(document).on('page:load page:change', function () {
+        editReductionText()
+        const TAG_NODES = document.getElementsByClassName(TAG_SELECTOR);
+        const FIELD_ERRORS = document.getElementsByClassName(FIELD_ERROR_SELECTOR);
+        const CC_ERRORS = document.getElementsByClassName(CC_ERROR_SELECTOR);
+        if(TAG_NODES.length > 0 && !window.Shopify.Checkout.isOrderStatusPage){
+            let hasCreditCardError = false;
+
+            for (let i =0; i<CC_ERRORS.length; i++) {
+                const node = CC_ERRORS[i];
+                if(node.className === CC_ERROR_SELECTOR){
+                    hasCreditCardError = true;
+                }
+            }
+
+            if(FIELD_ERRORS.length === 0 && !hasCreditCardError){
+                let discountTitle = TAG_NODES[TAG_NODES.length-1].innerHTML;
+                const amount = discountTitle.replace(/\D/g, "");
+                const updates = {};
+                const finalUpdate = {};
+
+                {% for item in checkout.line_items %}
+                    createUpdatePayload(
+                        amount,
+                        {{ item.product.variants | json }},
+                        parseInt("{{ item.quantity }}", 10),
+                        "{{ item.variant.price }}",
+                        "{{ item.variant.sku }}",
+                        "{{ item.variant.id }}",
+                        updates,
+                        finalUpdate
+                    );
+                {% endfor %}
+
+                const toUpdate = createFinalUpdate(updates, finalUpdate);
+
+                if (toUpdate) {
+                    $.ajax({
+                        url: "/cart/update.js",
+                        method: "post",
+                        dataType: "json",
+                        data: {
+                            updates: finalUpdate,
+                        },
+                        success: function (response) {
+                            location.reload()
+                        },
+                        error: function (request, status, error) {
+                            console.error(error);
+                        }
+                    })
+                }
+            }
+
+        }
+    })
+</script>

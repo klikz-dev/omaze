@@ -1,0 +1,56 @@
+{% if view == 'mobile' %}
+	{% assign viewClass = 'hide-desktop' %}
+	{% assign namespace = 'mobile' %}
+{% else %}
+	{% assign viewClass = 'desktop-only' %}
+{% endif %}
+<div id="{% include 'h-namespace', id: 'pvInfoTabs', namespace: namespace %}" class="oz-component-campaign-infotabs {{ viewClass }}">
+	<div class="oz-campaign-infotabs js-content-wrap">
+		<div id="{% include 'h-namespace', id: 'pvTabsNav', namespace: namespace %}" class="oz-tab-nav desktop-only">
+			<span class="js-infotab oz-active-tab" data-id="about">
+				<div>
+					<i class="icon icon-about"></i>
+				</div>
+				about
+			</span>
+			<span class="js-infotab" data-id="shipping">
+				<div>
+					<i class="icon icon-shipping"></i>
+				</div>
+				shipping
+			</span>
+			<span class="js-infotab" data-id="faq">
+				<div>
+					<i class="icon icon-faq"></i>
+				</div>
+				faq
+			</span>
+		</div>
+
+		<section class="about oz-campaign-infotabs__section active-content" id="about">
+
+			{% if meta.product.about_title != blank %}
+				<div class="oz-campaign-infotabs__header">
+					{{ meta.product.about_title }}
+				</div>
+			{% endif %}
+
+			<div class="oz-campaign-infotabs__content">
+				{% if meta.product.about_image != blank %}
+					<img data-src="{{ meta.product.about_image | file_img_url: 'master' }}" class="lazyload" />
+				{% endif %}
+
+				{% if meta.product.about contains '<p>' %}
+					{{ meta.product.about }}
+				{% else %}
+					<p>
+						{{ meta.product.about }}
+					</p>
+				{% endif %}
+			</div>
+		</section>
+
+		{% section 'product-shipping' %}
+		{% section 'product-faq' %}
+	</div>
+</div>

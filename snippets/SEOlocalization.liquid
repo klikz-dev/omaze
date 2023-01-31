@@ -1,0 +1,8 @@
+{% if template == 'index'%}
+    <link rel="alternate" href="{{ canonical_url }}" hreflang="x-default" />
+    <link rel="alternate" href="{{ canonical_url }}" hreflang="en" />
+
+    {% if settings.uk_house_active %}
+        <link rel="alternate" href="{{ settings.uk_house_page_url }}" hreflang="en-GB" />
+    {% endif %}
+{% endif %}

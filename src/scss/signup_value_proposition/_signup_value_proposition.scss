@@ -1,0 +1,110 @@
+@import 'style/globals/font-face';
+
+.oz-signup-value-proposition {
+    // .oz-signup-value-proposition__container
+    &__container {
+        margin: 0 auto;
+        width: 100%;
+
+        .oz-divider {
+            border: rem(1) solid $gray-5;
+            margin: rem(24) 0;
+        }
+    }
+
+    // .oz-signup-value-proposition__header
+    &__header {
+        margin: rem(10) 0;
+        font-weight: 900;
+        font-style: normal;
+        font-size: rem(18);
+        line-height: rem(26);
+        letter-spacing: rem(0.32);
+        color: $black-2;
+        font-family: $secondary-font;
+        text-align: left;
+    }
+
+    // .oz-signup-value-proposition__top-text
+    &__top-text {
+        margin: rem(8) 0;
+        font-weight: 900;
+        font-size: rem(16);
+        line-height: rem(24);
+        letter-spacing: rem(0.32);
+        text-align: left;
+    }
+
+    // oz-signup-value-proposition__promo-offer
+    &__promo-offer {
+        font-family: $primary-font;
+        font-style: normal;
+        color: $black-2;
+        font-weight: 700;
+        font-size: rem(16);
+        line-height: rem(19);
+        letter-spacing: rem(0.4);
+        margin-bottom: rem(8);
+        max-width: rem(381);
+    }
+
+    // .oz-signup-value-proposition__list
+    &__list {
+        list-style-type: none;
+        text-align: left;
+        margin: 0;
+        padding: 0;
+    }
+
+    // .oz-signup-value-proposition__list-item
+    &__list-item {
+        display: flex;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.321429px;
+        color: #000;
+        cursor: text;
+        padding-bottom: rem(10);
+
+        // @include apply-to(desktop) {
+        //     padding-bottom: rem(10);
+        // }
+
+        &:last-child {
+            padding-bottom: 0;
+            padding-bottom: rem(17);
+
+            @include apply-to(desktop) {
+                padding-bottom: rem(20);
+            }
+        }
+
+        &:hover {
+            color: black;
+            cursor: text;
+        }
+    }
+
+    // .oz-signup-value-proposition__list-item-text
+    &__list-item-text {
+        color: black;
+    }
+
+    // .oz-signup-value-proposition__list-item-icon
+    &__list-item-icon {
+        width: rem(25);
+        height: rem(25);
+        margin-right: rem(6);
+        text-align: right;
+    }
+
+    // .oz-signup-value-proposition__btn
+    &__btn {
+        padding-top: rem(15);
+        padding-bottom: rem(15);
+        max-width: rem(321.85);
+        box-sizing: border-box;
+    }
+}

@@ -1,0 +1,96 @@
+{% if template == 'cart' %}
+ 	{% assign template_cart = true %}
+{% else %}
+	{% assign template_cart = false %}
+{% endif %}
+
+<section id="bag" class="bag{% if modifier %} bag--{{ modifier }}{% endif %} is-empty">
+
+	{% comment %} capture and output bagData {% endcomment %}
+	{%- capture bagData -%}
+		<script>
+			var bagItems = [];
+
+			{% for item in cart.items %}
+
+				bagItems.push({
+					id: {{ item.variant.id }},
+					inventory_quantity: {{ item.variant.inventory_quantity }},
+					price: '{{ item.variant.price | money_without_currency }}',
+					quantity: {{ item.quantity }},
+					sku: '{{ item.variant.sku }}',
+					template_cart: {{ template_cart }}
+				});
+
+			{% endfor %}
+		</script>
+	{%- endcapture -%}
+	{% include 'h-minify', variable: bagData %}
+
+	<form id="bagForm" action="/cart" method="post" class="bag__form{% if template == 'cart' %} container is-hidden{% endif %}"{% if template == 'cart' %} style="display: none;"{% endif %}>
+
+		{% unless template_cart %}
+			<header class="bag__header">
+				<h1 class="bag__title">Your Bag</h1>
+			</header>
+		{% endunless %}
+
+		{% if template_cart %}
+			<a href="/" class="bag__back btn-back hide-phone">
+				<i class="icon icon--arrow-left btn-back__icon"></i>
+				<span class="btn-back__label">back to shopping</span>
+			</a>
+		{% endif %}
+
+		<div class="bag__content">
+			<div class="bag__summary">
+				<div id="bagTotals" class="bag__totals">
+					<div class="bag__header">
+						<h2 class="bag__title bag__title--summary">Order Summary</h2>
+					</div>
+					<p class="bag__total">
+						<span class="bag__total-label">
+							Subtotal
+						</span>
+						<span id="bagSubtotal" class="bag__total-value">
+						 	{{- cart.total_price | money | remove: '.00' -}}
+						</span>
+					</p>
+				</div>
+				<div class="bag__actions">
+					<button class="bag__action bag__checkout btn btn--secondary btn--full" type="submit" name="checkout" title="Proceed to Checkout">
+						Checkout
+					</button>
+				</div>
+			</div>
+
+			<div id="bagItems" class="bag__items"></div>
+
+			<div id="bagEmpty" class="bag__empty">
+				<p>You have no items in your shopping cart.</p>
+			</div>
+
+			{% if template_cart %}
+				<div class="bag__actions phone-only">
+					<button class="bag__action bag__checkout btn btn--secondary btn--full" type="submit" name="checkout" title="Proceed to Checkout">
+						Checkout
+					</button>
+				</div>
+			{% else %}
+				<div class="bag__footer">
+					<div class="bag__donations" style="display:none;" id="bagDonations"></div>
+					<button class="bag__action bag__checkout btn btn--secondary btn--full" href="/cart">
+						Checkout
+					</button>
+
+                    <button id="bagContinue" class="bag__continue btn btn--white btn--full">
+                        Continue Shopping
+                    </button>
+				</div>
+			{% endif %}
+
+		</div>
+
+	</form>
+
+</section>

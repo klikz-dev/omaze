@@ -1,0 +1,9 @@
+.container {
+    @apply mt-3;
+}
+
+@screen lg {
+    .container {
+        @apply mt-4 flex flex-row-reverse;
+    }
+}

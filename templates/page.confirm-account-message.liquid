@@ -1,0 +1,81 @@
+{% comment %} capture the content for header object {% endcomment %}
+{%- capture headerContent -%}{{ content_for_header }}{%- endcapture -%}
+{% assign userEmail = '' %}
+
+{% comment %} split the headerContent to retrieve the page url {% endcomment %}
+{%- assign pageUrl = headerContent | split:'"pageurl":"' | last |
+   split:'"' | first |
+   split:'?' | last |
+   replace:'\/','/' |
+   replace:'%20',' ' |
+   replace:'\u0026','&'
+-%}
+
+{% if pageUrl contains "email=" %}
+  {% assign userEmail = pageUrl | split:"email=" | last %}
+{% endif %}
+
+{% comment %} extra check to ensure only the user email is gotten from the query string {% endcomment %}
+{% if userEmail contains "&" %}
+{% assign userEmail = userEmail | split:"&" | first %}
+{% endif %}
+
+<div class="oz-confirm-account">
+  <div class="oz-confirm-account__icon"></div>
+  <h2 class="oz-confirm-account__header-text">{{ 'customer.account_confirmation.rebrand_title' | t }}</h2>
+</div>
+<div class="support-container">
+  <div class="support-text-container">
+    <div class="support-text-container_button">
+        <h3>Didn’t receive our email?</h3>
+        <button class="verification-email" type="button">
+          Resend email
+        </button>
+    </div>
+
+    <div class="support-text-container__message js-success">
+        <h3>Email sent to {{ userEmail }}!</h3>
+    </div>
+
+    <div class="support-text-container__message js-error">
+        <h3>We’re sorry, something went wrong when attempting to resend the email.</h3>
+    </div>
+
+    <p>Still not seeing our email? Check your spam folder or reach out to our customer support team at <a href="mailto:weloveyou@omaze.com">weloveyou@omaze.com</a> for assistance.</p>
+  </div>
+</div>
+<script>
+  (function () {
+    const email = '{{ userEmail }}';
+    const EMAIL_EL_ID = 'oz-confirm-account__email';
+    const emailEl = document.getElementById(EMAIL_EL_ID);
+
+    if (!email) {
+      goToHomePage();
+
+      return;
+    }
+
+    if (emailEl) {
+      scaleEmailFont({maxTextLength: 30, desktopWidth: 1100});
+
+      return;
+    }
+
+    function goToHomePage() {
+      window.location.href = '/';
+    }
+
+    function scaleEmailFont(options) {
+      if (window.screen.width < options.desktopWidth && email.length > options.maxTextLength) {
+        emailEl.classList.add('oz-confirm-account__email--small');
+      }
+    }
+  })();
+
+  (function (window) {
+    window.addEventListener('DOMContentLoaded', () => {
+      SDG.VerifyEmail.sendVerificationEmail('{{ settings.user_service_url }}', '{{ userEmail }}')
+    });
+  })(window);
+</script>

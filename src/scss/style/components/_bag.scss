@@ -1,0 +1,216 @@
+/**
+ * bag
+ *
+ * bag
+ * bag mini
+ * bag item
+ * bag exposed
+ * bag overlay
+ */
+
+/**
+ * bag
+ */
+.bag {
+
+	// hide till styles are applied
+	display: none;
+
+	// .bag__form
+	&__form {
+	}
+
+	// .bag__header
+	&__header {
+	}
+
+	// .bag__title
+	&__title {
+	}
+
+	// .bag__close
+	&__close {
+	}
+
+	// .bag__title
+	&__title {
+	}
+
+	// .bag__items
+	&__items {
+	}
+
+	 // .bag__footer
+	&__footer {
+	}
+
+	// .bag__total
+	&__total {
+
+		// .bag__total-label
+		&-label {
+		}
+
+		// .bag__total-value
+		&-value {
+		}
+	}
+
+	// .bag__actions
+	&__actions {
+	}
+
+	// .bag__action
+	&__action {
+	}
+
+	// .bag__checkout
+	&__checkout {
+	}
+
+	// .bag__continue
+	&__continue {
+	}
+
+	// .bag__empty
+	&__empty {
+		display: none;
+
+		@include apply-to(tablet) {
+		}
+	}
+
+	// .bag.is-empty
+	&.is-empty {
+
+		.bag__items,
+		.bag__totals,
+		.bag__checkout {
+			display: none;
+		}
+
+		.bag__empty {
+			display: block;
+		}
+	}
+}
+
+/**
+ * bag mini
+ */
+.bag--mini {
+
+	.is-bag-exposed & {
+	}
+}
+
+/**
+ * bag item
+ */
+.bag-item {
+
+	// overlay to prevent user interaction with the bag item
+	// this is only visible when the item is reloading
+	&::after {
+		background-color: $white;
+		bottom: 0;
+		content: '';
+		left: 0;
+		opacity: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transition: opacity $normal-timer $ease-1,
+					visibility $normal-timer $ease-1;
+		visibility: hidden;
+		z-index: z(front);
+	}
+
+	// .bag-item__photo
+	&__photo {
+
+		// .bag-item__photo-intrinsic-ratio
+		&-intrinsic-ratio {
+		}
+	}
+
+	// .bag-item__info
+	&__info {
+	}
+
+	// .bag-item__header
+	&__header {
+	}
+
+	// .bag-item__title <p>
+	&__title {
+	}
+
+	&__price,
+	&__variants {
+	}
+
+	// .bag-item__price <p>
+	&__price {
+	}
+
+	// .bag-item__variants <p>
+	&__variants {
+	}
+
+	// .bag-item__variant <span>
+	&__variant {
+	}
+
+	// .bag-item__actions
+	&__actions {
+	}
+
+	// .bag-item__remove
+	&__remove {
+	}
+
+	// .bag-item__msg <p>
+	&__msg {
+	}
+}
+
+/**
+ * bag exposed
+ */
+.is-bag-exposed {
+	overflow: hidden;
+	width: 100%;
+
+	.hdr,
+	.nav,
+	.page-wrap,
+	.footer {
+
+		@include apply-to(small-phone) {
+		}
+	}
+}
+
+/**
+ * bag overlay
+ */
+.bag-overlay {
+	background-color: transparent;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	transform: translate3d(0, 0, 0);
+	visibility: hidden;
+	width: 100%;
+	z-index: z(bag-overlay);
+
+	.is-bag-exposed & {
+		opacity: 1;
+		transition-delay: $normal-timer;
+		visibility: visible;
+	}
+}

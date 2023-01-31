@@ -1,0 +1,227 @@
+.ozc-carousel__wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.ozc-carousel.slick-slider {
+    margin: 0;
+
+    @include apply-to(tablet) {
+        margin: 0 rem(-8);
+    }
+
+    @include apply-to(desktop) {
+        margin: 0 rem(-12);
+    }
+}
+
+.ozc-carousel .slick-initialized .slick-slide {
+    position: relative;
+}
+
+.ozc-carousel .ozc-carousel__panel {
+    position: relative;
+    margin: 0 rem(8);
+    // Setting panel width allows showing multiple panels plus partial panels.
+    width: rem(242);
+    height: auto;
+
+    @include apply-to(tablet) {
+        width: auto;
+    }
+
+    @include apply-to(desktop) {
+        margin: 0 rem(12);
+    }
+}
+
+.ozc-carousel .slick-dots {
+    margin: 0;
+    bottom: rem(12);
+}
+
+.ozc-carousel .slick-dots li {
+    width: rem(8);
+    height: rem(8);
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.ozc-carousel .slick-dots li.slick-active {
+    background-color: $blue-1;
+}
+
+.lazy-blur .ozc-carousel img {
+    filter: none;
+}
+
+.ozc-carousel__arrow {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.ozc-carousel__arrow--prev {
+    margin-right: rem(40);
+}
+
+.ozc-carousel__arrow:before {
+    content: '';
+    width: rem(13);
+    height: rem(13);
+    border: solid rem(0.8) $black-2;
+    display: inline-block;
+    transform: rotate(45deg);
+    opacity: 1;
+}
+
+.ozc-carousel__arrow--prev:before {
+    border-width: 0 0 rem(2) rem(2);
+}
+
+.ozc-carousel__arrow--next:before {
+    border-width: rem(2) rem(2) 0 0;
+}
+
+// Partial carousel: when has less slides than fits in one row
+.ozc-carousel--partial {
+    .ozc-carousel__title {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+    }
+
+    .ozc-carousel__nav {
+        display: none;
+    }
+}
+
+// Header: title & nav
+.ozc-carousel__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0;
+    margin-bottom: rem(16);
+
+    @include apply-to(desktop) {
+        margin-bottom: rem(16);
+    }
+
+    &--hidden {
+        display: none;
+    }
+}
+
+.ozc-carousel__title {
+    font-family: $secondary-font;
+    font-size: rem(18);
+    line-height: rem(26);
+    letter-spacing: rem(0.32);
+    font-weight: 900;
+    color: $black-2;
+    margin-right: rem(20);
+
+    @include apply-to(tablet) {
+        font-size: rem(24);
+        line-height: rem(32);
+        letter-spacing: rem(0.18);
+        margin-right: rem(40);
+    }
+}
+
+.ozc-carousel__nav {
+    position: relative;
+    display: none;
+    margin-left: auto;
+
+    @include apply-to(tablet) {
+        display: flex;
+    }
+}
+
+.ozc-carousel__nav-controls {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: rem(48);
+    margin-right: rem(6);
+}
+
+.ozc-carousel__nav-info {
+    font-family: $primary-font;
+    font-size: rem(16);
+    line-height: rem(19.2);
+    letter-spacing: rem(0.4);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+// CAROUSEL TYPE: compact
+.ozc-carousel--compact {
+    .ozc-carousel__header {
+        display: none;
+    }
+
+    .slick-slider {
+        margin: 0;
+
+        @include apply-to(desktop) {
+            margin: 0;
+        }
+    }
+
+    .ozc-carousel__panel {
+        margin: 0;
+
+        @include apply-to(desktop) {
+            margin: 0;
+        }
+    }
+
+    .ozc-carousel__arrow {
+        position: absolute;
+        top: 45%;
+        z-index: 99;
+
+        width: rem(40);
+        height: rem(48);
+        background-color: rgba(81, 82, 82, 0.5);
+    }
+
+    .ozc-carousel__arrow:hover {
+        background-color: rgba(81, 82, 82, .65);
+    }
+
+    .ozc-carousel__arrow:active {
+        background-color: rgba(81, 82, 82, .75);
+    }
+
+    .ozc-carousel__arrow--prev {
+        left: 0;
+    }
+
+    .ozc-carousel__arrow--next {
+        right: 0;
+    }
+
+    .ozc-carousel__arrow:before {
+        border: solid rem(0.8) #fff;
+    }
+
+    .ozc-carousel__arrow--prev:before {
+        border-width: 0 0 rem(1) rem(1);
+        margin-right: rem(-3);
+    }
+
+    .ozc-carousel__arrow--next:before {
+        border-width: rem(1) rem(1) 0 0;
+        margin-left: rem(-3);
+    }
+}

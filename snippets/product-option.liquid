@@ -1,0 +1,76 @@
+{% if swatch == blank %}
+	<div class="config__error error">
+		<p>You must include the snippet swatch.liquid with the name of a product option.</p>
+		<p>Use: <code>{% raw %}{% include 'product-option', swatch : 'name of your product option here' %}{% endraw %}</code></p>
+		<p>Example: <code>{% raw %}{% include 'product-option', swatch : 'Color' %}{% endraw %}</code></p>
+	</div>
+{% else %}
+
+	{% assign foundOption = false %}
+	{% assign isColor = false %}
+
+	{% for option in product.options %}
+		{% if option == swatch %}
+			{% assign foundOption = true %}
+			{% assign optionIndex = forloop.index0 %}
+			{% assign optionDowncase = swatch | downcase %}
+			{% if optionDowncase contains 'color' or optionDowncase contains 'colour' %}
+				{% assign isColor = true %}
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+
+	{% unless foundOption %}
+		<div class="config__error error">
+			<p>You included the snippet swatch.liquid with the name of a product option — <code>'{{ swatch }}'</code> — that does not belong to your product.</p>
+			<p>Use <code>{% raw %}{% include 'product-option', swatch : 'name of your product option here' %}{% endraw %}</code></p>
+			<p>Example: <code>{% raw %}{% include 'product-option', swatch : 'Color' %}{% endraw %}</code></p>
+			<p><strong>This is case-sensitive!</strong> Do not put in <code>'color'</code> if your product option name is <code>'Color'</code>.</p>
+		</div>
+	{% else %}
+		{% assign configGroupId = swatch | camelcase | prepend: 'configGroup' %}
+		{% assign swatchHandle = swatch | handleize %}
+		<div id="{{ configGroupId }}" class="config__group config__group--{{ swatchHandle }} js-config-group" data-option-index="{{ optionIndex }}">
+			<div class="config__header">
+				<h4 class="config__group-title">
+					{{ swatch }} -
+					<span class="config__value-label js-config-label"></span>
+				</h4>
+			</div>
+			<div class="config__options config__options--{{ swatchHandle }}">
+				{% assign values = '' %}
+				{% for variant in product.variants %}
+					{% assign value = variant.options[optionIndex] %}
+					{% unless values contains value %}
+						{% assign values = values | join: ',' %}
+						{% assign values = values | append: ',' | append: value %}
+						{% assign values = values | split: ',' %}
+
+						{% assign valueHandle = value | handle %}
+						{% capture valueId %}swatch-{{ optionIndex }}-{{ valueHandle }}{% endcapture %}
+
+						<div data-value="{{ value | escape }}" class="config__variant{% if isColor %} config__variant--color{% endif %} {{ valueHandle }} js-config-variant">
+
+							<input id="{{ valueId }}" type="radio" name="option-{{ optionIndex }}" value="{{ value | escape }}" class="config__radio js-config-radio" />
+
+							{% if isColor %}
+								<label for="{{ valueId }}" class="config__btn swatch js-config-btn js-config-btn-color" data-val="{{ value | escape }}" data-variant-id="{{ variant.id }}">
+									<div class="swatch__intrinsic-ratio">
+										<img data-src="{{ valueHandle | append: '.' | append: swatchFileExtension | prepend: 'swatch-' | asset_img_url: '42x' }}" data-src-retina="{{ valueHandle | append: '.' | append: swatchFileExtension | prepend: 'swatch-' | asset_img_url: '84x' }}" alt="{{ value }}" class="lazyload" />
+									</div>
+								</label>
+							{% else %}
+								<label for="{{ valueId }}" class="config__btn{% unless variant.available %} is-disabled{% endunless %} js-config-btn" data-variant-id="{{ variant.id }}" data-val="{{ value | escape }}">
+									{{ value }}
+								</label>
+							{% endif %}
+
+						</div>
+
+					{% endunless %}
+				{% endfor %}
+			</div>
+		</div>
+	{% endunless %}
+
+{% endif %}

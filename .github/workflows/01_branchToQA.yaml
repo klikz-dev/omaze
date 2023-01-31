@@ -1,0 +1,54 @@
+name: 01 (Dispatch) Build and Deploy to QA
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy'
+        required: true
+
+env:
+  CI: true
+  SHOPIFY_ENV: qa
+
+jobs:
+  build-deploy-QA-branch:
+    runs-on: [ubuntu-18.04]
+    steps:
+      - name: Git checkout
+        id: checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.inputs.branch}}
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 14
+
+      - name: Setup .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.RELEASE_WORKFLOW_TOKEN }}" > ~/.npmrc
+
+      - name: Cache Node Modules
+        id: node-cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        id: deps
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Build QA Theme
+        id: build-qa
+        run: npm run build:dev
+
+      - id: config-move
+        run: mv config.yml.sample config.yml
+
+      - name: Deploy to QA
+        id: deploy-QA
+        uses: docker://jpteasdale/shopify-theme
+        with:
+          args: deploy --env ${{env.SHOPIFY_ENV}} --password ${{secrets.QA_SHOPIFY_THEME_PW}} --themeid ${{secrets.QA_SHOPIFY_THEME_ID}} --store ${{secrets.QA_SHOPIFY_STORE_URL}} --verbose --nodelete --timeout 90s

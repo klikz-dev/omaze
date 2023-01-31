@@ -1,0 +1,191 @@
+.oz-more-winners {
+    margin-top: 24px;
+
+    @include apply-to(desktop) {
+        margin-top: 42px;
+    }
+
+    .ozc-page-tabs__nav {
+        margin: 0 25px;
+
+        @include apply-to(desktop) {
+            margin: 0 60px;
+            margin-bottom: 32px;
+        }
+    }
+
+    .ozc-page-tabs__content {
+        margin-bottom: 56px;
+    }
+
+    .exp-leader {
+        @include apply-to(desktop) {
+            margin-top: 0;
+        }
+    }
+
+    /* WYH OVERRIDE */
+    .exp-benefit {
+        @include apply-to(desktop) {
+            margin-bottom: 0;
+        }
+
+        .oz-section-title {
+            margin-bottom: 16px;
+
+            @include apply-to(desktop) {
+                margin-bottom: 24px;
+            }
+        }
+
+        .exp-info__img-wrapper {
+            margin-bottom: 34px;
+
+            @include apply-to(desktop) {
+                margin-bottom: 24px;
+            }
+        }
+
+        .exp-info__charity-logo-wrapper {
+            order: -1;
+            margin-top: 0;
+            margin-bottom: 16px;
+
+            @include apply-to(desktop) {
+                margin-bottom: 24px;
+            }
+        }
+
+        .oz-wysigyg p {
+            margin-bottom: 32px;
+
+            @include apply-to(desktop) {
+                margin-bottom: 24px;
+            }
+        }
+    }
+
+    .oz-experience .ozc-more-winners__drawing-countdown {
+        padding: 0 30px;
+
+        @include apply-to(desktop) {
+            padding: 0 60px;
+        }
+    }
+
+    .ozc-more-winners__drawing-countdown {
+        display: block;
+        width: 100%;
+
+        .ozc-time-countdown__header {
+            font-size: 24px;
+            line-height: 32px;
+            letter-spacing: .18px;
+            margin-bottom: 16px;
+
+            @include apply-to(desktop) {
+                font-size: 32px;
+                line-height: 40px;
+                letter-spacing: .24px;
+                margin-bottom: 24px;
+            }
+        }
+
+        .ozc-time-countdown__footer {
+            margin-top: 16px;
+
+            @include apply-to(desktop) {
+                margin-top: 24px;
+            }
+
+            p {
+                font-size: 14px;
+                line-height: 24px;
+                letter-spacing: .25px;
+                margin-bottom: 0px;
+
+                @include apply-to(desktop) {
+                    font-size: 20px;
+                    line-height: 32px;
+                    letter-spacing: .28px;
+                }
+            }
+        }
+    }
+
+    // Elements
+    .oz-btn--outline {
+        display: inline-block;
+        align-self: center;
+        font-size: 14px;
+        line-height: 17px;
+        padding: 9px 28px;
+        background-color: transparent;
+        color: $pink-6;
+        border: 1px solid;
+        min-width: 215px;
+
+        &:hover {
+            background-color: $pink-6;
+            color: #fff;
+        }
+    }
+
+    .ozc-prizes-overview.mobile-only {
+        margin-top: 26px;
+    }
+
+    .oz-btn--cta {
+        display: block;
+    }
+
+
+    /* STICKY BUTTON */
+    .ozc-sticky-button {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        background: #fff;
+
+        z-index: 10;
+        position: sticky;
+        position: -webkit-sticky;
+        bottom: 0;
+
+        a {
+            display: block;
+            min-width: 300px;
+
+            @include apply-to(desktop) {
+                display: inline-block;
+            }
+        }
+
+        &--mobile-only {
+            @include apply-to(desktop) {
+                position: relative;
+                margin-top: 48px;
+                margin-bottom: 100px;
+            }
+        }
+    }
+
+    // Layout
+    .ozc__panel--base {
+        margin-top: 56px;
+        margin-bottom: 56px;
+
+        @include apply-to(desktop) {
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+    }
+
+    .ozc-callout {
+        @include apply-to(phone) {
+            margin-top: 56px;
+            margin-bottom: 56px;
+        }
+    }
+}

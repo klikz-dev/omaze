@@ -1,0 +1,118 @@
+/**
+ * Font Families
+ */
+$primary-font: 'National', sans-serif;
+$primary-font-regular: 'National Regular', sans-serif;
+$primary-font-medium: 'National Medium', sans-serif;
+$primary-font-extrabold: 'National Extrabold', sans-serif;
+$primary-font-bold: 'National Bold', sans-serif;
+$primary-font-italic: 'National Italic', sans-serif;
+$secondary-font: 'Clan', sans-serif;
+$arial-bold-font: 'Arial-BoldMT', sans-serif;
+$primary-font-rebrand: 'Gellix', Roboto, sans-serif;
+ 
+.primary-font {
+    font-family: $primary-font;
+}
+ 
+.secondary-font {
+    font-family: $secondary-font;
+}
+ 
+/**
+  * Font Weights
+ */
+$light: 300;
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+ 
+/**
+  * Font Sizes
+ */
+ 
+// H1
+$size-h1: (
+    null: em(45),
+    tablet: em(60),
+    desktop-large: em(70)
+);
+ 
+// H2
+$size-h2: (
+    null: em(28),
+    tablet: em(36),
+    desktop-large: em(40)
+);
+ 
+// H3
+$size-h3: (
+    null: em(15)
+);
+ 
+// H4
+$size-h4: (
+    null: em(14),
+    desktop-large: em(18)
+);
+ 
+// H5
+$size-h5: (
+    null: em(14)
+);
+ 
+// H6
+$size-h6: (
+    null: em(12)
+);
+ 
+// Paragraph
+$size-p: (
+    null: em(16),
+    tablet: em(18)
+);
+ 
+// Inputs
+$size-input: (
+    null: em(16)
+);
+ 
+// Section header
+$size-section-header-hdg: (
+    null: em(18)
+);
+ 
+/**
+  * Line Heights
+  */
+ 
+// Paragraph
+$lineheight-p: (
+    null: em(26, 16)
+);
+ 
+ /**
+  * margins
+  */
+$margin-p: (
+    null: em(21.6),
+    tablet: em(24.3)
+);
+ 
+/* rebrand vars */
+ 
+$rebrand-primary-font: 'Gellix', Roboto, sans-serif;
+ 
+$rebrand-size-p: (
+    null: em(16),
+    tablet: em(16)
+);
+ 
+$rebrand-lineheight-p: (
+    null: em(24)
+);
+ 
+$rebrand-margin-p: (
+    null: em(8)
+);

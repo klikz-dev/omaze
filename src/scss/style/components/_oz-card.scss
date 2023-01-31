@@ -1,0 +1,288 @@
+/**
+ * Card Component
+ *
+ * oz-card
+ * info banner
+ * exp banner
+ */
+
+// .oz-card
+.oz-card {
+    display: flex;
+    flex-direction: column;
+    width: 96%;
+    max-width: rem(425);
+    position: relative;
+    background: $white;
+    font-size: rem(15);
+    color: $gray-9;
+    text-align: left;
+    margin: 0 rem(10) rem(25);
+    padding: 0;
+    border: 1px solid $gray-8;
+    box-shadow: $gray-8 1px 1px 3px -1px;
+
+    @include apply-to(tablet) {
+        margin: 0 rem(15) rem(30);
+        width: rem(300);
+    }
+
+    // .oz-card--large
+    &--large {
+
+        @include apply-to(tablet) {
+            margin-left: 1%;
+            margin-right: 1%;
+            width: 46%;
+        }
+
+        // .oz-card--large .oz-card
+        .oz-card {
+
+            // .oz-card--large .oz-card__cta-label
+            &__cta-label {
+
+                @include apply-to(tablet) {
+                    font-size: rem(13);
+                }
+            }
+        }
+    }
+
+    // .oz-card--tall
+    &--tall {
+        margin: 0 0 rem(20);
+
+        @include apply-to(tablet) {
+            margin: 0 0 rem(25);
+        }
+
+        // .oz-card--tall.oz-card
+        &.oz-card {
+            max-width: rem(500);
+            width: 100%;
+        }
+
+        // .oz-card--tall .oz-card
+        .oz-card {
+
+            // .oz-card--tall .oz-card__title
+            &__title {
+                height: rem(54);
+            }
+
+            // .oz-card--tall .oz-card__cta-label
+            &__cta-label {
+                color: $pink-4;
+                font-size: rem(13);
+                margin: 0;
+                padding-top: rem(10);
+            }
+
+            // .oz-card--tall .oz-card__footer
+            &__footer {
+                margin: rem(12) 0;
+            }
+        }
+
+        // .oz-card .oz-chevron
+        .oz-chevron {
+
+            // .oz-chevron--right-thick
+            &--right-thick {
+
+                // .oz-chevron--right-thick::after
+                &::after {
+                    content: none;
+                }
+            }
+        }
+    }
+
+    // .oz-card__section
+    &__section {
+        padding: 0 rem(20);
+        position: relative;
+
+        // .oz-card__section--full-width
+        &--full-width {
+            padding: 0;
+        }
+    }
+
+    // .oz-card__container
+    &__container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    // .oz-card__intrinsic-ratio
+    &__intrinsic-ratio {
+        background: $gray-8;
+    }
+
+    // .oz-card__content
+    &__content {
+        margin-top: rem(10);
+        flex: 1;
+        white-space: normal;
+    }
+
+    // .oz-card__sub-title
+    &__sub-title {
+        line-height: normal;
+        margin-bottom: rem(3);
+        margin-top: 0;
+        font-size: rem(14);
+        color: $blue-1;
+        font-style: italic;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    // .oz-card__title
+    &__title {
+        font-size: rem(15);
+        margin: 0;
+
+        @include apply-to(tablet) {
+            position: relative;
+            overflow: hidden;
+            line-height: 1.2;
+            height: rem(36);
+        }
+
+        // .oz-card__title::after
+        &::after {
+
+            @include apply-to(tablet) {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 50%;
+                background: linear-gradient(to top, $white 0,$white 15%,rgba(255,255,255,.5) 100%);
+            }
+        }
+    }
+
+    // .oz-card__cta-label
+    &__cta-label {
+        color: $pink-6;
+        float: right;
+        font-size: rem(11);
+        font-weight: $bold;
+        text-transform: lowercase;
+        margin: rem(5) 0 rem(8);
+
+        @include apply-to(tablet) {
+            font-size: rem(13);
+        }
+    }
+
+    // .oz-card__entries-lrg
+    &__entries-lrg {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        text-align: center;
+        letter-spacing: -3px;
+        color: $blue-1;
+        line-height: rem(40);
+        font-size: rem(69);
+        transform: translateY(-50%);
+    }
+
+    // .oz-card__entries-sub
+    &__entries-sub {
+        font-size: rem(30);
+        letter-spacing: 0.5px;
+    }
+
+    // .oz-card .oz-chevron
+    .oz-chevron {
+
+        // .oz-chevron--right-thick
+        &--right-thick {
+
+            // .oz-chevron--right-thick::after
+            &::after {
+                border: 2px solid;
+                border-width: 2px 2px 0 0;
+                content: '';
+                position: relative;
+                display: inline-block;
+                vertical-align: middle;
+                color: inherit;
+                margin-top: -1px;
+                width: rem(6);
+                height: rem(6);
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+    // .oz-card .oz-btn
+    .oz-btn {
+
+        // .oz-card .oz-btn--cta
+        &--cta {
+            display: inline-block;
+            min-width: rem(200);
+            margin: rem(15) auto rem(20);
+        }
+    }
+}
+
+.oz-info-banner {
+    position: absolute;
+    top: rem(16);
+    right: rem(16);
+    font-family: $primary-font;
+    font-size: rem(14);
+    font-weight: $bold;
+    line-height: rem(14);
+    letter-spacing: rem(0.4);
+    text-transform: uppercase;
+    background: $yellow-3;
+    color: $black-2;
+    border-radius: rem(4);
+    font-style: normal;
+    padding: rem(5) rem(8);
+
+    @include apply-to(desktop) {
+        padding: rem(4) rem(8);
+        font-size: rem(16);
+        line-height: rem(16);
+    }
+}
+
+// rebrand css
+body.rebrand {
+    .oz-info-banner {
+        top: rem(24);
+        left: rem(24);
+        right: unset;
+        font-family: $primary-font-rebrand;
+        font-size: rem(16);
+        font-weight: 700;
+        line-height: 1.5;
+        letter-spacing: 0.015rem;
+        text-transform: unset;
+        background: $yellow-3;
+        color: $new-grey;
+        border-radius: rem(10);
+        font-style: normal;
+        padding: rem(3) rem(14) rem(5);
+        box-shadow: 0px 2px 6px rgba(8, 31, 40, 0.15);;
+    }
+
+    .experience--closed .oz-info-banner {
+        text-transform: uppercase;
+        background: $new-navy-50;
+    }
+}

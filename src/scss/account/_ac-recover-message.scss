@@ -1,0 +1,97 @@
+.oz-recover-account {
+    display: flex;
+    flex-direction: column;
+    width: rem(280);
+    padding-top: rem(62);
+    padding-bottom: rem(68);
+	margin: 0 auto;
+
+    @include apply-to(desktop) {
+        width: 100%;
+    }
+
+    // .oz-recover-account__icon
+    &__icon {
+        background-image: url(asset("email-icon.png"));
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: rem(88);
+        width: rem(88);
+        align-self: center;
+    }
+
+    // .oz-recover-account__header-text
+    &__header-text {
+        text-align: center;
+        align-self: center;
+        width: rem(260);
+        margin: rem(32) 0 0 0;
+        font-size: rem(24);
+        line-height: rem(32);
+        letter-spacing: rem(0.18);
+        font-family: $primary-font;
+        color: $black-2;
+
+        @include apply-to(desktop) {
+            width: 100%;
+        }
+    }
+
+    // .oz-recover-account__message
+    &__message {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        text-align: center;
+        margin: rem(16) 0 0 0;
+        font-size: rem(18);
+        font-family: $primary-font;
+        font-style: normal;
+        font-weight: normal;
+        line-height: rem(26);
+        letter-spacing: rem(0.321429);
+        color: $black-2;
+        width: 100%;
+
+        @include apply-to(desktop) {
+            margin: rem(25) 0 0 0;
+        }
+    }
+
+    // .oz-recover-account__email
+    &__email {
+        font-weight: bold;
+
+        // . oz-recover-account__email--small
+        &--small {
+            font-size: rem(14);
+        }
+
+        @include apply-to(desktop) {
+            margin: rem(8) 0;
+        }
+    }
+}
+
+.oz-recover-account-call-out {
+    min-width: rem(327);
+    background-color: $blue-11;
+    color: $black-2;
+    font-family: $primary-font;
+    font-size: 16px;
+    line-height: 24px;
+	text-align: center;
+	align-self: center;
+	letter-spacing: 0.321429px;
+	padding: rem(26) rem(24);
+	margin-top: 94px;
+	
+	// .oz-recover-account-call-out__title
+	&__title {
+		font-weight: bold;
+	}
+
+	p, h4 {
+		margin: 0;
+	}
+}

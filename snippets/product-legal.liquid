@@ -1,0 +1,42 @@
+{% assign legalTitle = 'stuff our lawyers want you to read' %}
+{% if meta.legal.section_title != blank %}
+    {% assign legalTitle = meta.legal.section_title %}
+{% endif %}
+
+{% assign id = product.id %}
+
+<div class="columns__one-full-width">
+    {% if productStatus == 'closed' %}
+        {% if meta.legal.text != blank %}
+            <div class="exp-legal">
+                <details>
+                    <summary>
+                        {% if meta.legal.section_title != blank %}
+                            <p id="js-legal" class="oz-section-title oz-section-title--banner--mobile oz-centered">{{ legalTitle }}</p>
+                        {% endif %}
+                    </summary>
+
+                    <div class="exp-legal__legal-content-wrapper">
+                        <div class="exp-legal__legal-content">
+                            {{ meta.legal.text }}
+                        </div>
+                    </div>
+                </details>
+            </div>
+        {% endif %}
+    {% else %}
+        {% if meta.legal.text != blank %}
+            <div class="exp-legal">
+                {% if meta.legal.section_title != blank %}
+                    <h1 id="js-legal"
+                       class="oz-section-title oz-section-title--banner--mobile oz-centered">{{ legalTitle }}</h1>
+                {% endif %}
+                <div class="exp-legal__legal-content-wrapper">
+                    <div class="exp-legal__legal-content">
+                        {{ meta.legal.text }}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>

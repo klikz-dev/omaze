@@ -1,0 +1,119 @@
+/**
+ * product header
+ *
+ * header
+ * brand
+ * title
+ * oz campaign heading
+ */
+
+/**
+ * header
+ */
+.pv-header {
+	order: 2;
+
+	// .pv-header__wrap
+	&__wrap {
+
+		@include apply-to(desktop) {
+			border-bottom: 2px solid $gray-4;
+			border-top: 2px solid $gray-4;
+			padding: rem(20) 0 rem(25);
+			margin: rem(12) 0 rem(25);
+		}
+	}
+}
+
+/**
+ * brand
+ */
+.pv-brand {
+	font-family: $secondary-font;
+	margin: rem(6) 0 rem(10);
+	font-size: rem(18);
+	text-align: center;
+
+	@include apply-to(desktop) {
+		margin: rem(6) 0 rem(18);
+		font-size: rem(22);
+		text-align: left;
+	}
+}
+
+.pv-brand-intro {
+	text-transform: uppercase;
+	color: $gray-5;
+	font-size: rem(14);
+	letter-spacing: 2.2px;
+	text-align: center;
+	margin: 0;
+
+	@include apply-to(desktop) {
+		font-size: rem(16);
+		text-align: left;
+	}
+}
+
+.pv-brand,
+.pv-brand-intro {
+	line-height: 1;
+}
+
+/**
+ * oz campaign heading
+ */
+.oz-campaign-heading {
+	padding: 0 rem(20);
+	position: relative;
+
+	@include apply-to(desktop) {
+		margin-bottom: rem(50);
+		padding: 0;
+	}
+
+	// .oz-campaign-heading img
+	img {
+		position: absolute;
+		left: rem(20);
+		border-radius: 50%;
+		height: rem(50);
+		width: auto;
+
+		@include apply-to(desktop) {
+			left: 0;
+		}
+	}
+
+	// .oz-campaign-heading__content
+	&__content {
+		margin-left: rem(65);
+	}
+
+	// .oz-campaign-heading__price
+	&__price {
+		font-size: rem(28);
+		margin-bottom: rem(10);
+		font-weight: $light;
+	}
+
+	// .oz-campaign-heading__content .oz-celebrity-name
+	.oz-celebrity-name {
+
+		@include apply-to(desktop) {
+			font-size: rem(22);
+			margin-bottom: rem(5);
+		}
+	}
+
+	// .oz-campaign-heading h2
+	h2 {
+		font-size: rem(16);
+		line-height: 1;
+		margin: 0;
+
+		@include apply-to(desktop) {
+			font-size: rem(22);
+		}
+	}
+}

@@ -1,0 +1,64 @@
+/**
+ * Homepage three buttons vertical
+ */
+
+.oz-homepage {
+    // .oz-homepage__three-buttons
+    &__three-buttons {
+        color: $white;
+        padding: rem(10) rem(20);
+        min-height: rem(100);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+
+        @include apply-to(tablet) {
+            padding: rem(15) rem(30);
+        }
+
+        @include apply-to(desktop) {
+            padding: rem(20) rem(50);
+        }
+
+        // .oz-homepage__three-buttons .oz-section-title
+        .oz-section-title {
+            width: 80%;
+            margin: 0 auto rem(10);
+            color: $black-2;
+            text-align: center;
+            font-size: rem(24);
+            line-height: rem(29);
+        }
+        // .oz-homepage__three-buttons .oz-section-content
+        .oz-section-content {
+            width: 100%;
+            margin: 0;
+            color: $black-2;
+            text-align: center;
+            display: flex;
+            max-width: rem(1050);
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+
+            @include apply-to(tablet) {
+                flex-direction: row;
+            }
+
+            .three-button {
+                min-height: 44px;
+                width: 100%;
+                margin: rem(10) 0;
+                text-align: center;
+                max-width: rem(320);
+
+                @include apply-to(tablet) {
+                    width: 30%;
+                }
+            }
+        }
+    }
+}

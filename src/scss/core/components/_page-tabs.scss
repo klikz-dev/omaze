@@ -1,0 +1,49 @@
+.ozc-page-tabs {
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        font-family: $primary-font;
+
+        @include apply-to(desktop) {
+            justify-content: flex-start;
+        }
+
+        &--hidden {
+            display: none;
+        }
+    }
+
+    &__tab {
+        display: inline-block;
+        padding-bottom: 10px;
+        border-bottom: 2px solid transparent;
+        color: $gray-14;
+        font-size: 18px;
+        letter-spacing: .32px;
+        font-weight: bold;
+
+        @include apply-to(desktop) {
+            font-size: 22px;
+            letter-spacing: .39px;
+            margin-right: 40px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &__tab--active {
+        color: $pink-6;
+        border-color: $pink-6;
+    }
+
+    &__panel {
+        display: none
+    }
+
+    &__panel--active {
+        display: block;
+    }
+}
+

@@ -1,0 +1,69 @@
+/// Symbol Chevron
+/// This mixin will add a pseudo element with a square-based chevron
+/// @param {String} $dir - Left/Right: direction to point
+/// @param {Number} $thickness - thickness of chevron in px
+/// @param {Number} $size - Width/Height in ems or px; ems will be converted to px and rounded up
+/// @param {String} $color - Chevron color: defaults to inherited color
+/// @example
+/// .my-link {
+///     @include symbol-chevron(right, 2px, .3em, $color: #000);
+/// }
+
+@mixin symbol-chevron($dir: right, $thickness: 1px, $size: .35em, $color: inherit) {
+    // must set defaults for any var used outside of @if scope...
+    $placement: null;
+    $margin-dir: null;
+    $deg: null;
+
+    @if $dir == right {
+        $deg: 45deg;
+        $placement: '&:after';
+        $margin-dir: 'margin-left';
+    } @else {
+        $deg: -135deg;
+        $placement: '&:before';
+        $margin-dir: 'margin-right';
+    }
+
+    // if $size is in ems then convert to pixels and round up as decimals can render inconsistently
+    @if unit($size) == 'em' {
+        $size: ems-to-px-ceil($size);
+    }
+
+
+    #{$placement} {
+        content: '';
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+
+        color: $color;
+
+        margin-top: -1px;
+        #{$margin-dir}: 2px;
+
+        width: $size;
+        height: $size;
+
+        border: $thickness solid;
+        border-width: $thickness $thickness 0 0;
+
+        @include rotate($deg);
+    }
+}
+
+.oz-chevron--right {
+    @include symbol-chevron(right);
+}
+
+.oz-chevron--right-thick {
+    @include symbol-chevron(right, 2px);
+}
+
+.oz-chevron--left {
+    @include symbol-chevron(left);
+}
+
+.oz-chevron--left-thick {
+    @include symbol-chevron(left, 2px);
+}

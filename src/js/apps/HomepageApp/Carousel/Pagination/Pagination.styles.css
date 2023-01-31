@@ -1,0 +1,29 @@
+.paginationInfo {
+    line-height: 19.2px;
+    letter-spacing: 0.4px;
+}
+
+.paginationControls {
+    margin-right: 6px;
+}
+
+.arrow:before {
+    border: solid 0.8px #fff;
+    content: '';
+    width: 13px;
+    height: 13px;
+    border: solid 0.8px #1a1a1a;
+    display: inline-block;
+    transform: rotate(45deg);
+    opacity: 1;
+}
+
+.prevArrow:before {
+    border-width: 0 0 2px 2px;
+    margin-right: -3px;
+}
+
+.nextArrow:before {
+    border-width: 2px 2px 0 0;
+    margin-left: -3px;
+}

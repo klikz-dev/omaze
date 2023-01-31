@@ -1,0 +1,118 @@
+.oz-confirm-account {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 56px 24px 96px 24px;
+    margin: 0 auto;
+    max-width: 580px;
+
+    @include apply-to(desktop) {
+        width: 100%;
+    }
+
+    // .oz-confirm-account__icon
+    &__icon {
+        background-image: url("data:image/svg+xml,%3Csvg width='77' height='35' viewBox='0 0 77 35' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M27.6996 5.27708L41.6894 17.0737L27.6996 29.5819V5.27708ZM30.4075 31.6532H50.1726C50.1875 31.6532 50.2024 31.6534 50.2172 31.6538C50.2321 31.6534 50.247 31.6532 50.2619 31.6532H70.0269L56.1904 19.282C56.18 19.2727 56.1697 19.2633 56.1596 19.2538L51.3433 23.3151C51.0409 23.5701 50.6578 23.71 50.2619 23.71H50.1726C49.7767 23.71 49.3936 23.5701 49.0912 23.3151L44.2748 19.2538C44.2647 19.2633 44.2545 19.2727 44.2441 19.282L30.4075 31.6532ZM58.7451 17.0736L72.7348 29.5819V5.27695L58.7451 17.0736ZM69.8288 3.34679L30.6056 3.34692L50.2172 19.884L69.8288 3.34679ZM50.2172 34.9994C50.2321 34.9998 50.247 35 50.2619 35H74.4108C75.3364 35 76.0868 34.2508 76.0868 33.3266V1.67339C76.0868 1.22958 75.9102 0.803943 75.5959 0.490122C75.2816 0.176301 74.8553 -1.41854e-06 74.4108 0L26.0236 0.000158877C25.098 0.000161892 24.3477 0.749362 24.3477 1.67355V33.3266C24.3477 34.2508 25.098 35 26.0236 35H50.1726C50.1875 35 50.2024 34.9998 50.2172 34.9994Z' fill='%230193A7'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M6.50586 7.79887C6.50586 6.85338 7.29739 6.08691 8.2738 6.08691H16.4927C17.4691 6.08691 18.2607 6.85338 18.2607 7.79887C18.2607 8.74436 17.4691 9.51083 16.4927 9.51083H8.2738C7.29739 9.51083 6.50586 8.74436 6.50586 7.79887Z' fill='%230193A7'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M6.50586 28.6315C6.50586 27.686 7.29739 26.9196 8.2738 26.9196H16.4927C17.4691 26.9196 18.2607 27.686 18.2607 28.6315C18.2607 29.577 17.4691 30.3435 16.4927 30.3435H8.2738C7.29739 30.3435 6.50586 29.577 6.50586 28.6315Z' fill='%230193A7'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 18.2227C0 17.2772 0.791535 16.5107 1.76794 16.5107H16.4929C17.4693 16.5107 18.2609 17.2772 18.2609 18.2227C18.2609 19.1682 17.4693 19.9347 16.4929 19.9347H1.76794C0.791535 19.9347 0 19.1682 0 18.2227Z' fill='%230193A7'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 76px;
+        height: 35px;
+        align-self: start;
+    }
+
+    // .oz-confirm-account__header-text
+    &__header-text {
+        text-align: left;
+        align-self: center;
+        width: 100%;
+        margin: 24px 0 0 0;
+        font-size: 30px;
+        line-height: 150%;
+        letter-spacing: 0.18px;
+        font-family: $primary-font-rebrand;
+        color: $new-grey-900;
+    }
+
+    // .oz-confirm-account__email
+    &__email {
+        font-weight: bold;
+
+        // . oz-confirm-account__email--small
+        &--small {
+            font-size: rem(14);
+        }
+
+        @include apply-to(desktop) {
+            margin: rem(8) 0;
+        }
+    }
+}
+
+.support-container {
+    display: block;
+    background: $new-navy-50;
+}
+
+.support-text-container {
+    max-width: 590px;
+    margin: 0 auto;
+    padding: 24px;
+
+    h3 {
+        font-size: 18px;
+        font-weight: bold;
+        font-family: $primary-font-rebrand;
+        margin-top: 13px;
+        margin-bottom: 14px;
+        line-height: 150%;
+    }
+
+    &__message {
+        display: none;
+
+        h3 {
+            color: $new-navy-600;
+        }
+    }
+
+    button {
+        font-size: 16px;
+        font-weight: bold;
+        font-family: $primary-font-rebrand;
+        line-height: 24px;
+        background-color: transparent;
+        color: $new-grey-900;
+        border-radius: 76px;
+        margin-top: 6px;
+        margin-bottom: 13px;
+        border: 2px solid $new-navy-500;
+        width: 156px;
+        letter-spacing: 0.015rem;
+
+        &:hover, &:active {
+            border-color: $new-yellow-500;
+        }
+
+        &:focus {
+            border-color: #55C2FF;
+        }
+    }
+
+    p {
+        font-size: 16px;
+        letter-spacing: 0.015rem;
+        line-height: 150%;
+        font-weight: 500;
+        font-family: $primary-font-rebrand;
+    }
+
+    a {
+        font-weight: bold;
+        border-bottom: 2px solid $new-navy-500;
+        color: $new-grey-900;
+    }
+
+    a:hover, a:focus {
+        border-bottom: 2px solid transparent;
+    }
+}

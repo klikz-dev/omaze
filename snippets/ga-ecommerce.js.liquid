@@ -1,0 +1,160 @@
+{% comment %}
+    The enhanced ecommerce plug-in for analytics.js enables the measurement of
+    user interactions with products on ecommerce websites across the user's
+    shopping experience, including: product impressions, product clicks,
+    viewing product details, adding a product to a shopping cart, initiating
+    the checkout process, transactions, and refunds.
+{% endcomment %}
+
+{% if checkout %}
+  {% comment %}
+    Measure each step of the checkout process using
+    the checkout action.
+  {% endcomment %}
+
+  window.addEventListener("load", function(){
+    var shopifyCheckoutStep = Shopify.Checkout.step || undefined;
+
+    if(shopifyCheckoutStep) {
+      var products = [
+        {% for line_item in checkout.line_items %}
+          {
+              'name': {{ line_item.product.title | json }},
+              'id': {{ line_item.product_id | json }},
+              'category': {{ line_item.product.type | json }},
+              'price': {{ line_item.variant.price | money_without_currency | json }},
+              'variant': {{ line_item.variant.title | json }},
+              'quantity': {{ line_item.quantity | json }},
+              'url': {{ line_item.url | json }},
+              'currency': {{ currency | json }},
+              'brand': {{ brand | json }},
+          },
+        {% endfor %}
+      ]
+
+      switch (shopifyCheckoutStep) {
+          case 'contact_information': {
+            {% capture billing_address %}{{checkout.billing_address.address1}} {{checkout.billing_address.city}} {{ checkout.billing_address.zip}}{% endcapture %}
+            dataLayer.push({
+              'event': 'checkout',
+              'ecommerce': {
+                'checkout': {
+                  'actionField': {'step': 1, 'option': {{ billing_address | json }} },
+                  'products': products
+                }
+              }
+            });
+          }
+          break;
+        case 'shipping_method': {
+            {% capture shipping_address %}{{checkout.shipping_address.address1}} {{checkout.shipping_address.city}} {{ checkout.shipping_address.zip}}{% endcapture %}
+            dataLayer.push({
+              'event': 'checkout',
+              'ecommerce': {
+                'checkout': {
+                  'actionField': {'step': 2, 'option':  {{ shipping_address | json }} },
+                  'products': products
+                }
+              }
+            });
+          }
+          break;
+        case 'payment_method':
+          dataLayer.push({
+            'event': 'checkout',
+            'ecommerce': {
+              'checkout': {
+                'actionField': {'step': 3, 'option': 'payment_method'},
+                'products': products
+              }
+            }
+          });
+          break;
+        case 'processing': // (between payment page and thank you page)
+          break;
+        case 'review': // (optional step set in the Admin)
+          break;
+      }
+    }
+  });
+
+  {% comment %}
+    Push your transaction details into the Data Layer using the purchase action,
+    along with an event that will fire an enhanced ecommerce-enabled tag.
+  {% endcomment %}
+
+  dataLayer.push({
+      'ecommerce': {
+        'purchase': {
+          'actionField': {
+            'id': {{ checkout.order_id | json }},
+            'revenue': {{ checkout.total_price | money_without_currency | json }},
+            'tax':{{ checkout.tax_price | money_without_currency | json }},
+            'shipping': {{checkout.shipping_price | money_without_currency | json }}
+          },
+          'products': [
+            {% for line_item in checkout.line_items %}
+                {% comment %}
+                  iterate the tags and extracts primary category and secondary category and sets the same 
+                  into a variable based on tag values.
+                {% endcomment %}
+
+                {% assign productCategoryL2 = '/(not set)' %}
+                {% assign productCategoryL3 = '/(not set)' %}
+                {% assign primaryCategory = '$oz_sweepstake_primary-category:' %}
+                {% assign secondaryCategory = '$oz_sweepstake_secondary-category:' %}
+
+                {% for tag in line_item.product.tags %}
+
+                    {% if tag contains primaryCategory %}
+                      {% assign productCategoryL2 = tag | remove_first: primaryCategory %}
+                      {% assign productCategoryL2 = '/' | append: productCategoryL2  %}
+                    {% endif %}
+                    
+                    {% if tag contains secondaryCategory %}
+                      {% assign productCategoryL3 = tag | remove_first: secondaryCategory %}
+                      {% assign productCategoryL3 = '/' | append: productCategoryL3  %}
+                    {% endif %}
+
+                {% endfor %}
+                
+                {% assign productCategory = line_item.product.type | append: productCategoryL2 | append: productCategoryL3 %}
+
+                {
+                  'name': {{ line_item.product.title | json }},
+                  'id': {{ line_item.product_id | json }},
+                  'category': {{ productCategory | json }},
+                  'price': {{ line_item.variant.price | money_without_currency | json }},
+                  'variant': {{ line_item.variant.title | json }},
+                  'quantity': {{ line_item.quantity | json }},
+                  'url': {{ line_item.url | json }},
+                  'currency': {{ currency | json }},
+                  'brand': {{ brand | json }},
+                },
+             {% endfor %}
+          ]
+        }
+      }
+    });
+{% endif %}
+
+{% if product %}
+  {% comment %}
+    Measure a view of product details by pushing a detail action to the data layer,
+    along with one or more productFieldObjects representing the products being viewed.
+  {% endcomment %}
+    dataLayer.push({
+      'event': 'productDetail',
+      'ecommerce': {
+        'detail': {
+          'products': [{
+            'name': {{ product.title | json }},
+            'id': {{ product.id | json }},
+            'category' : {{ product.type | json }},
+            'currency': {{ currency | json }},
+            'brand': {{ brand | json }},
+          }]
+         }
+       }
+    });
+{% endif %}

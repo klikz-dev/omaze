@@ -1,0 +1,932 @@
+[
+    {
+        "name": "theme_info",
+        "theme_name": "Omaze Shopify",
+        "theme_author": "Omaze",
+        "theme_version": "1.10.0",
+        "theme_documentation_url": "https://omaze.com",
+        "theme_support_url": "https://omaze.com"
+    },
+    {
+        "name": "Development Environment",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Choose an environment"
+            },
+            {
+                "type": "select",
+                "id": "env",
+                "label": "Development Environment",
+                "options": [
+                    {
+                        "value": "qa",
+                        "label": "QA"
+                    },
+                    {
+                        "value": "staging",
+                        "label": "Development"
+                    },
+                    {
+                        "value": "production",
+                        "label": "Production"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Omaze Geolocation",
+        "settings": [
+            {
+                "type": "text",
+                "id": "oz_geolocation_api_url",
+                "label": "URL",
+                "default": "https:\/\/api.ipstack.com\/check?access_key=53d84e070bc011850c720f1c6aaeb24e",
+                "info": "Geolocation API URL"
+            },
+            {
+                "type": "textarea",
+                "id": "oz_geolocation_content_conf",
+                "label": "Geolocation content config",
+                "info": "Config array to be used to render geo-targeted content"
+            }
+        ]
+    },
+    {
+        "name": "CCM: Cookie Compliance Management",
+        "settings": [
+            {
+                "id": "cookie_compliance_on",
+                "type": "checkbox",
+                "default": true,
+                "label": "Enforce cookie compliance"
+            },
+            {
+                "type": "text",
+                "id": "onetrust_script_id",
+                "label": "OneTrust Script ID"
+            },
+            {
+                "type": "textarea",
+                "id": "oz_cookie_ls_list",
+                "label": "Omaze cookies and storage keys",
+                "info": "Omaze cookies and local storage keys permission groups"
+            }
+        ]
+    },
+    {
+        "name": "Access Restriction",
+        "settings": [
+            {
+                "type": "textarea",
+                "id": "oz_access_ineligible_countries",
+                "label": "Countries where Omaze is not available",
+                "default": "[]",
+                "info": "All uppercase. JSON Format. [\"US\", \"GB\", ...]"
+            },
+            {
+                "type": "textarea",
+                "id": "oz_access_ineligible_regions",
+                "label": "Regions where Omaze is not available",
+                "default": "{}",
+                "info": "All uppercase. JSON Format. { \"US\": [\"CA\", \"FL\" ... ] } - restricts regions within country"
+            },
+            {
+                "type": "textarea",
+                "id": "ip_whitelist",
+                "label": "IP Whitelist",
+                "default": "127.0.0.1",
+                "info": "add one IP address per line"
+            },
+            {
+                "type": "textarea",
+                "id": "ip_blacklist",
+                "label": "IP Blacklist",
+                "default": "127.0.0.1",
+                "info": "add one IP address per line"
+            },
+            {
+                "type": "text",
+                "id": "restrictedCountries",
+                "label": "Countries that cannot enter sweepstakes on omaze.com",
+                "default": "DE,AU,UK",
+                "info": "Comma separated list of country codes"
+            },
+            {
+                "type": "text",
+                "id": "restrictedStartDate",
+                "label": "Sweepstakes on omaze.com, launched before this date, are available to all countries",
+                "default": "2021-07-10",
+                "info": "(yyyy-MM-dd)"
+            }
+        ]
+    },
+    {
+        "name": "Fame",
+        "settings": [
+            {
+                "type": "text",
+                "id": "fame_app_host",
+                "label": "Fame application host"
+            },
+            {
+                "type": "text",
+                "id": "fame_upsell_variant_sku",
+                "label": "Fame upsell variant SKU",
+                "default": "standard-fame_20"
+            }
+        ]
+    },
+    {
+        "name": "Google Tag Manager",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "gtm_enable",
+                "label": "Enable",
+                "default": false
+            },
+            {
+                "type": "text",
+                "id": "gtm_id",
+                "label": "ID",
+                "info": "The characters following \"GTM-\""
+            }
+        ]
+    },
+    {
+        "name": "Optimizely",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "optimizely_enable",
+                "label": "Enable",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "Password Page",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Design"
+            },
+            {
+                "type": "image_picker",
+                "id": "logo",
+                "label": "Logo"
+            },
+            {
+                "type": "color",
+                "id": "bgcolor",
+                "label": "Background Color",
+                "default": "#ffffff"
+            },
+            {
+                "type": "color",
+                "id": "text_color",
+                "label": "Text Color",
+                "default": "#000000"
+            },
+            {
+                "type": "color",
+                "id": "input_bgcolor",
+                "label": "Input Background Color",
+                "default": "#ffffff"
+            },
+            {
+                "type": "color",
+                "id": "input_border_color",
+                "label": "Input Border Color",
+                "default": "#000000"
+            },
+            {
+                "type": "color",
+                "id": "input_text_color",
+                "label": "Input Text Color",
+                "default": "#000000"
+            }
+        ]
+    },
+    {
+        "name": "Promo Banner",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "promo_enable",
+                "label": "Enable",
+                "default": false
+            },
+            {
+                "type": "text",
+                "id": "promo_text",
+                "label": "Promo Text"
+            },
+            {
+                "type": "text",
+                "id": "promo_text_mobile",
+                "label": "Promo Text Mobile"
+            },
+            {
+                "type": "url",
+                "id": "promo_url",
+                "label": "Promo URL"
+            },
+            {
+                "type": "image_picker",
+                "id": "promo_background",
+                "label": "Promo Background"
+            },
+            {
+                "type": "image_picker",
+                "id": "promo_background_mobile",
+                "label": "Promo Background Mobile"
+            }
+        ]
+    },
+    {
+        "name": "Link Wall",
+        "settings": [
+            {
+                "type": "url",
+                "id": "link_one",
+                "label": "First Link Item"
+            },
+            {
+                "type": "text",
+                "id": "text_one",
+                "label": "First Page Copy",
+                "default": "how we think"
+            },
+            {
+                "type": "url",
+                "id": "link_two",
+                "label": "Second Link Item"
+            },
+            {
+                "type": "text",
+                "id": "text_two",
+                "label": "Second Page Copy",
+                "default": "how it works"
+            },
+            {
+                "type": "url",
+                "id": "link_three",
+                "label": "Third Link Item"
+            },
+            {
+                "type": "text",
+                "id": "text_three",
+                "label": "Third Page Copy",
+                "default": "who we are"
+            }
+        ]
+    },
+    {
+        "name": "Contact Us",
+        "settings": [
+            {
+                "type": "text",
+                "id": "press_inquiries",
+                "label": "Press Inquiries",
+                "default": "For press inquiries, contact: "
+            },
+            {
+                "type": "text",
+                "id": "press_email",
+                "label": "Press Inquiries Email",
+                "default": "pr@omaze.com"
+            },
+            {
+                "type": "text",
+                "id": "customer_care",
+                "label": "Customer Care",
+                "default": "Customer care inquiry? Reach out to: "
+            },
+            {
+                "type": "text",
+                "id": "customer_care_email",
+                "label": "Customer Care Email",
+                "default": "weloveyou@omaze.com"
+            }
+        ]
+    },
+    {
+        "name": "Winners Blog",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "winners_desktop_banner",
+                "label": "Winners Desktop Banner"
+            },
+            {
+                "type": "image_picker",
+                "id": "winners_mobile_banner",
+                "label": "Winners Mobile Banner"
+            },
+            {
+                "type": "text",
+                "id": "winners_header",
+                "label": "Winners Header"
+            },
+            {
+                "type": "text",
+                "id": "winners_copy",
+                "label": "Winners Copy"
+            },
+            {
+                "type": "text",
+                "id": "winners_content_header_desktop",
+                "label": "Winners Content Header Desktop"
+            },
+            {
+                "type": "text",
+                "id": "winners_content_header_mobile",
+                "label": "Winners Content Header Mobile"
+            },
+            {
+                "type": "textarea",
+                "id": "winners_content_copy",
+                "label": "Winners Content Copy",
+                "default": "Congratulations to the Omaze winners! We love you for boldly taking a chance on the experience of your dreams, for generously supporting incredible causes around the world and for being amazing members of this community. Whether it’s our Kobe Bryant winner who’s been rooting for him since she was just 2 years old... or the amazing couple who, after 10 years together, had John Legend sing for them on their wedding day... we love you. Keep on with your awesome selves."
+            }
+        ]
+    },
+    {
+        "name": "Footer",
+        "settings": [
+            {
+                "type": "text",
+                "id": "contact_email",
+                "label": "Contact Email"
+            }
+        ]
+    },
+    {
+        "name": "404",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "error_image",
+                "label": "404 Image"
+            },
+            {
+                "type": "text",
+                "id": "error_header",
+                "label": "Header"
+            }
+        ]
+    },
+    {
+        "name": "Cart",
+        "settings": [
+            {
+                "label": "Active",
+                "id": "cart_active",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "Sailthru",
+        "settings": [
+            {
+                "label": "API",
+                "id": "omaze_sailthru_api",
+                "type": "text",
+                "default": "https://ak.sail-horizon.com/spm/spm.v1.min.js"
+            },
+            {
+                "label": "CustomerId",
+                "id": "omaze_sailthru_customerid",
+                "type": "text",
+                "default": "8cbb86041b0cc20589116c726d6f32c2"
+            }
+        ]
+    },
+    {
+        "name": "Shopify Multipass Settings",
+        "settings": [
+            {
+                "type": "text",
+                "id": "omaze_app_proxy_secret_key",
+                "label": "App Proxy Secret Key",
+                "info": "App Proxy Secret Key, https://partners.shopify.com/ - > Omaze Proxy App"
+            },
+            {
+                "type": "text",
+                "id": "omaze_customer_access_token_key",
+                "label": "Omaze Customer Access Token Key",
+                "default": "Omaze-Api-Access-Token"
+            },
+            {
+                "type": "text",
+                "id": "shopify_customer_access_token_key",
+                "label": "Shopify Customer Access Token Key",
+                "default": "Shopify-Storefront-Api-Access-Token"
+            }
+        ]
+    },
+    {
+        "name": "UK House",
+        "settings": [
+            {
+                "label": "Active",
+                "id": "uk_house_active",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "label": "Uk House page URL",
+                "type": "text",
+                "id": "uk_house_page_url",
+                "default": "https://omaze.co.uk/"
+            }
+        ]
+    },
+    {
+        "name": "Cross Sell",
+        "settings": [
+            {
+                "label": "Minimum Products To Show",
+                "id": "cross_sell_minimum_products",
+                "type": "number",
+                "default": 1
+            },
+            {
+                "label": "Maximum Products To Show",
+                "id": "cross_sell_max_products",
+                "type": "number",
+                "default": 3
+            },
+            {
+                "label": "Priority Collection Slug",
+                "id": "cross_sell_priority_collection",
+                "type": "text",
+                "default": "prioritized_cross_sell"
+            },
+            {
+                "label": "Default Collection Slug",
+                "id": "cross_sell_default_collection",
+                "type": "text",
+                "default": "experiences"
+            },
+            {
+                "label": "Default Header",
+                "id": "cross_sell_default_header",
+                "type": "text",
+                "default": "More to win"
+            },
+            {
+                "label": "Use Priority Collection Only",
+                "info": "If checked, only products from priority collection will be used. All others will be ignored.",
+                "id": "cross_sell_use_priority_collection",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "Product Recommendations",
+        "settings": [
+            {
+                "label": "Minimum Products To Show",
+                "id": "product_recommendations_minimum_products",
+                "type": "number",
+                "default": 4
+            },
+            {
+                "label": "Priority Collection Slug",
+                "id": "product_recommendations_priority_collection",
+                "type": "text",
+                "default": "prioritized_cross_sell"
+            },
+            {
+                "label": "Default Collection Slug",
+                "id": "product_recommendations_default_collection",
+                "type": "text",
+                "default": "experiences"
+            },
+            {
+                "label": "Default Header",
+                "id": "product_recommendations_default_header",
+                "type": "text",
+                "default": "Check out more dreams to win!"
+            },
+            {
+                "label": "Use Priority Collection Only",
+                "info": "If checked, only products from priority collection will be used. All others will be ignored.",
+                "id": "product_recommendations_use_priority_collection",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "Member Profiles",
+        "settings": [
+            {
+                "label": "On",
+                "id": "member_profiles_on",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "label": "Runtime",
+                "type": "text",
+                "id": "member_profiles_js_runtime",
+                "info": "Member Profiles runtime (runtime-main.[hash].js)"
+            },
+            {
+                "label": "Main Chunk",
+                "type": "text",
+                "id": "member_profiles_js_main",
+                "info": "Member Profiles main chunk (main.[hash].chunk.js)"
+            },
+            {
+                "label": "Chunk",
+                "type": "text",
+                "id": "member_profiles_js_chunk",
+                "info": "Member Profiles chunk ([hash].chunk.js)"
+            },
+            {
+                "label": "Main CSS",
+                "type": "text",
+                "id": "member_profiles_css_main",
+                "info": "Member Profiles main css chunk (main.[hash].chunk.css)"
+            },
+            {
+                "label": "Chunk CSS",
+                "type": "text",
+                "id": "member_profiles_css_chunk",
+                "info": "Member Profiles css chunk ([hash].chunk.css)"
+            }
+        ]
+    },
+    {
+        "name": "Profile On-boarding Callouts",
+        "settings": [
+            {
+                "label": "On",
+                "id": "profile_onboarding_callouts_on",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "Thank You Page Profile On-boarding Callouts",
+        "settings": [
+            {
+                "label": "On",
+                "id": "thank_you_page_profile_onboarding_callouts_on",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "Closed Sweepstakes Updates",
+        "settings": [
+            {
+                "label": "Winner Callouts",
+                "id": "closed_sweepstakes_winner_callouts_on",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "label": "Winner Banner",
+                "id": "closed_sweepstakes_winner_banner_on",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "label": "Winner Non Profit Section",
+                "id": "closed_sweepstakes_non_profit_section_on",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "Auth0",
+        "settings": [
+            {
+                "label": "Auth0 On",
+                "id": "auth0_on",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "label": "Omaze Web Domain",
+                "type": "text",
+                "id": "auth0_domain",
+                "info": "Auth0 Domain"
+            },
+            {
+                "label": "Omaze Web Client Id",
+                "type": "text",
+                "id": "auth0_client_id",
+                "info": "Auth0 Client Id"
+            },
+            {
+                "label": "Omaze Web Redirect Uri",
+                "type": "text",
+                "id": "auth0_redirect_uri",
+                "info": "Auth0 Redirect Uri"
+            },
+            {
+                "label": "Omaze Web Cache Location",
+                "type": "text",
+                "id": "auth0_cache_location",
+                "info": "Auth0 Cache Location"
+            },
+            {
+                "label": "Omaze User Service API Audience",
+                "type": "text",
+                "id": "auth0_audience",
+                "info": "Auth0 Api (Audience/Identifier)"
+            },
+            {
+                "label": "Multipass Token Namespace",
+                "type": "text",
+                "id": "auth0_multipass_token_namespace",
+                "info": "Multipass Token Namespace"
+            },
+            {
+                "label": "Auth0 SPA SDK URL",
+                "type": "text",
+                "id": "auth0_spa_sdk_js_url",
+                "info": "SDK URL"
+            },
+            {
+                "label": "Shopify Multipass Url",
+                "type": "text",
+                "id": "shopify_multipass_url",
+                "info": "Shopify Multipass Url"
+            },
+            {
+                "label": "GA Namespace",
+                "type": "text",
+                "id": "auth0_ga_namespace",
+                "info": "GA Namespace"
+            }
+        ]
+    },
+    {
+        "name": "Combo Promotion",
+        "settings": [
+            {
+                "label": "Enabled",
+                "id": "combo_promotion_enabled",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "type": "textarea",
+                "id": "combo_promotion_ineligible_countries",
+                "label": "Countries where combo promotion is not available",
+                "default": "[]",
+                "info": "All uppercase. JSON Format. [\"US\", \"GB\", ...]"
+            },
+            {
+                "type": "textarea",
+                "id": "combo_promotion_ineligible_regions",
+                "label": "Regions where combo_promotion is not available",
+                "default": "{}",
+                "info": "All uppercase. JSON Format. { \"US\": [\"CA\", \"FL\" ... ] } - restricts regions within country"
+            }
+        ]
+    },
+    {
+        "name": "Promotion Board",
+        "settings": [
+            {
+                "label": "Enabled",
+                "id": "promotion_board_enabled",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "type": "textarea",
+                "id": "promotion_board_ineligible_countries",
+                "label": "Countries where Promotion Board feature is not available",
+                "default": "[]",
+                "info": "All uppercase. JSON Format. [\"US\", \"GB\", ...]"
+            },
+            {
+                "type": "textarea",
+                "id": "promotion_board_ineligible_regions",
+                "label": "Regions where Promotion Board feature is not available",
+                "default": "{}",
+                "info": "All uppercase. JSON Format. { \"US\": [\"CA\", \"FL\" ... ] } - restricts regions within country"
+            }
+        ]
+    },
+    {
+        "name": "Banner Ad Feature",
+        "settings": [
+            {
+                "label": "Enabled",
+                "id": "banner_ad_enabled",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "type": "textarea",
+                "id": "banner_ad_ineligible_countries",
+                "label": "Countries where Banner Ad feature is not available",
+                "default": "[]",
+                "info": "All uppercase. JSON Format. [\"US\", \"GB\", ...]"
+            },
+            {
+                "type": "textarea",
+                "id": "banner_ad_ineligible_regions",
+                "label": "Regions where Banner Ad feature is not available",
+                "default": "{}",
+                "info": "All uppercase. JSON Format. { \"US\": [\"CA\", \"FL\" ... ] } - restricts regions within country"
+            }
+        ]
+    },
+    {
+        "name": "Sanity Pages",
+        "settings": [
+            {
+                "label": "Home Page",
+                "id": "sanity_home_page_id",
+                "type": "text"
+            }
+        ]
+    },
+    {
+        "name": "Homepage App Features",
+        "settings": [
+            {
+                "label": "Sweepstakes Carousel",
+                "id": "homepage_sweepstakes_carousel_enabled",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "label": "Featured Ad",
+                "id": "homepage_featured_ad_enabled",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "On-site Discovery House Focus Feature",
+        "settings": [
+            {
+                "label": "Enabled",
+                "id": "feature_house_focus_on",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "Donor Counter Feature",
+        "settings": [
+            {
+                "label": "Enabled",
+                "id": "donor_counter_enabled",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "type": "textarea",
+                "id": "donor_counter_product_blacklist",
+                "label": "Product pages where Donor Counter is not shown",
+                "default": "[]",
+                "info": "Add product page handles to the list. [\"example-product-handle-1\", \"example-product-handle-2\"]"
+            },
+            {
+                "type": "number",
+                "id": "minimum_number_of_donors",
+                "label": "The minimum number of donors required to show the donor counter",
+                "default": 10
+            },
+            {
+                "type": "text",
+                "id": "donor_counter_api_host",
+                "label": "Donor Counter API Host"
+            }
+        ]
+    },
+    {
+        "name": "Collection App Features",
+        "settings": [
+            {
+                "label": "Sweepstakes Collection",
+                "id": "collection_sweepstakes_enabled",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "Storefront Client",
+        "settings": [
+            {
+                "type": "text",
+                "id": "shopify_storefront_client_token",
+                "label": "Shopify Storefront Client Token",
+                "info": "Private app with storefront access"
+            }
+        ]
+    },
+    {
+        "name": "Rebrand",
+        "settings": [
+            {
+                "label": "Active",
+                "id": "rebrand_active",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "label": "Checkout-Thankyou Footer",
+                "id": "rebrandFooter_active",
+                "type": "checkbox",
+                "default": false
+            }
+        ]
+    },
+    {
+        "name": "External Services",
+        "settings": [
+            {
+                "type": "header",
+                "content": "User Service"
+            },
+            {
+                "type": "paragraph",
+                "content": "Gives the ability to perform actions on users, such as resetting their password."
+            },
+            {
+                "type": "text",
+                "id": "user_service_url",
+                "label": "URL"
+            },
+            {
+                "type": "header",
+                "content": "Sanity"
+            },
+            {
+                "type": "paragraph",
+                "content": "Gives access to any content currently managed within the Sanity CMS."
+            },
+            {
+                "label": "Dataset",
+                "id": "sanity_dataset",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "dev",
+                        "label": "Development"
+                    },
+                    {
+                        "value": "qa",
+                        "label": "QA"
+                    },
+                    {
+                        "value": "staging",
+                        "label": "Staging"
+                    },
+                    {
+                        "value": "production",
+                        "label": "Production"
+                    }
+                ]
+            },
+            {
+                "label": "Project ID",
+                "id": "sanity_project_id",
+                "type": "text",
+                "default": "qxkhuw10"
+            },
+            {
+                "label": "Tag",
+                "id": "sanity_tag",
+                "type": "text",
+                "default": "default"
+            },
+            {
+                "label": "Use CDN",
+                "id": "sanity_use_cdn",
+                "type": "checkbox",
+                "default": false
+            },
+            {
+                "label": "Token",
+                "id": "sanity_token",
+                "type": "text"
+            }
+        ]
+    }
+]

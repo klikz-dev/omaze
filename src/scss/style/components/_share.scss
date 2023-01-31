@@ -1,0 +1,26 @@
+/**
+ * share
+ */
+.share {
+
+	// .share__list
+	&__list {
+		margin: 0;
+	}
+
+	// .share__item
+	&__item {
+		display: inline-block;
+	}
+
+	// .share__btn
+	&__btn {
+		display: inline-block;
+		position: relative;
+		text-decoration: none;
+	}
+
+	// .share__icon
+	&__icon {
+	}
+}

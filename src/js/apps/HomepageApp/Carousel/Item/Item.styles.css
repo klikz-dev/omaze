@@ -1,0 +1,16 @@
+.carouselItem {
+    width: 242px !important;
+}
+
+@media only screen and (min-width: 720px) {
+    .carouselItem {
+        width: auto !important;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+    .carouselItem {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+}

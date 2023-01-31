@@ -1,0 +1,52 @@
+/**
+ * Experience Donate Buttons
+ */
+
+ .exp-donate-button-wrapper {
+    position: sticky;
+    bottom: 0;
+
+    &.hidden {
+        display: none;;
+    }
+ }
+
+ .exp-donate-button-wrapper.phone-only {
+     z-index: 2;
+ }
+
+.exp-donate-btns {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: rem(10) rem(30) rem(40);
+    z-index: z(donate-button);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.456376) 33.33%, $white 100%);
+    display: flex;
+    justify-content: space-between;
+
+    @include apply-to(tablet) {
+        display: none;
+    }
+}
+
+// rebrand css
+body.rebrand {
+    .exp-donate-btns a {
+        background: $yellow-3;
+        border-radius: 76px;
+        padding: 12px 32px 14px;
+        border: none;
+        color: $new-grey;
+        font-family: $primary-font-rebrand;
+        font-size: 20px;
+        line-height: 1.5;
+        letter-spacing: 0.015rem;
+        font-weight: 700;
+
+        &:hover {
+            background-color: $new-yellow-800;
+        }
+    }
+}

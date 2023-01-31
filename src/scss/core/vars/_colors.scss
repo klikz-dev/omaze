@@ -1,0 +1,127 @@
+/**
+ * Color Variables
+ */
+
+// Primary and Secondary
+$primary-color: #2dc3ea;
+$secondary-color: #ea2786;
+// Black
+$black-1: #000;
+$black-2: #1a1a1a; // header footer background
+$black-3: #231F2C;
+$black-4: #231F20;
+$black-5: #1D1D1D;
+$black-1-fade: rgba(0, 0, 0, 0.1);
+$black-2-fade: rgba(26, 26, 26, 0.3);
+$black-2-fade-2: rgba(26, 26, 26, 0.7);
+// White
+$white: #fff;
+
+// Gray
+$gray-1: #464545;
+$gray-2: #5e5c5c;
+$gray-3: #f1f2f2; // light background
+$gray-4: #e2e2e1; // th gray border
+$gray-5: #b3b3b5; // disabled btn
+$gray-6: #929497;
+$gray-7: #d9dadb;
+$gray-8: #ededed; // border on card item
+$gray-9: #111; // card item text
+$gray-10: #f2f2f4;
+$gray-11: #939598;
+$gray-12: #aaa;
+$gray-13: #f1f1f2;
+$gray-14: #515252;
+$gray-15: #fcfcfc;
+$gray-16: #dededd;
+$gray-17: #51525240;
+$gray-18: #9098a9;
+
+// Blue
+$blue-1: #00caf2; // main blue
+$blue-2: #5dcaed; // nav hover
+$blue-3: #1db1dc; // social hover
+$blue-4: #3c5a99;
+$blue-5: #97d9f2; // pdp icons
+$blue-6: #3b5998; // facebook
+$blue-7: #334d81; // facebook hover
+$blue-8: #5fa8dc; // twitter
+$blue-9: #518fbb; // twitter hover
+$blue-10:#f2fbff;
+$blue-11:#ebf9fc; // cart title
+$blue-13: #e1faff; // marketing optin bg
+// Pink
+$pink-1: #c01e6e; // button hover
+$pink-2: #e82885; // buttons and links
+$pink-3: #e9197e; // cta button on hover/active
+$pink-4: #d51479;
+$pink-5: #fbdaea;
+$pink-6: #ea2786; // cta buttons
+
+// Yellow
+$yellow-1: #F9E400; // flag
+$yellow-2: #f9a200; // flag
+$yellow-3: #ffdd00;
+$yellow-4: #ffc700;
+
+// Red
+$red-1: #e20000;
+$red-2: #fbe8e8; // message background
+$red-3: #d0021b; // errors
+$red-4: #cd2026;
+
+// Green
+$green-1: #2e8b57;
+$green-2: #e2ffef; // message background
+$green-3: #00AE4C;
+$green-4: #00a566;
+
+// purple
+$purple: #B7B7FF;
+
+// Re-brand
+$new-navy: #081f28;
+$new-grey: #090f15;
+
+// Re-brand Grey
+$new-grey-50: #f8f9fa;
+$new-grey-100: #ecf0f4;
+$new-grey-200: #dde2e8;
+$new-grey-300: #c1c9d1;
+$new-grey-400: #919ca8;
+$new-grey-500: #6d7b89;
+$new-grey-600: #4f5e6b;
+$new-grey-700: #3a4957;
+$new-grey-800: #242d38;
+$new-grey-900: #090f15;
+
+// Re-brand Navy
+$new-navy-50: #f6fcff;
+$new-navy-100: #ebf4f8;
+$new-navy-200: #cfdfe6;
+$new-navy-300: #8ba5b2;
+$new-navy-400: #628292;
+$new-navy-500: #3b5c6b;
+$new-navy-600: #224857;
+$new-navy-700: #153b4a;
+$new-navy-800: #13323f;
+$new-navy-900: #081f28;
+
+// Re-brand Teal
+$new-teal-50: #dffeff;
+$new-teal-200: #63f6fa;
+$new-teal-500: #00d5db;
+$new-teal-800: #0193a7;
+
+// Re-brand Yellow
+$new-yellow-50: #fff9d1;
+$new-yellow-500: #ffdd00;
+$new-yellow-800: #ffcb11;
+
+// Re-brand Red
+$new-red-200: #ff522b;
+$new-red-500: #db2800;
+
+$new-pink-500: #ffa1a7;
+
+$new-purple: #85A7FF;

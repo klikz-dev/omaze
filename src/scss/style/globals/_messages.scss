@@ -1,0 +1,127 @@
+/**
+* messages
+*
+* messages
+* message
+*/
+
+.messages {
+	opacity: 0;
+	overflow: hidden;
+	position: relative;
+	transition: height $normal-timer $ease-1,
+	opacity $normal-timer $ease-1;
+
+	&.is-visible {
+		opacity:1;
+		overflow: visible;
+	}
+}
+
+/**
+* message
+*/
+.message {
+	padding: rem(2) rem(12);
+	white-space: nowrap;
+	position: absolute;
+	left: 0;
+	right: 0;
+
+	// .message--error
+	&--error {
+		color: $red-3;
+	}
+
+	// .message--success
+	&--success {
+		color: $green-1;
+	}
+
+	&, p {
+		font-size: rem(14);
+		font-style: italic;
+		font-weight: $regular;
+		line-height: rem(14);
+		margin: 0;
+	}
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+
+/**
+* Old omaze messages code
+*/
+
+#flash-teleport {
+	display: none;
+}
+
+#flash-container {
+	position: fixed;
+	top: 55px;
+	left: 50%;
+	@include translate(-50%, 0);
+	width: 90%;
+	max-width: 600px;
+	margin: 5px auto;
+	z-index: 99999;
+	border-radius: 2px;
+
+	// #flash-container strong
+	strong {
+		font-weight: $regular;
+	}
+
+	// #flash-container.alert
+	&.alert {
+		color: #fff;
+		background: #F76464;
+		box-shadow: #000 0 5px 15px -5px;
+		border: 2px solid #E88E8E;
+	}
+
+	// #flash-container.alert-success
+	&.alert-success {
+		color: #737373;
+		background-color: #8DFDD3;
+		box-shadow: #000 0 5px 15px -5px;
+		border: 1px solid #8EEAC7;
+	}
+
+	// #flash-container button span
+	button span {
+		color: #000;
+	}
+
+	// #flash-container .error-codes
+	.error-codes {
+		font-size: 12px;
+		margin-top: 15px;
+		border-top: 1px dashed #E2DBDB;
+		font-style: italic;
+		margin-bottom: -10px;
+		padding-top: 3px;
+		font-weight: normal;
+		letter-spacing: 1px;
+
+		&:before {
+			content: 'Error Codes:';
+			margin-right: 10px;
+		}
+	}
+}
+
+#bootstrap_flash {
+	position: relative;
+	width: 90%;
+	max-width: 600px;
+	margin: 5px auto;
+
+	// #bootstrap_flash.no-close .close
+	&.no-close .close {
+		display: none;
+	}
+}

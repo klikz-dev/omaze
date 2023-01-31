@@ -1,0 +1,32 @@
+<div id="EmptyCart" class="cart__empty">
+    <div class="product-rec__container" data-prod-rec-container="{{ product.id }}"></div>
+    {% unless settings.feature_house_focus_on %}
+        <a href="/collections/experiences" class="product-recommendations__button js-product-recommendations__button">
+            Browse all experiences
+        </a>
+    {% endunless %}
+    <div class="cart__experience-impact">
+        <img
+            class="cart__experience-impact-image"
+            src="{{ 'world-icon-01.png' | asset_url }}"
+            srcset="{{ 'world-icon-01@2x.png' | asset_url }} 2x,
+                {{ 'world-icon-01@3x.png' | asset_url }} 3x"
+        >
+        <div class="cart__experience-impact-text">
+            <span class="cart__experience-impact-text-line">Donors from over <strong>180</strong> countries. </span>
+            <span class="cart__experience-impact-text-line">More than <strong>300</strong> nonprofits served.</span>
+        </div>
+        <div class="cart__experience-impact-highlight">
+            Over $130 million given to charity!
+        </div>
+        <div class="cart__experience-impact-thanks">
+            <span>Thanks for being a part of it</span>
+            <img
+                class="cart__experience-impact-smile"
+                src="{{ 'noun-smile.png' | asset_url }}"
+                srcset="{{ 'noun-smile@2x.png' | asset_url }} 2x,
+                    {{ 'noun-smile@3x.png' | asset_url }} 3x"
+            >
+        </div>
+    </div>
+</div>

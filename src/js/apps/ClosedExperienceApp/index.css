@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'ClanMedium';
+    font-style: normal;
+    font-weight: 400;
+    src: url("//cdn.shopify.com/s/files/1/0043/8471/8938/t/6/assets/ClanOTMedium.eot?v=381350818312660805");
+    src:
+            url("//cdn.shopify.com/s/files/1/0043/8471/8938/t/6/assets/ClanOTMedium.eot?v=381350818312660805") format("eot"),
+            url("//cdn.shopify.com/s/files/1/0043/8471/8938/t/6/assets/ClanOTMedium.woff?v=936473584310506017") format("woff"),
+            url("//cdn.shopify.com/s/files/1/0043/8471/8938/t/6/assets/ClanOTMedium.ttf?v=724778095257429512") format("truetype");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

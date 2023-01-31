@@ -1,0 +1,53 @@
+.featuredAdWrapper {
+    --yellow200: #FFEE7E;
+    --yellow800: #FFCB11;
+    --gray900: #090F15;
+    --blueFocus: #55C2FF;
+    --white: #fff;
+    --navy600: #224857;
+}
+
+.headline {
+    font-family: 'Showtime';
+    font-size: 40px;
+    line-height: 100%;
+    letter-spacing: 0.5px;
+    color: var(--gray900);
+}
+
+.subtitle {
+    font-family: 'Gellix';
+    font-size: 18px !important;
+    line-height: 150%;
+    letter-spacing: 0.015em;
+    margin-bottom: 0 !important;
+    color: var(--gray900);
+}
+
+@screen md {
+    .featuredAdContent {
+        top: 50%;
+        left: 50%;
+        width: 100%;
+    }
+
+    .headline {
+        font-size: 72px;
+        color: var(--white);
+    }
+
+    .subtitle {
+        color: var(--white);
+        font-size: 24px !important;
+    }
+}
+
+@screen lg {
+    .headline {
+        font-size: 96px;
+    }
+
+    .subtitle {
+        font-size: 30px !important;
+    }
+}

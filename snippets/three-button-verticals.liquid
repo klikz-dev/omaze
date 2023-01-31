@@ -1,0 +1,24 @@
+<section class="oz-homepage__three-buttons" id="oz-homepage-three-buttons">
+    <div class="oz-section-title">
+        {% assign title = linklists.three-button-verticals.title %}
+        
+        {% if title == blank %}
+            {% assign title = "What are your dreams made of?" %}
+        {% endif %}
+
+        {{ title }}
+    </div>
+    <div class="oz-section-content">
+        {%- for link in linklists.three-button-verticals.links -%}
+            <a
+                class="oz-btn oz-btn--cta oz-btn--long three-button"
+                href="{{ link.url }}"
+                data-oa-id="verticalButton"
+                data-oa-track="click"
+                data-oa-details="ga_label:{{ link.title }}"
+            >
+                {{ link.title }}
+            </a>
+        {%- endfor -%}
+    </div>
+</section>

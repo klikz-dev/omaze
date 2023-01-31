@@ -1,0 +1,183 @@
+{% if line_item.title == "Bonus Entries" %}
+    {% comment %}
+        Since the bonus entries line item for each experience ordered needs
+        to match its experience, I am using the "next_line_item" to get the
+        bonus entries'image and title. And this is with the assumption that
+        in the line_items array, for each experience the bonus entries comes
+        first before the experience it represents.
+    {% endcomment %}
+    {% assign next_line_item = order.line_items[current_item_index]  %}
+    {% assign line_item_product = next_line_item.product  %}
+{% else %}
+    {% assign line_item_product = line_item.product  %}
+{% endif %}
+
+{% for discount_application in order.discount_applications %}
+    {% if discount_application.type == "discount_code" %}
+        {%   assign discount_code = discount_application.title %}
+    {% endif %}
+{% endfor %}
+
+{% comment %}
+    Determine the line item type, standard | legacy_loyalty | legacy_promotional | promotional
+    standard is the default display for all line items
+    legacy_promotional is the "old" discount code; explicit product type "Bonus Entries"
+    legacy_loyalty is the (discounted) line item that was split from original line item
+    promotional is the "new" discount code; variant on the product (released with cart)
+{% endcomment %}
+
+{% assign line_item_type = "standard" %}
+
+{% assign propertySize = line_item.properties | size %}
+
+{% comment %} logic to determine if line item is legacy_loyalty {% endcomment %}
+{% if propertySize > 0 %}
+    {% for property in line_item.properties %}
+        {% if property.first == "legacy_loyalty" and property.last == true %}
+            {% assign line_item_type = "legacy_loyalty" %}
+
+            {% assign show_loyalty_bonus_text = true %}
+
+            {% break %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% comment %} logic to determine if line item is legacy_promotional {% endcomment %}
+{% if line_item.title == "Bonus Entries" %}
+    {% assign line_item_type = "legacy_promotional" %}
+
+    {% assign show_loyalty_bonus_text = false %}
+
+{% endif %}
+
+{% comment %} logic to determine if line item is promotional {% endcomment %}
+{% if line_item.sku contains "promo" %}
+    {% assign line_item_type = "promotional" %}
+    {% assign show_loyalty_bonus_text = false %}
+{% endif %}
+
+{% comment %} logic to determine if line item is a combo entry {% endcomment %}
+{% if line_item.sku contains "combo"  %}
+    {% assign line_item_type = "combo" %}
+{% endif %}
+
+<div class="line-item__image" style="background-image: url({{ line_item_product | img_url: 'master' }})">
+    {% if line_item_type == "legacy_promotional" %}
+        <div class="line-item__quantity">1</div>
+    {% else %}
+        <div class="line-item__quantity">{{ line_item.quantity }}</div>
+    {% endif %}
+</div>
+<div class="line-item__details">
+    <div class="line-item__details-content">
+        <div class="line-item__details-entries-price">
+            {% if line_item_type == "legacy_promotional" %}
+                <div class="entries">
+                    <span class="{{ strike_through_class }}">
+                        {{ line_item.quantity }} entries
+                    </span>
+                    {% if PAYMENT_STATUS == REFUNDED %}
+                        <span class="refund">
+                            ({{ 'customer.order.transaction_details.refund' | t | capitalize }})
+                        </span>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="entries">
+                    <span class="{{ strike_through_class }}">
+                        {{ line_item.variant.sku | split: '_' | last  }} entries
+                    </span>
+                    {% if PAYMENT_STATUS == REFUNDED %}
+                        <span class="refund">
+                            ({{ 'customer.order.transaction_details.refund' | t | capitalize }})
+                        </span>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            {% if line_item_type == "legacy_loyalty" %}
+                <div class="price bonus">{{ 'customer.order.bonus' | t | upcase }}</div>
+            {% elsif line_item_type == "legacy_promotional" %}
+                <div class="price bonus">{{ 'customer.order.bonus' | t | upcase }}</div>
+            {% elsif line_item_type == "promotional" %}
+                {% if PAYMENT_STATUS == REFUNDED %}
+                    <span class="mobile-only refund {{ strike_through_class }}">{{ 'customer.order.bonus' | t | upcase }}</span>
+                {% else %}
+                    <span class="mobile-only">{{ 'customer.order.bonus' | t | upcase }}</span>
+                {% endif %}
+            {% elsif line_item_type == "combo" %}
+                {% if PAYMENT_STATUS == REFUNDED %}
+                    <span class="mobile-only refund {{ strike_through_class }}">BONUS</span>
+                {% else %}
+                    <span class="mobile-only">BONUS</span>
+                {% endif %}
+
+            {% comment %} default and/or "standard" line item type {% endcomment %}
+            {% else %}
+                <div class="price">
+                    {% if PAYMENT_STATUS == REFUNDED %}
+                        <span class="mobile-only refund {{ strike_through_class }}">$0.00</span>
+                    {% else %}
+                        <span class="mobile-only">${{ line_item.price | money_without_currency }}</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="line-item__details-title">
+            {{ line_item_product.title }}
+        </div>
+        <div class="line-item__details-support">
+            {%- unless line_item_type == "combo" -%}
+                <div class="text">
+                    Support {{ line_item_product.vendor }}
+                </div>
+            {%- endunless -%}
+            {% if line_item_type == "legacy_loyalty" and discount_code == 0 %}
+                <div class="promo-code">
+                    {{ 'customer.order.loyalty_bonus_message' | t: quantity: line_item.quantity | upcase }}
+                </div>
+            {% elsif line_item_type == "promotional" and discount_code != 0 %}
+                <div class="promo-code">
+                    <span>
+                        <img
+                            class="promo-code--icon"
+                            src="{{ 'reduction-icon.svg' | asset_url }}"
+                            alt="{{ reduction-icon }}"
+                        />
+                    </span>
+                    <span>
+                        {{ discount_code | upcase }}
+                    </span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% if show_loyalty_bonus_text == true or line_item.title == "Bonus Entries" %}
+    <div class="line-item__price bonus desktop-only">
+        {{ 'customer.order.bonus' | t | upcase }}
+    </div>
+{% else %}
+    <div class="line-item__price desktop-only">
+        {% if line_item_type == "promotional" %}
+            {% if PAYMENT_STATUS == REFUNDED %}
+                <span class="refund {{ strike_through_class }}">{{ 'customer.order.bonus' | t | upcase }}</span>
+            {% else %}
+                <span>{{ 'customer.order.bonus' | t | upcase }}</span>
+            {% endif %}
+        {% elsif line_item_type == "combo" %}
+            {% if PAYMENT_STATUS == REFUNDED %}
+                <span class="refund {{ strike_through_class }}">BONUS</span>
+            {% else %}
+                <span>BONUS</span>
+            {% endif %}
+        {% else %}
+            {% if PAYMENT_STATUS == REFUNDED %}
+                <span class="refund {{ strike_through_class }}">$0.00</span>
+            {% else %}
+                <span>${{ line_item.price | money_without_currency }}</span>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endif %}

@@ -1,0 +1,20 @@
+{% assign s = section.settings %}
+
+<section>
+  <div class="transparency__content-callout">
+    <h2>{{- s.content_callout -}}</h2>
+  </div>
+</section>
+ 
+{% schema %}
+{
+	"name": "Transparency: Callout",
+	"settings": [
+		{
+      "type": "text",
+      "id": "content_callout",
+      "label": "Content Callout"
+    }
+	]
+}
+{% endschema %}

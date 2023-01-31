@@ -1,0 +1,87 @@
+/*
+////////////////////////////////////////////////////////////////////////////////
+--------------------------------------------------------------------------------
+
+1. Box Sizing
+2. Microsoft Surface Viewport Hack
+3. Focus for keyboard vs input
+
+////////////////////////////////////////////////////////////////////////////////
+--------------------------------------------------------------------------------
+
+//////////////////////////////////////////////////////////////////////
+1. Box Sizing
+//////////////////////////////////////////////////////////////////////
+*/
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/*
+//////////////////////////////////////////////////////////////////////
+2. Microsoft Surface Viewport Hack
+//////////////////////////////////////////////////////////////////////
+*/
+@-ms-viewport {
+	width: device-width;
+}
+
+/*
+//////////////////////////////////////////////////////////////////////
+3. Focus for keyboard vs input
+//////////////////////////////////////////////////////////////////////
+*/
+[data-whatinput='mouse'] button:focus,
+[data-whatinput='mouse'] input:focus,
+[data-whatinput='mouse'] select:focus,
+[data-whatinput='mouse'] a:focus,
+[data-whatinput='mouse'] textarea:focus {
+	outline:none;
+}
+
+/**
+ * Omaze old site resets
+ */
+
+ h1,
+ .h1,
+ h2,
+ .h2,
+ h3,
+ .h3,
+ h4,
+ .h4,
+ h5,
+ .h5,
+ h6,
+ .h6 {
+     margin: 0;
+     font-weight: normal;
+ }
+
+ ul {
+     padding: 0;
+     list-style-position: inside;
+ }
+
+ a {
+     color: inherit;
+     text-decoration: none;
+
+     &:active,
+     &:focus,
+     &:hover,
+     &:visited {
+         text-decoration: none;
+     }
+ }
+
+ :focus {
+   outline: 0;
+ }
+
+ .oz-nobr {
+     white-space: nowrap;
+ }

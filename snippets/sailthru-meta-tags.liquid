@@ -1,0 +1,17 @@
+<!-- /snippets/sailthru-meta-tags.liquid -->
+{%- if template.name == 'product' -%}
+    <!-- <meta name="sailthru.author" content="{{ product.vendor | strip_html }}" /> -->
+    <meta name="sailthru.title" content="{{ product.title | strip_html }}" />
+    <meta name="sailthru.description" content="{{ product.description | strip_html }}" />
+
+    <meta name="sailthru.date" content="{{ sweepstakeDatesStart }}" />
+    <meta name="sailthru.expire_date" content="{{ sweepstakeDatesEnd }}" />
+
+    <meta name="sailthru.tags" content="{{ tagsExcludingInternalTags }}" />
+
+    <meta name="sailthru.image.full" content="http:{{ product.images.first.src | product_img_url: '1024x1024' }}">
+    <meta name="sailthru.image.thumb" content="http:{{ product.images.first.src | product_img_url: '50x50' }}" />
+
+    <!-- <meta name="sailthru.location" content="LOCATION_IN_LAT_LNG" /> -->
+    <!-- <meta name="sailthru.price" content="PRICE_IN_CENTS" /> -->
+{%- endif -%}

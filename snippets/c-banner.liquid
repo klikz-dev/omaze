@@ -1,0 +1,42 @@
+<section class="columns__one-full-width">
+	<div class="oz-section-banner">
+		<div class="oz-section-banner__image-container intrinsic-ratio banner__intrinsic-ratio lazy-blur phone-only hide-tablet">
+			<img
+				src="{{ 'banner-mobile-example' | asset_img_url: '812x339' }}"
+				alt="Banner Image"
+			/>
+			<img
+				class="lazyload"
+				data-sizes="auto"
+				data-src="{{ 'banner-mobile-example.jpg' | asset_img_url: '812x339' }}"
+				data-srcset="{% include 'c-responsive-asset-image-url', responsive_img: 'banner-mobile-example.jpg' %}"
+			/>
+		</div>
+		<div class="oz-section-banner__image-container intrinsic-ratio banner__intrinsic-ratio lazy-blur hide-phone">
+			<img
+				src="{{ 'banner-desktop-example' | asset_img_url: 'master' }}"
+				alt="Banner Image"
+			/>
+			<img
+				class="lazyload"
+				data-sizes="auto"
+				data-src="{{ 'banner-desktop-example.jpg' | asset_img_url: 'master' }}"
+				data-srcset="{% include 'c-responsive-asset-image-url', responsive_img: 'banner-desktop-example.jpg' %}"
+			/>
+		</div>
+		<div class="oz-section-banner__content">
+
+			<h2 class="oz-section-title">
+				donate to win a
+				<span class="oz-nobr">once-in-a-lifetime</span>
+				 experience and support an amazing cause
+			</h2>
+			<a
+				href="{{- s.button_url -}}"
+				class="oz-btn oz-btn--long oz-btn--line oz-btn--line--white"
+			>
+				find out how
+			</a>
+		</div>
+	</div>
+</section>

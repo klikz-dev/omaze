@@ -1,0 +1,38 @@
+{% assign line_item_product = line_item.product  %}
+{% if line_item.sku contains "donation" %}{% endif %}
+{% comment %} Default Product Hero Image to use as a thumbnail {% endcomment %}
+{% assign thumbnail = line_item_product | img_url: 'master' %}
+{% if line_item_product.images[3] != blank %}
+    {% assign thumbnail = line_item_product.images[3] | img_url: 'small' %}
+{% endif %}
+
+<div class="line-item__image" style="background-image: url({{ thumbnail }})">
+    <div class="line-item__quantity">{{ line_item.quantity }}</div>
+</div>
+<div class="line-item__details">
+    <div class="line-item__details-content">
+        <div class="line-item__details-entries-price">
+            <div class="price">
+                {% if PAYMENT_STATUS == REFUNDED %}
+                    <span class="mobile-only refund {{ strike_through_class }}">$0.00</span>
+                {% else %}
+                    <span class="mobile-only">${{ line_item.price | money_without_currency }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="line-item__details-title">{{ line_item_product.title }}</div>
+        <div class="line-item__details-support">
+            <div class="text">
+                Supporting {{ line_item_product.vendor | upcase }} relief efforts
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="line-item__price desktop-only">
+    {% if PAYMENT_STATUS == REFUNDED %}
+        <span class="refund {{ strike_through_class }}">$0.00</span>
+    {% else %}
+        <span>${{ line_item.price | money_without_currency }}</span>
+    {% endif %}
+</div>

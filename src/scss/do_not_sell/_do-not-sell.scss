@@ -1,0 +1,87 @@
+/**
+ * Do not sell my personal data page
+ */
+
+.do-not-sell {
+	margin: rem(40);
+}
+
+.page--do-not-sell-my-personal-information {
+	max-width: 44rem;
+	margin: 0 auto;
+	padding: rem(10);
+}
+.page__title {
+	font-size: rem(40);
+	line-height: rem(60);
+}
+
+.do_not_sell-form {
+	margin-bottom: rem(50);
+}
+
+.do_not_sell-form-row {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+
+	@include apply-to(tablet) {
+		flex-direction: row;
+	}
+	.oz-field {
+		min-width: rem(300);
+		margin: rem(20) 0;
+	}
+}
+.do_not_sell-form-button {
+	display: flex;
+	justify-content: center;
+	padding: rem(20);
+
+	.button {
+		min-width: rem(300);
+
+		img {
+			max-height: rem(20);
+		}
+	}
+}
+.oz-field {
+	padding: 0;
+	margin-bottom: rem(25);
+	margin-top: rem(25);
+	position: relative;
+
+	// .oz-field__container
+	&__container {
+		// .oz-field__container.error
+		&.error {
+			border-color: $red-1;
+
+			label {
+				color: $red-1;
+			}
+		}
+		&--hint-text {
+			text-align: left;
+			color: $primary-color;
+		}
+	}
+
+	// .oz-field .input.error
+	.input.error {
+		border-color: $red-1;
+	}
+	&> label.error {
+		color: $red-1;
+		position: absolute;
+		top: rem(73);
+	}
+}
+
+.page__container {
+	a {
+		color: $secondary-color;
+	}
+}

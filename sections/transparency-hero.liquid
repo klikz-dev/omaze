@@ -1,0 +1,62 @@
+{% assign s = section.settings %}
+
+<section class="columns__one-full-width">
+  <div class="oz-section-banner transparency__hero">
+    <div class="intrinsic-ratio transparency__hero-intrinsic-ratio lazy-blur phone-only">
+      <img
+        src="{{ s.hero_mobile_image | img_url: '812x339' }}"
+        alt="{{ s.hero_mobile_image.alt }}"
+      />
+      <img
+        class="lazyload"
+        data-sizes="auto"
+        data-src="{{ s.hero_mobile_image | img_url: '812x339' }}"
+        data-srcset="{% include 'c-responsive-image-url', responsive_img: s.hero_mobile_image %}"
+        alt="{{ s.hero_mobile_image.alt }}"
+      />
+    </div>
+
+    <div class="intrinsic-ratio transparency__hero-intrinsic-ratio lazy-blur desktop-and-tablet">
+      <img
+        src="{{ s.hero_desktop_image | img_url: master }}"
+        alt="{{ s.hero_desktop_image.alt }}"
+      />
+      <img
+        class="lazyload"
+        data-sizes="auto"
+        data-src="{{ s.hero_desktop_image | img_url: master }}"
+        data-srcset="{% include 'c-responsive-image-url', responsive_img: s.hero_desktop_image %}"
+        alt="{{ s.hero_desktop_image.alt }}"
+      />
+    </div>
+
+    {% if s.hero_title != blank %}
+      <div class="oz-section-banner__content">
+        <h1 class="oz-page-title transparency__hero-title">{{- s.hero_title -}}</h1>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+	"name": "Transparency: Hero",
+	"settings": [
+		{
+			"type": "image_picker",
+			"id": "hero_desktop_image",
+			"label": "Hero Desktop Image"
+		},
+		{
+			"type": "image_picker",
+			"id": "hero_mobile_image",
+			"label": "Hero Mobile Image"
+		},
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title"
+    }
+	]
+}
+{% endschema %}

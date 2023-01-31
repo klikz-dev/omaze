@@ -1,0 +1,127 @@
+// Loading Skeleton background
+// This mixin will add a background-image with title and line skeletons, along with
+// an animation.
+
+@mixin loading-skeleton(
+    $background-color: #fff,
+    $skeleton-color: #f1f1f1,
+    $side-padding: 35px,
+
+    $title-width: 100%,
+    $title-height: 40px,
+
+    $line-skeletons: 5,
+    $line-height: 25px,
+    $line-margin-bottom: 6px,
+
+    $skip-animation: false,
+    $animation-delay: 0
+) {
+    // padding with borders
+    border: solid $background-color;
+    border-left-width: $side-padding;
+    border-right-width: $side-padding;
+
+    // title skeleton
+    $title-skeleton-height: $title-height;
+    @if (unitless($title-skeleton-height)) {
+        $title-skeleton-height: $title-height * 1px;
+    }
+
+    $title-skeleton-width: $title-width;
+    @if (unitless($title-skeleton-width)) {
+        $title-skeleton-width: $title-width * 1%;
+    }
+
+    $title-position-x: 0;
+    $title-position-y: 50px;
+
+    $title-skeleton-position: $title-position-x $title-position-y;
+    $title-skeleton: linear-gradient($skeleton-color $title-skeleton-height, transparent 0);
+    $title-size: $title-skeleton-width $title-skeleton-height;
+
+    // line skeleton
+    $line-start-position-y: $title-position-y + (2 * $title-skeleton-height);
+
+    $line-width: 100%;
+    $line-skeleton: linear-gradient($skeleton-color $line-height, transparent 0);
+    $line-total-height: $line-height + $line-margin-bottom;
+    $line-size: $line-width $line-height;
+
+
+    // starting properties
+    $bg-image: "#{$title-skeleton}";
+    $bg-size: "#{$title-size}";
+    $bg-position: "#{$title-skeleton-position}";
+
+    // build properties per each line
+    @for $i from 0 to $line-skeletons {
+        $bg-image: "#{$bg-image}, #{$line-skeleton}";
+        $bg-size: "#{$bg-size}, #{$line-size}";
+
+        $position-i: ", 0 #{$line-start-position-y + $i * $line-total-height}";
+        $bg-position: "#{$bg-position} #{$position-i}";
+    }
+
+    // set background properties
+    background-color: $background-color;
+    background-repeat: no-repeat;
+
+    background-image: unquote($bg-image);
+    background-size: unquote($bg-size);
+    background-position: unquote($bg-position);
+
+    @if not $skip-animation {
+        @include skeleton-animation(
+            $background-color: $background-color,
+            $animation-delay: $animation-delay
+        );
+    }
+}
+
+@mixin skeleton-animation(
+    $background-color: #fff,
+    $blur-width: 160px,
+    $animation-delay: 0
+) {
+    $animation-blur: linear-gradient(
+        90deg,
+        rgba($background-color, 0) 0,
+        rgba($background-color, .8) 50%,
+        rgba($background-color, 0) 100%
+    );
+
+    @if (unitless($animation-delay)) {
+        $animation-delay: $animation-delay * 1s;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        background-image: $animation-blur;
+        background-size: $blur-width 100%;
+        background-position: -150% 0;
+        background-repeat: no-repeat;
+
+        animation: skeleton-bg-animation 1s infinite $animation-delay;
+
+        @include apply-to(desktop) {
+            animation: skeleton-bg-animation-desktop 1.5s infinite $animation-delay;
+        }
+    }
+}
+
+@keyframes skeleton-bg-animation {
+    to {
+        background-position: 350% 0;
+    }
+}
+
+@keyframes skeleton-bg-animation-desktop {
+    to {
+        background-position: 150% 0;
+    }
+}

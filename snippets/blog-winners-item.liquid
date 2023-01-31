@@ -1,0 +1,38 @@
+{% assign meta = article.metafields.winners %}
+
+<a
+	href="{{- article.url -}}"
+	class="oz-winner-component-list__winner-card"
+>
+	<div class="oz-component-card">
+	    <div class="oz-component-card__header-wrap">
+			<header class="oz-component-card__header">
+	        	<div class="oz-component-card__img oz-component-card--no-padding">
+					<div class="oz-img">
+						<div class="oz-component-card__intrinsic-ratio intrinsic-ratio">
+						</div>
+						<img
+							alt="{{ article.image.alt}}"
+							class="lazyload oz-img__img"
+							data-sizes="auto"
+							data-srcset="{{ article.image.src | img_url: '233x198', crop: 'bottom' }}"
+						/>
+					</div>
+	            </div>
+	        </header>
+		</div>
+	    <div class="oz-component-card__body">
+	        <h4 class="oz-component-card__title oz-overflow-ellipsis">
+	            {{- article.title -}}
+	        </h4>
+	        <p class="oz-component-card__copy">
+	        	{{- meta.summary -}}
+	        </p>
+		</div>
+	    <div class="oz-component-card__footer">
+	        <div class="oz-component-card__link">
+	        	more ❯
+	    	</div>
+		</div>
+	</div>
+</a>

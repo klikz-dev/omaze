@@ -1,0 +1,25 @@
+{% comment %}
+    Cookies used: YES
+    Optimizely Cookie Groups:
+        * PERFORMANCE: C0002
+
+    Script set to type="text/plain" so that it can be converted to type="text/javascript"
+    once user grants permission for cookie group. Conversion happens via the OneTrust SDK.
+    Note: Optanon is an alias for OneTrust.
+
+    The values in the `class="optanon-category-#-#-#"` correspond to the categories
+    of cookies set up in the cookie list for the site.
+
+    When listing multiple categories using this method, such as optanon-category-C0003-C0004,
+    the categories are blocked concurrently. None of the cookies in these categories will be set
+    unless the site visitor consents to all of the categories being blocked.
+{% endcomment %}
+
+{% assign scriptType = "text/javascript" %}
+{% if settings.cookie_compliance_on %}
+    {% assign scriptType = "text/plain" %}
+{% endif %}
+
+{% if settings.optimizely_enable %}
+    <script  type="{{scriptType}}" class="optanon-category-C0002" src="https://cdn.optimizely.com/js/14464890104.js"></script>
+{% endif %}

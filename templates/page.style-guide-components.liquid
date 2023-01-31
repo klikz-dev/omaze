@@ -1,0 +1,88 @@
+{{ 'style-guide-components.scss.css' | asset_url | stylesheet_tag }}
+<section id="page_{{ page.handle | replace : '-','_' }}" class="page page--{{ page.handle }}">
+	<div class="page__container">
+		{% comment %} Header {% endcomment %}
+		<div class="page__header">
+			<h1 class="page__title">
+				{{ page.title }}
+			</h1>
+		</div>
+		<div class="docs">
+			{% comment %} Content {% endcomment %}
+			<div class="c-styles__full">
+				<div class="page__rte rte">
+					{{ page.content }}
+					<div class="docs-group">
+						<div class="docs-group__content">
+							<section id="cCard" class="docs-sec container">
+								<h3 class="docs-sec__hdg">
+									OZ Card
+								</h3>
+								<div>
+									{% include 'c-card', modifier: 'large', cardImage: 'card-example.jpg', namespace: 'style-guide' %}
+								</div>
+								<div>
+									{% include 'c-card', modifier: 'tall', cardImage: 'voter-example.jpg', namespace: 'style-guide' %}
+								</div>
+							</section>
+							<section id="cCardComponent" class="docs-sec">
+								<h3 class="docs-sec__hdg">
+									OZ Component Card
+							</h3>
+								<div class="oz-winner-component-list__winners-grid">
+									<a href="#" class="oz-winner-component-list__winner-card">
+										{% assign componentCardImage = 'test-winner-img.png' | asset_img_url: 'master' %}
+										{% include 'c-component-card', ozImage: componentCardImage, namespace: 'style-guide' %}
+									</a>
+								</div>
+							</section>
+							<section id="headings" class="docs-sec">
+								<h3 class="docs-sec__hdg">
+									Banner
+								</h3>
+
+								<div>
+									{% include 'c-banner' %}
+								</div>
+							</section>
+							<section id="headings" class="docs-sec">
+								<h3 class="docs-sec__hdg">
+									Newsletter
+								</h3>
+								{% include 'c-newsletter' %}
+							</section>
+							<section id="headings" class="docs-sec">
+								<h3 class="docs-sec__hdg">
+									Featured
+								</h3>
+								<section class="oz-homepage__featured-in columns__one-full-width">
+									<div class="oz-section-content">
+										<div class="oz-section-title__wrapper oz-annotation-image">
+											<h2 class="oz-section-title">
+												featured in
+											</h2>
+										</div>
+										<div class="oz-overflow-x oz-centered oz-homepage__featured-in-image">
+											<img
+												alt="Featured In"
+												class="in-the-news__logo-wall-imgx lazyload"
+												data-size="auto"
+												data-src="{{ 'featured-in' | asset_img_url: 'master' }}"
+												data-srcset="{% include 'c-responsive-image-url', responsive_img: 'featured-in.png' %}"
+											/>
+										</div>
+										<div class="oz-btn__btn-wrap oz-centered">
+											<a href="/in-the-news" class="oz-homepage__featured-in-btn">
+												go to our press page
+											</a>
+										</div>
+									</div>
+								</section>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

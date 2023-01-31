@@ -1,0 +1,15 @@
+.cards {
+    width: 360px;
+}
+
+@screen md {
+    .cards {
+        width: 704px;
+    }
+}
+
+@screen lg {
+    .cards {
+        width: 1152px;
+    }
+}

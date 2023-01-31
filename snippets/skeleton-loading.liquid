@@ -1,0 +1,10 @@
+{% if settings.env == 'production' %}
+	{% assign extension = '.min.js' %}
+{% elsif settings.env == 'staging' %}
+	{% assign extension = '.min.js' %}
+{% elsif settings.env == 'qa' %}
+	{% assign extension = '.js' %}
+{% else %}
+	{% assign extension = '.js' %}
+{% endif %}
+{{ 'skeleton-loading' | append: extension | asset_url | script_tag }}

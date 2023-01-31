@@ -1,0 +1,47 @@
+{% if template == 'product' %}
+	{% capture twitterStatus %}
+			{{ product.title }} {{ shop.url }}{{ product.url }}
+	{% endcapture %}
+
+	{% capture facebookStatus %}
+		{{ shop.url }}{{ product.url }}
+	{% endcapture %}
+
+	{% assign facebookEncoded = facebookStatus | url_encode %}
+	{% assign twitterEncoded = twitterStatus | url_encode %}
+
+	{% assign facebookUrl = 'https://www.facebook.com/sharer.php?u=' | append: facebookEncoded %}
+	{% assign twitterUrl = 'https://twitter.com/home?status=' | append: twitterEncoded %}
+
+{% endif %}
+
+<div class="oz-component-campaign-social">
+	<div class="desktop-only">
+		<img data-src="{{ 'help-get-the-word-out.png' | asset_img_url: 'master' }}" class="lazyload" />
+		<div class="oz-social-share">
+			<a class="oz-social-share__btn oz-social-share__btn--facebook" target="_blank" href="{{ facebookUrl }}">
+				<i class="icon icon--facebook"></i>
+				share
+			</a>
+			<a class="oz-social-share__btn oz-social-share__btn--twitter" target="_blank" href="{{ twitterUrl }}">
+				<i class="icon icon--twitter"></i>
+				tweet
+			</a>
+		</div>
+	</div>
+	<div class="hide-desktop oz-campaign-social__mobile">
+		<img src="//assets.omaze.com/img/annotations/tell-your-friends-2x.png">
+		<oz-social-share>
+			<div class="oz-social-share">
+				<a class="oz-social-share__btn oz-social-share__btn--facebook" target="_blank" href="{{ facebookUrl }}">
+					<i class="icon icon--facebook"></i>
+					share
+				</a>
+				<a class="oz-social-share__btn oz-social-share__btn--twitter" target="_blank" href="{{ twitterUrl }}">
+					<i class="icon icon--twitter"></i>
+					tweet
+				</a>
+			</div>
+		</oz-social-share>
+	</div>
+</div>

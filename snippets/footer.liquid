@@ -1,0 +1,74 @@
+<footer class="footer" role="contentinfo">
+	<div class="footer__main">
+		<div class="footer__main-container">
+			<h3 class="footer__title">follow us on:</h3>
+			<ul class="footer__social list-rest">
+				{% for link in linklists.social-media.links %}
+				<li class="footer__social-icon">
+					<a
+						href="{{ link.url }}"
+						class="footer__social-icon-btn js-footer__social-icon-btn"
+						data-social-link-title="{{ link.title | downcase }}">
+						<i class="icon icon--{{ link.title | downcase }}"></i>
+					</a>
+				</li>
+				{% endfor %}
+			</ul>
+			<div class="footer__contact">
+				<p class="footer__contact-copy">
+					<span class="footer__contact-copy-question">
+						Questions?
+					</span>
+					<br class="mobile-only" />Contact
+					<a
+						class="footer__contact-copy-link js-footer__contact-copy-link"
+						href="mailto: {{ settings.contact_email }}"
+						data-footer-contact="contact us"
+					>
+						{{ settings.contact_email }}
+					</a>
+				</p>
+			</div>
+			<ul class="footer__nav group list-reset">
+				{% for link in linklists.footer.links %}
+				<li class="footer__nav-item">
+					<a
+						class="footer__nav-link oz-btn--line--white oz-btn--line oz-btn js-footer__nav-link"
+						href="{{ link.url }}"
+						data-primary-link-title="{{ link.title | downcase }}"
+					>
+						{{ link.title | downcase }}
+					</a>
+				</li>
+				{% endfor %}
+			</ul>
+			<nav class="footer__signature">
+				<ul class="footer__signature-nav list-rest">
+					{% for link in linklists.hyper-footer.links %}
+					<li class="footer__signature-nav-item">
+						<a
+							class="footer__signature-nav-link js-footer__signature-nav-link"
+							href="{{ link.url }}"
+							data-secondary-link-title="{{ link.title | downcase }}"
+						>
+							{{- link.title -}}
+						</a>
+					</li>
+					{% endfor %}
+				</ul>
+				<div class="footer__signature-hyper">
+					<a href="/">
+						<i class="footer__signature-hyper-icon icon icon--logo-white"></i>
+					</a>
+					<div class="footer__sub-colophon">
+						Copyright &copy; {{ 'now' | date: '%Y' }}, Omaze, Inc.
+						All Rights Reserved.
+					</div>
+				</div>
+				<div class="footer__signature-bbb-accreditation">
+					<img src="{{ 'bbb-accreditation-logo@3x.png' | asset_url }}" alt="bbb accreditation logo" />
+				</div>
+			</nav>
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,813 @@
+/**
+ * Closed Experience
+ */
+@import 'style/globals/font-face-italic';
+
+.oz-experience.experience--closed {
+
+    .js-gallery-section:not(.oz-experience-leader) {
+        display: none;
+    }
+
+    .product-recommendations__container-closed--mobile {
+        @include apply-to(mobile) {
+            margin: 40px auto;
+        }
+    }
+
+    .product-experience-winner--mobile {
+        margin: rem(20) rem(24) 0 rem(24);
+        width: 100%;
+
+        @include apply-to(desktop) {
+            display: none;
+        }
+    }
+
+    .product-experience-winner--desktop {
+        min-width: 325px;
+
+        @include apply-to(mobile) {
+            display: none;
+        }
+    }
+
+    .exp-details--closed {
+        @include apply-to(desktop) {
+            margin: 0 60px 48px 0;
+        }
+    }
+
+    .exp-section-order {
+        order: -1;
+        position: relative;
+
+        @include apply-to(desktop) {
+            float: right;
+            width: 30%;
+            margin: 0;
+            position: absolute;
+            top: initial;
+        }
+    }
+
+    // .oz-experience.experience--closed .exp-leader__img
+    .exp-leader__img {
+
+        & > img {
+            // filter: grayscale(100%);
+        }
+    }
+
+    // .oz-experience.experience--closed .exp-donate-button-wrapper
+    .exp-donate-button-wrapper {
+
+        @include apply-to(mobile) {
+            display: none;
+        }
+    }
+
+    // .oz-experience.experience--closed .exp-leader__closed-banner
+    .exp-leader__closed-banner {
+        bottom: rem(-15);
+        left: 0;
+        right: 0;
+        width: 80%;
+        margin: auto;
+        z-index: 1;
+        text-transform: none;
+        letter-spacing: 0;
+        font-size: rem(22);
+        padding: 0.35em .5em;
+
+        @include apply-to(tablet) {
+            width: 60%;
+        }
+    }
+
+    .yellow-flag {
+        opacity: 0;
+    }
+
+
+    .exp-winner-v2 {
+        padding-bottom: 0;
+        position: relative;
+
+        @include apply-to(tablet) {
+            padding-bottom: rem(20);
+        }
+
+        @include apply-to(desktop) {
+            border-color: transparent;
+        }
+
+        // .oz-experience.experience--closed .exp-winner-v2__info-banner
+        &__info-banner {
+            background: $blue-1;
+            font-family: $secondary-font;
+            font-size: rem(12);
+            font-weight: 700;
+            margin-left: rem(-30);
+            margin-right: rem(-30);
+            padding: rem(12) 0 rem(9);
+            text-align: center;
+
+            @include apply-to(desktop) {
+                font-size: rem(14);
+                margin: 0;
+            }
+        }
+
+        // .oz-experience.experience--closed .exp-winner__info-box
+        &__info-box {
+            align-items: center;
+            display: flex;
+            padding: rem(20) 0;
+            position: relative;
+
+            @include apply-to(desktop) {
+                background: $gray-3;
+                padding: rem(20);
+            }
+
+            h4 {
+                margin: 0 0 rem(5) 0;
+                font-size: rem(14);
+                font-family: $secondary-font;
+                font-weight: $bold;
+
+                @include apply-to(desktop) {
+                    font-size: rem(16);
+                }
+            }
+
+            p {
+                margin: 0;
+                font-size: rem(16);
+            }
+
+            #winnerAnnounceDate {
+                font-family: $primary-font;
+            }
+        }
+
+        // .oz-experience.experience--closed .exp-winner__more
+        &__more {
+            color: $pink-6;
+            font-size: rem(13);
+            font-weight: $bold;
+            position: absolute;
+            right: rem(20);
+        }
+
+        // .oz-experience.experience--closed .exp-winner__image-wrap
+        &__image-wrap {
+            width: rem(62);
+            height: rem(62);
+            border-radius: 50%;
+            overflow: hidden;
+            background: #D9DADB;
+
+            & > img {
+                height: auto;
+                width: 100%;
+            }
+        }
+
+        // .oz-experience.experience--closed .exp-winner__winner-info
+        &__winner-info {
+            padding: rem(10);
+            flex: 1;
+        }
+    }
+
+    .exp-winner {
+        position: relative;
+        padding: rem(24);
+        z-index: 1;
+        background-image: url(asset('Bubbles_Winner_Experience.png')), linear-gradient(269.88deg, #FFF3F2 0.1%, #FFFCF8 99.9%);
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: contain;
+
+        @include apply-to(mobile) {
+            padding: rem(16);
+        }
+    }
+
+    .exp-winner--no-image {
+        background-image: url(asset('Bubbles_Winner_Experience_Pending.png')), linear-gradient(269.88deg, #FFF3F2 0.1%, #FFFCF8 99.9%);
+
+        @include apply-to(mobile) {
+            padding-right: 0;
+        }
+    }
+
+    .exp-winner__content {
+        z-index: 1;
+        padding-right: 5.75rem;
+
+        @include apply-to(mobile) {
+            padding-right: 5rem;
+        }
+
+        h2, h3, h4, h5 {
+            font-family: $primary-font;
+            font-weight: $bold;
+            font-style: normal;
+        }
+
+        h2 {
+            font-size: rem(42);
+            line-height: rem(50.4);
+
+            @include apply-to(mobile) {
+                font-size: rem(36);
+                line-height: rem(43.2);
+            }
+        }
+
+        h3 {
+            font-size: rem(20);
+            line-height: rem(28);
+        }
+
+        h4 {
+            font-size: rem(16);
+            line-height: rem(19.2);
+        }
+
+        h5 {
+            font-size: rem(14);
+            line-height: rem(16.8);
+        }
+    }
+
+    .exp-winner__content--no-image {
+        padding-right: 0 !important;
+    }
+
+    .exp-winner__content__title {
+        margin-top: -0.5rem;
+        margin-bottom: 1rem;
+        position: relative;
+        width: max-content;
+
+        @include apply-to(mobile) {
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .exp-winner__content__title__background {
+        position: absolute;
+        background-color: rgba(255, 221, 0, 0.6);
+        width: 100%;
+        height: rem(20);
+        top: rem(20);
+        left: 0.25rem;
+        z-index: -1;
+
+        @include apply-to(mobile) {
+            height: rem(16);
+        }
+    }
+
+    .exp-winner__content__name {
+        text-transform: uppercase;
+        margin-bottom: .25rem;
+
+        @include apply-to(mobile) {
+            margin-bottom: 0;
+        }
+    }
+
+    .exp-winner__content__location {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    .exp-winner__content__date {
+        margin-bottom: 0;
+    }
+
+    .exp-winner__content__date--no-image {
+        margin-right: 3rem;
+    }
+
+    .exp-winner__content__more {
+        color: $pink-6;
+        font-size: rem(13);
+        font-weight: $bold;
+    }
+
+    .exp-winner__image-container {
+        position: absolute;
+        top: rem(24);
+        right: rem(-4);
+        clip: rect(0, rem(116), rem(140), 0);
+
+        @include apply-to(mobile) {
+            clip: rect(0, rem(96), rem(118), 0);
+            top: 1rem;
+        }
+    }
+
+    .exp-winner__image-container__image {
+        height: rem(140);
+        width: rem(120);
+        border-radius: 50%;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+
+        @include apply-to(mobile) {
+            height: rem(118);
+            width: rem(100);
+        }
+    }
+}
+
+
+// .oz-experience.experience--closed .exp-newsletter-form
+.exp-newsletter-form {
+    margin: rem(30) 0 0;
+
+    @include apply-to(tablet) {
+        margin: rem(60) 0 rem(40);
+    }
+
+    // .oz-experience.experience--closed .exp-newsletter-form__title
+    &__title {
+        font-size: rem(16);
+
+        @include apply-to(tablet) {
+            font-size: rem(20);
+        }
+    }
+
+    // .oz-experience.experience--closed .exp-newsletter-form__desc
+    &__desc {
+        text-align: center;
+
+        @include apply-to(desktop) {
+            font-size: rem(14);
+        }
+    }
+
+    &.exp-closed-exp-newsletter-form {
+        flex: 1;
+        background: $gray-3;
+        padding: rem(10) rem(20) rem(20);
+
+        @include apply-to(phone) {
+            margin-bottom: rem(45);
+        }
+
+        @include apply-to(desktop) {
+            padding: rem(35);
+        }
+
+        .oz-newsletter-form {
+            max-width: rem(835);
+            margin: 0 auto;
+
+            @include apply-to(phone) {
+                padding: 0;
+            }
+        }
+
+        .oz-field-wrap {
+            display: flex;
+            flex-direction: column;
+
+            @include apply-to(tablet) {
+                flex-direction: row;
+            }
+        }
+
+        .oz-newsletter-form__text-input {
+            width: 100%;
+
+            @include apply-to(tablet) {
+                width: 64%;
+            }
+        }
+
+        .oz-newsletter-form__btn {
+            width: 100%;
+
+            @include apply-to(phone) {
+                text-transform: lowercase;
+            }
+
+            @include apply-to(tablet) {
+                width: 35%;
+            }
+        }
+    }
+}
+
+.exp-winner__loading {
+    position: relative;
+    padding: 16px;
+
+    .ozc-skeleton-box {
+        z-index: 1;
+    }
+
+    .ozc-skeleton-box:nth-child(1) {
+        margin-bottom: 16px;
+        width: 67%;
+    }
+
+    .ozc-skeleton-box:nth-child(2) {
+        margin-bottom: 8px;
+        width: 61%;
+    }
+
+    .ozc-skeleton-box:nth-child(3) {
+        margin-bottom: 16px;
+        width: 55%;
+    }
+
+    .ozc-skeleton-box:nth-child(4) {
+        width: 61%;
+    }
+
+    .exp-skeleton-winner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+    }
+}
+
+.exp-title__loading {
+    position: relative;
+    padding: 16px;
+    margin-bottom: 16px;
+
+    .ozc-skeleton-box {
+        z-index: 1;
+    }
+
+    .ozc-skeleton-box:nth-child(1) {
+        margin-bottom: 12px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 85%;
+        height: 32px;
+
+        @include apply-to(mobile) {
+            height: 24px;
+            margin-bottom: 8px;
+        }
+    }
+
+    .ozc-skeleton-box:nth-child(2) {
+        margin-bottom: 24px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 65%;
+        height: 32px;
+
+        @include apply-to(mobile) {
+            height: 24px;
+            margin-bottom: 16px;        }
+    }
+
+    .ozc-skeleton-box:nth-child(3) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 30%;
+        margin-bottom: 24px;
+        height: 24px;
+
+        @include apply-to(mobile) {
+            height: 14px;
+            margin-bottom: 16px;
+        }
+    }
+
+    .ozc-skeleton-box:nth-child(4) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        height: 24px;
+        margin-bottom: 8px;
+
+        @include apply-to(mobile) {
+            height: 18px;
+            margin-bottom: 8px;
+        }
+    }
+
+    .ozc-skeleton-box:nth-child(5) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 45%;
+        height: 24px;
+
+        @include apply-to(mobile) {
+            height: 18px;
+        }
+    }
+
+    .exp-skeleton-title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+    }
+}
+
+.exp-prize-details__loading {
+    position: relative;
+    padding: 16px;
+    margin-bottom: 16px;
+
+    .ozc-skeleton-box {
+        z-index: 1;
+    }
+
+    .ozc-skeleton-box:nth-child(1) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100px;
+        height: 32px;
+    }
+
+    .exp-skeleton-prize-details {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+    }
+}
+
+
+.exp-impact-media-assets__loading {
+    position: relative;
+    padding: 16px;
+
+    .ozc-skeleton-box {
+        z-index: 1;
+    }
+
+    .ozc-skeleton-box:nth-child(1) {
+        margin-bottom: 16px;
+        width: 67%;
+    }
+
+    .ozc-skeleton-box:nth-child(2) {
+        margin-bottom: 8px;
+        width: 61%;
+    }
+
+    .ozc-skeleton-box:nth-child(3) {
+        margin-bottom: 16px;
+        width: 55%;
+    }
+
+    .ozc-skeleton-box:nth-child(4) {
+        width: 61%;
+    }
+
+    .exp-skeleton-winner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
+    }
+}
+
+.oz-closed-sweepstakes__prize-details {
+    text-align: center;
+
+    &__collapse-content {
+        margin: 0 10px;
+    }
+}
+
+.oz-closed-sweepstakes__non-profit {
+    flex: 1;
+
+    &__loading {
+        margin-top: 24px;
+
+        > div {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        &__icon {
+            width: 52px;
+            height: 42px;
+
+            @include apply-to(desktop) {
+                width: 65px;
+                height: 50px;
+            }
+        }
+
+        &__header {
+            width: 207px;
+            margin-top: 16px;
+
+            @include apply-to(desktop) {
+                width: 257px;
+            }
+        }
+
+        &__total-raised {
+            margin-top: 24px;
+            width: 295px;
+            height: 90px;
+
+            @include apply-to(desktop) {
+                width: 425px;
+                height: 126px;
+                margin-top: 40px;
+            }
+        }
+
+        &__total-raised-caption {
+            margin-top: 8px;
+            width: 257px;
+
+            @include apply-to(desktop) {
+                width: 331px;
+            }
+        }
+
+        &__container {
+            @include apply-to(desktop) {
+                display: flex;
+                justify-content: center;
+                margin-top: 64px;
+
+                > div {
+                    max-width: 540px;
+                    width: 50%;
+                    margin-right: 24px;
+
+                    &:first-child {
+                        margin-right: 0;
+                    }
+
+                    &:nth-child(0) {
+                        order: 2;
+                    }
+
+                    &:nth-child(1) {
+                        order: 1;
+                    }
+
+                    & > div {
+                        margin-left: 0;
+                        margin-right: 0;
+                    }
+                }
+            }
+
+            > div > div {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        &__logo {
+            margin-top: 24px;
+            width: 207px;
+            height: 90px;
+
+            @include apply-to(desktop) {
+                margin-top: 0;
+                height: 82px;
+            }
+        }
+
+        &__thank-you-1 {
+            margin-top: 16px;
+            width: 207px;
+
+            @include apply-to(desktop) {
+                width: auto;
+                max-width: 501px;
+                height: 24px;
+            }
+        }
+
+        &__thank-you-2 {
+            margin-top: 8px;
+            width: 259px;
+
+            @include apply-to(desktop) {
+                margin-top: 16px;
+                width: auto;
+                max-width: 541px;
+                height: 24px;
+            }
+        }
+
+        &__thank-you-3 {
+            margin-top: 8px;
+            width: 207px;
+
+            @include apply-to(desktop) {
+                display: none;
+            }
+        }
+
+        &__impact-container {
+            margin-top: 32px;
+            position: relative;
+            padding: 32px;
+
+            @include apply-to(desktop) {
+                margin-top: 0;
+            }
+
+            & > div {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        & &__impact {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+
+            @include apply-to(desktop) {
+                display: none;
+            }
+        }
+
+        &__impact-1 {
+            width: 207px;
+
+            @include apply-to(desktop) {
+                width: 313px;
+            }
+        }
+
+        &__impact-2 {
+            margin-top: 8px;
+            width: 295px;
+
+            @include apply-to(desktop) {
+                width: 447px;
+            }
+        }
+
+        &__impact-3 {
+            margin-top: 8px;
+            width: 207px;
+
+            @include apply-to(desktop) {
+                width: 313px;
+            }
+        }
+    }
+}
+
+
+.oz-closed-sweepstakes__impact-media-assets {
+    flex: 1;
+
+    &__loading {
+        margin-top: 24px;
+
+        > div {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
+
+// rebrand css
+body.rebrand {
+    .oz-experience.experience--closed {
+        .product-recommendations__container-closed--mobile {
+            @include apply-to(mobile) {
+                margin: 0;
+            }
+        }
+
+        .product-experience-winner--mobile {
+            margin: 0;
+        }
+    }
+}

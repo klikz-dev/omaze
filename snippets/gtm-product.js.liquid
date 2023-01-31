@@ -1,0 +1,93 @@
+{% comment %}
+    The 'product' object will be defined in liquid if the customer is on a product page.
+{% endcomment %}
+
+{% if product %}
+    dataLayer.push({
+        "product": {
+            "id": {{ product.id | json }},
+            "title": {{ product.title | json }},
+            "url": {{ product.url | json }},
+            "available": {{ product.available | json }},
+            "collections": {{ product.collections | json }},
+            "handle": {{ product.handle | json }},
+            "tags": {{ product.tags | json }},
+            "type": {{ product.type | json }},
+            "variants": [
+                {% for variant in product.variants %}
+                    {
+                        "available": {{ product.available | json }},
+                        "id": {{ variant.id | json }},
+                        "sku": {{ variant.sku | json }},
+                        "price": {{ variant.price | json }},
+                        "title": {{ variant.title | json }},
+                    },
+                {% endfor %}
+            ]
+        }
+    });
+{% else %}
+    dataLayer.push({
+        "product": {{ nil | json }}
+    });
+{% endif %}
+
+{% comment %}
+   Add the Recommended Products to Data Layer
+{% endcomment %}
+
+ window.addEventListener("load", function(){
+     var products = [];
+     var variants = [];
+     if(SDG.Analytics && SDG.Analytics.data){
+        (SDG.Analytics.data.productRecommendations || []).forEach(function(product) {
+
+          // Create variants
+          variants = (product.variants || []).map(function(variant) {
+               return {
+                   "id": variant.id,
+                   "sku": variant.sku,
+                   "price": variant.price,
+                   "title": variant.title
+               }
+           })
+
+           products.push({
+               id : product.id,
+               title: product.title,
+               url: product.url,
+               type: product.type,
+               variants: variants
+           });
+        });
+    }
+
+    dataLayer.push({
+      "recommendations": products
+    });
+});
+
+{% if collection.products %}
+   var _gtm_collection_products =  [
+       {% for product in collection.products %}
+           {
+               'id': {{ product.id | json }},
+               'name': {{ product.title | json }},
+               'category': {{ product.type | json }},
+               'url': {{ product.url | json }},
+               'currency': {{ currency | json }},
+               'brand': {{ brand | json }},
+           },
+       {% endfor %}
+    ];
+
+    window.addEventListener("load", function(){
+       if(SDG.Analytics && SDG.Analytics.data){
+          SDG.Analytics.data.productCollections = _gtm_collection_products;
+       }
+    });
+
+    dataLayer.push({
+      "products": _gtm_collection_products
+    });
+{% endif %}

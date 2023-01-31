@@ -1,0 +1,30 @@
+.container {
+    padding-bottom: 12px;
+}
+
+.charity {
+    line-height: 16.8px;
+    letter-spacing: 0.4px;
+}
+
+@screen lg {
+    .charity {
+        line-height: 19.2px;
+    }
+}
+
+.title {
+    margin-top: 6px;
+    letter-spacing: 0.32px;
+}
+
+@screen lg {
+    .title {
+        line-height: 26px;
+    }
+}
+
+.tag {
+    top: 10px;
+    right: 10px;
+}

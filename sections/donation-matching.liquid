@@ -1,0 +1,67 @@
+{% if section.settings.matching_enabled == 'yes' %}
+    <h3>
+        {{ section.settings.matching_title }}
+    </h3>
+    <div class="oz-donation-donate-to-all__img oz-donation-donate-to-all__img--matching">
+        {% for block in section.blocks %}
+            <img src="{{ block.settings.charity_img | img_url: 'medium'}}"
+                    alt="{{ block.settings.charity_name }} logo" />
+        {% endfor %}
+    </div>
+    <p>
+        {{ section.settings.matching_message }}
+    </p>
+{% endif %}
+
+{% schema %}
+    {
+        "name": "DTA - Matching: Logos",
+        "class": "oz-donation-donate-to-all__matching",
+        "settings": [
+            {
+                "type": "select",
+                "id": "matching_enabled",
+                "options": [
+                    {
+                        "value": "yes",
+                        "label": "Yes"
+                    },
+                    {
+                        "value": "no",
+                        "label": "No"
+                    }
+                ],
+                "label": "Matching Visible?",
+                "default": "no"
+            },
+            {
+                "type": "text",
+                "id": "matching_title",
+                "label": "Matching Title"
+            },
+            {
+                "type": "text",
+                "id": "matching_message",
+                "label": "Matching Message"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "matching_charity",
+                "name": "Matching Charity",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "charity_img",
+                        "label": "Charity Logo"
+                    },
+                    {
+                        "type": "text",
+                        "id": "charity_name",
+                        "label": "Charity Name"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

@@ -1,0 +1,63 @@
+{% comment %}
+    Use the canonical URL to determine the page type.
+
+    If we're on checkout, canonical_url will be nil,
+    so we need to look at the Checkout JS object instead.
+{% endcomment %}
+var page_type = null;
+{% if canonical_url %}
+    {% assign split_canonical = canonical_url | split: '/' %}
+    {% assign first_part = split_canonical[3] %}
+    {% assign second_part = split_canonical[4] %}
+    {% case first_part %}
+        {% when nil %}
+            {% assign page_type = "home" %}
+        {% when "products" %}
+            {% assign page_type = "product" %}
+        {% when "cart" %}
+            {% assign page_type = "cart" %}
+        {% when "blogs" %}
+            {% assign page_type = "content" %}
+        {% when "pages" %}
+            {% assign page_type = "content" %}
+        {% when "account" %}
+            {% assign page_type = "account" %}
+        {% when "collections" %}
+            {% assign page_type = "category" %}
+    {% endcase %}
+    page_type = {{ page_type | json }}
+{% else %}
+    window.addEventListener('load', function() {
+        if (Shopify != undefined) {
+            const checkout_page = Shopify.Checkout.page;
+            switch (checkout_page) {
+                case "thank_you":
+                    page_type = "confirmation";
+                    break;
+                default:
+                    page_type = "checkout";
+            }
+        }
+    });
+{% endif %}
+
+{% comment %}
+    Not sure how to determine page category.
+{% endcomment %}
+{% assign page_category = nil %}
+
+window.addEventListener('load', function() {
+    dataLayer.push({
+        "page": {
+            "current": {{ current_page | json }},
+            "canonical_url": {{ canonical_url | json }},
+            "handle": {{ handle | json }},
+            "description": {{ page_description | json }},
+            "title": {{ page_title | json }},
+            "tags": {{ current_tags | json }},
+            "environment": {{ settings.env | json }},
+            "type": page_type,
+            "category": {{ page_category | json }}
+        }
+    });
+});

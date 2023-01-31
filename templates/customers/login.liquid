@@ -1,0 +1,238 @@
+{% comment %}
+Check to see if we're at "/account/invalid_token".
+
+If we are, we display an expired password reset error,
+instead of the normal form errors.
+
+There doesn't seem to be a separate template for this.
+
+Submitting the form will take the user to "/account/login",
+and the normal login form errors will be displayed.
+{% endcomment %}
+
+{% assign form_name = "customer_login" %}
+{% assign last_url_part = canonical_url | split: '/' | last %}
+
+{% if settings.auth0_on == false %}
+<div class="oz-page" id="acLogin">
+	<div class="oz-login-app" id="accountSection">
+		<div class="oz-section-container">
+			<div class="oz-section">
+				<div class="oz-section__inner" id="acLoginForm">
+					<h1 class="oz-section__page-title">{{ 'customer.login.title' | t }}</h1>
+					<div class="oz-section__content oz-component-login__form">
+
+						{% if settings.omaze_social_login_on == false %}
+							<div class='oxi-social-login'></div>
+					    {% endif %}
+
+						{% form 'customer_login' %}
+							<div class="oz-divider oz-or-divider">
+								<span class="oz-divider__text">or</span>
+							</div>
+
+							{% if last_url_part == 'invalid_token' %}
+								<div class="errors">
+									<ul>
+										<li>{{ 'customer.login.password_reset_expired' | t }}</li>
+									</ul>
+								</div>
+							{% else %}
+								{{ form.errors | default_errors }}
+							{% endif %}
+
+							<div class="oz-field">
+								<div class="oz-field__container{% if form.errors contains 'email' %} error {% endif %}">
+									<input
+										id="customerEmail"
+										class="input{% if form.errors contains 'email' %} error {% endif %}"
+										type="email"
+										name="customer[email]"
+										autocorrect="off"
+										autocapitalize="off"
+										autocomplete="email"
+										autofocus
+										required
+									/>
+									<label for="customerEmail">
+										{{'customer.login.email' | t }}
+									</label>
+								</div>
+							</div>
+
+							<div class="oz-field">
+								<div class="oz-field__container{% if form.errors contains 'password' %} error{% endif %}">
+									<input
+										id="customerPassword"
+										type="password"
+										class="input{% if form.errors contains 'password' %} error{% endif %}"
+										name="customer[password]"
+										required
+									/>
+									<span
+										id="togglePasswordVisibility"
+										class="toggle-password-visibility"
+									>
+										show
+									</span>
+									<label for="customerPassword">
+										{{ 'customer.login.password' | t }}
+									</label>
+								</div>
+							</div>
+
+							<input type="hidden" name="checkout_url" value="" />
+
+							<div class="oz-field oz-field--btn">
+								<button class="oz-btn oz-btn--block signin-button" type="submit">
+									<span class="btn__label">
+									{{ 'customer.login.sign_in' | t }}
+									</span>
+								</button>
+							</div>
+
+							<p class="oz-fine-print oz-fine-print--center">
+								<button
+									id="recoverPassword"
+									class="ac-btn-link oz-btn-link"
+									type="button"
+								>
+									{{ 'customer.login.forgot_password' | t }}
+								</button>
+							</p>
+
+							<div class="oz-divider"></div>
+
+							<div class="oz-fine-print oz-fine-print--center">
+								<p>{{ 'customer.login.no_account' | t }}</p>
+								<a
+									id="accountRegister"
+									class="oz-btn-link oz-btn-link--block oz-btn-link--large oz-btn-link--secondary"
+									href="/account/register"
+								>
+									<span class="btn__label">
+										{{ 'layout.customer.create_account' | t }}
+									</span>
+								</a>
+							</div>
+						{% endform %}
+					</div>
+				</div>
+
+				{%- comment -%} recover password form {%- endcomment -%}
+				<div id="acRecoverPasswordForm" style="display: none;">
+					<h1 class="oz-section__page-title oz-section__page-title--recover-password">
+						{{ 'customer.recover_password.title' | t }}
+					</h1>
+					<div class="oz-section__content oz-section__content--recover-password">
+						{{ 'customer.recover_password.instruction' | t }}
+					</div>
+
+					<div class="oz-section__content">
+						{% form 'recover_customer_password', id: 'recoverPasswordForm' %}
+
+							{% if form.posted_successfully? %} {% assign resetSuccess = true %} {% endif %}
+
+							<ul class="form-list list-reset">
+								<li class="oz-field">
+									<div class="oz-field__container{% if form.errors.messages.form contains 'No account found' %} error {% endif %}">
+										<input
+											id="recoverEmail"
+											class="input"
+											class="input{% if form.errors.messages.form contains 'No account found' %} error{% endif %}"
+											type="email"
+											name="email"
+											autocorrect="off"
+											autocapitalize="off"
+											required
+										/>
+										<label for="recoverEmail">
+											{{ 'customer.recover_password.email' | t }}
+										</label>
+									</div>
+									{% if form.errors %}
+										{% for field in form.errors %}
+											{% if form.errors.messages[field] contains "No account found" %}
+												<span class="error">{{ 'validation_errors.account_not_found' | t}}</span>
+											{% endif %}
+										{% endfor %}
+									{% endif %}
+								</li>
+
+								<li class="oz-field">
+									<button class="oz-btn oz-btn--block" id="recover-passwword-submit" type="submit">
+										{{
+											'customer.recover_password.submit' | t
+										}}
+									</button>
+								</li>
+
+								<div>
+									<p class="oz-fine-print oz-fine-print--center">
+										<span>Changed your mind?</span>
+										<button
+											id="hideRecoverPasswordBtn"
+											class="ac-btn-link oz-btn-link back-to-login-link"
+											type="button"
+											style="display:none;"
+										>
+											Return to sign in
+										</button>
+									</p>
+								</div>
+							</ul>
+						{% endform %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+<script>
+
+	const node = document.getElementsByName('checkout_url')[0];
+	if (node) {
+		node.value = document.referrer;
+	}
+
+	document
+		.querySelector('#recover-passwword-submit')
+		.addEventListener('click', function() {
+			const email = document.querySelector('#recoverEmail').value;
+			window.ozLocalStorageSet('oz__recover-password__email', email);
+		})
+
+	navigateToRecoverEmailMessagePage()
+
+	function navigateToRecoverEmailMessagePage() {
+		{% if resetSuccess %}
+			const email = window.localStorage.getItem('oz__recover-password__email');
+			window.location.href = `/pages/recover-account-message?email=${email}`;
+			window.localStorage.removeItem('oz__recover-password__email');
+		{% endif %}
+	}
+
+	window.onload = function() {
+		var customerPassword = 'customerPassword';
+		window.addPasswordVisibilityListeners(customerPassword);
+	}
+
+	window.addEventListener("DOMContentLoaded", function() {
+		{% if settings.profile_onboarding_callouts_on %}
+			{% if customer.id == null %}
+				window.SDG.SignupValueProposition.init({
+					showContactInfo: true,
+					showTopText: true,
+					placement: {
+						position: 'afterbegin',
+						referenceSelector: '.oz-section__content',
+					}
+				});
+			{% endif %}
+		{% endif %}
+	})
+
+
+
+</script>

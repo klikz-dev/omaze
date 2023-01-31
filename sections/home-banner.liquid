@@ -1,0 +1,94 @@
+{% assign s = section.settings %}
+
+{%- if s.banner_mobile_image != blank and s.banner_desktop_image != blank -%}
+	<section class="columns__one-full-width">
+		<div class="oz-section-banner">
+
+			{%- if s.banner_mobile_image != blank -%}
+				<div class="oz-section-banner__image-container intrinsic-ratio banner__intrinsic-ratio lazy-blur phone-only hide-tablet">
+
+					<img
+						src="{{- s.banner_mobile_image | img_url: '812x339' -}}"
+						alt="{{- s.banner_mobile_image.alt -}}"
+					/>
+					<img
+						alt="{{- s.banner_mobile_image.alt -}}"
+						class="lazyload"
+						data-sizes="auto"
+						data-src="{{- s.banner_mobile_image | img_url: '812x339' -}}"
+						data-srcset="{%- include 'c-responsive-image-url', responsive_img: s.banner_mobile_image -%}"
+					/>
+				</div>
+			{%- endif -%}
+
+			{%- if s.banner_desktop_image != blank -%}
+				<div class="oz-section-banner__image-container intrinsic-ratio banner__intrinsic-ratio lazy-blur hide-phone">
+					<img
+						src="{{- s.banner_desktop_image | img_url: 'master' -}}"
+						alt="{{- s.banner_desktop_image.alt -}}"
+					/>
+					<img
+						alt="{{- s.banner_desktop_image.alt -}}"
+						class="lazyload"
+						data-sizes="auto"
+						data-src="{{- s.banner_desktop_image | img_url: 'master' -}}"
+						data-srcset="{%- include 'c-responsive-image-url', responsive_img: s.banner_desktop_image -%}"
+					/>
+				</div>
+			{%- endif -%}
+
+			{%- if s.banner_text != blank and s.banner_button_url != blank -%}
+				<div class="oz-section-banner__content">
+
+					{%- if s.banner_text != blank -%}
+						<h2 class="oz-section-title">
+							{{- s.banner_text -}}
+						</h2>
+					{%- endif -%}
+
+					{%- if s.banner_button_url != blank and s.banner_button_text != blank -%}
+						<a
+							href="{{- s.banner_button_url -}}"
+							class="oz-btn oz-btn--long oz-btn--line oz-btn--line--white"
+						>
+							{{- s.banner_button_text -}}
+						</a>
+					{%- endif -%}
+				</div>
+			{%- endif -%}
+		</div>
+	</section>
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "Home Banner",
+	"settings": [
+		{
+			"type": "image_picker",
+			"id": "banner_desktop_image",
+			"label": "Banner Desktop Image"
+		},
+		{
+			"type": "image_picker",
+			"id": "banner_mobile_image",
+			"label": "Banner Mobile Image"
+		},
+		{
+			"type": "text",
+			"id": "banner_text",
+			"label": "Banner Text"
+		},
+		{
+			"type": "text",
+			"id": "banner_button_text",
+			"label": "Banner Button Text"
+		},
+		{
+			"type": "url",
+			"id": "banner_button_url",
+			"label": "Banner Button URL"
+		}
+	]
+}
+{% endschema %}

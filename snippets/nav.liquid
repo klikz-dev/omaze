@@ -1,0 +1,67 @@
+{% comment %}
+Accepts 'view' and 'modifier' when calling this snippet.
+This snippet is used for both the mobile and dekstop navigation separately.
+{% endcomment %}
+
+<nav id="nav" class="nav">
+	<div class="nav__content nav__content-wrapper">
+		<div class="oz-nav-overlay"></div>
+		<div class="nav__list-wrapper">
+			<ul class="nav__list list-reset js-nav-list">
+				<li class="js-nav-close mobile-close phone"></li>
+				{% for link in linklists.main-menu.links %}
+					<li class="nav__item">
+						{% if linklists[menu_name].links.size > 0 and settings[hide_menu] != true  %}
+							<button type="button" class="nav__btn nav__btn--toggle">
+								{{ link.title }}
+							</button>
+							<div class="nav__litter">
+								<div class="nav__litter-box{% if settings[showTout] %} nav__litter-box--has-tout{% endif %}">
+									<ul class="list-reset nav__kittens{% if linklists[menu_name].links.size > 4 and linklists[menu_name].links.size < 7  %} nav__kittens--two{% endif %}{% if linklists[menu_name].links.size > 7 %} nav__kittens--three{% endif %}">
+										{%- for sublink in linklists[menu_name].links -%}
+											<li>
+												<a href="{{ sublink.url }}" class="nav__kitty">
+													{{- sublink.title -}}
+												</a>
+											</li>
+										{%- endfor -%}
+										<li>
+											<a href="{{ link.url }}" class="nav__kitty mobile-only">View All</a>
+										</li>
+									</ul>
+									<a href="{{ link.url }}" class="nav__view-all nav__kitty desktop-only"><span>View All</span></a>
+								</div>
+							</div>
+						{% else %}
+							<a href="{{ link.url }}" class="nav__btn" data-nav-link-title="{{ link.title }}">
+								{{- link.title -}}
+							</a>
+						{% endif %}
+					</li>
+				{% endfor %}
+				{% comment %}Desktop Customer Links{% endcomment %}
+				<li class="nav__item nav__account-wrapper">
+                    {% capture user_icon %}
+                        <img class="nav__user-icon" src="{{ 'user.svg' | asset_url }}" alt="Go to My Account" />
+                    {% endcapture %}
+
+					{% if customer %}
+						<div class="nav__account-btn">
+                            {{ user_icon }}
+                        </div>
+
+						{% include 'nav-account-menu' %}
+					{% else %}
+						<a href="/account/login" class="nav__account-btn js-nav-btn--login js-nav-btn--login-analytics">
+                            {{ user_icon }}
+                        </a>
+					{% endif %}
+				</li>
+				<li class="nav__account-wrapper nav__item">
+					{% include 'cart-icon' %}
+				</li>
+			</ul>
+		</div>
+
+	</div>
+</nav>

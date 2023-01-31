@@ -1,0 +1,65 @@
+{% assign s = section.settings %}
+
+<section>
+    {%- if s.hero_link != blank -%}
+        <a href="{{ s.hero_link }}">
+    {%- endif -%}
+
+        <div class="oz-section-banner__image-container phone-only lqip-container home-hero__intrinsic-ratio intrinsic-ratio">
+            <img src="{{ s.single_img_mobile | img_url: '400x' }}">
+            <img class="lazyload" data-sizes="auto" data-srcset="{% include 'c-responsive-image-url', responsive_img: s.single_img_mobile %}">
+        </div>
+
+        {%- if s.home_video_url_desktop == blank -%}
+            <div class="oz-section-banner__image-container lqip-container home-hero__intrinsic-ratio intrinsic-ratio hide-phone">
+                <img src="{{ s.single_img_desktop | img_url: '700x' }}">
+                <img class="lazyload" data-sizes="auto" data-srcset="{% include 'c-responsive-image-url', responsive_img: s.single_img_desktop %}">
+            </div>
+        {%- endif -%}
+
+        {%- if s.home_video_url_desktop != blank -%}
+            <div class="oz-video__container oz-video--hide-controls home-hero__intrinsic-ratio intrinsic-ratio hide-phone">
+                <video class="oz-video__player" autoplay loop muted>
+                    <source src="{{ s.home_video_url_desktop }}" type="video/mp4">
+                </video>
+            </div>
+        {%- endif -%}
+
+        {%- if s.title != blank -%}
+            <div class="oz-section-banner__content hide-phone">
+                <h1 class="oz-section-banner__content--title">{{ s.title }}</h1>
+            </div>
+        {%- endif -%}
+
+    {%- if s.hero_link != blank -%}
+        </a>
+    {%- endif -%}
+</section>
+
+{% schema %}
+    {
+        "name": "Home: Hero (Alt 1)",
+        "class": "hero-single-section home-hero home-hero--alt-1 home-hero--hidden",
+        "settings": [{
+                "type": "image_picker",
+                "id": "single_img_mobile",
+                "label": "Image Mobile (aspect 1:1)"
+            },{
+                "type": "image_picker",
+                "id": "single_img_desktop",
+                "label": "Image Desktop (aspect 12 x 5.25)"
+            },{
+                "type": "text",
+                "id": "title",
+                "label": "Title"
+            },{
+                "type": "text",
+                "id": "home_video_url_desktop",
+                "label": "Video URL (MP4)"
+            },{
+                "type": "url",
+                "id": "hero_link",
+                "label": "Link to"
+        }]
+    }
+{% endschema %}

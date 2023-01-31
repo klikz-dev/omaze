@@ -1,0 +1,28 @@
+/**
+ * Effects
+ */
+
+.oz-striped-borders {
+
+    &:before, &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 10px;
+        background-image: url(asset('painted-stripe-white.png'));
+        background-repeat: no-repeat;
+        background-repeat-x: repeat;
+        background-size: auto rem(30);
+        background-position: rem(-100) 100%;
+    }
+
+    &:before {
+        top: 0;
+    }
+
+    &:after {
+        bottom: 0;
+        transform: rotate(180deg);
+    }
+}

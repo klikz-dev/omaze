@@ -1,0 +1,77 @@
+.header {
+    @apply font-secondary text-base font-bold text-black leading-relaxed;
+
+    letter-spacing: .32px;
+}
+
+.highlight {
+    @apply inline-block bg-rebrand-yellow-500 text-xl align-middle;
+
+    line-height: 26px;
+    padding: 0 4px;
+}
+
+.caption {
+    @apply font-primary text-sm font-semibold text-black;
+
+    margin-top: 4px;
+    line-height: 1.2;
+    letter-spacing: .4px;
+}
+
+@screen md {
+    .header {
+        @apply leading-8;
+    }
+
+    .highlight {
+        @apply leading-8;
+
+        font-size: 24px;
+    }
+
+    .caption {
+        @apply mt-1;
+
+        font-size: 14px;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .header {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+}
+
+:global(.rebrand) .highlight {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 20px;
+    line-height: 28px;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+    background-color: #FFDD00;
+    margin-top: -9px;
+}
+
+@screen md {
+    :global(.rebrand) .rebrand-md:mb-3 {
+        @apply mb-3;
+    }
+}
+
+@screen lg {
+    :global(.rebrand) .header {
+        font-size: 18px;
+        line-height: 32px;
+    }
+    
+    :global(.rebrand) .highlight {
+        font-size: 24px;
+        line-height: 32px;
+    }
+}

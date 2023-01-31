@@ -1,0 +1,24 @@
+<script>
+    window.ozAppConfig = {
+        env: '{{ settings.env }}',
+
+        featureHouseFocusOn: {{ settings.feature_house_focus_on }},
+
+        productRecMinProducts: {{ settings.product_recommendations_minimum_products }},
+        productRecPriorityCollectionSlug: '{{ settings.product_recommendations_priority_collection }}',
+        productRecDefaultCollectionSlug: '{{ settings.product_recommendations_default_collection }}',
+        productRecDefaultHeader: '{{ settings.product_recommendations_default_header }}',
+        productRecUsePriorityCollection: {{ settings.product_recommendations_use_priority_collection }},
+
+        crossSellMinProducts: {{ settings.cross_sell_minimum_products }},
+        crossSellMaxProducts: {{ settings.cross_sell_max_products }},
+        crossSellPriorityCollectionSlug: '{{ settings.cross_sell_priority_collection }}',
+        crossSellDefaultCollectionSlug: '{{ settings.cross_sell_default_collection }}',
+        crossSellDefaultHeader: '{{ settings.cross_sell_default_header }}',
+        crossSellUsePriorityCollection: {{ settings.cross_sell_use_priority_collection }},
+
+        comboPromotion: {{ settings['combo_promotion_enabled'] | json }},
+        comboPromotionBlockedCountries: {{ settings['combo_promotion_ineligible_countries'] | json }},
+        comboPromotionBlockedRegions: {{ settings['combo_promotion_ineligible_regions'] | json }},
+    };
+</script>

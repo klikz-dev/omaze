@@ -1,0 +1,97 @@
+.oz-homepage__curated-cta.oz-btn__btn-wrap {
+    padding: rem(40);
+
+    @include apply-to(desktop) {
+        padding-bottom: rem(64);
+    }
+}
+
+.home-curated-collection-skeleton--carousel {
+    display: flex;
+    flex-direction: column;
+    max-width: 1104px;
+    margin: 0 auto;
+    padding-left: 24px;
+    margin-top: 40px;
+
+    @include apply-to(desktop) {
+        margin-top: 64px;
+    }
+}
+
+.home-curated-collection-skeleton--header {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.home-curated-collection-skeleton--cards {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    justify-content: space-between;
+}
+
+.home-curated-collection-skeleton--card {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.home-curated-collection-skeleton--header .ozc-skeleton-box--title {
+    width: 242px;
+    height: 26px;
+
+    @include apply-to(desktop) {
+        width: 376px;
+        height: 46px;
+    }
+}
+
+.home-curated-collection-skeleton--header .ozc-skeleton-box--pagination {
+    width: 129px;
+    height: 46px;
+}
+
+.home-curated-collection-skeleton--cards .home-curated-collection-skeleton--card {
+    .ozc-skeleton-box--card-image {
+        margin-top: 14px;
+        width: 242px;
+        height: 136px;
+
+        @include apply-to(desktop) {
+            width: 258px;
+            height: 144px;
+        }
+    }
+    .ozc-skeleton-box--card-desc1 {
+        margin-top: 9px;
+        width: 190px;
+        height: 16px;
+
+        @include apply-to(desktop) {
+            width: 202px;
+            height: 17px;
+        }
+    }
+    .ozc-skeleton-box--card-desc2 {
+        margin-top: 8px;
+        width: 242px;
+        height: 20px;
+
+        @include apply-to(desktop) {
+            width: 258px;
+            height: 21px;
+        }
+    }
+    .ozc-skeleton-box--card-desc3 {
+        margin-top: 8px;
+        width: 242px;
+        height: 20px;
+
+        @include apply-to(desktop) {
+            width: 258px;
+            height: 21px;
+        }
+    }
+}

@@ -1,0 +1,101 @@
+<div class="cart__container">
+    <div
+        class="section group desktop-and-tablet display-flex table__title to-upper bold"
+    >
+        <div class="span_8_of_12 rebrand_col_items display-flex centered-v">
+            Your Items
+        </div>
+        <div class="span_2_of_12 rebrand_col_remove display-flex centered-v centered-h">
+            Remove
+        </div>
+        <div class="span_2_of_12 rebrand_col_amount display-flex centered-v centered-h cart__tab--amount-header">
+            Amount
+        </div>
+    </div>
+    <hr class="cart__hr cart__hr--header desktop-and-tablet display-flex" />
+    {% assign reversedCartItems = cart.items | reverse %}
+    {% for cartItem in reversedCartItems %}
+        {% assign item = cartItem %}
+        {% include 'cart-item' %}
+    {% endfor %}
+
+    <div class="product-rec__container product-rec__container--cross-sell">
+        <div class="product-recommendations__list section group"></div>
+    </div>
+
+    <div
+        class="section group desktop-and-tablet display-flex continue-browsing"
+    >
+        <div class="col span_8_of_12 display-flex centered-v bold">
+            {% unless settings.feature_house_focus_on %}
+                {% if settings.rebrand_active %}
+                    <a class="secondary-color continue-browsing__link" href="/collections/experiences"
+                        >Continue browsing</a
+                    >
+                {% else %}
+                    <a class="secondary-color continue-browsing__link" href="/collections/experiences"
+                        >&#60; Continue browsing</a
+                    >
+                {% endif %}
+            {% endunless %}
+        </div>
+        <div class="col span_2_of_12 display-flex centered-v bold">
+            Total:
+        </div>
+        <div class="col span_2_of_12 display-flex centered-v centered-h continue-browsing__price">
+            <span class="continue-browsing-price__currency-code">{{ cart.currency.iso_code }}</span>
+            <span class="bold">{{ cart.total_price | money }}</span>
+        </div>
+    </div>
+    <div class="section group phone-only continue-browsing">
+        <div
+            class="col span_12_of_12 display-flex centered-v centered-h space-between"
+        >
+            <div class="bold">
+                Total:
+            </div>
+            <div>
+                <span>{{ cart.currency.iso_code }}</span>
+                <span class="bold">{{ cart.total_price | money }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="section group display-flex phone-only-column">
+        <div
+            id="mobile-2"
+            class="col span_8_of_12 display-flex centered-v phone-only-column"
+        >
+            {% unless settings.feature_house_focus_on %}
+                <div class="pb-40 display-flex centered-v centered-h bold phone-only">
+                    {% if settings.rebrand_active %}
+                        <a class="secondary-color continue-browsing__link" href="/collections/experiences"
+                            >Continue browsing</a
+                        >
+                    {% else %}
+                        <a class="secondary-color continue-browsing__link" href="/collections/experiences"
+                            >&#60; Continue browsing</a
+                        >
+                    {% endif %}
+                </div>
+            {% endunless %}
+
+            <div class="oz-cart__cafa">{% section 'CAFA-cart' %}</div>
+        </div>
+        <div id="mobile-1" class="col span_4_of_12">
+            <div class="display-flex centered-h">
+                <div
+                    id="pre-checkout"
+                    class="display-flex flex-column checkout-button-container"
+                >
+                    {% if additional_checkout_buttons %}
+                        <div class="additional-checkout-buttons__wrapper">
+                            <div class="additional-checkout-buttons">
+                                {{ content_for_additional_checkout_buttons }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

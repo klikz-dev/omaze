@@ -1,0 +1,18 @@
+{% comment %} capture and output bagData {% endcomment %}
+{%- capture bagData -%}
+	<script>
+		var bagItems = [];
+
+		{% for item in cart.items %}
+
+			bagItems.push({
+				id: {{ item.variant.id }},
+				inventory_quantity: {{ item.variant.inventory_quantity }},
+				price: '{{ item.variant.price | money_without_currency }}',
+				sku: '{{ item.variant.sku }}',
+			});
+
+		{% endfor %}
+	</script>
+{%- endcapture -%}
+{% include 'h-minify', variable: bagData %}

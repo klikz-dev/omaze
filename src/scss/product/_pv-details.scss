@@ -1,0 +1,84 @@
+/**
+ * product details
+ *
+ * details
+ * description
+ */
+
+/**
+ * details
+ */
+.pv-details {
+
+	p {
+		margin-bottom: rem(25);
+
+		@include apply-to(desktop) {
+			margin-bottom: 0;
+		}
+	}
+
+}
+
+/**
+ * description
+ */
+.pv-desc {
+	@include mqstyle('font-size', $size-p);
+	@include mqstyle('line-height', $lineheight-p);
+
+	p,
+	ol,
+	ul {
+		font-size: inherit;
+		line-height: 1.6;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	li {
+		padding-bottom: 0;
+		padding-left: rem(35);
+		position: relative;
+
+		// dot
+		&::before {
+			background-color: $gray-1;
+			border-radius: 50%;
+			bottom: 0;
+			content: '';
+			display: block;
+			height: rem(4);
+			left: rem(10);
+			margin: auto 0;
+			position: absolute;
+			top: 0;
+			width: rem(4);
+		}
+	}
+
+	h3 {
+		color: $blue-2;
+		font-family: $primary-font;
+		font-size: rem(14);
+		font-weight: $bold;
+		line-height: normal;
+		margin-top: 0;
+		text-transform: uppercase;
+	}
+
+	// .pv-desc__content
+	&__content {
+		font-size: rem(15);
+
+		h3 {
+
+			@include apply-to(tablet) {
+				margin-top: rem(42);
+			}
+		}
+	}
+}

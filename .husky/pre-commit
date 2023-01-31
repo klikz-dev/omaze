@@ -1,0 +1,3 @@
+#!/bin/sh
+npm run lint-react
+npm run lint-types

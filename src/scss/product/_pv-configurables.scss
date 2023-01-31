@@ -1,0 +1,202 @@
+/**
+ * product configurables
+ *
+ * selector wrapper
+ * config
+ * actions
+ * action
+ * add
+ * swatch
+ */
+
+/**
+ * selector wrapper
+ * hide single option selector
+ */
+.selector-wrapper {
+	display: none;
+}
+
+/**
+ * config
+ */
+.config {
+	padding-bottom: rem(14);
+
+	@include apply-to(desktop) {
+		padding-bottom: 0;
+	}
+
+	// .config__group
+	&__group {
+
+		// .config__group-title
+		&-title {
+			text-transform: uppercase;
+			font-family: $primary-font;
+			font-size: rem(16);
+			letter-spacing: 1.7px;
+			margin-bottom: 0;
+		}
+	}
+
+	// .config__header
+	&__header {
+		margin-bottom: rem(12);
+	}
+
+	// .config__options
+	&__options {
+	}
+
+	// .config__group
+	&__group {
+		margin-top: rem(10);
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	// .config__radio
+	&__radio {
+		display: none;
+	}
+
+	// .config__value-label
+	&__value-label {
+		font-weight: $light;
+		text-transform: capitalize;
+		letter-spacing: 1.2px;
+	}
+
+	// .config__variant
+	&__variant {
+		display: inline-block;
+		padding: 0;
+		vertical-align: middle;
+		display: inline-block;
+	    width: rem(46);
+	    height: rem(46);
+	    line-height: rem(46);
+	    background-color: $white;
+		margin: 2px 0;
+
+		@include apply-to(desktop) {
+			margin: 0 rem(4) 0 0;
+		}
+
+		// .config__variant--color
+		&--color {
+
+			// .config__variant--color .config__btn
+			.config__btn {
+				border-width: 2px;
+			}
+		}
+	}
+
+	// .config__btn
+	&__btn {
+		border: 1px solid $gray-6;
+	    border-radius: 50%;
+		color:$black-1;
+		cursor: pointer;
+		font-family: $secondary-font;
+		font-size: rem(14);
+		text-align: center;
+		display:inline-block;
+		overflow: hidden;
+		width: 100%;
+		transition: all .2s $easeActiveSwatch;
+
+		// .config__btn.is-active
+		&.is-active {
+			border-color: $blue-1;
+			box-shadow: 0 0 1px $blue-1 inset;
+		}
+	}
+}
+
+/**
+ * add
+ */
+.pv-add {
+
+	// .pv-add__btn
+	&__btn {
+		margin: rem(16) auto rem(36);
+		padding: rem(16);
+		max-width: 80%;
+
+		@include apply-to(desktop) {
+			margin: rem(38) 0 rem(27);
+			max-width: 100%;
+		}
+	}
+}
+
+/**
+ * swatch
+ */
+.swatch {
+	display: inline-block;
+	position: relative;
+	height: 100%;
+
+	// .swatch--white
+	&--white {
+
+		&::before {
+			border: 1px solid $gray-2;
+			bottom: 0;
+			content: '';
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+			z-index: z(backward);
+		}
+	}
+
+	// .swatch__intrinsic-ratio
+	&__intrinsic-ratio {
+
+		// loading
+		&::before {
+			font-size: 6px;
+		}
+
+		// .swatch__intrinsic-ratio img
+		img {
+			height: 100%;
+			width: 100%;
+		}
+	}
+}
+
+
+// dev styles for debugging
+// .selector-wrapper {
+// 	display: block;
+// 	margin-bottom: em(20);
+//
+// 	label {
+// 		display: block;
+// 		font-weight: $bold;
+// 	}
+//
+// 	select {
+// 		background-color: $white;
+// 	}
+//  }
+//
+// #productSelect {
+// 	background-color: $white;
+// 	display: block !important;
+// }
+//
+// .config__radio {
+// 	display: block !important;
+// }
+// end dev styles

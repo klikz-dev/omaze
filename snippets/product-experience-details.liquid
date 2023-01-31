@@ -1,0 +1,20 @@
+{% comment %}Donor Counter - app portal{% endcomment %}
+{% if productStatus == 'active' and settings.donor_counter_enabled %}
+	<div id="active-experience-app__donor-counter"></div>
+{% endif %}
+
+<div class="exp-details__highlights oz-wysigyg">
+	{{ product.description }}
+</div>
+
+{% include 'pv-exp-dates' %}
+
+<div class="exp-details__btn">
+	<a href="{{ enterNowButtonAnchor }}" id="enter-now-button-desktop" class="js-grid-link exp-details__donate-btn oz-btn oz-btn--cta hoverable">
+		Enter now
+
+	</a>
+</div>
+
+{% comment %}Countdown Counter{% endcomment %}
+{% include 'product-experience-counter', hide: true %}

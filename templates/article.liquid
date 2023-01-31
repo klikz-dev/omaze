@@ -1,0 +1,8 @@
+<article class="page-width" itemscope itemtype="http://schema.org/Article">
+	{% if blog.handle == 'winners' %}
+		{% include 'article-winners' %}
+	{% endif %}
+	{% if blog.handle == 'causes' %}
+		{% include 'article-causes' %}
+	{% endif %}
+</article>

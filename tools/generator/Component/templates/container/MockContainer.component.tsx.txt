@@ -1,0 +1,6 @@
+import { createEmptyMock } from '@omaze/test';
+import { FunctionComponent } from 'react';
+
+const { {% containerName %}: Original{% containerName %} }: any = jest.requireActual('../{% containerName %}.component');
+
+export const {% containerName %}: FunctionComponent = createEmptyMock(Original{% containerName %});

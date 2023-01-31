@@ -1,0 +1,156 @@
+/**
+ * Lottery modal
+ */
+
+.oz-lottery-modal {
+	width: 90%;
+	margin: 0 auto;
+	max-width: rem(400);
+	padding: rem(20);
+
+	@include apply-to(desktop) {
+		padding: rem(25);
+	}
+
+	// .oz-lottery-modal__overlay
+	&__overlay {
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+}
+
+.oz-lottery-spinner-informational {
+
+	// .oz-lottery-spinner-informational__close-button
+	&__close-button {
+		margin-bottom: 0;
+		display: flex;
+		flex-direction: row-reverse;
+
+		// .oz-lottery-spinner-informational__close-button span
+		span {
+			color: $black-2;
+
+			// .oz-lottery-spinner-informational__close-button span:hover
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+
+	// .oz-lottery-spinner-informational__close-img
+	&__close-img {
+		display: flex;
+		align-self: start;
+		justify-self: start;
+		width: rem(12);
+		height: rem(12);
+	}
+
+	// .oz-lottery-spinner-informational__header
+	&__header {
+
+		// .oz-lottery-spinner-informational__header h1
+		h1 {
+			font-size: rem(32);
+			letter-spacing: -0.7px;
+			margin: 0;
+		}
+	}
+
+	// .oz-lottery-spinner-informational__content
+	&__content {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+
+		@include apply-to(desktop) {
+			flex-direction: row;
+		}
+	}
+
+	// .oz-lottery-spinner-informational__footer
+	&__footer {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding-top: rem(20);
+
+		// .oz-lottery-spinner-informational__footer a
+		a {
+			color: $pink-1;
+
+			// .oz-lottery-spinner-informational__footer a p
+			p {
+				font-size: rem(13);
+				line-height: 1.54;
+				letter-spacing: .1px;
+				text-align: center;
+				margin: 0 0 rem(17.5);
+			}
+		}
+	}
+}
+
+.oz-informational-content {
+
+	// .oz-informational-content__wrapper
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		@include apply-to(desktop) {
+			max-width: rem(400);
+		}
+	}
+
+	// .oz-informational-content__wheel
+	&__wheel {
+
+		@include apply-to(desktop) {
+			margin-right: rem(20);
+		}
+
+		// .oz-informational-content__wrapper img
+		img {
+			width: rem(275);
+			height: auto;
+			margin: rem(10);
+		}
+	}
+
+	// .oz-informational-content__copy
+	&__copy {
+		padding: rem(15) 0 0;
+
+		// .oz-informational-content__copy p
+		p {
+			font-size: rem(14);
+			font-family: $primary-font;
+			font-weight: $light;
+			letter-spacing: .1px;
+			line-height: 1.29;
+			text-align: center;
+			margin: 0 0 rem(21.6);
+
+			@include apply-to(desktop) {
+				font-size: rem(16);
+				line-height: 1.25;
+			}
+		}
+	}
+
+	// .oz-informational-content__call-to-action
+	&__call-to-action {
+
+		// .oz-informational-content__call-to-action span
+		span {
+			display: inline-block;
+			min-width: rem(200);
+			text-align: center;
+		}
+	}
+}

@@ -1,0 +1,51 @@
+<section class="columns__one-full-width transparency__link-list">
+  <div class="transparency__link-list--grid">
+    {% for block in section.blocks %}
+      {%- if block.settings.list_image != blank -%}
+        <div class="transparency__link-list--item">
+          <a href="{{ block.settings.link_to }}" class="transparency__link-list--item-link">
+            <img
+              class="lazyload img-img"
+              data-sizes="auto"
+              data-src="{{ block.settings.list_image | img_url: '812x' }}"
+              data-srcset="{% include 'c-responsive-image-url', responsive_img: block.settings.list_image %}"
+              alt="{{ block.settings.list_image.alt }}"
+            />
+            {% if block.settings.list_title != blank %}
+              <h1 class="oz-page-title transparency__link-list--title">{{- block.settings.list_title -}}</h1>
+            {% endif %}
+          </a>
+        </div>
+      {%- endif -%}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+	"name": "Transparency: Link List",
+	"blocks": [
+		{
+			"name": "List item",
+			"type": "list-item",
+			"settings": [
+				{
+          "type": "image_picker",
+          "id": "list_image",
+          "label": "List Image"
+        },
+				{
+          "type": "text",
+          "id": "list_title",
+          "label": "List Title"
+        },
+				{
+          "type": "url",
+          "id": "link_to",
+          "label": "Link To"
+        }
+			]
+		}
+	]
+}
+{% endschema %}

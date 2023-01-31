@@ -1,0 +1,361 @@
+/**
+ * form elements
+ *
+ * form list
+ * form item
+ * form inline
+ * fieldset
+ * legend
+ * label
+ * input
+ * search
+ * textarea
+ * select
+ * radio and checkbox
+ * radio
+ * checkbox
+ * input placeholder
+ */
+
+/**
+ * form item/field
+ */
+.oz-field {
+
+	// .oz-field__container
+	&__container {
+		background-color: $white;
+		border: 1px solid $gray-5;
+		box-shadow: none;
+		position: relative;
+		transition: box-shadow $faster-timer ease;
+		width: 100%;
+		border-radius: 4px;
+
+		&:focus-within {
+			border: 1px solid $primary-color;
+
+			label {
+				color: $primary-color;
+			}
+
+			input {
+				caret-color: $primary-color;
+			}
+		}
+
+		// .oz-field.oz-error .oz-field__container
+		.oz-error & {
+			border-color: $red-3;
+		}
+
+		&.has-value {
+
+			label {
+				padding: 0 rem(8);
+				background-color: transparent;
+				top: 10px !important;
+				font-size: rem(14) !important;
+			}
+		}
+	}
+
+	// .oz-field .input
+	.input {
+		background-color: transparent;
+		border: 0;
+		border-radius: 4px;
+		display: block;
+		font-family: $primary-font;
+		font-size: rem(16);
+		line-height: normal;
+		height: 58px;
+		outline: 0;
+		padding: rem(13) rem(12);
+		width: 100%;
+
+		@include apply-to(desktop) {
+			font-size: rem(18);
+			padding: rem(20) rem(12);
+		}
+
+		&:not(:focus) ~ label {
+			background-color: transparent;
+			font-size: rem(16);
+			top: 50%;
+			left: 5px;
+			@include apply-to(desktop) {
+				font-size: rem(18);
+			}
+		}
+
+		&:-webkit-autofill,
+		&:-webkit-autofill:hover,
+		&:-webkit-autofill:focus {
+			-webkit-text-fill-color: $black-1;
+			background-color: transparent;
+
+			~ label {
+				padding: 0 rem(8);
+				background-color: transparent;
+				top: 10px !important;
+				font-size: rem(14) !important;
+			}
+		}
+	}
+
+	select.input {
+		line-height: normal;
+	}
+
+	// .oz-field label
+	label {
+	  background-color: transparent !important;
+	  color: #929497;
+		font-size: rem(14);
+		left: 5px;
+		padding: 0 rem(8);
+		pointer-events: none;
+		position: absolute;
+		top: 10px;
+		transform: translateY(-50%);
+		transition: all $fast-timer ease;
+		white-space: nowrap;
+		z-index: z(forward);
+	}
+}
+
+/**
+ * inline form field
+ */
+.oz-input {
+	border: 1px solid transparent;
+	color: $black-1;
+	font-family: $primary-font;
+	margin-bottom: rem(10);
+	padding: rem(14) rem(8);
+	width: 100%;
+
+	&::placeholder {
+		color: $gray-7;
+		font-style: italic;
+	}
+}
+
+// .oz-field-wrap
+.oz-field-wrap {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+
+	@include apply-to(tablet) {
+		width: 64%;
+	}
+}
+
+// .oz-field-submit
+.oz-field-submit {
+	display: inline-block;
+	width: 100%;
+
+	@include apply-to(tablet) {
+		width: 35%;
+	}
+
+	// .oz-field-submit .oz-btn
+	.oz-btn {
+
+		// .oz-field-submit .oz-btn--cta
+		&--cta {
+			padding: rem(14) rem(31);
+		}
+	}
+}
+
+// .oz-form
+.oz-form {
+    width: 100%;
+    background: $gray-3;
+    padding: rem(10) rem(20) rem(20) rem(20);
+
+    @include apply-to(tablet) {
+        padding-top: 20px;
+    }
+}
+
+
+/**
+ * select
+ */
+.select {
+	position: relative;
+
+	// .select::before
+	&::before {
+		bottom: 0;
+		margin: auto 0;
+		pointer-events: none;
+		position: absolute;
+		right: rem(30);
+		top: 0;
+		z-index: z(forward);
+		@include icon-svg;
+		@include icon--chevron-down;
+	}
+
+	// .select select
+	select {
+		background-color: $pink-3;
+		border: 0;
+	    border-radius: 0;
+		color: $input-placeholder-color;
+		font-family: $primary-font;
+		font-weight: $regular;
+		margin: 0;
+		outline: none;
+		padding: $select-padding;
+		width: 100%;
+		@include mqstyle('font-size', $size-input);
+
+		&:-moz-focusring {
+			color: transparent;
+			text-shadow: 0 0 0 $black-1;
+		}
+
+		// .select select:hover
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+
+@supports ( -webkit-appearance: none ) or ( appearance: none ) or ( ( -moz-appearance: none ) and ( mask-type: alpha ) ) {
+
+	.select {
+
+		&::after {
+			display: block;
+		}
+
+		select {
+			-moz-appearance: none;
+			-webkit-appearance: none;
+			appearance: none;
+		}
+	}
+}
+
+// Firefox
+@-moz-document url-prefix() {
+
+	.select {
+
+		&::after {
+			display: block;
+		}
+
+		select {
+			background:transparent;
+
+			// Firefox < 4
+			min-width: 6em;
+
+			// Firefox 4-15
+			min-width: -moz-calc(0em);
+
+			// Firefox 16+
+			min-width: calc(0em);
+			overflow: -moz-hidden-unscrollable;
+			padding-right: .4em;
+			width: 130%;
+			width: -moz-calc(100% + 2.4em);
+			width: calc(100% + 2.4em);
+		}
+
+		@supports ( mask-type: alpha ) {
+			overflow: visible;
+
+			select {
+				-moz-appearance: none;
+				padding-right: 2em;
+				width: 100%;
+			}
+		}
+	}
+}
+
+// IE
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+
+	.select {
+
+		&:after {
+			display: block;
+		}
+
+		select {
+			width: 110%;
+
+			&::-ms-expand {
+				display: none;
+			}
+
+			&:focus::-ms-value {
+				background: transparent;
+			}
+		}
+	}
+}
+
+/**
+ * radio and checkbox
+ */
+.checkbox {
+	position: relative;
+
+	// .checkbox label
+	label {
+		cursor: pointer;
+		margin: 0;
+		padding: rem(1) 0 0 rem(28);
+		position: relative;
+		text-align: left;
+
+		// .checkbox label::before
+		&::before {
+			display: block;
+			left: 0;
+			position: absolute;
+			top: 0;
+			@include icon-svg;
+		}
+	}
+
+	// .checkbox input
+	input {
+		height: 0;
+		left: 0;
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		width: 0;
+	}
+}
+
+/**
+ * checkbox
+ */
+.checkbox {
+
+	// .checkbox label::before
+	label::before {
+		@include icon--checkbox-off;
+	}
+
+	// .checkbox input[type="checkbox"]:checked + label::before
+	// .checkbox.is-active label::before
+	input[type="checkbox"]:checked + label::before,
+	&.is-active label::before {
+		@include icon--checkbox-on;
+	}
+}

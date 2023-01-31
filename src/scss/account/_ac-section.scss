@@ -1,0 +1,25 @@
+/**
+ * account section
+ */
+.ac-section {
+
+	@include apply-to(tablet) {
+		padding-left: em(40);
+		padding-top: em(14);
+	}
+
+	@include apply-to(desktop) {
+		padding-left: em(80);
+	}
+
+	// .ac-section em.error
+	em.error {
+	    position: absolute;
+	    top: 100%;
+	    left: 0;
+	    white-space: nowrap;
+	    padding: rem(2) rem(12);
+	    font-size: rem(14);
+	    font-style: italic;
+	}
+}

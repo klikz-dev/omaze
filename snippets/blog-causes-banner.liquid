@@ -1,0 +1,18 @@
+{% assign meta = blog.metafields %}
+{% assign heroMobileImg = meta.hero.mobile_img %}
+{% assign heroDesktopImg = meta.hero.desktop_img %}
+{% assign sectionSubtitle = meta.section.subtitle %}
+
+<div class="causes">
+	<section class="oz-causes__hero columns__one-full-width">
+		{% section 'causes-hero' %}
+		{% if sectionSubtitle %}
+			<div class="oz-section-content">
+				<h3 class="oz-centered">
+					{{- sectionSubtitle -}}
+				</h3>
+			</div>
+		{% endif %}
+
+	</section>
+</div>

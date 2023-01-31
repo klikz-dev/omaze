@@ -1,0 +1,66 @@
+{% assign meta = collection.metafields %}
+{% assign collectionName = collection.handle %}
+{% assign experiencesClosedClass = 'oz-campaigns__experiences--closed' %}
+
+{%- capture experiencesClosed -%}
+    {%- if collectionName == 'experiences-closed' -%}
+        {{- experiencesClosedClass -}}
+    {%- endif -%}
+{%- endcapture -%}
+
+<div class="oz-campaigns experiences">
+    {% section 'campaigns-hero' %}
+    <section class="oz-campaigns__experiences {{ experiencesClosed }}">
+        <div class="oz-section-content">
+            <div class="oz-tabs oz-tabs--two-column">
+                <div class="oz-tabs__tab-bar" id="tabBar">
+                    <div class="oz-tabs__tab{% unless collectionName contains 'closed' %} is-active{% endunless %}">
+                        <a {% if collectionName contains 'closed' %} href="{{ collection.url | remove: '-closed' }}" {% endif %} class="oz-tabs__tab-content">Current campaigns</a>
+                    </div>
+                    <div class="oz-tabs__tab{% if collectionName contains 'closed' %} is-active{% endif %}">
+                        <a {% unless collectionName contains 'closed' %} href="{{ collection.url | append: '-closed' }}" {% endunless %} class="oz-tabs__tab-content">Recently closed</a>
+                    </div>
+                </div>
+                <div class="oz-tabs__panel z-campaigns__experiences--open is-active" id="results">
+                    {% unless settings.collection_sweepstakes_enabled %}
+                        {% paginate collection.products by 4 %}
+                            <div class="card-collection AjaxinateLoop">
+                                {% for product in collection.products %}
+                                    {% include 'product-grid-item' %}
+                                {% endfor %}
+                            </div>
+                            <div class="AjaxinatePagination">
+                                {% if paginate.next %}
+                                    <div class="spinner">
+                                        <a href="{{ paginate.next.url }}"></a>
+                                        {% include 'experience-spinner' %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endpaginate %}
+                    {% endunless %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if settings.collection_sweepstakes_enabled %}
+        <div id="js-collection-app__root">
+            {% render 'collection-skeleton' %}
+        </div>
+        {% render 'skeleton-loading' %}
+        <script>
+            SDG.SkeletonLoading.init();
+        </script>
+    {% endif %}
+
+    <section class="oz-campaigns__links">
+        <div class="oz-about-page__links oz-centered">
+            <a href="/pages/how-it-works">How it works</a>
+        </div>
+    </section>
+</div>
+
+{% if settings.collection_sweepstakes_enabled %}
+    {% include 'CollectionApp' %}
+{% endif %}

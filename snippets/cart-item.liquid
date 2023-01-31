@@ -1,0 +1,15 @@
+{% comment %}
+    Display a Different Cart Line Item based on the product_type
+{% endcomment %}
+{% assign PRODUCT_TYPE = item.product.type | downcase %}
+{% assign EXPERIENCE_PRODUCT_TYPE = 'experience' %}
+{% assign DONATION_PRODUCT_TYPE = 'donation' %}
+{% if PRODUCT_TYPE == EXPERIENCE_PRODUCT_TYPE %}
+    {% include 'cart-item-experience' %}
+{% elsif PRODUCT_TYPE == DONATION_PRODUCT_TYPE %}
+    {% include 'cart-item-donation' %}
+{% else %}
+{% comment %} NOOP -- here for future use cases {% endcomment %}
+{% endif %}
+
+<hr class="cart__hr" />

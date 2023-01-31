@@ -1,0 +1,26 @@
+{% assign s = section.settings %}
+
+<section>
+  <div class="transparency__content-image">
+    <img
+      class="lazyload"
+      data-sizes="auto"
+      data-src="{{ s.content_image | img_url: '812x' }}"
+      data-srcset="{% include 'c-responsive-image-url', responsive_img: s.content_image %}"
+      alt="{{ s.content_image.alt }}"
+    />
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Transparency: Image Two",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "content_image",
+      "label": "Content Image"
+    }
+  ]
+}
+{% endschema %}

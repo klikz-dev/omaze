@@ -1,0 +1,315 @@
+{% comment %}
+    OneTrust Cookies Consent Notice
+
+    The script must be placed before any other script in your site in order to ensure the banner
+    is loaded before any other scripts have the chance to load or set cookies. This allows for the
+    script tag to communicate the site visitor's consent preferences to downstream vendors and for
+    those vendors to show content and set cookies as allowed by the site visitor.
+
+    Exposed global functions:
+        @function OptanonWrapper
+            * Executed on each page load, or whenever the user saves changes
+                to the privacy settings in the Preference Center.
+            * if cookie_compliance_on is False performs a noop
+
+        @function window.ozCookieSet
+            * sets cookie if permitted
+            * if cookie_compliance_on is False, sets cookie directly without permission check
+
+        @function window.ozLocalStorageSet
+            * sets local storage item if permitted
+            * if cookie_compliance_on is False, sets item directly without permission check
+
+        @function window.ozCookieGet
+            * retrieves cookie
+
+        @function window.ozCookieDelete
+            * deletes cookie
+
+        @function window.ozCookiePermitted
+        @function window.ozLocalStoragePermitted
+            * checks if cookie or localStorage key is on a permitted list and if group is permitted
+            * if cookie_compliance_on is False will always return true.
+
+
+    Cookie compliance features:
+        * On page load, purge all existing cookies and local storage keys
+            that are listed inside Inactive Cookie Groups.
+        * On user permission change, purge all existing cookies and local storage keys
+            that are listed inside Inactive Cookie Groups.
+        * Store internal list of cookies and local storage keys and their respective
+            cookie groups.
+        * Set internal cookies and local storage keys only if its group is allowed, as listed
+            in the OneTrust Active Groups. Cookies and local storage keys on internal list marked as
+            STRICTLY NECESSARY are automatically permitted.
+{% endcomment %}
+
+{% if settings.cookie_compliance_on and settings.onetrust_script_id != blank %}
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="{{ settings.onetrust_script_id }}"></script>
+{% endif %}
+
+<script type="text/javascript">
+    (function (window) {
+        const ccmActive = {{ settings.cookie_compliance_on }};
+        const cookieLsList = parseJsonList({{ settings.oz_cookie_ls_list | json }}) || getDefaultCookieList();
+        const cookieGroups = {
+            STRICTLY_NECESSARY_GROUP: "C0001",
+            PERFORMANCE_GROUP: "C0002",
+            FUNCTIONAL_GROUP: "C0003",
+            TARGETING_GROUP: "C0004",
+        }
+
+        // Exposed API if CCM is ON
+        window.OptanonWrapper = optanonWrapperCallback;
+        window.ozCookieSet = setPermittedCookie;
+        window.ozLocalStorageSet = setPermittedLocalStorage;
+        window.ozCookieGet = getCookie;
+        window.ozCookieDelete = deleteCookie;
+        window.ozCookiePermitted = cookiePermitted;
+        window.ozLocalStoragePermitted = cookiePermitted;
+
+        // Exposed API if CCM is OFF
+        if (!ccmActive) {
+            window.OptanonWrapper = () => {};
+            window.ozCookieSet = setCookie;
+            window.ozLocalStorageSet = setLocalStorage;
+            window.ozCookiePermitted = () => { return true };
+            window.ozLocalStoragePermitted = () => { return true };
+        }
+
+        function optanonWrapperCallback () {
+            purgeCookiesAndLocalStorage();
+            setShopifyTrackingConsent();
+        }
+
+        function getInactiveGroups () {
+            if (typeof(OneTrust) !== 'object') {
+                return [];
+            }
+
+            const activeGroups = getActiveGroupIDs();
+            const domainData = OneTrust.GetDomainData();
+            const groupData = domainData && domainData.Groups || [];
+
+            return groupData.filter((group) => {
+                return !activeGroups.includes(group.CustomGroupId);
+            });
+        }
+
+        // Purges any existing cookie or localStorage key
+        //  listed in an inactive OneTrust group.
+        function purgeCookiesAndLocalStorage () {
+            const inactiveGroups = getInactiveGroups();
+
+            inactiveGroups.forEach((group) => {
+                purgeCookieGroup(group);
+            });
+        }
+
+        function purgeCookieGroup (group) {
+            group.Cookies.forEach((cookieData) => {
+                const name = cookieData.Name;
+                const domain = cookieData.Host;
+
+                // Deleting cookies with and w/o setting the Domain
+                // to catch edge cases
+                deleteCookie(name);
+                deleteCookie(name, domain);
+                deleteLocalStorageItem(name);
+            });
+        }
+
+        // Get array of active cookie group ID's as stored in OnetrustActiveGroups window variable.
+        // OnetrustActiveGroups is set by OneTrust library GTM related code.
+        function getActiveGroupIDs () {
+            if (typeof(OnetrustActiveGroups) !== 'string') {
+                console.warn('[Cookies: getActiveGroupIDs] OnetrustActiveGroups missing.');
+
+                return [];
+            }
+
+            const activeIDs = OnetrustActiveGroups.replace(/(^,)|(,$)/g, '');
+            return activeIDs.split(',');
+        }
+
+        // Check if group associated with cookie is permitted.
+        // Any STRICTLY_NECESSARY cookie is allowed automatically.
+        function cookiePermitted (cookieName) {
+            const group = cookieLsList[cookieName];
+
+            if (!group) {
+                return false;
+            }
+
+            const groupId = `C000${group}`;
+            if (groupId === cookieGroups.STRICTLY_NECESSARY_GROUP) {
+                return true;
+            }
+
+            const activeGroupIDs = getActiveGroupIDs();
+
+            return activeGroupIDs.includes(groupId);
+        }
+
+        // Check if cookie is permitted before calling setCookie().
+        function setPermittedCookie (name, value, expirationDays) {
+            if (!cookiePermitted(name)) {
+                console.warn(`[setPermittedCookie] Cookie "${name}" not permitted to be set.`)
+
+                return false;
+            }
+
+            return setCookie(name, value, expirationDays);
+        }
+
+        function setCookie (name, value, expirationDays) {
+            let expirationDate = '';
+            expirationDaysInt = parseInt(expirationDays);
+
+            if (expirationDaysInt) {
+                expirationDate = new Date();
+                expirationDate.setDate(expirationDate.getDate() + expirationDaysInt);
+                expirationDate = expirationDate.toUTCString()
+            }
+
+            document.cookie = `${name} = ${encodeURI(value)}; expires=${expirationDate}; path=/`;
+
+            return true;
+        };
+
+        function getCookie (cName) {
+            let i, x, y;
+            const ARRcookies = document.cookie.split(';');
+            for (i = 0; i < ARRcookies.length; i += 1) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf('='));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf('=') + 1);
+                x = x.replace(/^\s+|\s+$/g, '');
+                if (x === cName) {
+                    return decodeURI(y);
+                }
+            }
+
+            return false;
+        };
+
+        function deleteCookie (name, domain, path) {
+            const pathValue = path || '/';
+            const pathString = `Path=${pathValue};`;
+            const expireString = 'expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+
+            let domainString = '';
+
+            if (domain) {
+                domainString = `Domain=${domain};`
+            }
+
+            const deleted = `${name}=; ${expireString} ${domainString} ${pathString}`;
+
+            document.cookie = deleted;
+        };
+
+        function deleteLocalStorageItem (key) {
+            localStorage.removeItem(key);
+        }
+
+        function setPermittedLocalStorage (key, value) {
+            if (!cookiePermitted(key)) {
+                console.warn(`[setPermittedLocalStorage] Key "${key}" not permitted to be set.`)
+
+                return false;
+            }
+
+            return setLocalStorage(key, value);
+        }
+
+        function setLocalStorage (key, value) {
+            return window.localStorage.setItem(key, value);
+        }
+
+        function parseJsonList (str) {
+            try {
+                return JSON.parse(str);
+            } catch (e) {}
+
+            return false;
+        }
+
+        // Default internal cookie list with group designations.
+        function getDefaultCookieList () {
+            return {
+                "oz__do_not_sell_data": 1,
+                "oz_stop_expired_bonus_entries_notice": 1,
+                "oz_stop_bonus_entries_won_notice": 1,
+                "oz__geo__ip": 1,
+                "oz__geo__region_code": 1,
+                "oz__geo__country_code": 1,
+                "oz__geo__continent_code": 1,
+                "oz__cec": 2,
+
+                // Local Storage
+                "Omaze-Api-Access-Token": 1,
+                "Shopify-Storefront-Api-Access-Token": 1,
+                "oz__recover-password__email": 1,
+                "recreate-acct-user": 1,
+                "OZ_CURRENT_PATH_NAME": 1,
+                "OZ_PREVIOUS_PATH_NAME": 1,
+                "msgType": 1,
+                "authenticationPathName": 1,
+                "returnUrl": 1,
+
+                // Shopify
+                "_ab": 1,
+                "storefront_digest": 1,
+                "cart": 1,
+            };
+        }
+        // ensure to activate GDPR settings on shopify for this to work
+        // https://help.shopify.com/en/manual/your-account/privacy/cookies#tracking-european-customers-and-gdpr-compliance
+        function setShopifyTrackingConsent () {
+            if (!window.Shopify || !window.Shopify.customerPrivacy) {
+                return;
+            }
+            
+            const isAllCategoriesOptedIn = checkAllCategoriesOptedIn();
+            
+            if (!shouldSetTrackingConsent(isAllCategoriesOptedIn)) {
+                return;
+            }
+
+            // setTrackingConsent to true/yes when all cookie categories are OptedIn otherwise set to false/no
+            window.Shopify.customerPrivacy.setTrackingConsent(isAllCategoriesOptedIn, () => {});
+        };
+
+
+        function shouldSetTrackingConsent (isAllCategoriesOptedIn) {
+            const NO_INTERACTION = "no_interaction";
+            const trackingConsent = (window.Shopify.customerPrivacy.getTrackingConsent() || NO_INTERACTION).toLowerCase();
+
+            // Tracking consent hasn't been set in Shopify yet
+            if (trackingConsent === NO_INTERACTION) {
+                return true;
+            }
+
+            // Tracking consent set to yes, but should change to no
+            if (trackingConsent === "yes" && !isAllCategoriesOptedIn) {
+                return true;
+            }
+
+            // Tracking consent set to no, but should change to yes
+            if (trackingConsent === "no" && isAllCategoriesOptedIn) {
+                return true;
+            }
+
+            return false;
+        };
+
+        function checkAllCategoriesOptedIn () {
+            const onetrustActiveGroups = window.OnetrustActiveGroups || "";
+            const activeGroups = new Set(onetrustActiveGroups.split(","));
+
+            return Object.values(cookieGroups).every((group) => {
+                return activeGroups.has(group);
+            });
+        };
+})(window);
+</script>

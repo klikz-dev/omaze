@@ -1,0 +1,682 @@
+// order summary - main container
+.order-summary-container {
+    width: 100%;
+    max-width: rem(400);
+    margin: auto;
+    height: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    margin-top: rem(20);
+    padding: 0;
+}
+
+.order-summary-title {
+    display: flex;
+    justify-content: space-between;
+    .title {
+        text-transform: uppercase;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .order-total {
+        display: none;
+        text-transform: capitalize;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.card {
+    background-color: transparent;
+    margin-top: rem(8);
+    padding: rem(20) rem(0);
+}
+
+.card-title {
+    font-family: $primary-font;
+    font-size: rem(18);
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+}
+
+.content {
+    margin-bottom: rem(20);
+    display: block;
+    .content-title {
+        font-family: National;
+        font-size: rem(18);
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.33;
+        letter-spacing: rem(0.32);
+        color: $black-1;
+    }
+    .content-text {
+        font-family: $primary-font;
+        font-size: rem(18);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.41;
+        letter-spacing: rem(0.3);
+        color: $black-1;
+    }
+    .content-link {
+        font-family: $primary-font;
+        font-size: rem(20);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $secondary-color;
+        text-decoration: none;
+        padding-top: rem(20);
+
+        @include apply-to(mobile) {
+            font-size: rem(18);
+        }
+    }
+
+    #view-campaign-link{
+        font-family: $primary-font;
+        font-weight: bold;
+    }
+}
+
+.button-content {
+    margin-bottom: rem(20);
+    display: flex;
+    align-items: center;
+}
+
+.transaction-details {
+    &--card {
+        margin-top: 0;
+        padding-bottom: 0;
+    }
+    &--title {
+        margin-bottom: rem(25);
+        color: $blue-1;
+        opacity: 0.87;
+        font-family: $secondary-font;
+        font-size: rem(20);
+        font-weight: 900;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.2;
+        letter-spacing: rem(0.36);
+    }
+    &--sub-title {
+        margin-bottom: rem(4);
+    }
+    &--content {
+        &:last-child {
+            margin-bottom: 0;
+        }
+        &__title {
+            font-size: rem(18);
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.33;
+            letter-spacing: rem(0.32);
+            color: $black-1;
+        }
+    }
+}
+
+
+.line-items {
+    width: 100%;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        width: 0 !important
+    }
+    .line-item {
+        border-bottom: rem(1) solid $gray-4;
+        height: auto;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        padding: rem(20) 0;
+        &:first-child {
+            border-top: rem(1) solid $gray-4;
+        }
+        &__image {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            flex-basis: 23%;
+            border: rem(0.2) solid $gray-8;
+            background-color: $gray-8;
+            position: relative;
+            height: rem(75);
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+            border-radius: rem(5);
+        }
+        &__quantity {
+            position: absolute;
+            top: rem(-10);
+            right: rem(-10);
+            border-radius: 50%;
+            background-color: $primary-color;
+            color: $white;
+            text-align: center;
+            width: rem(20);
+            height: rem(20);
+            font-size: rem(13);
+            padding-top: rem(3);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &__details {
+            flex-basis: 72%;
+            height: 100%;
+            overflow: hidden;
+            &-content {
+                width: 100%;
+            }
+            &-entries-price {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                .entries {
+                    flex-basis: 67%;
+                    font-family: $primary-font;
+                    font-size: rem(16);
+                    font-weight: normal;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: normal;
+                    letter-spacing: normal;
+                    text-transform: capitalize;
+                    color: $black-2;
+                }
+                .price {
+                    flex-basis: 33%;
+                    display: block;
+                    font-family: $primary-font;
+                    font-size: rem(14);
+                    font-weight: 500;
+                    font-style: normal;
+                    font-stretch: normal;
+                    line-height: 1;
+                    letter-spacing: normal;
+                    text-align: right;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    color: $black-1;
+                }
+                .bonus {
+                    color: $primary-color;
+                }
+            }
+            &-title {
+                text-align: left;
+                font-family: $primary-font;
+                font-size: rem(16);
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: $black-1;
+                margin: rem(5) 0;
+            }
+            &-support {
+                text-transform: capitalize;
+                font-family: $primary-font;
+                font-size: rem(14);
+                font-weight: normal;
+                font-style: italic;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: $black-2-fade-2;
+                .promo-code {
+                    text-transform: uppercase;
+                    font-size: rem(10);
+                    margin-top: rem(4);
+                    &--icon {
+                        margin-right: rem(2);
+                        width: rem(11);
+                    }
+                }
+            }
+        }
+        &__price {
+            display: none;
+        }
+        .bonus {
+            color: $primary-color;
+        }
+        .refund {
+            margin-left: rem(3);
+            color: $yellow-2
+        }
+        .strike-through {
+            text-decoration: line-through;
+        }
+    }
+}
+
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    height: rem(67);
+    &>a {
+        flex-basis: 30%;
+        color: $secondary-color;
+        font-size: rem(14);
+        .arrow {
+            font-family: $primary-font;
+            color: $secondary-color;
+            text-decoration: none;
+            padding-left: rem(14);
+            cursor: pointer;
+            font-size: rem(16);
+            font-weight: bold;
+        }
+        .text {
+            font-family: $primary-font;
+            text-decoration: none;
+            margin-bottom: 0;
+            font-size: rem(14);
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            cursor: pointer;
+        }
+    }
+}
+
+.order-cost {
+   margin-top: rem(16);
+   width: 100%;
+   display: flex;
+   align-items: center;
+   &__content {
+        width: 100%;
+        .content-text {
+            text-transform: capitalize;
+            color: $black-1;
+            display: flex;
+            align-items: center;
+            .title {
+                flex-basis: 50%;
+                text-align: left;
+            }
+            .value {
+                flex-basis: 50%;
+                text-align: right;
+            }
+        }
+        .subtotal_price {
+             font-family: $primary-font;
+             font-size: rem(16);
+             font-weight: normal;
+             font-style: normal;
+             font-stretch: normal;
+             line-height: 1.5;
+             letter-spacing: rem(0.29);
+             text-align: right;
+        }
+        .total_price {
+             font-family: $primary-font;
+             font-size: rem(18);
+             font-weight: bold;
+             font-style: normal;
+             font-stretch: normal;
+             line-height: 1.33;
+             letter-spacing: rem(0.32);
+             text-align: right;
+             margin-top: 0;
+        }
+    }
+}
+
+.oz-button {
+    width: rem(252);
+    height: rem(61);
+    border-radius: rem(4);
+    border: rem(1) solid $secondary-color;
+    background-color: $secondary-color;
+    color: $white;
+    font-family: $primary-font;
+    font-size: rem(20);
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.oz-button:hover {
+    cursor: pointer;
+    background-color: $pink-1;
+}
+
+.oz-button-secondary {
+    width: rem(252);
+    height: rem(50);
+    height: rem(61);
+    border-radius: rem(4);
+    border: solid rem(1) $secondary-color;
+    background-color: $gray-15;
+    color: $secondary-color;
+    font-family: $primary-font;
+    font-size: rem(20);
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: rem(5) rem(5) rem(5) rem(24);
+}
+
+.oz-button-secondary:hover {
+    cursor: pointer;
+}
+
+.helpful-links, .common-questions {
+    margin-top: rem(49);
+
+    &__title {
+        font-family: $secondary-font;
+        font-size: rem(24);
+        line-height: rem(32);
+        letter-spacing: rem(0.33);
+        opacity: 0.87;
+        height: 32px;
+        margin-bottom: rem(16);
+
+        @include apply-to(mobile) {
+            font-size: rem(18);
+            line-height: rem(24);
+            letter-spacing: rem(0.32);
+            height: 24px;
+        }
+    }
+}
+
+.content-container {
+    padding-left: rem(16);
+    padding-right: rem(16);
+    z-index: 9;
+    position: relative;
+}
+
+.loading-container {
+    padding: 0 rem(10) 0 rem(10);
+}
+
+.error-card {
+    border-radius: rem(2);
+    box-shadow: 0 rem(2) rem(2) 0 $black-1-fade;
+    border: solid rem(1) $gray-16;
+    background-color: $white;
+    margin-bottom: rem(24);
+    color: $black-2;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.error-text {
+    color: $red-3;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Small Devices, Tablets */
+@include apply-to(mobile) {
+    margin: rem(5) rem(5) rem(5) rem(16);
+}
+
+@include apply-to(tablet) {
+    .order-summary-container {
+        width: 100vw;
+        max-width: none;
+        padding: 0 rem(15) rem(32) rem(16);
+    }
+
+    .content {
+        display: flex;
+        justify-content: space-between;
+        .content-title {
+            flex-basis: 25%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .content-text {
+            flex-basis: 72%;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &.campaign-title {
+                white-space: normal;
+                text-overflow: none;
+            }
+        }
+    }
+
+    .line-items {
+        .line-item {
+            &__image {
+                flex-basis: 14%;
+            }
+            &__details {
+                flex-basis: 82%;
+            }
+        }
+    }
+
+    .nav-bar {
+        display: flex;
+        align-items: center;
+        height: rem(67);
+        &>a {
+            flex-basis: 30%;
+            color: $secondary-color;
+            font-size: rem(16);
+            .arrow {
+                font-family: $primary-font;
+                color: $secondary-color;
+                text-decoration: none;
+                padding-left: rem(16);
+                cursor: pointer;
+                font-size: rem(18);
+                font-weight: bold;
+            }
+            .text {
+                font-family: $primary-font;
+                text-decoration: none;
+                margin-bottom: 0;
+                font-size: rem(16);
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@include apply-to(desktop) {
+    .order-summary-container {
+        width: rem(728);
+        max-width: none;
+        padding: 0;
+    }
+
+    .content {
+        display: flex;
+        justify-content: space-between;
+
+        .content-title {
+            flex-basis: 25%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: rem(20);
+        }
+        .content-text {
+            flex-basis: 72%;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: rem(20);
+            &.campaign-title {
+                white-space: normal;
+                text-overflow: none;
+            }
+        }
+    }
+
+    .line-items {
+        .line-item {
+            &__image {
+                flex-basis: 12%;
+            }
+            &__details {
+                flex-basis: 63%;
+                &-content {
+                    width: 80%;
+                }
+                &-entries-price {
+                    .price {
+                        display: none
+                    }
+                }
+                &-support {
+                    .promo-code {
+                        display: block;
+                        font-family: $primary-font;
+                        font-size: rem(11);
+                        font-weight: normal;
+                        font-style: normal;
+                        font-stretch: normal;
+                        line-height: normal;
+                        letter-spacing: normal;
+                        color: $gray-6;
+                        &--icon {
+                            margin-right: rem(2);
+                            width: rem(11);
+                        }
+                    }
+                }
+            }
+            &__price {
+                flex-basis: 20%;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                font-size: rem(17)
+            }
+
+            .refund {
+                margin-left: rem(7);
+                margin-right: rem(7);
+            }
+        }
+    }
+
+    .order-cost {
+        justify-content: flex-end;
+        &__content {
+            width: 40%;
+            .subtotal_price {
+                font-size: rem(18)
+            }
+            .total_price {
+                margin-top: rem(20);
+                font-size: rem(20)
+            }
+        }
+    }
+
+    .order-summary-title {
+        .title {
+            text-transform: capitalize;
+            font-size: rem(20);
+        }
+        .order-total {
+            display: block;
+            text-transform: capitalize;
+            text-align: right;
+            font-size: rem(20);
+        }
+    }
+
+    .transaction-details {
+        &--card {
+            margin-top: 0;
+            padding-bottom: 0;
+        }
+        &--title {
+            margin-bottom: rem(25);
+            color: $blue-1;
+            opacity: 0.87;
+            font-family: $secondary-font;
+            font-size: rem(24);
+            font-weight: 900;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.2;
+            letter-spacing: rem(0.36);
+        }
+        &--sub-title {
+            margin-bottom: rem(4);
+        }
+        &--content {
+            &:last-child {
+                margin-bottom: 0;
+            }
+            &__title {
+                font-size: rem(18);
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.33;
+                letter-spacing: rem(0.32);
+                color: $black-1;
+            }
+        }
+    }
+}

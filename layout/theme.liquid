@@ -1,0 +1,181 @@
+{% comment %}When the website goes live change this to production{% endcomment %}
+{% assign ENV = settings.env %}
+
+<!doctype html>
+<html lang="en-US">
+<head>
+    {% if settings.env == 'staging' %}
+        <meta name="robots" content="noindex">
+    {% endif %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    {% include 'SEOManager' %}
+    {% include 'social-meta-tags' %}
+    {% include 'sailthru-meta-tags' %}
+
+    {% include 'favicons' %}
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+
+    {% include 'SEOlocalization' %}
+
+    {% comment %}
+    ****************************************************
+    ******* No scripts above Cookie Compliance *********
+    **************************************************** {% endcomment %}
+    {% include 'cookie-compliance-management' %}
+
+    {% include 'app-config-vars' %}
+
+    {% assign tempAssetUrl = 'temp' | asset_url | split: 'temp?' | first %}
+    {% assign tempFileUrl = 'temp' | file_url | split: 'temp?' | first %}
+    <script>
+        var assetUrl = '{{ tempAssetUrl }}';
+        var fileUrl = '{{ tempFileUrl }}';
+        {% if template contains 'collection' %}
+        var collectionName = '{{ collection.title }}';
+        {% endif %}
+        window.SDG = window.SDG || {};
+        window._ = window._ || {};
+        SDG.sq = [];
+    </script>
+
+    {% include 'geolocation-head' %}
+
+    {% include 'optimizely-head' %}
+
+    {% include 'googletagmanager-head' %}
+
+    {% include 'stylesheets' %}
+
+    {% if template contains 'customers' %}
+        {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {% endif %}
+
+    {{ content_for_header }}
+
+    {% if template == 'product' %}
+        {{ 'experience.scss.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    {% if template == 'product.donation' %}
+        {{ 'donation.scss.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    {% include 'geolocation-content' %}
+</head>
+
+{% comment %}CSS class added to body to make nav header sticky.{% endcomment %}
+{% assign hdrFixed = ' hdr-fixed' %}
+
+{% comment %}Add class to body if promo enabled: settings.promo_enable{% endcomment %}
+{%- capture promo_enabled -%}
+    {%- if settings.promo_enable -%}has-promo{%- endif -%}
+{%- endcapture -%}
+
+{% comment %}Set isDashboard{% endcomment %}
+{% assign isDashboard = false %}
+{% if template == 'customers/account' or template == 'customers/addresses' %}
+    {% assign isDashboard = true %}
+{% endif %}
+
+{% if settings.rebrand_active == true %}
+    {% assign rebrandClass = "rebrand" %}
+{% endif %}
+
+<body id="{{ page_title | handle }}" class="{{ rebrandClass }} {% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{{ hdrFixed }} {{ promo_enabled }}">
+    {% include 'googletagmanager-body' %}
+
+    {% include 'eligibility-settings' %}
+
+    {% include 'storefront-client-token' %}
+
+    {% if template != 'page.unavailable' %}
+        {% include 'header' %}
+    {% else %}
+        {% include 'unavailable-nav' %}
+    {% endif %}
+
+    <main id="main" class="page-wrap" role="main">
+        {{ content_for_layout }}
+    </main>
+
+    {% if template != 'page.unavailable' %}
+        {% include 'local-storage-data' %}
+        {% include 'footer' %}
+        {% include 'modals' %}
+        {% include 'bag-data' %}
+        {% include 'notification-bar' %}
+        {% include 'redirect-handler' %}
+    {% endif %}
+
+    {% include 'js' %}
+
+    <!--
+        NOTE:
+            product-recommendations.js needs this, but it has to load after jQuery so
+            it cannot be added at the new call sites (jQuery has not loaded by then),
+            ideally product-recommendations.js should be refactored to use the new
+            imported Slick carousel component per @tglaz, also would prefer to load
+            it only where needed, hence using this existing triple template check
+
+            SEE TICKET: https://favro.com/organization/46d56f56f921b3d19fb69f7f/f267f684d9bd42c142206ee5?card=Oma-3389
+    -->
+    {% if template == 'customers/account.orders' or template == 'product' or template == 'cart' %}
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    {% endif %}
+
+    <script>
+        var customerData = {
+            email: '{{ customer.email }}',
+            tags: {{ customer.tags | json }},
+            cartItems: {{ cart.items | json }},
+        };
+
+        // TODO: Move this to the src/js directory
+        // TODO: the expectation is that we shouldn't have to touch shopify logout
+        // but when a user logs out, they can still see their info when they
+        // navigate to the accounts page with the back button - OMA-1166
+        // So we need to ask shopify about this
+        // https://github.com/Omaze/shopify-theme/pull/62#discussion_r273732077
+
+        jQuery(document).ready( function() {
+            jQuery('a[href^="/account/logout"]').on("click", function() {
+                jQuery.ajaxSetup({cache: false});
+                jQuery.ajax(jQuery(this).attr('href') )
+                .done(function() {
+                    window.localStorage.removeItem('{{settings.omaze_customer_access_token_key}}');
+                    window.localStorage.removeItem('{{settings.shopify_customer_access_token_key}}');
+                    window.location.reload(true);
+                });
+
+                return false;
+            });
+        });
+
+        window.addEventListener("DOMContentLoaded", function() {
+            SDG.AccessRestrictions.init({
+                ineligibleCountries: {{- settings.oz_access_ineligible_countries | json -}},
+                ineligibleRegions: {{- settings.oz_access_ineligible_regions | json -}},
+                env: '{{- settings.env -}}',
+            });
+            SDG.AccessRestrictions.restrictAccess();
+
+            {% unless
+                template contains 'customers' or
+                template contains 'page.recover-account-message' or
+                template contains 'page.confirm-account-message' or
+                template contains 'page.teaser'
+            %}
+                window.SDG.Marketing.loadOptinForm();
+            {% endunless %}
+        });
+    </script>
+
+    {% include 'sailthru-body' %}
+
+    {% include 'auth0' %}
+</body>
+</html>

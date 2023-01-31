@@ -1,0 +1,10 @@
+{% if blog.handle == 'causes' %}
+	{% include 'blog-causes-banner' %}
+	{% include 'blog-causes-archive' %}
+
+{% elsif blog.handle == 'winners' %}
+	{% include 'blog-winners-banner' %}
+	{% include 'blog-winners-content' %}
+	{% include 'blog-winners-archive' %}
+
+{% endif %}

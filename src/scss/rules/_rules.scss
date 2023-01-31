@@ -1,0 +1,117 @@
+/**
+ * About Page
+ */
+
+.page--rules {
+	margin-left: 60px;
+    margin-right: 60px;
+}
+
+.page--rules .page_header {
+	border-bottom: solid 2px #000;
+    margin-bottom: 20px;
+}
+
+.page__title {
+	text-align: center;
+}
+
+.rules {
+
+	// .rules__title
+	&__title {
+		border-bottom: solid rem(2) $black-1;
+		margin: rem(50) rem(60) rem(20) rem(60);
+		padding-top: rem(40);
+		text-align: center;
+
+		h1 {
+			font-size: rem(32);
+		}
+	}
+
+	// .rules__section
+	&__section {
+		border-bottom: rem(1) solid $gray-3;
+		margin: rem(8) 5%;
+		padding: rem(8) rem(16) rem(8) rem(16);
+		text-align: justify;
+
+		p {
+			font-size: rem(16);
+			font-weight: $light;
+			line-height: rem(24);
+			margin: 0 0 1.35em;
+		}
+
+		strong {
+			font-size: rem(18);
+			line-height: 1.25rem;
+		}
+
+		span {
+			text-decoration: underline;
+		}
+
+		a {
+			color: $pink-6;
+
+			// .rules__section a:hover
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+		ul {
+			list-style: disc outside none;
+			margin: 0;
+			padding: 0;
+			font-size: rem(16);
+			font-weight: $light;
+
+			li {
+				font-size: rem(16);
+				font-weight: $light;
+				margin: rem(4) 5%;
+				padding: rem(4);
+			}
+		}
+	}
+
+	.main {
+		background: $white;
+		font-family: $primary-font;
+
+		h1 {
+			font-family: $secondary-font;
+			margin-bottom: 0;
+		}
+	}
+
+	.copyright {
+		margin: rem(16) rem(64);
+		padding: rem(16) rem(64);
+		text-align: center;
+
+		p {
+			font-size: rem(16);
+			font-weight: $light;
+			margin-bottom: 0;
+			line-height: 1;
+		}
+	}
+
+	.oz-omaze-component-rules {
+		margin: 0 auto;
+		padding: 0 rem(15);
+		display: block;
+
+		@include apply-to(tablet) {
+			width: rem(970);
+		}
+
+		@include apply-to(desktop) {
+			width: rem(1170);
+		}
+	}
+}

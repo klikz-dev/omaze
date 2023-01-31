@@ -1,0 +1,34 @@
+.oz-donation__title {
+    margin-top: 24px;
+    margin-bottom: 0;
+
+    @include apply-to(desktop) {
+        margin-top: 56px;
+    }
+}
+
+.oz-donation__title h1 {
+    font-family: $secondary-font;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.18px;
+
+    @include apply-to(desktop) {
+        font-size: 26px;
+    }
+}
+
+.oz-donation__title p {
+    font-family: $primary-font;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 14px;
+    padding-right: 30px;
+    margin-top: 4px;
+}
+
+.oz-donation__subtitle h2 {
+    font-size: 20px;
+}

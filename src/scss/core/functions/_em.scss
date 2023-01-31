@@ -1,0 +1,36 @@
+/**
+ * pixels to em
+ */
+$browser-context: 16; // Default
+
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+/**
+ * pixels to rem
+ */
+@function rem($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}rem;
+}
+
+/// This function will calculate px based on ems passed and round up to nearest integer
+/// based on the default of 16px, or you can pass a context
+/// @param {string|number} $ems - The em value you want to convert
+/// @param {string|number} $context [$browser-context] - The context to use for converting
+/// @see $browser-context
+/// @returns {String} Value in px
+/// @example
+/// font-size: ceil-calc-px(.5em);
+
+@function ems-to-px-ceil($ems, $context: $browser-context) {
+    @if (unitless($ems)) {
+        $ems: $ems * 1em;
+    }
+
+    @if (unitless($context)) {
+        $context: $context * 1px;
+    }
+
+    @return ceil($ems / 1em * $context);
+}

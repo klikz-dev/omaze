@@ -1,0 +1,64 @@
+/**
+ * Product Experience Cart
+ */
+
+.oz-card__container {
+	@include apply-to(desktop-narrow) {
+		width: $breakpoint-desktop-narrow;
+	}
+}
+
+.oz-collapsible-panel {
+
+	// .oz-collapsible-panel__header
+	&__header {
+		z-index: 2;
+	    cursor: pointer;
+	    color: #c01e6e;
+	    position: absolute;
+	    bottom: 0;
+	    right: 5%;
+	    text-decoration: underline;
+	    font-weight: 700;
+	    font-size: 12px;
+	}
+
+	// .oz-collapsible-panel__content
+	&__content {
+	    display: block;
+	    word-break: break-all;
+		min-height: 90px;
+	    opacity: 1 !important;
+
+		@include apply-to(desktop) {
+			margin-top: 0;
+		}
+
+		// .oz-collapsible-panel__content-wrapper
+		&-wrapper {
+			height: 90px;
+			overflow: hidden;
+		}
+	}
+
+	// .oz-collapsible-panel-content
+	&-content {
+		display: block;
+		margin-top: 25px;
+
+		@include apply-to(desktop) {
+			margin-top: 0;
+		}
+	}
+}
+
+.oz-wysigyg a {
+	color: $pink-6;
+	text-decoration: underline;
+	&:active,
+	&:focus,
+	&:hover,
+	&:visited {
+		color: $pink-1;
+	}
+}

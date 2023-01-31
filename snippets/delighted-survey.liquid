@@ -1,0 +1,45 @@
+{% comment %}
+    Sailtrhu
+    * email service provider
+
+    Cookies used: YES
+    Cookie Groups:
+        * PERFORMANCE: C0002
+
+    Script set to type="text/plain" so that it can be converted to type="text/javascript"
+    once user grants permission for cookie group. Conversion happens via the OneTrust SDK.
+    Note: Optanon is an alias for OneTrust.
+
+    The values in the `class="optanon-category-#-#-#"` correspond to the categories
+    of cookies set up in the cookie list for the site.
+
+    When listing multiple categories using this method, such as optanon-category-C0003-C0004,
+    the categories are blocked concurrently. None of the cookies in these categories will be set
+    unless the site visitor consents to all of the categories being blocked.
+{% endcomment %}
+
+{% if checkout.order_id %}
+    {% assign scriptType = "text/javascript" %}
+    {% if settings.cookie_compliance_on %}
+        {% assign scriptType = "text/plain" %}
+    {% endif %}
+
+    <script type="{{scriptType}}" class="optanon-category-C0002">
+        !function(e,t,r,n,a){if(!e[a]){for(var i=e[a]=[],c=0;c<r.length;c++){var s=r[c];i[s]=i[s]||function(e){return function(){var t=Array.prototype.slice.call(arguments);i.push([e,t])}}(s)}i.SNIPPET_VERSION="1.0.1";var o=t.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://d2yyd1h5u9mauk.cloudfront.net/integrations/web/v1/library/"+n+"/"+a+".js";var p=t.getElementsByTagName("script")[0];p.parentNode.insertBefore(o,p)}}(window,document,["survey","reset","config","init","set","get","event","identify","track","page","screen","group","alias"],"icBMqnD1fJoO7PpD","delighted");
+        delighted.survey({
+            email: '{{ checkout.customer.email }}',
+            name: '{{ checkout.customer.name }}',
+            recurringPeriod: 5,
+            properties: {
+                customerFirstOrder: '{{ checkout.customer.orders.last.id }}',
+                customerId: '{{ checkout.customer.id }}',
+                customerOrdersCount: '{{ checkout.customer.orders | size }}',
+                landingSite: 'https://www.omaze.com',
+                orderCreatedAt: '{{ order.created_at }}',
+                orderId: '{{ checkout.order_id }}',
+                orderItemQuantity: '{{ checkout.line_items | size }}',
+                orderTotal: '{{ checkout.total_price }}',
+            }
+        });
+    </script>
+{% endif %}

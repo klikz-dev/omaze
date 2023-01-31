@@ -1,0 +1,21 @@
+{% include 'donation-data' %}
+
+<a data-oa-id="clickProduct"
+   data-oa-details="product_id:{{ product.id }}" class="oz-simple-card oz-card-experience" href="{{ product.url }}" title="{{ product.title }}">
+
+    <div class="oz-simple-card__img oz-simple-card__section oz-simple-card__section--full-width">
+        <div class="oz-aspect--16-9">
+            <img class="lazyload" data-sizes="auto" data-src="{{ product | img_url: '812x' }}" data-src="{% include 'c-responsive-image-url', responsive_img: product %}" alt="{{ product.image.alt }}">
+        </div>
+    </div>
+    <div class="oz-simple-card__content oz-simple-card__section">
+        <h4 class="oz-simple-card__title">
+            {{- product.title -}}
+        </h4>
+    </div>
+    <div class="oz-card__footer oz-card__section">
+        <span class="oz-card__cta-label oz-chevron--right-thick secondary-font">
+            Donate now
+        </span>
+    </div>
+</a>

@@ -1,0 +1,25 @@
+{% assign s = section.settings %}
+
+<div id="unavailableheader">
+  <header class="oz-unavailable-header">
+    <h1 class="heading"> {{ s.unavailable-heading }} </h1>
+    <h2 class="sub-heading"> {{ s.unavailable-sub-heading }} </h2>
+  </div>
+</header>
+{% schema %}
+  {
+    "name": "Unavailable Page Header",
+    "settings": [
+      {
+        "id": "unavailable-heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "unavailable-sub-heading",
+        "type": "text",
+        "label": "Sub Heading"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,16 @@
+{% comment %}
+Related Products
+{% endcomment %}
+{% assign hasRelatedProduct = false %}
+{% assign id = product.id %}
+{%- capture relatedProducts -%}
+	{%- for tag in product.tags -%}
+		{% assign tagDowncase = tag | downcase %}
+		{%- if tagDowncase contains 'related:' -%}
+			{%- assign hasRelatedProduct = true -%}
+			{%- assign tagFormat = tagDowncase | strip -%}
+			{%- capture relatedTag -%}{{- tagFormat | remove: 'related:' | strip -}}{%- endcapture -%}
+			{%- include 'product-grid-item', product: all_products[relatedTag], namespace: 'related-item' -%}
+		{%- endif -%}
+	{%- endfor -%}
+{%- endcapture -%}

@@ -1,0 +1,93 @@
+.container {
+   @apply grid mt-2;
+}
+
+.image, .textContainer {
+    @apply justify-self-center;
+
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.imageDesktop {
+    display: none;
+}
+
+.imageMobile {
+    display: block;
+}
+
+.amount {
+    @apply type-h3 text-center;
+
+    margin-bottom: 4px;
+    margin-top: 30px;
+}
+
+.caption {
+    @apply type-caption text-center;
+
+    width: 320px;
+    line-height: 18px;
+}
+
+@screen lg {
+    .amount {
+        @apply type-h2 mb-1;
+
+        margin-top: 32px;
+    }
+
+    .caption {
+        @apply type-caption text-center ml-1;
+
+        width: 398px;
+    }
+
+    .container {
+        @apply grid mt-4;
+     }
+
+    .imageDesktop {
+        display: block;
+    }
+
+    .imageMobile {
+        display: none;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .container {
+    margin-top: 16px;
+}
+
+:global(.rebrand) .amount {
+    color: #090F15;
+    font-family: Showtime;
+    font-size: 60px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+:global(.rebrand) .caption {
+    color: #000000;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 500;
+    font-style: italic;
+}
+
+@screen lg {
+    :global(.rebrand) .amount {
+        font-size: 72px;
+    }
+
+    :global(.rebrand) .caption {
+        font-size: 14px;
+    }
+}

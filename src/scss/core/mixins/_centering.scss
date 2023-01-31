@@ -1,0 +1,36 @@
+////
+/// @group Centering
+/// @example
+/// .my-class {
+///      position: relative;
+///
+///     &__child {
+///         @include middle;
+///     }
+/// }
+////
+
+/// Horizontally Center Item
+@mixin horiz-center () {
+    position: absolute;
+    left: 50%;
+
+    @include transform(translateX(-50%));
+}
+
+/// Vertically Center Item
+@mixin vert-center () {
+    position: absolute;
+    top: 50%;
+
+    @include transform(translateY(-50%));
+}
+
+/// Both Vertical And Horizontally Center Item
+@mixin middle () {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    @include transform(translateX(-50%) translateY(-50%));
+}

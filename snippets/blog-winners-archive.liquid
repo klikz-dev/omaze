@@ -1,0 +1,42 @@
+<div class="oz-winner-component-list__winners">
+	<div class="oz-winner-component-list__winners-grid">
+		<h2 class="oz-winner-component-list__header--winners">
+			meet them all...
+		</h2>
+
+		{% paginate blogs.winners.articles by 12 %}
+
+			{%- capture isPagination -%}
+				{%- if paginate.next -%}
+					true
+				{%- else -%}
+					false
+				{%- endif %}
+			{%- endcapture -%}
+
+			<div id="MainContent" class="paginate">
+				<div class="AjaxinateLoop paginate__container">
+
+					{% for article in blogs.winners.articles %}
+						{% include 'blog-winners-item' %}
+					{% endfor %}
+
+				</div>
+				<div class="AjaxinatePagination paginate__button">
+
+				  {% if paginate.next %}
+					    <a class="oz-btn oz-btn--line oz-btn--line--pink oz-btn--line--pink--long" href="{{ paginate.next.url }}">
+					    	view more
+					    </a>
+				  {% endif %}
+
+				</div>
+			</div>
+			
+		{% endpaginate %}
+
+	</div>
+</div>
+<script>
+	var isPaginated = {{ isPagination | strip }};
+</script>

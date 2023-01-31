@@ -1,0 +1,208 @@
+{% assign s = section.settings %}
+
+{% if s.carousel_enabled == 'yes' %}
+    <section class="columns__one-full-width oz-homepage__impact">
+        <h2 class="oz-section-title oz-centered">
+            {{ s.section_title }}
+        </h2>
+        <div class="oz-slider">
+            <div class="oz-slider__list js-impact-slider">
+
+                {% for block in section.blocks %}
+                    {% assign b = block.settings %}
+
+                    <div class="oz-slider__item">
+                        {%- if b.slide_video_url == blank -%}
+                            {%- if b.slide_link != blank -%}
+                                <a href="{{ b.slide_link }}">
+                            {%- endif -%}
+                                    <div class="oz-slider__img intrinsic-ratio oz-slider__intrinsic-ratio">
+                                        <img class=" lazyload" data-src="{{ b.slide_img | img_url: '800x400', crop: 'center' }}">
+                                        <h3 class="oz-slider__title">
+                                            {{ b.slide_text }}
+                                        </h3>
+                                    </div>
+                            {%- if b.slide_link != blank -%}
+                                </a>
+                            {%- endif -%}
+                        {%- endif -%}
+                        {%- if b.slide_video_url != blank -%}
+                            {% assign videoURL = b.slide_video_url %}
+                            {% if videoURL contains "?" %}
+                                {% assign videoURL = b.slide_video_url | append: "&enablejsapi=1" %}
+                            {% else %}
+                                {% assign videoURL = b.slide_video_url | append: "?enablejsapi=1" %}
+                            {% endif %}
+                            <div class="oz-slider__img intrinsic-ratio oz-slider__intrinsic-ratio">
+                                <div class="embed-container">
+                                    <iframe onload="videoStartHandler(this)" src="{{videoURL}}" allowfullscreen="" frameborder="0"></iframe>
+                                </div>
+                            </div>
+                        {%- endif -%}
+                        <div class="oz-slider__content">
+                            {%- if b.slide_link != blank -%}
+                                <a href="{{ b.slide_link }}">
+                            {%- endif -%}
+                                    <h4 class="oz-slider__subtitle">
+                                        {{ b.sub_slide_text }}
+                                    </h4>
+                            {%- if b.slide_link != blank -%}
+                                </a>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <script>
+       const addYoutubeEventListener = (function () {
+            const videoUrls = [];
+            const callbacks = [];
+            let iframeId = 0;
+
+            return function (iframe, callback) {
+                if (iframeId === 0) {
+                    // Initialize the Youtube message listener when this module is called first time
+                    window.addEventListener('message', function (e) {
+                        if (e.origin !== 'https://www.youtube.com' || e.data === undefined) {
+                            return;
+                        }
+
+                        try {
+                            const data = JSON.parse(e.data);
+
+                            if (data.event === 'infoDelivery' && !videoUrls[data.id]) {
+                                videoUrls[data.id] = data.info.videoUrl;
+                            }
+
+                            // Only pass the onStateChange data to the callback
+                            if (data.event === 'onStateChange') {
+                                // data.id is the iframeId we send to Youtube
+                                const cb = callbacks[data.id];
+                                data.videoUrl = videoUrls[data.id];
+
+                                cb(data);
+                            }
+                        } catch (e) {} // Ignore the error because event come as streaming(Youtube video playing)
+                    });
+                }
+
+                // store the callback for each iframe, based on the iframeId
+                iframeId++;
+                callbacks[iframeId] = callback;
+
+                // Send message to Youtube to subscribe to the listening event,
+                // each iframe is differentiated by the iframeId
+                let message = JSON.stringify({
+                    event: 'listening',
+                    id: iframeId,
+                    channel: 'widget'
+                });
+                iframe.contentWindow.postMessage(message, 'https://www.youtube.com');
+
+                // Send message to Youtube to subscribe to the onStateChange event,
+                // each iframe is differentiated by the iframeId
+                message = JSON.stringify({
+                    event: 'command',
+                    func: 'addEventListener',
+                    args: ['onStateChange'],
+                    id: iframeId,
+                    channel: 'widget'
+                });
+                iframe.contentWindow.postMessage(message, 'https://www.youtube.com');
+            }
+        })();
+
+       const videoStartHandler = (el) => {
+           // data is Youtube's onStateChange event data
+           // 1 is for video playing
+           // https://developers.google.com/youtube/iframe_api_reference#Events
+           addYoutubeEventListener(el, function (data) {
+               if (data.info === 1) {
+                   SDG.Analytics.events.pushDataLayerEvent({
+                       event: 'click',
+                       ga_category: 'Impact Section',
+                       ga_action: 'Start Video',
+                       ga_label: data.videoUrl,
+                   });
+               }
+           });
+       }
+
+        const pauseVideoHandler = function() {
+            const els = $('.oz-homepage__impact .embed-container iframe');
+            els.each((index) => {
+                const el = els[index];
+                el.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', 'https://www.youtube.com');
+            });
+        };
+
+        window.onload = () => {
+            $('.oz-homepage__impact .js-impact-slider').on('afterChange', pauseVideoHandler);
+        };
+    </script>
+{% endif %}
+
+{% schema %}
+    {
+        "name": "Home Impact",
+        "class": "home-impact",
+        "settings": [
+            {
+                "type": "select",
+                "id": "carousel_enabled",
+                "options": [
+                    {
+                        "value": "yes",
+                        "label": "Yes"
+                    },
+                    {
+                        "value": "no",
+                        "label": "No"
+                    }
+                ],
+                "label": "Carousel Enabled?",
+                "default": "no"
+            },
+            {
+                "type": "text",
+                "id": "section_title",
+                "label": "Section Title"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "home_impact_slide",
+                "name": "Home Impact Slide",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "slide_img",
+                        "label": "Slide Image"
+                    },
+                    {
+                        "type": "url",
+                        "id": "slide_video_url",
+                        "label": "Slide Video Embed URL"
+                    },
+                    {
+                        "type": "text",
+                        "id": "slide_text",
+                        "label": "Slide Text"
+                    },
+                    {
+                        "type": "text",
+                        "id": "sub_slide_text",
+                        "label": "Sub Slide Text"
+                    },
+                    {
+                        "type": "url",
+                        "id": "slide_link",
+                        "label": "Slide Link"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

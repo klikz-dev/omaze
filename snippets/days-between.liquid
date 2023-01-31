@@ -1,0 +1,14 @@
+{% assign secondDate = endDate | date: '%s' %}
+{% assign firstDate = 'now' | date: '%s' %}
+
+{% if startDate %}
+	{% assign firstDate = startDate %}
+{% endif %}
+
+{% comment %} difference in seconds {% endcomment %}
+{% assign diffSeconds = firstDate | minus: secondDate %}
+
+{% comment %} difference in days {% endcomment %}
+{% assign diffDays = diffSeconds | divided_by: 3600 | divided_by: 24 %}
+
+{{ diffDays | abs }}

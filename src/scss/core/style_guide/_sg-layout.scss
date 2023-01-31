@@ -1,0 +1,112 @@
+.ozsg {
+    .ozc__page {
+        padding: 0 $ozsgPagePaddingMobile;
+
+        @include apply-to(desktop) {
+            padding: 0 $ozsgPagePaddingDesktop;
+        }
+    }
+
+    .ozc-section--fixed-width-desktop {
+        @include apply-to(desktop) {
+            width: $ozsgPageDesktopFixedWidth;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    .ozc-section--fixed-width {
+        display: block;
+        width: 100%;
+        padding-left: $ozsgPagePaddingMobile;
+        padding-right: $ozsgPagePaddingMobile;
+
+        @extend .ozc-section--fixed-width-desktop;
+    }
+
+    .ozc__panel {
+        margin-bottom: 45px;
+
+        @include apply-to(desktop) {
+            margin-bottom: 100px;
+        }
+    }
+
+    .ozc__panel--emphasis-1 {
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+        @include apply-to(desktop) {
+            margin-top: 45px;
+            margin-bottom: 45px;
+        }
+    }
+
+    .ozc__panel--emphasis-2 {
+        margin-top: 45px;
+        margin-bottom: 45px;
+
+        @include apply-to(desktop) {
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+    }
+
+    .ozc__panel-width-desktop--medium {
+        @include apply-to(desktop) {
+            width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    .ozc--fullscreen {
+        margin-left: -$ozsgPagePaddingMobile;
+        margin-right: -$ozsgPagePaddingMobile;
+
+        @include apply-to(desktop) {
+            margin-left: -$ozsgPagePaddingDesktop;
+            margin-right: -$ozsgPagePaddingDesktop;
+        }
+    }
+
+    .ozc-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 0;
+
+        @include apply-to(desktop) {
+            margin-bottom: 52px;
+        }
+    }
+
+    .ozc-grid--large {
+        @include apply-to(desktop) {
+            display: grid;
+            grid-template-columns: 418px 418px;
+            grid-column-gap: 30px;
+            grid-row-gap: 45px;
+            justify-content: center;
+        }
+    }
+
+    .ozc-margin-bottom--16-24 {
+        margin-bottom: 16px;
+
+        @include apply-to(desktop) {
+            margin-bottom: 24px;
+        }
+    }
+
+    p,
+    .text-block {
+        margin-bottom: 30px;
+    }
+
+    img {
+        display: block;
+    }
+}

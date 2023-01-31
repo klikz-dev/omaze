@@ -1,0 +1,71 @@
+.ozc-prizes-overview {
+    display: block;
+    width: 100%;
+    background-color: #ebf9fc;
+    padding: 32px 24px;
+    text-align: center;
+
+    &.desktop-only {
+        margin-top: 34px;
+    }
+
+    &__header {
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: .2px;
+        margin-bottom: 4px;
+        font-weight: bold;
+    }
+
+    &__sub-header {
+        font-size: 20px;
+        line-height: 32px;
+        letter-spacing: .4px;
+        margin-bottom: 25px;
+    }
+
+    &__footer {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: .3px;
+        font-weight: bold;
+        margin-top: 32px;
+        margin-bottom: 32px;
+    }
+
+    &__prize {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: .3px;
+        margin-bottom: 24px;
+    }
+
+    &__prize-icon {
+        max-width: 35px;
+        max-height: 30px;
+        margin-bottom: 4px;
+    }
+
+    &__prize-info {
+        font-size: 16px;
+        line-height: 1.5;
+        letter-spacing: 0.29px;
+    }
+
+    &__prize-info span {
+        display: inline;
+    }
+
+    &__prize-type {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    &__prize-footnote {
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: .4px;
+        font-style: italic;
+    }
+}

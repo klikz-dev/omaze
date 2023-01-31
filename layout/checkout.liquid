@@ -1,0 +1,158 @@
+{% comment %}
+    To activate the React order status app (OrderStatusApp):
+
+    1.  Add build to webpack.config.
+        - in module.exports, add:
+            createBuild('OrderStatusApp', env)
+
+    2.  Include app root in liquid file.
+        - place markup below in checkout.liquid (check ID matches ID used in app, and make sure conditional is present):
+            {% if order %}
+                <div id="js-order-status-app__root"></div>
+                {% include "OrderStatusApp" %}
+            {% endif %}
+
+        - the 'OrderStatusApp' snippet will be auto generated on app build (run npm start locally)
+{% endcomment %}
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+    <link rel="alternate" href="{{ canonical_url }}" hreflang="en-us" />
+
+    <title>{{ page_title }}</title>
+
+    {% comment %}
+    ****************************************************
+    ******* No scripts above Cookie Compliance *********
+    **************************************************** {% endcomment %}
+    {% include 'cookie-compliance-management' %}
+
+    {% include 'app-config-vars' %}
+
+    {% include 'optimizely-head' %}
+
+    {% include 'geolocation-head' %}
+
+    {% include 'googletagmanager-head' %}
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+
+    {{ 'checkout.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'product_suggestions.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'thankyou.scss.css' | asset_url | stylesheet_tag }}
+    {{ checkout_scripts }}
+
+    {% include 'delighted-survey' %}
+</head>
+<body class="{% if settings.rebrand_active == true %}rebrand{% endif %}">
+    {{ skip_to_content_link }}
+
+    {% include 'googletagmanager-body' %}
+
+    <div class="checkout-banner" data-header>
+        <div class="wrap">
+            <a href="/">
+                <img class="checkout-banner__logo" src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }}" />
+            </a>
+        </div>
+    </div>
+
+    {% if settings.rebrand_active == true %}
+        {% include 'checkout-header' %}
+    {% endif %}
+
+    {{ order_summary_toggle }}
+
+    <div class="checkout-wrapper">
+        <div class="content" data-content>
+            <div class="wrap">
+                <div class="main" role="main">
+                    <div class="main__header">
+                        {{ breadcrumb }}
+                        {{ alternative_payment_methods }}
+                    </div>
+                    <div class="main__content">
+                        {{ content_for_layout }}
+                    </div>
+                    {% comment %}T&C Note on Customer information page {% endcomment %}
+                    <div class="main__note"></div>
+                    {% comment %}Custom footer on Billing, Shopping and Payment page {% endcomment %}
+
+                    {% if settings.rebrand_active != true %}
+                        <div class="main__footer">
+                            <a href="/pages/official-rules">Official Rules</a>
+                            <a href="/pages/terms-of-use">Terms of Use</a>
+                            <a href="/pages/privacy-policy">Privacy Policy</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="sidebar" role="complementary">
+                    <div class="sidebar__header">
+                        {{ content_for_logo }}
+                    </div>
+                    <div class="sidebar__content">
+                        {{ content_for_order_summary }}
+                    </div>
+                </div>
+            </div>
+
+            {% if settings.rebrand_active == true %}
+                {% include 'checkout-footer' %}
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="checkout-spinner">
+        <div class="spinner">
+            {% include 'spinner' %}
+        </div>
+    </div>
+
+    {{ tracking_code }}
+
+    {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+
+    {% if settings.env == 'production' %}
+        {% assign extension = '.min.js' %}
+    {% elsif settings.env == 'staging' %}
+        {% assign extension = '.min.js' %}
+    {% elsif settings.env == 'qa' %}
+        {% assign extension = '.js' %}
+    {% else %}
+        {% assign extension = '.js' %}
+    {% endif %}
+
+    <script type="text/javascript" src="{{ 'checkout' | append: extension | asset_url }}"></script>
+    {% include 'checkout-handler' %}
+    {% include 'notification-bar' %}
+    {% include 'redirect-handler' %}
+
+    <script>
+        window
+        .addEventListener('DOMContentLoaded', () => {
+            SDG.Checkout.ProductRecommendations.init();
+        });
+    </script>
+    <!--
+        NOTE:
+            product-recommendations.js needs this, but it has to load after jQuery so
+            it cannot be added at the new call sites (jQuery has not loaded by then),
+            ideally product-recommendations.js should be refactored to use the new
+            imported Slick carousel component per @tglaz
+
+            SEE TICKET: https://favro.com/organization/46d56f56f921b3d19fb69f7f/f267f684d9bd42c142206ee5?card=Oma-3389
+    -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    {% include 'sailthru-body' %}
+    {% include 'eligibility-settings' %}
+    {% include 'promo-adding-script' %}
+</body>
+</html>

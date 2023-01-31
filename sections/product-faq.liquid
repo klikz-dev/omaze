@@ -1,0 +1,63 @@
+{% assign s = section.settings %}
+
+<section class="faq oz-campaign-infotabs__section" id="faq">
+	<div class="oz-campaign-infotabs__header desktop-only">
+		{{ s.faq_title }}
+	</div>
+	<div class="oz-campaign-infotabs__header hide-desktop">
+		{{ s.faq_title_mobile }}
+	</div>
+	<div class="oz-campaign-infotabs__content">
+		{% for block in section.blocks %}
+			{% assign b = block.settings %}
+			<div class="oz-campaign-infotabs__subheader oz-color--blue">
+				{{ b.question }}
+			</div>
+			{% if b.answer contains '<p>' %}
+				{{ b.answer }}
+			{% else %}
+				<p>
+					{{ b.answer }}
+				</p>
+			{% endif %}
+		{% endfor %}
+	</div>
+</section>
+
+{% schema %}
+{
+	"name": "FAQs",
+	"settings": [
+		{
+			"type": "text",
+			"id": "faq_title",
+			"label": "Section Title Desktop",
+			"default": "frequently asked questions"
+		},
+		{
+			"type": "text",
+			"id": "faq_title_mobile",
+			"label": "Section Title Mobile",
+			"default": "faq"
+		}
+	],
+	"blocks": [
+		{
+			"type": "faq",
+			"name": "FAQ",
+			"settings": [
+				{
+					"type": "text",
+					"id": "question",
+					"label": "Question"
+				},
+				{
+					"type": "textarea",
+					"id": "answer",
+					"label": "Answer"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

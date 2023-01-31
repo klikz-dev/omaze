@@ -1,0 +1,67 @@
+<!-- /templates/cart.liquid -->
+{% if settings.cart_active %}
+<div class="cart" id="productCart">
+    {% if settings.rebrand_active != true %}
+        <h1 class="cart__title bold">{{ "cart.general.title" | t }}</h1>
+    {% else %}
+        {% include 'cart-header' %}
+    {% endif %}
+
+    {% if cart.item_count > 0 %} {% include 'cart-content' %} {% else %} {%
+    include 'cart-empty' %} {% endif %}
+</div>
+
+{% include 'cart-expired-removal' %}
+
+<script>
+    const PAGE_LOAD_EVENT = "DOMContentLoaded";
+    window.addEventListener(PAGE_LOAD_EVENT, function() {
+        const customer = "{{ customer.email }}";
+        const CHECKOUT_OPTIONS = {
+            GUEST: "guest"
+        };
+
+        const data = {
+            checked: CHECKOUT_OPTIONS.GUEST,
+            customerExists: false,
+            donationLabel: "{{ 'cart.general.login_options_subtext' | t }}"
+        };
+
+        if (customer) {
+            data.customerExists = true;
+        }
+
+        window.SDG.CartHandler.InitConfig(data);
+        window.SDG.CartHandler.RenderCheckoutOptions();
+    });
+</script>
+{% else %}
+<script type="application/javascript">
+    const lastExperienceVisitedPath = document.cookie.replace(
+        /(?:(?:^|.*;\s*)__oa_ce\s*\=\s*([^;]*).*$)|^.*$/,
+        "$1"
+    );
+
+    if (lastExperienceVisitedPath) {
+        window.location.href = `${
+            window.location.origin
+        }${lastExperienceVisitedPath}`;
+    } else {
+        window.location.href = `${window.location.origin}`;
+    }
+</script>
+{% endif %}
+
+<script>
+    (function (window) {
+        function getCartItems() {
+            return {{ cart.items | reverse | json }};
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            SDG.Cart.init({
+                cartItems: getCartItems(),
+            });
+        });
+    }(window));
+</script>

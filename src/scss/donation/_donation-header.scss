@@ -1,0 +1,13 @@
+.oz-donation__header {
+    width: 100%;
+    display: block;
+}
+
+.oz-donation-hero {
+    display: block;
+    width: 100%;
+}
+
+.oz-donation-hero__intrinsic-ratio {
+    @include intrinsic-ratio-padding(16/9);
+}

@@ -1,0 +1,66 @@
+{% assign s = section.settings %}
+
+<section>
+  <div class="transparency__money-usage">
+    {% for block in section.blocks %}
+      {%- if block.settings.experience_type != blank -%}
+        <div class="transparency__money-usage--item">
+          <div>
+            <p class="transparency__money-usage--prefix">Your $10 donation to win a…</p>
+            <h3 class="transparency__money-usage--experience-type">{{- block.settings.experience_type -}}</h3>
+            <h3 class="transparency__money-usage--experience-subtitle">({{- block.settings.experience_subtitle -}})</h3>
+            <img
+              class="lazyload"
+              data-sizes="auto"
+              data-src="{{ block.settings.caption_image | img_url: '812x' }}"
+              data-srcset="{% include 'c-responsive-image-url', responsive_img: block.settings.caption_image %}"
+              alt="{{ block.settings.caption_image.alt }}"
+            />
+            <p class="transparency__money-usage--caption">{{- block.settings.caption -}}</p>
+          </div>
+        </div>
+      {%- endif -%}
+    {% endfor %}
+  </div>
+</section>
+ 
+{% schema %}
+{
+	"name": "Transparency: Money Usage",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+			"name": "Experience",
+			"type": "experience",
+			"settings": [
+				{
+          "type": "text",
+          "id": "experience_type",
+          "label": "Experience Type"
+        },
+				{
+          "type": "text",
+          "id": "experience_subtitle",
+          "label": "Experience Subtitle"
+        },
+				{
+          "type": "image_picker",
+          "id": "caption_image",
+          "label": "Caption Image"
+        },
+				{
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        }
+			]
+		}
+  ]
+}
+{% endschema %}

@@ -1,0 +1,29 @@
+/**
+* The payment buttons are dynamic content provided by Shopify during page render
+* which gives users little control over how the buttons can be manipulated. 
+* Under this circumstance, various selectors were considered for the 
+* payment-buttons elements and the below selectors were found to be the most
+* optimal/consistent across different environments (dev/stage/prod).
+* 
+* To ensure these styles overwrite the default styles provided by Shopify,
+* the `!important` keywords are added because the elements are dynamic content
+* added to the DOM by Shopify and most of the styles accompanying the content
+* have `!important` attached to them.
+*/
+div[data-shopify-buttoncontainer="true"] {
+    @include apply-to(desktop) {
+        padding-bottom: rem(72);
+        div[data-testid="grid-cell"] {
+            height: rem(42) !important;
+            margin-top: rem(6) !important;
+            margin-bottom: rem(6) !important;
+            &:first-child {
+                margin-top: 0 !important;
+            }
+            div[data-testid="ShopifyPay-button"],
+            div[data-testid="GooglePay-button"] {
+                height: rem(42) !important;
+            }
+        }
+    }
+}

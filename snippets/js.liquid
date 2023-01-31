@@ -1,0 +1,83 @@
+{% comment %}
+set cpage
+{% endcomment %}
+{%- assign cpage = handle -%}
+{%- if template contains 'index' -%}
+	{%- assign cpage = 'index' -%}
+{%- endif -%}
+{%- if template contains 'customers' -%}
+	{%- assign cpage = 'account' -%}
+	{%- if isDashboard -%}
+		{%- assign cpage = 'account-dashboard' -%}
+	{%- endif -%}
+{%- endif -%}
+{%- if template contains 'product' -%}
+	{%- assign cpage = 'product' -%}
+{%- endif -%}
+{%- if template contains 'product.donation' -%}
+	{%- assign cpage = 'donation' -%}
+{%- endif -%}
+{%- if template contains 'style-guide' -%}
+	{% assign cpage = 'style_guide' %}
+{%- endif -%}
+{%- if template contains 'blog' -%}
+	{% assign cpage = 'blog' %}
+{%- endif -%}
+{%- if template contains 'article' -%}
+	{% assign cpage = 'article' %}
+{%- endif -%}
+{%- if template contains 'collection' -%}
+	{%- assign cpage = 'collection' -%}
+{%- endif -%}
+{%- if template contains 'collection.donation' -%}
+	{%- assign cpage = 'collection-donation' -%}
+{%- endif -%}
+{%- if template contains 'page' -%}
+	{%- assign cpage = 'page' -%}
+{%- endif -%}
+
+{% comment %}
+set environment specific variables
+TODO: set these in the settings_data.json
+{% endcomment %}
+{% if ENV == 'production' %}
+	{% assign extension = '.min.js' %}
+	{% assign ssId = 'i3x7su' %}
+{% elsif ENV == 'staging' %}
+	{% assign extension = '.min.js' %}
+	{% assign ssId = 'bp0feg' %}
+{% elsif ENV == 'qa' %}
+	{% assign extension = '.js' %}
+	{% assign ssId = 'bp0feg' %}
+{% else %}
+	{% assign extension = '.js' %}
+	{% assign ssId = 'bp0feg' %}
+{% endif %}
+
+{% comment %}
+capture script variables
+{% endcomment %}
+{%- capture scriptVars -%}
+<script type="text/javascript">
+	var path = {
+		account 			: "{{ 'account' | append: extension | asset_url }}",
+		account_dashboard 	: "{{ 'account-dashboard' | append: extension | asset_url }}",
+		ajaxinate 			: "{{ 'ajaxinate.min.js' | asset_url }}",
+		article 			: "{{ 'article' | append: extension | asset_url }}",
+		blog 				: "{{ 'blog' | append: extension | asset_url }}",
+		index 				: "{{ 'index' | append: extension | asset_url }}",
+		product 			: "{{ 'product' | append: extension | asset_url }}",
+		donation 			: "{{ 'donation' | append: extension | asset_url }}",
+		collection 			: "{{ 'collection' | append: extension | asset_url }}",
+		collection_donation : "{{ 'collection-donation' | append: extension | asset_url }}",
+		shopify_options 	: "{{ 'option_selection.js' | shopify_asset_url }}",
+		style_guide 		: "{{ 'style-guide' | append: extension | asset_url }}",
+		page 				: "{{ 'page' | append: extension | asset_url }}",
+	},
+	pageHandle = "{{ cpage  | replace : '-', '_' }}",
+	ssId = '{{ ssId }}';
+</script>
+{%- endcapture -%}
+{% include 'h-minify', variable: scriptVars %}
+
+<script type="text/javascript" src="{{ 'app' | append: extension | asset_url }}"></script>

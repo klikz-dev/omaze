@@ -1,0 +1,166 @@
+{% assign s = section.settings %}
+
+{% style %}
+    .oz-cafa-callout__wrapper {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 916px;
+    }
+
+    .oz-cafa-callout__about {
+        transform: skewY(-3deg);
+        background-color: rgba(249, 228, 0, 0.16);
+        padding-bottom: 30px;
+        padding-top: 32px;
+        margin-bottom: 32px;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        .oz-cafa-callout__about {
+            transform: skewY(-2deg);
+            padding-top: 44px;
+            padding-bottom: 44px;
+        }
+    }
+
+    .oz-cafa-callout__about h3 {
+        font-family: 'National', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 28px;
+        text-align: center;
+        letter-spacing: 0.533333px;
+        text-transform: uppercase;
+        transform: skewY(3deg);
+        margin: 0 auto;
+        padding: 8px;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        .oz-cafa-callout__about h3 {
+            transform: skewY(2deg);
+            max-width: 622px;
+        }
+    }
+
+    .oz-cafa-callout__about p {
+        font-family: 'National', sans-serif;
+        font-size: 14px;
+        transform: skewY(3deg);
+        text-align: center;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        .oz-cafa-callout__about p {
+            transform: skewY(2deg);
+            max-width: 728px;
+        }
+    }
+
+    .oz-cafa-callout__about a {
+        text-decoration: underline;
+    }
+
+    body.rebrand .oz-cafa-callout__about {
+        transform: unset;
+        background-color: rgba(255, 249, 209, 1);
+        padding-bottom: 24px;
+        padding-top: 24px;
+        margin-bottom: 24px;
+        color: #090F15;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        body.rebrand .oz-cafa-callout__about {
+            transform: unset;
+            padding-top: 32px;
+            padding-bottom: 40px;
+            margin-bottom: 32px;
+        }
+    }
+
+    body.rebrand .oz-cafa-callout__about h3 {
+        font-family: 'Gellix', Roboto, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0 auto 8px;
+        transform: unset;
+        text-transform: unset;
+        padding: 0;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        body.rebrand .oz-cafa-callout__about h3 {
+            transform: unset;
+        }
+    }
+
+    body.rebrand .oz-cafa-callout__about p {
+        font-family: 'Gellix', sans-serif;
+        line-height: 1.5;
+        letter-spacing: 0.3px;
+        transform: unset;
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        body.rebrand .oz-cafa-callout__about p {
+            max-width: 836px;
+            transform: unset;
+        }
+    }
+
+    body.rebrand .oz-wysigyg-text h4 {
+        margin: 0 auto 24px;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        body.rebrand .oz-wysigyg-text h4 {
+            margin: 0 auto 32px;
+        }
+    }
+
+    body.rebrand .oz-portfolio-section__experiences {
+        margin-bottom: 15px;
+    }
+
+    @media only screen and (min-width: 1100px) {
+        body.rebrand .oz-portfolio-section__experiences {
+            margin-bottom: 40px;
+        }
+    }
+
+    body.rebrand .optin-container {
+        margin-top: 0;
+    }
+{% endstyle %}
+
+<section class="oz-cafa-callout__wrapper">
+    <div class="oz-cafa-callout__about">
+        <h3>{{ s.header }}</h3>
+        <div>{{ s.body }}</div>
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "CAFA",
+        "class": "Global Callout",
+        "settings": [{
+                "type": "text",
+                "id": "header",
+                "label": "Header",
+                "default": "Dream experiences. Great causes."
+            },{
+                "type": "richtext",
+                "id": "body",
+                "label": "Body",
+                "default": "<p>Omaze experiences raise funds for Charities Aid Foundation America (“CAF America”), a US-registered, 501(c)(3) public charity. 100% of donations go to CAF America, which will then grant the donations, minus experience fees and costs, to the nonprofit(s) identified on the experience page. For more info, see the “Fundraising Transparency” section at the bottom of each experience page.</p>"
+            }]
+    }
+{% endschema %}

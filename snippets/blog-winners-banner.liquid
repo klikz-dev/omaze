@@ -1,0 +1,40 @@
+<section class="columns__one-full-width">
+	<div class="oz-section-banner oz-section-banner--winners">
+		<div class="oz-section-banner__image-container intrinsic-ratio banner__intrinsic-ratio banner__intrinsic-ratio--winners lazy-blur tablet hide-desktop">
+			<img
+				alt="{{- settings.winners_mobile_banner.alt -}}"
+				src="{{ settings.winners_mobile_banner | img_url: '812x339' }}"
+			/>
+			<img
+				alt="{{- settings.winners_mobile_banner.alt -}}"
+				class="lazyload"
+				data-sizes="auto"
+				data-src="{{- settings.winners_mobile_banner | img_url: '812x339' -}}"
+				data-srcset="{%- include 'c-responsive-image-url', responsive_img: settings.winners_mobile_banner -%}"
+			/>
+		</div>
+		<div class="oz-section-banner__image-container intrinsic-ratio banner__intrinsic-ratio--winners banner__intrinsic-ratio lazy-blur hide-tablet hide-phone">
+			<img
+				alt="{{- settings.winners_desktop_banner.alt -}}"
+				src="{{ settings.winners_desktop_banner | img_url: 'master' }}"
+			/>
+			<img
+				alt="{{- settings.winners_desktop_banner.alt -}}"
+				class="lazyload"
+				data-sizes="auto"
+				data-src="{{ settings.winners_desktop_banner | img_url: 'master' }}"
+				data-srcset="{%- include 'c-responsive-image-url', responsive_img: settings.winners_desktop_banner -%}"
+			/>
+		</div>
+		<div class="oz-section-banner__content">
+			<h1 class="oz-hero-title">
+				{{- settings.winners_header -}}
+			</h1>
+			<div class="oz-hero-quote">
+				<p class="oz-quote-text oz-with-quotes">
+					{{- settings.winners_copy -}}
+				</p>
+			</div>
+		</div>
+	</div>
+</section>

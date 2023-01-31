@@ -1,0 +1,45 @@
+{% comment %}
+    The templates for 'home hero' should be identical, with the content/data loaded
+    through section settings.
+
+    All hero templates are hiddent by default. The toggling of visibility should
+    happen through Geolocation Content config in Shopify settings
+    (see geolocation-content.liquid).
+{% endcomment %}
+
+<div class="oz-homepage">
+    {% render 'sanity-env' %}
+    {% if settings.homepage_featured_ad_enabled %}
+        <div id="homepage-app__featured-ad">
+            {% render 'home-featured-ad-skeleton' %}
+        </div>
+    {% else %}
+        <div class="home-hero__wrapper home-hero__intrinsic-ratio intrinsic-ratio">
+            <div class="oz-homepage__hero-placeholder"></div>
+            {% section 'home-hero' %}
+            {% section 'home-hero-alt-1' %}
+            {% section 'home-hero-alt-2' %}
+            {% section 'home-hero-alt-3' %}
+        </div>
+    {% endif %}
+
+    {% if settings.feature_house_focus_on %}
+        {% section 'home-title' %}
+    {% else %}
+        {% include 'three-button-verticals' %}
+    {% endif %}
+    {% section 'CAFA-global' %}
+
+    {% if settings.homepage_sweepstakes_carousel_enabled %}
+        {% section 'home-curated-collections-data' %}
+    {% else %}
+        {% section 'home-curated-collections' %}
+    {% endif %}
+
+    {% section 'home-banner' %}
+    {% section 'home-slider' %}
+    {% section 'home-featured' %}
+
+    <div id="js-homepage-app__root"></div>
+    {% include 'HomepageApp' %}
+</div>

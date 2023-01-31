@@ -1,0 +1,119 @@
+/**
+ * Blog Winners Template
+ */
+
+.oz-section-banner--winners {
+
+	.oz-hero-title {
+		font-family: $secondary-font;
+		letter-spacing: rem(.3);
+		font-size: rem(28);
+		margin-bottom: rem(8);
+
+		@include apply-to(tablet) {
+		    font-size: rem(52);
+		}
+
+		@include apply-to(desktop) {
+			font-size: rem(75);
+		}
+	}
+
+	.oz-section-banner {
+
+		// .oz-section-banner__image-container
+		&__image-container {
+
+			img {
+				top: rem(-80);
+
+				@include apply-to(tablet) {
+					top: rem(-150);
+				}
+
+				@include apply-to(desktop) {
+					top: rem(-56);
+				}
+			}
+		}
+
+		// .oz-section-banner__content
+		&__content {
+
+			position: absolute;
+			z-index: 2;
+			width: 100%;
+			color: $white;
+			padding: 0 rem(20);
+			bottom: rem(30);
+			text-align: left;
+
+			@include apply-to(tablet) {
+			    bottom: rem(-15);
+			    top: auto;
+			    transform: translateX(-50%) translateY(0);
+			}
+
+			@include apply-to(desktop) {
+				text-align: center;
+			}
+		}
+	}
+
+	.oz-quote-text {
+	    font-size: rem(15);
+	    font-weight: $light;
+		display: inline-block;
+	    line-height: 1.4;
+	    padding: 0 rem(20);
+	    position: relative;
+	    text-align: left;
+
+		@include apply-to(tablet) {
+			font-size: rem(24);
+		    line-height: 1.3;
+		    padding: 0 rem(65);
+		}
+
+		// .oz-quote-text::before
+		// .oz-quote-text::after
+		&::before,
+		&::after {
+			content: '';
+			background-image: url(asset('quote-icon.png'));
+			display: inline-block;
+			background-repeat: no-repeat;
+			background-size: contain;
+			position: absolute;
+		}
+
+		// .oz-quote-text::before
+		&::before {
+			transform: rotate(180deg);
+			left: 0;
+			top: rem(-20);
+			width: rem(40);
+			height: rem(40);
+
+			@include apply-to(tablet) {
+				top: rem(-30);
+				width: rem(60);
+				height: rem(60);
+			}
+		}
+
+		// .oz-quote-text::after
+		&::after {
+		    right: 0;
+		    bottom: rem(-10);
+		    width: rem(40);
+		    height: rem(40);
+
+		    @include apply-to(tablet) {
+		    	bottom: rem(-30);
+	    	    width: rem(60);
+	    	    height: rem(60);
+		    }
+		}
+	}
+}

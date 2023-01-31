@@ -1,0 +1,13 @@
+/**
+* oz-section-home-title
+*/
+
+.oz-home-title {
+    width: 100%;
+    .oz-section-title {
+        color: $black-2;
+        text-align: center;
+        font-size: rem(24);
+        line-height: rem(29);
+    }
+}

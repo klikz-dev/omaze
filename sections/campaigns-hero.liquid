@@ -1,0 +1,84 @@
+{% assign s = section.settings %}
+
+<header class="oz-section-banner oz-section-banner--hero">
+	<a href="{{ s.hero_link }}">
+		<div class="oz-section-banner__image-container intrinsic-ratio experiences__hero-intrinsic-ratio phone-only">
+		<div class="lazy-blur">
+				<img src="{{ s.single_img_mobile | file_img_url: '375x262' }}" alt="{{ collection.title | append: ' Phone Hero Blur' }}" />
+				<img
+					class="lazyload"
+					data-sizes="auto"
+					data-src="{{ s.single_img_mobile | file_img_url: '375x262' }}"
+					data-srcset="{% include 'c-responsive-image-url', responsive_img: s.single_img_mobile %}"
+					alt="{{ collection.title | append: ' Phone Hero' }}"
+				/>
+		</div>
+		</div>
+			<div class="oz-section-banner__image-container intrinsic-ratio experiences__hero-intrinsic-ratio desktop-and-tablet">
+			<div class="lazy-blur">
+				{% if s.single_img_desktop != blank %}
+					<img src="{{ s.single_img_desktop | img_url: '812x254' }}" alt="{{ collection.title | append: ' Desktop Hero Blur' }}"/>
+					<img
+						class="lazyload"
+						data-sizes="auto"
+						data-src="{{ s.single_img_desktop | img_url: '812x254' }}"
+						data-srcset="{% include 'c-responsive-image-url', responsive_img: s.single_img_desktop %}"
+						alt="{{ collection.title | append: ' Desktop Hero' }}"
+					/>
+				{% else %}
+					<img src="{{ collection.image | img_url: '812x254' }}" alt="{{ collection.title | append: ' Desktop Hero Blur' }}"/>
+					<img
+						class="lazyload"
+						data-sizes="auto"
+						data-src="{{ collection.image | img_url: '812x254' }}"
+						data-srcset="{% include 'c-responsive-image-url', responsive_img: collection.image %}"
+						alt="{{ collection.title | append: ' Desktop Hero' }}"
+					/>
+				{% endif %}
+			</div>
+		</div>
+	</a>
+</header>
+
+{% if s.description != blank %}
+	<div class="oz-section-banner__subtitle-wrapper">
+		<p class="oz-section-banner__subtitle">
+			{{- s.description -}}
+		</p>
+	</div>
+{% elsif collection.description %}
+	<div class="oz-section-banner__subtitle-wrapper">
+		<p class="oz-section-banner__subtitle">
+			{{- collection.description -}}
+		</p>
+	</div>
+{% endif %}
+
+{% schema %}
+	{
+		"name": "Campaigns: Hero",
+		"class": "hero-single-section",
+		"settings": [
+			{
+				"type": "image_picker",
+				"id": "single_img_mobile",
+				"label": "Image Mobile (1370 x 772)"
+			},
+			{
+				"type": "image_picker",
+				"id": "single_img_desktop",
+				"label": "Image Desktop"
+			},
+			{
+				"type": "text",
+				"id": "description",
+				"label": "description"
+			},
+			{
+				"type": "url",
+				"id": "hero_link",
+				"label": "Link to"
+			}
+		]
+	}
+{% endschema %}

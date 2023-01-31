@@ -1,0 +1,54 @@
+{% for tag in product.tags %}
+	{% assign downTag = tag | downcase %}
+
+	{% if downTag contains 'size chart:' %}
+		{% assign sizeChartName = downTag | remove: 'size chart:' | handleize %}
+		{% break %}
+	{% endif %}
+{% endfor %}
+
+{% if sizeChartName != false %}
+	{% for block in section.blocks %}
+		{% assign b = block.settings %}
+		{% assign downName = block.settings.size_guide_name | handleize %}
+
+		{% if downName == sizeChartName %}
+			<div id="sGuide" class="s-guide">
+				<span id="sGuideLink" class="s-guide__link">
+					Show size chart + item details
+				</span>
+				<div id="sGuideContent" class="s-guide__content">
+					<h3 class="s-guide__title">item details</h3>
+					<div class="intrinsic-ratio intrinsic-ratio--square s-guide__intrinsic-ratio">
+						<img src="{{ b.size_guide_img | img_url: '812x812' }}" />
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% schema %}
+{
+	"name": "Size Guides",
+	"class": "size-guides",
+	"blocks": [
+		{
+			"type": "sizeguide",
+			"name": "Size Guide",
+			"settings": [
+				{
+					"type": "text",
+					"id": "size_guide_name",
+					"label": "Size Guide Name"
+				},
+				{
+					"type": "image_picker",
+					"id": "size_guide_img",
+					"label": "Size Guide Image"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

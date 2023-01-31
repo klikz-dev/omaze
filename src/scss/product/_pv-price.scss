@@ -1,0 +1,29 @@
+/**
+ * product price
+ */
+.pv-price {
+	margin: 0;
+
+	&__original,
+	&__compare {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	// .pv-price__original
+	&__original {
+		font-size: rem(16);
+		font-family: $secondary-font;
+		font-weight: $bold;
+
+		@include apply-to(desktop) {
+			font-size: rem(22)
+		}
+	}
+
+	// .pv-price__compare
+	&__compare {
+		font-size: 90%;
+		text-decoration: line-through;
+	}
+}

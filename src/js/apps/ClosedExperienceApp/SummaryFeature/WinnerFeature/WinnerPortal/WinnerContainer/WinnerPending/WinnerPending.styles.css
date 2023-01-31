@@ -1,0 +1,66 @@
+.header {
+    @apply type-rebrand-h4 font-bold;
+}
+
+.winnerPendingContainer {
+    @apply relative;
+    z-index: 1;
+    background-repeat: no-repeat !important;
+    background-position: right !important;
+    background-size: contain !important;
+    height: 110px;
+}
+
+.winnerPendingContent {
+    min-width: 300px;
+    padding: 8px 16px 6px 16px;
+}
+
+.pendingDate {
+    @apply type-subtitle2 mt-1;
+    margin-right: 45px;
+}
+
+@screen lg {
+    .winnerPendingContainer {
+        height: 144px;
+    }
+
+    .winnerPendingContent {
+        min-width: 340px;
+        padding: 24px 16px 6px 16px;
+    }
+
+    .pendingDate {
+        @apply mr-6 mt-2;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .winnerPendingContainer {
+    background: none !important;
+    background-color: #F6FCFF !important;
+}
+
+:global(.rebrand) .winnerPendingContent {
+    padding: 10px 24px 16px;
+}
+
+:global(.rebrand) .header {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 32px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+}
+
+:global(.rebrand) .pendingDate {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+    margin: 4px 0;
+}

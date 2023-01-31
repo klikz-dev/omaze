@@ -1,0 +1,18 @@
+<section class="page-404">
+  <div class="page-404-wrapper">
+    <img
+      class="page-404-desktop-image"
+      src="{{ '404-desktop-image-2-x.png' | asset_url }}"
+      srcset="{{ '404-desktop-image-2-x@2x.png' | asset_url }} 2x,
+        {{ '404-desktop-image-2-x@3x.png' | asset_url }} 3x"
+    >
+    <div class="page-404-text text-center">
+      <p class="page-404-text-header">{{ 'general.404.subtext' | t }}</p>
+      <div>{{ 'general.404.message' | t }}</div>
+    </div>
+    <div class="page-404-buttons">
+      <a href="/collections/experiences" class="page-404-buttons-experience">{{ 'general.404.experience-link-text' | t }}</a>
+      <a href="/" class="page-404-buttons-home">{{ 'general.404.home-link-text' | t }}</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+import { IFunctionComponent } from '@omaze/app';
+import React, { ReactElement } from 'react';
+
+import { namespace } from '{% namespacePath %}';
+
+import { {% componentName %} } from './{% componentName %}/{% componentName %}.component';
+import { displayName } from './{% containerName %}.qa';
+
+export const {% containerName %}: IFunctionComponent = namespace.createComponent(displayName, (): ReactElement => {
+    return (
+        <{% componentName %} />
+    );
+});

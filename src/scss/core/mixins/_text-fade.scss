@@ -1,0 +1,127 @@
+/// Text Fade
+/// This mixin will fade out overflowing text by setting max height to a container and
+/// adding a pseudo-element at bottom with a white gradient to gradually fade out text
+/// @param {Number} $max-lines - thickness of chevron in px
+/// @param {Number} $fade-out-lines - how many lines to fade out
+/// @param {Number} $line-height - text line height
+/// @example
+/// .my-text-element {
+///     @include text-fade(3);
+/// }
+
+@mixin text-fade($max-lines: 2, $fade-out-lines: 1,  $line-height: 1.2) {
+
+    position: relative;
+    overflow: hidden;
+
+    line-height: $line-height;
+
+    @if (unitless($line-height)) {
+        height: $line-height * $max-lines * 1em;
+    } @else {
+        height: $line-height * $max-lines;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: $fade-out-lines / $max-lines * 100%;
+
+        background: linear-gradient(to top, #fff 0%, #fff 15%, rgba(#fff, 0.5) 100%);
+    }
+}
+
+
+.oz-text-fade--2 {
+    @include text-fade(2);
+
+    &-tablet {
+        @include apply-to(tablet) {
+            @include text-fade(2);
+        }
+    }
+}
+
+.oz-text-fade--3 {
+    @include text-fade(3);
+
+    &-tablet {
+        @include apply-to(tablet) {
+            @include text-fade(3);
+        }
+    }
+}
+
+.oz-text-fade--4 {
+    @include text-fade(4);
+
+    &-tablet {
+        @include apply-to(tablet) {
+            @include text-fade(4);
+        }
+    }
+}
+
+.oz-text-fade--5 {
+    @include text-fade(5);
+
+    &-tablet {
+        @include apply-to(tablet) {
+            @include text-fade(5);
+        }
+    }
+}
+
+.oz-text-fade--6 {
+    @include text-fade(6);
+
+    &-tablet {
+        @include apply-to(tablet) {
+            @include text-fade(6);
+        }
+    }
+}
+
+.oz-text-fade--7 {
+    @include text-fade(7);
+
+    &-tablet {
+        @include apply-to(tablet) {
+            @include text-fade(7);
+        }
+    }
+}
+
+.oz-text-fade--8 {
+    @include text-fade(8);
+
+    &-tablet {
+        @include apply-to(tablet) {
+            @include text-fade(8);
+        }
+    }
+}
+
+.oz-text-fade--9 {
+    @include text-fade(9);
+
+    &-tablet {
+        @include apply-to(tablet) {
+            @include text-fade(9);
+        }
+    }
+}
+
+.oz-text-fade--10 {
+    @include text-fade(10);
+
+    &-tablet {
+        @include apply-to(tablet) {
+            @include text-fade(10);
+        }
+    }
+}

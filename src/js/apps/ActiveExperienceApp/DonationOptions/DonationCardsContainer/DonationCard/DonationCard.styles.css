@@ -1,0 +1,151 @@
+.host {
+    @apply relative text-center;
+
+    padding-top: 24px;
+    box-shadow: 2px 2px 4px rgba(26, 26, 26, 0.1);
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/*
+ * Setting pointer-events-none on all the child elements
+ * is necessary with current gtm application so that all clicks
+ * on the card trigger the gtm 'click' event.
+ */
+
+.host * {
+    @apply pointer-events-none;
+}
+
+.entriesBlock {
+    @apply font-bold text-secondary;
+}
+
+.entriesAmount {
+    @apply type-h3;
+
+    line-height: 56px;
+}
+
+.entriesText {
+    @apply type-h5;
+
+    line-height: 32px;
+}
+
+.ctaButton {
+    min-width: 134px;
+    margin: 12px auto;
+    padding: 0 16px;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.533333px;
+}
+
+.badge {
+    @apply absolute font-bold uppercase text-center block bg-secondary text-secondary-contrast;
+
+    top: 0;
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    width: auto;
+    padding: 5px 8px;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+.badgeYellow {
+    background-color: #FFDD00;
+}
+
+
+@screen lg {
+    .ctaButton {
+        min-width: 140px;
+    }
+}
+
+:global(.rebrand) .host {
+    box-sizing: border-box;
+    box-shadow: 0px 1px 8px rgba(9, 15, 21, 0.08);
+    border-radius: 4px;
+    padding-top: 12px;
+}
+
+:global(.rebrand) .hostPopular {
+    border: 2px solid #00D5DB;
+}
+
+:global(.rebrand) .badge {
+    background: #63F6FA;
+    padding: 2px 14px 4px;
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    border-radius: 4px;
+}
+
+:global(.rebrand) .badgeYellow {
+    background: #CFDFE6;
+    text-transform: lowercase;
+}
+
+:global(.rebrand) .entriesBlock {
+    color: #090F15;
+}
+
+:global(.rebrand) .entriesAmount {
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 48px;
+    line-height: 52px;
+    margin-top: 12px;
+    letter-spacing: 0.015rem;
+    font-weight: 900;
+}
+
+:global(.rebrand) .entriesText {
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+}
+
+:global(.rebrand) .ctaButton {
+    min-width: 132px;
+    margin: 14px auto 12px;
+    padding: 10px 17.5px 11px;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-family: Gellix,Roboto,sans-serif;
+    font-weight: 700;
+    color: #090F15;
+    background-color: #FFDD00;
+    border: none;
+    border-radius: 76px;
+    pointer-events: unset;
+}
+
+:global(.rebrand) .ctaButton div {
+    line-height: 1.5;
+    padding: 0;
+}
+
+:global(.rebrand) .host:hover .ctaButton {
+    background-color: #FFCB11;
+}
+
+@screen lg {
+    :global(.rebrand) .ctaButton {
+        min-width: 132px;
+    }
+}

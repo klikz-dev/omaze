@@ -1,0 +1,30 @@
+.ozf-prizes-panel__announcements {
+    text-align: center;
+}
+
+.ozf-prizes-panel__announcements-header {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: .2px;
+    margin-bottom: 16px;
+    font-weight: bold;
+}
+
+.ozf-prizes-panel__announcements-subheader {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: .3px;
+    margin-bottom: 27px;
+}
+
+.ozf-prizes-panel__announcements .ozc-card-container__card {
+    padding:  16px 34px 26px 34px;
+    box-shadow: 1px 2px 4px 0 rgba(10, 0, 0, 0.15);
+    margin-bottom: 16px;
+    width: 100%;
+
+    @include apply-to(desktop) {
+        width: 350px;
+        margin: 12px;
+    }
+}

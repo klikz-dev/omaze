@@ -1,0 +1,44 @@
+.order-none {
+    &__desc {
+        text-align: center;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.6;
+        letter-spacing: rem(0.4);
+        margin-bottom: 0;
+        color: $black-1;
+
+        @include apply-to(desktop) {
+            font-size: rem(20);
+	    }
+
+        @include apply-to(phone) {
+            font-size: rem(18);
+            text-align: left;
+            width: rem(328);
+	    }
+    }
+
+    &__header {
+        font-weight: 800;
+        margin: rem(24) 0 rem(12) 0;
+        line-height: 1.3em;
+        color: $black-2;
+
+        @include apply-to(desktop) {
+            font-size: rem(32);
+	    }
+
+        @include apply-to(phone) {
+            text-align: left;
+            font-size: rem(24);
+	    }
+    }
+}
+
+.product-recommendations {
+    &__container {
+        margin-bottom: rem(80);
+    }
+}

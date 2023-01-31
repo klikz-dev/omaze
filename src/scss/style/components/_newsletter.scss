@@ -1,0 +1,179 @@
+/**
+ * Newsletter form
+ */
+
+// .oz-newsletter-form
+.oz-newsletter-form {
+
+	// .oz-newsletter-form__title-container
+    &__title-container {
+        margin: rem(10) 0;
+
+        @include flexbox;
+        @include flex-direction(row);
+        @include flex-wrap(wrap);
+        @include justify-content(center);
+
+        @include apply-to(tablet) {
+            margin-top: 0;
+        }
+    }
+
+	// .oz-newsletter-form__title
+    &__title {
+        width: 100%;
+        font-size: rem(20);
+        margin: 0 auto;
+
+        @include apply-to(tablet) {
+            font-size: rem(20);
+        }
+    }
+
+	// .oz-newsletter-form__title--top
+    &__title--top {
+        margin-right: rem(5);
+    }
+
+	// .oz-newsletter-form__btn
+    &__btn {
+        width: 100%;
+    }
+
+	// .oz-newsletter-form__msg
+    &__msg {
+        font-size: 1rem;
+        text-align: center;
+        margin: 0 0 1em 0;
+    }
+
+	// .oz-newsletter-form__desc
+    &__desc {
+        margin: 0;
+        margin-top: .5em;
+        font-size: rem(14);
+
+		@include apply-to(phone) {
+			color: $black-1;
+			font-weight: $light;
+			line-height: 1.25;
+		}
+    }
+
+	// .oz-newsletter-form__text-input
+    &__text-input {
+        border-radius: 0;
+        border: rem(1) solid transparent;
+        padding: rem(16) rem(8);
+        font-size: rem(16);
+        margin-bottom: rem(10);
+		min-height: rem(49);
+		width: 100%;
+
+		// .oz-newsletter-form__text-input.error
+        &.error {
+            border-color: $pink-6;
+        }
+    }
+
+	// .oz-newsletter-form .oz-field-wrap
+    .oz-field-wrap {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		width: 100%;
+
+		// .oz-newsletter-form .oz-field-wrap em.error
+        em.error {
+            position: absolute;
+            right: rem(310);
+            top: rem(17);
+            font-size: rem(13);
+            color: $pink-6;
+            font-weight: $light;
+        }
+    }
+
+	// oz-newsletter-form--footer
+	&--footer {
+		margin-bottom: rem(45);
+
+		@include apply-to(tablet) {
+			padding-top: rem(35);
+			padding-bottom: rem(35);
+			margin-bottom: rem(65);
+		}
+
+		// oz-newsletter-form--footer .oz-newsletter-wrapper
+		.oz-newsletter-wrapper {
+
+			@include apply-to(tablet) {
+				max-width: rem(835);
+				margin: 0 auto;
+			}
+		}
+
+		// oz-newsletter-form--footer .oz-newsletter-form
+		.oz-newsletter-form {
+
+			// oz-newsletter-form--footer .oz-newsletter-form__title-container
+			&__title-container {
+
+				@include apply-to(tablet) {
+					margin-bottom: rem(30);
+				}
+			}
+
+			// oz-newsletter-form--footer .oz-newsletter-form__title
+			&__title {
+				font-size: rem(28);
+
+				@include apply-to(tablet) {
+					font-size: rem(36);
+				}
+
+				@include apply-to(desktop) {
+					font-size: rem(40);
+				}
+			}
+
+			// oz-newsletter-form--footer .oz-newsletter-form__desc
+			&__desc {
+				font-size: rem(16);
+				font-weight: 100;
+
+				@include apply-to(tablet) {
+					margin-top: rem(18);
+				}
+
+				@include apply-to(desktop) {
+					margin-top: rem(21);
+					font-size: rem(24);
+				}
+			}
+
+			// oz-newsletter-form--footer .oz-newsletter-form__btn
+			&__btn {
+				padding: .75em .75em;
+
+				@include apply-to(tablet) {
+					flex-basis: 35%;
+					max-height: rem(49);
+					width: 100%;
+					padding: .825em 1.75em;
+					margin-left: rem(3);
+				}
+			}
+		}
+
+		// oz-newsletter-form--footer .oz-field-wrap
+		.oz-field-wrap {
+
+			@include apply-to(tablet) {
+				display: flex;
+				max-height: rem(49);
+				margin-bottom: rem(10);
+			}
+		}
+	}
+}

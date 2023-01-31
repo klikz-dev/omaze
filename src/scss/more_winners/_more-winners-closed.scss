@@ -1,0 +1,444 @@
+// OVERRIDE EXISTING CSS ONLOAD
+.experience--closed.oz-external--more-winners {
+    .js-details-wrapper,
+    .exp-leader__info-banner {
+        display: none;
+    }
+
+    .oz-experience-leader {
+        margin: auto;
+
+        @include apply-to(desktop) {
+            margin-top: 66px;
+            width: $ozsgPageDesktopFixedWidth;
+        }
+    }
+
+    .exp-leader {
+        margin: 0;
+    }
+}
+
+.oz-more-winners-closed {
+    display: block;
+    width: 100%;
+}
+
+// PAGE HEADER
+.oz-more-winners-closed__header {
+    margin-top: 40px;
+    text-align: center;
+
+    @include apply-to(desktop) {
+        margin-top: 72px;
+    }
+
+    h2 {
+        margin-bottom: 8px;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: .32px;
+        font-style: italic;
+        margin-bottom: 8px;
+
+    }
+
+    h4 {
+        font-family: $primary-font;
+        font-size: 22px;
+        line-height: 24px;
+        font-weight: bold;
+        color: $blue-3;
+    }
+}
+
+// MID-PAGE CTA
+.oz-more-winners-closed__cta-card {
+    background-color: $blue-10;
+    padding: 40px $ozsgPagePaddingMobile;
+    text-align: center;
+    margin-top: 56px;
+
+    @include apply-to(desktop) {
+        text-align: left;
+        margin-top: 100px;
+        padding: 48px 0;
+    }
+
+    &-wrapper {
+        max-width: 500px;
+        margin: auto;
+
+        @include apply-to(desktop) {
+            max-width: $ozsgPageDesktopFixedWidth;
+            display: flex;
+        }
+    }
+
+    &-content {
+        @include apply-to(desktop) {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 50%;
+            padding-right: 118px;
+        }
+    }
+
+    &-image {
+        margin-top: 24px;
+
+        @include apply-to(desktop) {
+            width: 50%;
+            margin-top: 0;
+        }
+    }
+
+    &-header {
+        font-family: $secondary-font;
+        font-weight: 900;
+        font-size: 22px;
+        line-height: 24px;
+        letter-spacing: .39px;
+
+        @include apply-to(desktop) {
+            font-size: 24px;
+            line-height: 32px;
+            letter-spacing: .18px;
+        }
+    }
+
+    &-body {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: .32px;
+        margin-top: 24px;
+        margin-bottom: 0;
+        color: $black-1;
+
+        @include apply-to(desktop) {
+            font-size: 20px;
+            line-height: 32px;
+            letter-spacing: .4px;
+            margin-top: 32px;
+        }
+    }
+
+    &-button {
+        display: block;
+        max-width: 90%;
+        margin: 25px auto 0 auto;
+
+        @include apply-to(tablet) {
+            max-width: 300px;
+        }
+
+        @include apply-to(desktop) {
+            margin: 32px 0 0 0;
+        }
+    }
+}
+
+// WINNER CARDS
+.oz-more-winners-closed__winner-cards {
+    margin-top: 56px;
+
+    @include apply-to(desktop) {
+        margin-top: 100px;
+    }
+
+    &-header {
+        text-align: center;
+        margin-bottom: 30px;
+
+        @include apply-to(desktop) {
+            margin-bottom: 40px;
+        }
+    }
+
+    .ozc-prize-card {
+        margin-bottom: 40px;
+    }
+
+    .ozc-prize-card__header {
+        text-transform: uppercase;
+    }
+}
+
+// IMPACT SECTION
+.oz-more-winners-closed__impact {
+    background-color: $blue-11;
+    color: $black-1;
+    padding-bottom: 42px;
+    text-align: center;
+    margin-top: 40px;
+
+    @include apply-to(desktop) {
+        margin-top: 72px;
+        padding-bottom: 35px;
+    }
+
+    &-header {
+        background-color: #86e6f9; // not defined as var elsewhere
+
+        &-wrapper {
+            position: relative;
+            max-width: 821px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 32px 18px;
+
+            @include apply-to(desktop) {
+                padding: 48px 0 96px 0;
+            }
+
+            &:after {
+                content: '';
+                display: block;
+                width: 60px;
+                height: 60px;
+                background-image: url('//images.omaze.com/web/assets/images/static/features/shared/impact-fist-icon.png');
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-size: contain;
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                transform: translate(-50%, 50%);
+
+                @include apply-to(desktop) {
+                    width: 140px;
+                    height: 140px;
+                }
+            }
+        }
+
+        h1 {
+            color: $white;
+        }
+
+        h3 {
+            margin-bottom: 16px;
+        }
+    }
+
+    &-body {
+        padding: 50px 18px 24px 18px;
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+
+        @include apply-to(desktop) {
+            padding: 104px 0 32px 0;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &-media {
+        max-width: 821px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 18px;
+    }
+
+    &-share {
+        max-width: 821px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 18px;
+        margin-top: 24px;
+    }
+}
+
+// QUOTE BLOCK
+.oz-more-winners-closed__quote {
+    margin-top: 54px;
+
+    @include apply-to(desktop) {
+        margin-top: 65px;
+    }
+
+    .ozc-quote-block {
+        margin: auto;
+    }
+}
+
+// ADDITIONAL PRIZES - NO WINNERS
+.oz-more-winners-closed__extra-prizes-no-winners {
+    max-width: 540px;
+    margin-top: 20px;
+
+    &-header,
+    &-body {
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: .32px;
+        color: $black-1;
+
+        @include apply-to(desktop) {
+            color: $black-2;
+            text-align: center;
+        }
+    }
+
+    &-header {
+        font-weight: bold;
+        margin-bottom: 8px;
+
+        @include apply-to(desktop) {
+            font-size: 24px;
+            line-height: 32px;
+            letter-spacing: 0.4px;
+            margin-bottom: 16px;
+        }
+    }
+
+    &-body {
+        margin-bottom: 0px;
+
+        @include apply-to(desktop) {
+            font-size: 20px;
+            line-height: 32px;
+            letter-spacing: 0.4px;
+        }
+    }
+
+    &-image {
+        margin-top: 24px;
+    }
+}
+
+// ADDITIONAL PRIZES - WITH WINNERS
+.oz-more-winners-closed__extra-prizes {
+    &-header {
+        text-align: center;
+        margin-bottom: 32px;
+
+        @include apply-to(desktop) {
+            margin-bottom: 56px;
+        }
+    }
+
+    .ozc-link-row__icon {
+        @include apply-to(desktop) {
+            color: $pink-6;
+        }
+    }
+}
+
+// ADDITIONAL PRIZES - MODAL PRIZE WINNER CONTENT
+.oz-additional-prize-view {
+    color: $black-1;
+
+    .ozc-modal__close {
+        margin-right: auto;
+
+        &:before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            margin-right: 6px;
+            border-style: solid;
+            border-width: 0 0 1px 1px;
+            transform: rotate(45deg);
+            background-color: transparent;
+
+            @include apply-to(desktop) {
+                width: 8px;
+                height: 8px;
+            }
+        }
+    }
+
+    .ozc-modal__close-text {
+        margin: 0;
+    }
+
+    .ozc-modal__close-icon {
+        display: none;
+    }
+
+    .ozc-modal__body {
+        margin-top: 30px;
+
+        @include apply-to(desktop) {
+            margin-top: 53px;
+        }
+    }
+
+    &__image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid $blue-1;
+
+        @include apply-to(desktop) {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__title {
+        margin-top: 11px;
+        text-align: center;
+
+        @include apply-to(desktop) {
+            margin-top: 24px;
+        }
+    }
+
+    &__subtitle {
+        margin-top: 6px;
+        font-style: italic;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: .53px;
+
+        @include apply-to(desktop) {
+            margin-top: 8px;
+        }
+    }
+
+    &__winners {
+        margin-top: 30px;
+
+        @include apply-to(tablet) {
+            display: grid;
+            grid-template-columns: 49% 49%;
+            grid-column-gap: 1%;
+            justify-content: center;
+        }
+
+        @include apply-to(desktop) {
+            display: grid;
+            grid-template-columns: 32% 32% 32%;
+            grid-column-gap: 1%;
+            justify-content: center;
+        }
+    }
+
+    &__winner {
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: .25px;
+
+        @include apply-to(desktop) {
+            font-size: 15px;
+            line-height: 24px;
+            letter-spacing: .29px;
+        }
+    }
+}

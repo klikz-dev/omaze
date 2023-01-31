@@ -1,0 +1,57 @@
+// .oz-winner-component-list
+.oz-winner-component-list {
+
+	// .oz-winner-component-list__header
+	&__header {
+
+		// .oz-winner-component-list__header--winners
+		&--winners {
+			font-family: $secondary-font;
+		    font-size: rem(24);
+		    margin-bottom: rem(20);
+
+		    @include apply-to(tablet) {
+		    	font-size: rem(35);
+		    	margin-bottom: rem(25);
+		    }
+		}
+	}
+
+
+	// .oz-winner-component-list__winners
+	&__winners {
+		text-align: center;
+
+		// .oz-winner-component-list__winners-grid
+		&-grid {
+			max-width: rem(1000);
+			margin: 0 auto;
+			margin-bottom: rem(100);
+		}
+	}
+
+	// .oz-winner-component-list__winner-card
+	&__winner-card {
+		width: 47%;
+		margin: 0 1% rem(20);
+		display: inline-block;
+		text-decoration: none;
+
+		@include apply-to(tablet) {
+			width: rem(235);
+			margin: 0 rem(5) rem(30);
+		}
+	}
+}
+
+.paginate {
+
+	// .paginate__button
+	 &__container {
+	 	margin-bottom: rem(15);
+
+	 	@include apply-to(desktop) {
+	 		margin-bottom: rem(50);
+	 	}
+	 }
+}

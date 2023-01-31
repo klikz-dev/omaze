@@ -1,0 +1,30 @@
+{{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+{{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+<script>
+    const idsToDelete = []
+    {% for item in cart.items %}
+      {% unless item.variant.available %}
+          idsToDelete.push('{{ item.variant_id }}')
+      {% endunless %}
+    {% endfor %}
+    if(idsToDelete.length > 0){
+      updates = {}
+      idsToDelete.forEach(id => {
+        updates[id]=0
+      })
+        jQuery.ajax({
+            cache: false,
+            url: '/cart/update.js',
+            type: 'POST',
+            contentType: 'application/json; charset=UTF-8',
+            dataType: 'JSON',
+            data: JSON.stringify({ updates }),
+            success: function (response) {
+              location.reload();
+            },
+            error: function (request, status, error) {
+              console.error(error)
+            }
+        });
+    }
+</script>

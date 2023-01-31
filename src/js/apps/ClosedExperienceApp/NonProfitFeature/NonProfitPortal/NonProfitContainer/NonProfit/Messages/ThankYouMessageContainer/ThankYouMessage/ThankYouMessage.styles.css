@@ -1,0 +1,84 @@
+.logo {
+    @apply mx-auto;
+    height: 62px;
+}
+
+.thankYouMessage {
+    @apply text-center mx-auto mt-2;
+
+    max-width: 331px;
+}
+
+.thankYouMessage strong {
+    font-weight: bold;
+}
+
+.thankYouMessage > blockquote {
+    @apply type-subtitle1 mx-auto;
+
+    line-height: 19.2px;
+    letter-spacing: 0.4px;
+}
+
+.thankYouMessage > p {
+    @apply type-body2 mx-auto;
+
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.thankYouMessage > blockquote + p {
+    @apply type-subtitle1 mx-auto;
+
+    line-height: 24px;
+    font-weight: 400;
+}
+
+@screen lg {
+    .containerWithImpact {
+        margin-left: 72px;
+    }
+
+    .logo {
+        @apply ml-0;
+
+        height: 100px;
+    }
+
+    .thankYouMessage {
+        @apply max-w-full text-left;
+
+        width: 538px;
+    }
+
+    .thankYouMessage > blockquote {
+        @apply type-button mx-auto;
+
+        line-height: 28px;
+    }
+
+    .logoWithoutImpactMessage {
+        @apply mx-auto;
+    }
+
+    .thankYouMessageCWithoutImpactMessage {
+        @apply mx-auto text-center;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .thankYouMessage p {
+    color: #000000;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+@screen lg {
+    :global(.rebrand) .thankYouMessage p {
+        font-size: 18px;
+    }
+}

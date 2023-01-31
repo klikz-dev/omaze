@@ -1,0 +1,50 @@
+.host {
+    @apply text-center;
+
+    /* one-off */
+    margin-bottom: 36px;
+    max-width: 728px;
+}
+
+.host h2 {
+    @apply type-h6;
+
+    line-height: 26px;
+    color: #000;
+}
+
+@screen md {
+    /* one-off */
+    margin-bottom: 44px;
+}
+
+@screen lg {
+    .host h2 {
+        @apply type-h5;
+
+        line-height: 32px;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .host {
+    margin-bottom: 24px;
+}
+
+:global(.rebrand) .host h2 {
+    color: #000000;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+}
+
+@screen lg {
+    :global(.rebrand) .host h2 {
+        font-size: 30px;
+        line-height: 45px;
+        letter-spacing: 0.015rem;
+        font-weight: 700;
+    }
+}

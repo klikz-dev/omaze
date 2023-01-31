@@ -1,0 +1,51 @@
+{% assign s = section.settings %}
+
+<section class="columns__one-full-width">
+  <div class="transparency__testimonial">
+    <div class="transparency__testimonial--header">
+      <img
+        class="lazyload"
+        data-sizes="auto"
+        data-src="{{ s.company_logo | img_url: '812x' }}"
+        data-srcset="{% include 'c-responsive-image-url', responsive_img: s.company_logo %}"
+        alt="{{ s.company_logo.alt }}"
+      />
+    </div>
+    <div class="transparency__testimonial--body">
+      <span class="transparency__testimonial--quote-icon"></span>
+      <h3>{{- s.testimony -}}</h3>
+    </div>
+    <div class="transparency__testimonial--footer">
+      <h3>{{- s.testimony_giver -}}</h3>
+      <p>{{- s.company_name -}}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonial One",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "company_logo",
+      "label": "Company Logo"
+    },
+    {
+      "type": "text",
+      "id": "company_name",
+      "label": "Company Name"
+    },
+    {
+      "type": "text",
+      "id": "testimony",
+      "label": "Testimony"
+    },
+    {
+      "type": "text",
+      "id": "testimony_giver",
+      "label": "Testimony Giver"
+    }
+  ]
+}
+{% endschema %}

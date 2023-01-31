@@ -1,0 +1,32 @@
+{% assign meta = article.metafields %}
+{% assign bannerImageId = meta.causes.bannerImageId | json_string %}
+{% assign bannerImage = meta.causes.bannerImageSrc | json_string %}
+
+{% if bannerImageId %}
+	{% capture bannerImage %}
+		https:{{ bannerImageId | append: ".jpg" | asset_img_url: 'master' }}
+	{% endcapture %}
+{% endif %}
+
+<a href="{{ article.url }}" class="oz-card">
+	<div class="oz-card__img oz-card__section oz-card__section--full-width">
+		<div class="oz-card__intrinsic-ratio intrinsic-ratio intrinsic-ratio--card-causes">
+			<img
+				alt="{{- article.title -}}"
+				class="lazyload"
+				data-sizes="auto"
+				src="{{ bannerImage }}"
+			/>
+		</div>
+	</div>
+	<div class="oz-card__content oz-card__section">
+		<h3 class="oz-card__title oz-text-fade--2">
+			{{- article.title -}}
+		</h3>
+	</div>
+	<div class="oz-card__footer oz-card__section">
+		<span class="oz-card__cta-label secondary-font oz-chevron--right-thick">
+			learn more
+		</span>
+	</div>
+</a>

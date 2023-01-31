@@ -1,0 +1,73 @@
+{% assign meta = article.metafields.winners %}
+{% assign name = article.title %}
+{% assign size = name | size | minus: 3 %}
+
+<div class="oz-winner">
+	<div class="oz-winner-announce">
+		<div class="oz-winner__container">
+
+			{% if meta.image != blank %}
+				<div class="oz-winner-video intrinsic-ratio banner__intrinsic-ratio banner__intrinsic-ratio--winners">
+					<img
+						class="lazyload"
+						data-src="{{- meta.image | file_img_url: '812x457' -}}"
+					/>
+				</div>
+			{% endif %}
+
+			<div class="oz-winner-info">
+				<div class="oz-winner-experience-profile">
+
+					{% if article.image != blank %}
+						<div class="oz-img-wrapper banner__intrinsic-ratio banner__intrinsic-ratio--winners banner__intrinsic-ratio--winners-thumbnail intrinsic-ratio">
+							<img
+								alt="{{- article.image.alt -}}"
+								class="oz-img lazyload"
+								data-src="{{- article.image.src | img_url: '300x300' -}}"
+							/>
+						</div>
+					{% endif %}
+
+					<div class="oz-winner-experience-profile__info">
+						<h2 class="oz-winner-experience-profile__name">
+							{{- article.title -}}
+						</h2>
+
+						{% if meta.location != blank %}
+							<div class="oz-winner-experience-profile__info-item">
+								<h3 class="oz-winner-experience-profile__location">
+									location
+								</h3>
+								<p class="oz-winner-experience-profile__location-city">{{- meta.location -}}</p>
+							</div>
+						{% endif %}
+
+					</div>
+				</div>
+
+				{% if article.content != blank %}
+					<div class="oz-winner-experience-info">
+						<p class="oz-winner-experience-info-copy">
+							{{- article.content -}}
+						</p>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="oz-winner-experience-related oz-winner-experience-recap">
+	<h1 class="oz-winner-experience-recap__section-title oz-winner-experience-recap__section-body">
+		want to live the dream like {{ name | slice: 0, size }}? check these out!
+	</h1>
+</div>
+
+<div class="oz-winner-experience-recap__link--main">
+    <a
+    	class="oz-color--pink"
+    	href="/blogs/winners/"
+	>
+    	back to directory
+    </a>
+</div>

@@ -1,0 +1,295 @@
+.cross-sell-product-card {
+    margin-bottom: rem(24);
+    width: rem(312);
+    height: rem(328);
+    border-radius: rem(1);
+    box-shadow: 0 rem(2) rem(4) 0 $gray-17;
+    border-right: solid rem(0.5) $gray-17;
+    background-color: $white;
+    &:first-child {
+        margin-top: rem(12);
+    }
+    @include apply-to(tablet) {
+        width: rem(352);
+        margin: 0.625rem;
+        padding: 0;
+        height: rem(388);
+        overflow: hidden;
+
+    }
+    .cross-sell-product-card__image {
+        &-link {
+            position: relative;
+        }
+    }
+    &__content {
+        padding: rem(14) 0;
+        width: 100%;
+        height: rem(102);
+        display: block;
+        @include apply-to(tablet) {
+            height: rem(136);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: rem(10) 0;
+        }
+        &.oz-text-fade--7:after {
+            @include apply-to(tablet) {
+                bottom: rem(21);
+            }
+        }
+    }
+    &__title {
+        width: 90%;
+        margin: auto;
+        margin-left: 5%;
+        font-family: National;
+        font-size: rem(13);
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: italic;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $primary-color;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        @include apply-to(tablet) {
+            width: 85%;
+            margin: rem(6);
+            margin-bottom: 0px;
+            font-size: rem(14);
+        }
+    }
+    &__description {
+        display: block;
+        width: 90%;
+        font-family: $primary-font;
+        font-size: rem(17.6);
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $black-2;
+        margin: rem(4) auto;
+        margin-bottom: 0;
+        word-break: break-word;
+        overflow: hidden;
+        @include apply-to(tablet) {
+            width: 85%;
+            margin: rem(4) 0;
+            font-size: rem(18.4);
+            max-height: 63%;
+        }
+    }
+    &__supports {
+        display: block;
+        width: 90%;
+        opacity: 0.7;
+        font-family: $primary-font;
+        font-size: rem(12);
+        font-weight: normal;
+        font-style: italic;
+        font-stretch: normal;
+        line-height: 1.33;
+        letter-spacing: rem(0.6);
+        color: $black-1;
+        margin: rem(6) auto;
+        margin-bottom: 0;
+        word-break: break-word;
+        @include apply-to(tablet) {
+            width: 85%;
+            margin: rem(6) 0;
+        }
+    }
+    &__footer {
+        display: flex;
+        width: 90%;
+        justify-content: space-between;
+        align-items: center;
+        margin: rem(6) auto;
+        @include apply-to(tablet) {
+            width: 87%;
+            justify-content: space-between;
+            margin: auto;
+        }
+    }
+    &__add-to-cart {
+        object-fit: contain;
+        color: $secondary-color;
+        font-family: $primary-font;
+        border: rem(1) solid $secondary-color;
+        border-radius: rem(3);
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        cursor: pointer;
+        text-align: center;
+        font-size: rem(14);
+        background-color: $white;
+        padding: 0.35em 1em;
+        border-radius: rem(2);
+        @include apply-to(tablet) {
+            padding: 0.45em 1.85em;
+            border-radius: rem(2);
+        }
+        &:hover, &:active {
+            color: $white;
+        }
+    }
+    &__add-to-cart.is-loading {
+        color: $secondary-color;
+        background-color: $secondary-color;
+    }
+    &__learn-more {
+        height: rem(15);
+        font-family: $primary-font;
+        font-size: rem(13);
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: $gray-5;
+        flex-basis: 50%;
+        padding-top: rem(4);
+        @include apply-to(tablet) {
+            font-size: rem(14);
+            flex-basis: 50%;
+            text-align: left;
+            padding-top: rem(0);
+        }
+    }
+}
+
+// rebrand css
+.cross-sell-product-card {
+    &__add-to-cart.rebrand, &__learn-more.rebrand {
+        display: none;
+    }
+}
+
+$underline_animate: all 0.5s ease-in-out;
+
+body.rebrand {
+    .cross-sell-product-card {
+        width: rem(328);
+        height: unset;
+        filter: drop-shadow(0px 1px 8px rgba(9, 15, 21, 0.08));
+        border-radius: rem(12);
+        box-shadow: unset;
+        border: unset;
+        overflow: hidden;
+
+        &__content {
+            padding: rem(16) rem(16) rem(0) rem(16);
+            height: unset;
+
+            &::after {
+                content: unset;
+            }
+        }
+
+        &__title {
+            width: 100%;
+            margin: 0;
+            color: $new-grey;
+            font-family: $primary-font-rebrand;
+            font-size: rem(16);
+            line-height: 1.5;
+            letter-spacing: 0.015rem;
+            font-weight: 700;
+            font-style: normal;
+
+            @include apply-to(phone) {
+                font-size: rem(14);
+            }
+        }
+
+        &__description {
+            width: 100%;
+            height: rem(48);
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: rem(2) 0 0 0;
+            color: $new-grey;
+            font-family: $primary-font-rebrand;
+            font-size: rem(16);
+            line-height: 1.5;
+            letter-spacing: 0.015rem;
+            font-weight: 500;
+
+            @include apply-to(phone) {
+                font-size: rem(14);
+            }
+        }
+
+        &__footer {
+            width: 100%;
+            padding: rem(16);
+            margin: 0;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+
+        &__add-to-cart {
+            &:not(.rebrand) {
+                display: none;
+            }
+
+            display: block;
+            background-color: $yellow-3;
+            border: 1px solid $yellow-3;
+            border-radius: 76px;
+            padding: rem(3) rem(16) rem(5) rem(16);
+            color: $new-grey;
+            font-family: $primary-font-rebrand;
+            font-size: rem(16);
+            line-height: 1.5;
+            letter-spacing: 0.015rem;
+            text-transform: capitalize;
+            margin-right: rem(32);
+
+            &:hover {
+                background-color: $new-yellow-800;
+            }
+
+            &:focus {
+                background-color: $new-yellow-800;
+            }
+        }
+
+        &__learn-more {
+            &:not(.rebrand) {
+                display: none;
+            }
+
+            display: block;
+            height: rem(18);
+            flex-basis: unset;
+            color: $new-grey;
+            font-family: $primary-font-rebrand;
+            font-size: 12px;
+            line-height: 1.5;
+            letter-spacing: 0.015rem;
+            font-weight: 700;
+            text-transform: capitalize;
+            border-bottom: 1.5px solid $new-navy-500;
+            padding: 0;
+
+            &:hover {
+                border-bottom-color: $yellow-3;
+            }
+        }
+    }
+}

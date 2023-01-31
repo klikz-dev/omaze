@@ -1,0 +1,41 @@
+{% if productStatus == 'active' %}
+    <div id="js-active-experience-app__root"></div>
+    <script>
+        (function setupOzActiveExperienceAppData () {
+            // Variant metafields are not available directly on variants JSON
+            function getVariantMetafields () {
+                const variantMetafields = {};
+
+                {% for variant in product.variants %}
+                    variantMetafields[{{ variant.id }}] = {
+                        calloutText:  {{ variant.metafields.badge.top_callout | json -}} || '',
+                    }
+                {% endfor %}
+
+                return variantMetafields;
+            }
+
+            window.ozActiveExperienceApp = {
+                experience: {
+                    id: {{- product.id | json -}},
+                    handle: {{- product.handle | json -}} || '',
+                    name: {{- product.title | json -}} || '',
+                },
+                variants: {{ product.variants | json }},
+                variantMetafieldSets: getVariantMetafields(),
+                nonProfit: {
+                    name: {{ product.vendor | json -}} || '',
+                },
+                config: {
+                    env: '{{- settings.env -}}',
+                    fameHostname: '{{- settings.fame_app_host -}}',
+                    fameUpsellVariantSku: '{{- settings.fame_upsell_variant_sku -}}',
+                    donorCounterBlackList: {{- settings.donor_counter_product_blacklist | json -}},
+                    donorCounterMinDonors: {{- settings.minimum_number_of_donors | json -}},
+                    donorCounterAPIHost: '{{- settings.donor_counter_api_host -}}',
+                }
+            };
+        })();
+    </script>
+    {% include 'ActiveExperienceApp' %}
+{% endif %}

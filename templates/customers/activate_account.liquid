@@ -1,0 +1,37 @@
+<div class="oz-page" id="acLogin">
+	<div class="oz-login-app" id="accountSection">
+		<div class="oz-section">
+			<div class="oz-section__inner" id="acActivateAccountForm">
+				<h1 class="oz-section__page-title oz-section__page-title--activate-account">{{ 'customer.activate_account.title' | t }}</h1>
+				<div class="oz-section__content oz-section__content--activate-account">
+					{{ 'customer.activate_account.subtext' | t }}
+				</div>
+				{% form 'activate_customer_password', id: 'activateAccountForm' %}
+					<input type="hidden" id="returnToInput" name="return_to" value="/account" />
+					<div class="oz-section__content">
+						<div class="oz-field">
+							<div class="oz-field__container{% if form.errors contains 'password' %} error{% endif %}">
+								<input id="activateAccountPassword" class="input{% if form.errors contains 'password' %} error{% endif %}" type="password" name="customer[password]" required />
+								<label for="activateAccountPassword" class="label--hidden">{{ 'customer.activate_account.password' | t }}</label>
+							</div>
+							<div id="passwordHint" class="oz-field__container--hint-text"></div>
+						</div>
+						<div class="oz-field">
+							<div class="oz-field__container{% if form.errors contains 'password_confirmation' %} error{% endif %}">
+								<input type="password" value="" name="customer[password_confirmation]" id="activateAccountPasswordConfirmation" class="input{% if form.errors contains 'password_confirmation' %} error{% endif %}" required />
+								<label for="activateAccountPasswordConfirmation" class="label--hidden">{{ 'customer.activate_account.password_confirm' | t }}</label>
+							</div>
+						</div>
+						<div class="oz-field oz-field--btn">
+							<button class="oz-btn oz-btn--block" type="submit">
+								<span class="btn__label">
+									{{ 'customer.activate_account.submit' | t }}
+								</span>
+							</button>
+						</div>
+					</div>
+				{% endform %}
+			</div>
+		</div>
+	</div>
+</div>

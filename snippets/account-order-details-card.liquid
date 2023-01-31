@@ -1,0 +1,53 @@
+{% assign REFUNDED = 'refunded' %}
+{% assign PAYMENT_STATUS = order.financial_status | downcase %}
+{% assign strike_through_class = "" %}
+
+{% if PAYMENT_STATUS == REFUNDED %}
+    {% assign strike_through_class = "strike-through" %}
+{% endif %}
+
+<div class="card">
+    <div class="order-summary-title">
+        <p class="card-title title">{{ 'customer.order.order_summary' | t }}</p>
+        <p class="card-title order-total">{{ 'customer.order.order_total' | t }}</p>
+    </div>
+
+    <div class="line-items">
+        {% assign line_item_count = 0 %}
+        {% for line_item in order.line_items %}
+            {% comment %} the forloop.index starts from 1 {% endcomment %}
+            {% assign current_item_index = forloop.index %}
+            {% assign show_loyalty_bonus_text = false %}
+            {% assign discount_code = 0 %}
+            {% include 'account-order-line-item' %}
+        {% endfor %}
+    </div>
+
+    <div class="content order-cost" id="order-cost">
+        <div class="order-cost__content">
+            <div class="content-text subtotal_price">
+                <span class="title">{{ 'customer.order.order_subtotal' | t }}</span>
+
+                <span class="value">
+                    {% if PAYMENT_STATUS == REFUNDED %}
+                        ${{ order.total_net_amount | money_without_currency }}
+                    {% else %}
+                        ${{ order.subtotal_price | money_without_currency }}
+                    {% endif %}
+                </span>
+            </div>
+            <div class="content-text total_price">
+                <span class="title">{{ 'customer.order.order_total' | t }}</span>
+                <span class="value">
+                    {% if PAYMENT_STATUS == REFUNDED %}
+                        {{ order.total_net_amount | money_with_currency }}
+                    {% else %}
+                        {{ order.total_price  | money_with_currency }}
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'total-entries-handler' %}

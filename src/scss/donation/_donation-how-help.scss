@@ -1,0 +1,30 @@
+.oz-donation__how-help {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.oz-donation__how-help h2 {
+    // font-family: Clan OT;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0.32px;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.oz-donation-how-help__cause {
+    text-transform: uppercase;
+}
+
+.oz-how-help__hero {
+    display: block;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.oz-how-help-hero__intrinsic-ratio {
+    @include intrinsic-ratio-padding(16/9);
+}

@@ -1,0 +1,65 @@
+<div class="oz-portfolio collection-featured">
+	<header class="oz-portfolio-banner oz-portfolio-banner--hero">
+	    <div class="phone-only">
+			<div class="intrinsic-ratio collection-featured__hero-intrinsic-ratio lazy-blur">
+				<img src="{{ collection.image | img_url: '518x162' }}" alt="{{ collection.title | append: ' Phone Hero Image Blur'}}" />
+				<img
+					class="lazyload"
+					data-sizes="auto"
+					data-src="{{ collection.image | img_url: '518x162' }}"
+					data-srcset="{% include 'c-responsive-image-url', responsive_img: collection.image %}"
+					alt="{{ collection.title | append: ' Phone Hero Image'}}"
+				/>
+			</div>
+	    </div>
+	    <div class="desktop-and-tablet">
+			<div class="intrinsic-ratio collection-featured__hero-intrinsic-ratio lazy-blur">
+				<img src="{{ collection.image | img_url: '1440x450' }}" alt="{{ collection.title | append: ' Desktop Hero Image Blur'}}" />
+				<img
+					class="lazyload"
+					data-sizes="auto"
+					data-src="{{ collection.image | img_url: '1440x450' }}"
+					data-srcset="{% include 'c-responsive-image-url', responsive_img: collection.image %}"
+					alt="{{ collection.title | append: ' Desktop Hero Image'}}"
+				/>
+			</div>
+	    </div>
+	</header>
+    {% section 'CAFA-global' %}
+	<section class="oz-portfolio-section__content oz-wysigyg-text">
+		{{ collection.description }}
+    </section>
+  	<section class="oz-portfolio-section__experiences">
+        {% unless settings.collection_sweepstakes_enabled %}
+            {% paginate collection.products by 4 %}
+                <div class="card-collection AjaxinateLoop">
+                    {% for product in collection.products %}
+                        {% include 'product-grid-item' %}
+                    {% endfor %}
+                </div>
+                <div class="AjaxinatePagination">
+                    {% if paginate.next %}
+                        <div class="spinner">
+                            <a href="{{ paginate.next.url }}"></a>
+                            {% include 'experience-spinner' %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endpaginate %}
+        {% endunless %}
+	</section>
+
+    {% if settings.collection_sweepstakes_enabled %}
+        <div id="js-collection-app__root">
+            {% render 'collection-skeleton' %}
+        </div>
+        {% render 'skeleton-loading' %}
+        <script>
+            SDG.SkeletonLoading.init();
+        </script>
+    {% endif %}
+</div>
+
+{% if settings.collection_sweepstakes_enabled %}
+    {% include 'CollectionApp' %}
+{% endif %}

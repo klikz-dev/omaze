@@ -1,0 +1,111 @@
+/**
+ * Mobile Nav
+ */
+.mobile-close {
+	position: relative;
+	height: rem(50);
+	width: 100%;
+
+	@include apply-to(desktop) {
+		display: none;
+	}
+
+	// .mobile-close::before,
+	// .mobile-close::active
+	&::before,
+	&::after {
+		content: '';
+		height: rem(20);
+		position: absolute;
+		width: rem(3);
+		background: $white;
+		right: rem(25);
+		top: 40%;
+		transform: translateY(-50%);
+		visibility: hidden;
+	}
+
+	// .mobile-close::before
+	&::before {
+		transform: rotate(45deg);
+	}
+
+	// .mobile-close::after
+	&::after {
+		transform: rotate(-45deg);
+	}
+}
+
+.oz-nav-overlay {
+	transition: all 0.3s ease 0.3s;
+	opacity: 0;
+
+	@include apply-to(desktop) {
+		display: none;
+	}
+
+	// .oz-nav-overlay.is-active
+	&.is-active {
+		background: rgba(17, 17, 17, 0.4);
+		bottom: 0;
+		height: 100vh;
+		left: 0;
+		margin: auto;
+		opacity: 1;
+		position: fixed;
+	    right: 0;
+	    top: 0;
+		width: 100%;
+
+		// .oz-nav-overlay.is-active + .nav__list-wrapper
+		+ .nav__list-wrapper {
+			opacity: 1;
+			position: static;
+			transition: all 0.3s ease;
+			visibility: visible;
+		}
+	}
+}
+
+// .oz-nav-list
+.oz-nav-list {
+
+	// .oz-nav-list-ready
+	&-ready {
+        align-items: flex-start;
+	    background-color: $black-2;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 100vh;
+	    left: -100%;
+        min-width: rem(275);
+		position: absolute;
+		text-align: left;
+	    top: 0;
+	    transform: translateX(-100%);
+	    transition: all 0.3s ease;
+	    visibility: hidden;
+	}
+
+	// .oz-nav-list-active
+	&-is-active {
+	    min-height: 100vh;
+	    left: 0;
+	    transform: translateX(0);
+	    visibility: visible;
+
+	    .mobile-close {
+
+	    	// .mobile-close::before
+	    	// .mobile-close::after
+	    	&::before,
+	    	&::after {
+	    		visibility: visible;
+	    	}
+	    }
+
+	    .nav__item {
+	    	visibility: visible;
+	    }
+	}
+}

@@ -1,0 +1,11 @@
+{% if responsive_img %}
+	{% if namespace == 'style-guide' %}
+		{{ responsive_img | asset_img_url: '480x' }} 480w, {{ responsive_img | asset_img_url: '812x' }} 812w, {{ responsive_img | asset_img_url: '1049x' }} 1049w, {{ responsive_img | asset_img_url: '1249x' }} 1249w, {{ responsive_img | asset_img_url: '1439x' }} 1439w, {{ responsive_img | asset_img_url: '1600x' }} 1600w, {{ responsive_img | asset_img_url: '2000x' }} 2000w, {{ responsive_img | asset_img_url: '2400x' }} 2400w
+	{% elsif namespace == 'file_img_url' %}
+		{{ responsive_img | file_img_url: '480x' }} 480w, {{ responsive_img | file_img_url: '812x' }} 812w, {{ responsive_img | file_img_url: '1049x' }} 1049w, {{ responsive_img | file_img_url: '1249x' }} 1249w, {{ responsive_img | file_img_url: '1439x' }} 1439w, {{ responsive_img | file_img_url: '1600x' }} 1600w, {{ responsive_img | file_img_url: '2000x' }} 2000w, {{ responsive_img | file_img_url: '2400x' }} 2400w
+	{% elsif namespace == 'product' %}
+		{{ responsive_img | product_img_url: '480x' }} 480w, {{ responsive_img | product_img_url: '812x' }} 812w, {{ responsive_img | product_img_url: '1049x' }} 1049w, {{ responsive_img | product_img_url: '1249x' }} 1249w, {{ responsive_img | product_img_url: '1439x' }} 1439w, {{ responsive_img | product_img_url: '1600x' }} 1600w, {{ responsive_img | product_img_url: '2000x' }} 2000w, {{ responsive_img | product_img_url: '2400x' }} 2400w
+	{% else %}
+		{{ responsive_img | img_url: '480x' }} 480w, {{ responsive_img | img_url: '812x' }} 812w, {{ responsive_img | img_url: '1049x' }} 1049w, {{ responsive_img | img_url: '1249x' }} 1249w, {{ responsive_img | img_url: '1439x' }} 1439w, {{ responsive_img | img_url: '1600x' }} 1600w, {{ responsive_img | img_url: '2000x' }} 2000w, {{ responsive_img | img_url: '2400x' }} 2400w
+	{% endif %}
+{% endif %}

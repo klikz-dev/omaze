@@ -1,0 +1,14 @@
+{
+    "account": "./src/js/account.js",
+    "app": "./src/js/app.js",
+    "article": "./src/js/article.js",
+    "blog": "./src/js/blog.js",
+    "index": "./src/js/index.js",
+    "product": "./src/js/product.js",
+    "donation": "./src/js/donation.js",
+    "collection": "./src/js/collection.js",
+    "collection-donation": "./src/js/collection_donation.js",
+    "checkout": "./src/js/checkout.js",
+    "page": "./src/js/page.js",
+    "skeleton-loading": "./src/js/skeleton-loading.js"
+}

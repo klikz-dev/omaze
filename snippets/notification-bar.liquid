@@ -1,0 +1,84 @@
+<div id='notificationBar' class="notification-bar__default">
+  <p id='messageText'></p>
+</div>
+<script>
+
+    var loginPathName = '/account/login';
+    var registerPathName = '/account/register';
+    var recoverMessagePathName = '/pages/recover-account-message';
+    var activatePathName = '/account/activate';
+    var resetPathName = '/account/reset';
+    var challengePathName = '/challenge';
+    var customerEmail = '{{ customer.email }}';
+    var currentPathName = window.location.pathname;
+
+    var authenticationPathName = window.localStorage.getItem('authenticationPathName');
+    var authenticationPathNameList = [
+        loginPathName,
+        registerPathName,
+        resetPathName,
+        activatePathName,
+        challengePathName,
+        recoverMessagePathName,
+    ];
+
+    var notificationBar = document.getElementById('notificationBar');
+    var messageText = document.getElementById('messageText');
+
+    const IS_AUTHENTICATION_PATH = authenticationPathNameList.some((path) => {
+        return currentPathName.includes(path);
+    });
+
+    const ANIMATION_DURATION = 3000;
+    const NOTIFICATION_DISPLAY_DELAY = 10000;
+
+    function showNotification(type, message) {
+        messageText.innerHTML = message;
+        messageText.className = `notification-bar__${type}`;
+        notificationBar.className = 'notification-bar notification-bar__show';
+        setTimeout(hideNotification, ANIMATION_DURATION + NOTIFICATION_DISPLAY_DELAY);
+    }
+
+    function hideNotification() {
+        notificationBar.className = 'notification-bar notification-bar__hide';
+    }
+
+    // DISPLAY NOTIFICATION IF PAGE IS NOT AN AUTHENTICATION PAGE
+    if(!IS_AUTHENTICATION_PATH && customerEmail) {
+        if ([registerPathName, challengePathName].includes(authenticationPathName)) {
+            showNotification('success', "{{ 'notification.messages.register_success' | t }}");
+        } else if(authenticationPathName.includes(resetPathName)) {
+            showNotification('success', "{{ 'notification.messages.password_reset_success' | t }}");
+        } else if(authenticationPathName.includes(activatePathName)) {
+            showNotification("success", "{{ 'notification.messages.activate_success' | t }}");
+        } else if ([loginPathName].includes(authenticationPathName)) {
+            showNotification("success", "{{ 'notification.messages.login_success' | t }}");
+        }
+    }
+
+    // Handling notifications on the account page when password reset is triggered and on the ccpa opt out page
+    const SUCCESS = 'success';
+    const FAILURE = 'failure';
+    const MESSAGE_TYPE_KEY = 'msgType';
+    const MESSAGE_TYPE_VALUE = localStorage.getItem(MESSAGE_TYPE_KEY);
+    const CUSTOMER_ACCOUNT_TEMPLATE = 'customers/account';
+    const CCPA_OPT_OUT_TEMPLATE = 'page.do-not-sell';
+    const CURRENT_TEMPLATE =  '{{ template }}';
+
+    if ( CURRENT_TEMPLATE === CUSTOMER_ACCOUNT_TEMPLATE && MESSAGE_TYPE_VALUE === SUCCESS) {
+        showNotification(SUCCESS, "{{ 'customer.recover_password.success' | t }}");
+        localStorage.removeItem(MESSAGE_TYPE_KEY);
+    } else if (CURRENT_TEMPLATE === CUSTOMER_ACCOUNT_TEMPLATE && MESSAGE_TYPE_VALUE === FAILURE) {
+        showNotification(FAILURE, "{{ 'customer.recover_password.failure' | t }}");
+        localStorage.removeItem(MESSAGE_TYPE_KEY);
+    } else if (CURRENT_TEMPLATE === CCPA_OPT_OUT_TEMPLATE && MESSAGE_TYPE_VALUE === SUCCESS) {
+        showNotification(SUCCESS, "{{ 'notification.messages.ccpa_opt_out_success' | t }}");
+        localStorage.removeItem(MESSAGE_TYPE_KEY);
+    } else if (CURRENT_TEMPLATE === CCPA_OPT_OUT_TEMPLATE && MESSAGE_TYPE_VALUE === FAILURE) {
+        showNotification(FAILURE, "{{ 'notification.messages.ccpa_opt_out_failure' | t }}");
+        localStorage.removeItem(MESSAGE_TYPE_KEY);
+    } else if (localStorage.getItem('omaze_loggedIn') === SUCCESS) {
+        showNotification(SUCCESS, "{{ 'notification.messages.activate_success' | t }}");
+        localStorage.removeItem('omaze_loggedIn');
+    };
+</script>

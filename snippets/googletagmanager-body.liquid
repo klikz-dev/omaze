@@ -1,0 +1,25 @@
+{% comment %}
+  Cookie Groups:
+    * STRICTLY_NECESSARY: C0001
+
+    Left on since it's STRICTLY_NECESSARY with a `noscript` tag.
+    Cookies used: YES
+
+    Script set to type="text/plain" so that it can be converted to type="text/javascript"
+    once user grants permission for cookie group. Conversion happens via the OneTrust SDK.
+    Note: Optanon is an alias for OneTrust.
+
+    The values in the `class="optanon-category-#-#-#"` correspond to the categories
+    of cookies set up in the cookie list for the site.
+
+    When listing multiple categories using this method, such as optanon-category-C0003-C0004,
+    the categories are blocked concurrently. None of the cookies in these categories will be set
+    unless the site visitor consents to all of the categories being blocked.
+{% endcomment %}
+
+{% if settings.gtm_enable %}
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-{{ settings.gtm_id }}"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+{% endif %}

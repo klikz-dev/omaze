@@ -1,0 +1,210 @@
+/**
+ * buttons
+ *
+ * button element
+ * button
+ * link button
+ * icon button
+ */
+
+/**
+ * button element
+ */
+button[type="button"],
+[role="button"] {
+	cursor:pointer;
+
+	&.disabled {
+		cursor:default;
+	}
+}
+
+/**
+ * button
+ */
+.oz-btn {
+	background: $pink-6;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	color: $white;
+	cursor: pointer;
+	font-family: $primary-font;
+	font-size: 20px;
+	font-weight: $bold;
+	padding: .75em .75em .55em .75em;
+	text-align: center;
+	transition: font-size $normal-timer $ease-1, padding $normal-timer $ease-1;
+
+	// .oz-btn:hover
+	&:hover {
+		background-color: $pink-1;
+	}
+
+	// .oz-btn.disabled
+	&.is-disabled {
+		background-color: $gray-5;
+		color: rgba(255, 255, 255, 0.6);
+		cursor: not-allowed;
+
+		// .oz-btn.disabled:hover
+		&:hover {
+			background-color: $gray-5;
+		}
+	}
+
+	// .oz-btn.is-loading
+	&.is-loading {
+		color: transparent;
+		cursor: initial;
+	}
+
+	// .oz-btn--block
+	&--block {
+		display: block;
+		width: 100%;
+	}
+
+	// .oz-btn--line
+	&--line {
+		background-color: transparent;
+		border: 1px solid;
+
+		// .oz-btn--line--pink
+		&--pink {
+			border-color: $pink-2;
+			color: $pink-2;
+
+			// .oz-btn--line--pink:hover
+			&:hover {
+				color: $white;
+			}
+
+			// .oz-btn--link--pink--long
+			&--long {
+				display: inline-block;
+				min-width: rem(200);
+			}
+		}
+
+		// .oz-btn--line--white
+		&--white {
+			border: 1px solid rgba(255, 255, 255, 0.65);
+			font-size: em(14);
+			padding: em(12) em(10) em(8);
+
+		// .oz-btn--line--white:hover
+			&:hover {
+				background: $white;
+				color: $black-2;
+			}
+		}
+	}
+
+	// .oz-btn--cta
+	&--cta {
+		background-color: $pink-6;
+
+		// .oz-btn--cta:hover
+		// .oz-btn--cta:active
+		&:hover,
+		&:active {
+			background-color: $pink-3;
+		}
+	}
+
+	// .oz-btn--long
+	&--long {
+		min-width: rem(200);
+		max-width: 100%;
+		padding: .75em .75em .55em;
+		padding-left: 2em;
+		padding-right: 2em;
+		font-size: rem(18);
+
+		@include apply-to(desktop) {
+			padding-left: 4em;
+			padding-right: 4em;
+		}
+	}
+
+	// .oz-btn__label
+	// button submitting styles
+	&__label {
+		display:inline-block;
+		transition:opacity $fast-timer $ease-1, transform $fast-timer $ease-1;
+	}
+
+	// .oz-btn__btn-wrap
+	// used for '>' on cta
+	// example on home > featured in > 'go to our press page >'
+	&__btn-wrap {
+		padding: 2em;
+		text-align: center;
+
+		// .oz-btn__btn-wrap .oz-btn
+		.oz-btn {
+			display: inline-block;
+		}
+	}
+
+	// .oz-btn--small
+	&--small  {
+		font-size: rem(14);
+		padding: rem(7) rem(14) rem(6);
+	}
+}
+
+/**
+ * link button
+ */
+.oz-btn-link {
+	background:transparent;
+	border:0;
+	color:$pink-6;
+	font-weight: bold;
+	padding:0;
+}
+
+/**
+ * icon button
+ */
+.oz-btn-icon {
+	background:transparent;
+	border:0;
+	cursor:pointer;
+	padding:0;
+}
+
+/**
+ * Play button
+ */
+ .oz-play-btn {
+     font-size: 1rem;
+     background-color: $blue-1;
+     padding: .75em 1.75em;
+     border-radius: 5px;
+     border: none;
+     -moz-appearance: none;
+     -webkit-appearance: none;
+     outline: none;
+     transition: background-color 500ms;
+
+	 // .oz-play-btn__icon
+     &__icon {
+         color: $white;
+         width: 1.0625em;
+         height: 1.125em;
+         display: block;
+         transition: color 500ms;
+     }
+
+	 // .oz-play-btn:hover
+     &:hover {
+         background-color: $white;
+
+         .oz-play-btn__icon {
+             color: $blue-1;
+         }
+
+     }
+ }

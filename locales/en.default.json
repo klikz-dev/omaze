@@ -1,0 +1,446 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close_modal": "Close (esc)"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "404": {
+      "title": "404 Page Not Found",
+      "subtext": "Oops! This is awkward…",
+      "message": "It looks like this page either doesn’t exist or is no longer active. Let’s find a better place for you to go.",
+      "experience-link-text": "Browse campaigns",
+      "home-link-text": "Back to home",
+      "link": "Continue shopping"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "current_page": "Page {{ current }} of {{ total }}",
+      "page": "page"
+    },
+    "password_page": {
+      "opening_soon": "Opening Soon",
+      "login_form_heading": "Enter store using password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter",
+      "signup_form_email_label": "Email",
+      "signup_form_success": "We will send you an email right before we open!",
+      "admin_link_html": "Are you the store owner? <a href=\"\/admin\" class=\"text-link\">Log in here<\/a>",
+      "password_link": "Enter using password",
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+    },
+    "social": {
+      "share_on_facebook": "Share",
+      "share_on_twitter": "Tweet",
+      "share_on_pinterest": "Pin it",
+      "alt_text": {
+        "share_on_facebook": "Share on Facebook",
+        "share_on_twitter": "Tweet on Twitter",
+        "share_on_pinterest": "Pin on Pinterest"
+      }
+    },
+    "search": {
+      "no_results_html": "Your search for \"{{ terms }}\" did not yield any results.",
+      "results_with_count": {
+        "one": "{{ count }} result for \"{{ terms }}\"",
+        "other": "{{ count }} results for \"{{ terms }}\""
+      },
+      "title": "Search our site",
+      "placeholder": "Search",
+      "submit": "Submit",
+      "close": "Close search"
+    },
+    "newsletter_form": {
+      "newsletter_email": "Join our mailing list",
+      "email_placeholder": "Email address",
+      "confirmation": "Thanks for subscribing",
+      "submit": "Subscribe"
+    },
+    "filters": {
+      "show_more": "Show More",
+      "show_less": "Show Less"
+    },
+    "helpful_links": {
+      "title": "Helpful links:",
+      "login_trouble": "I’m having trouble logging into my account.",
+      "confirm_winner": "How do you confirm a winner?",
+      "tax_deductible": "Is my contribution tax deductible?",
+      "help_center": "Help center",
+      "email_us": "Email us"
+    },
+    "common_questions": {
+      "title": "Common Questions",
+      "tax_deductible": "Is my contribution tax deductible?",
+      "tax_deductible_link": "https://support.omaze.com/hc/en-us/articles/217522927-Is-my-contribution-tax-deductible-",
+      "promo_code": "How do you apply a promo code?",
+      "promo_code_link": "https://support.omaze.com/hc/en-us/articles/360041077373-How-do-you-apply-a-Promo-Code-to-your-Order-",
+      "confirmation_email": "Will I receive a confirmation email?",
+      "confirmation_email_link": "https://support.omaze.com/hc/en-us/articles/360039523893-Will-I-receive-a-transaction-confirmation-email-",
+      "help_center": "Help center",
+      "help_center_link": "https://support.omaze.com/hc/en-us",
+      "email_us": "Email us",
+      "email_us_link": "https://support.omaze.com/hc/en-us/requests/new"
+    }
+  },
+  "sections": {
+    "slideshow": {
+      "next_slide": "Next slide",
+      "previous_slide": "Previous slide",
+      "pause_slideshow": "Pause slideshow",
+      "play_slideshow": "Play slideshow",
+      "play_video": "Play video",
+      "close_video": "Close video"
+    },
+    "map": {
+      "get_directions": "Get directions",
+      "address_error": "Error looking up that address",
+      "address_no_results": "No results for that address",
+      "address_query_limit_html": "You have exceeded the Google API usage limit. Consider upgrading to a <a href=\"https:\/\/developers.google.com\/maps\/premium\/usage-limits\">Premium Plan<\/a>.",
+      "auth_error_html": "There was a problem authenticating your Google Maps account. Create and enable the <a href=\"https:\/\/developers.google.com\/maps\/documentation\/javascript\/get-api-key\">JavaScript API<\/a> and <a href=\"https:\/\/developers.google.com\/maps\/documentation\/geocoding\/get-api-key\">Geocoding API<\/a> permissions of your app."
+    }
+  },
+  "blogs": {
+    "article": {
+      "view_all": "View all",
+      "all_topics": "All topics",
+      "by_author": "by {{ author }}",
+      "posted_in": "Posted in",
+      "read_more": "Read more",
+      "back_to_blog": "Back to {{ title }}"
+    },
+    "comments": {
+      "title": "Leave a comment",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "post": "Post comment",
+      "moderated": "Please note, comments must be approved before they are published",
+      "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
+      "success": "Your comment was posted successfully! Thank you!",
+      "comments_with_count": {
+        "one": "{{ count }} comment",
+        "other": "{{ count }} comments"
+      }
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your cart",
+      "note": "Add a note to your order",
+      "remove": "Remove",
+      "subtotal": "Subtotal",
+      "savings": "You're saving",
+      "shipping_at_checkout": "Shipping & taxes calculated at checkout",
+      "update": "Update",
+      "checkout": "Check out",
+      "empty": "Your cart is currently empty.",
+      "cookies_required": "Enable cookies to use the shopping cart",
+      "edit": "Edit",
+      "cancel": "Cancel",
+      "continue_shopping": "Continue shopping",
+      "login_options_subtext": "Save time, track donations, & score rewards!"
+    },
+    "label": {
+      "product": "Product",
+      "price": "Price",
+      "quantity": "Quantity",
+      "total": "Total"
+    }
+  },
+  "collections": {
+    "general": {
+      "view_all": "View all",
+      "no_matches": "Sorry, there are no products in this collection",
+      "items_with_count": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      }
+    },
+    "sorting": {
+      "title": "Sort",
+      "featured": "Featured",
+      "best_selling": "Best Selling",
+      "az": "Alphabetically, A-Z",
+      "za": "Alphabetically, Z-A",
+      "price_ascending": "Price, low to high",
+      "price_descending": "Price, high to low",
+      "date_descending": "Date, new to old",
+      "date_ascending": "Date, old to new"
+    },
+    "filters": {
+      "title_tags": "Filter",
+      "all_tags": "All products"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "message": "Message",
+      "submit": "Send",
+      "post_success": "Thanks for contacting us. We'll get back to you as soon as possible."
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "details": "Account Details",
+      "view_addresses": "View Addresses",
+      "return": "Return to Account Details",
+      "donation_history": "Donation History",
+      "account_settings": "Account Settings",
+      "your_orders": "Your orders",
+      "your_info": "Your info",
+      "intro_text": "If you used the alternative method of entry, you’re entered for the same chance to win, just without the warm, fuzzy feeling you get from giving back."
+    },
+    "donation_history": {
+      "title": "Donation History",
+      "breadcrumb": "back to your experiences",
+      "order_total": "Order total:",
+      "donation_total": "Donation total:",
+      "order_details": "Order details >",
+      "see_details": "see details >"
+    },
+    "activate_account": {
+      "title": "Set your password and you’re good to go!",
+      "subtext": "You’ve confirmed your email address. Now, create a secure password for secure access to your account.",
+      "password": "Enter Password",
+      "password_confirm": "Re-enter Password",
+      "submit": "Set your password"
+    },
+    "addresses": {
+      "title": "Your Addresses",
+      "default": "Default",
+      "add_new": "Add a New Address",
+      "edit_address": "Edit address",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "company": "Company",
+      "address1": "Address1",
+      "address2": "Address2",
+      "city": "City",
+      "country": "Country",
+      "province": "Province",
+      "zip": "Postal\/Zip Code",
+      "phone": "Phone",
+      "set_default": "Set as default address",
+      "add": "Add Address",
+      "update": "Update Address",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "delete_confirm": "Are you sure you wish to delete this address?"
+    },
+    "login": {
+      "title": "Sign in to access your Omaze account",
+      "email": "Email address",
+      "password": "Password",
+      "forgot_password": "Forgot password?",
+      "no_account": "Don't have an account yet?",
+      "sign_in": "Sign in",
+      "guest_title": "Continue as a guest",
+      "guest_continue": "Continue",
+      "new_account": "New Account",
+      "password_reset_expired": "Your password reset link expired. Hit 'forgot password' and let's try this again!"
+    },
+    "orders": {
+      "title": "Your Orders",
+      "order_number": "Order",
+      "date": "Date",
+      "payment_status": "Payment Status",
+      "fulfillment_status": "Fulfillment Status",
+      "total": "Total",
+      "none": {
+        "start": "This is where you’ll see experiences that you entered to win by making a donation.",
+        "link": "experiences",
+        "end": "Let’s change that!",
+        "header": "Support an incredible cause!"
+      }
+    },
+    "order": {
+      "title": "Order #: {{ name }}",
+      "date": "Order date:",
+      "campaign": "Campaign:",
+      "view_campaign": "View campaign",
+      "order_summary": "Order summary:",
+      "loyalty_bonus_message": "{{ quantity }}x bonus applied. Thanks for being Omazing!",
+      "total_entries": "Total Entries:",
+      "order_total": "Total",
+      "order_subtotal": "Subtotal",
+      "total": "{{ entries }} chances to win",
+      "financial_status": {
+        "payment_successful": "Payment successful"
+      },
+      "transaction_details": {
+        "title": "TRANSACTION DETAILS",
+        "donation": "Donation:",
+        "order_total": "Order total:",
+        "donation_total": "Donation total:",
+        "payment": "Payment method:",
+        "card_details": "{{ credit_card_company }} ending in {{ last_four_digits }}",
+        "status": "Payment status:",
+        "total_entries": "Total entries:",
+        "refund": "Refunded"
+      },
+      "cancelled": "Order Cancelled on {{ date }}",
+      "cancelled_reason": "Reason: {{ reason }}",
+      "billing_address": "Billing Address",
+      "payment_status": "Payment Status",
+      "shipping_address": "Shipping Address",
+      "fulfillment_status": "Fulfillment Status",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "product": "Product",
+      "sku": "SKU",
+      "price": "Price",
+      "quantity": "Quantity",
+      "fulfilled_at": "Fulfilled {{ date }}",
+      "subtotal": "Subtotal",
+      "return": "Your orders",
+      "bonus": "bonus"
+    },
+    "recover_password": {
+      "title": "Forgot your password?",
+      "instruction": "Don’t worry, it happens! Just enter your email below and we’ll send you a link to set a new password.",
+      "email": "Email address",
+      "submit": "Reset password",
+      "cancel": "Cancel",
+      "subtext": "We will send you an email to reset your password.",
+      "success": "We've sent you an email with a link to update your password.",
+      "failure": "Something went wrong, please try again in a few minutes."
+    },
+    "recover_account": {
+      "title": "Check your email to reset your password!",
+      "message_html": "We sent an email to <span id=\"oz-recover-account__email\" class=\"oz-recover-account__email\"> {{ email }} </span> with a link to update your password."
+    },
+    "reset_password": {
+      "title": "Reset Password",
+      "subtext_html": "Enter a new password for <strong>{{ email }}</strong>",
+      "password": "Password",
+      "password_confirm": "Re-enter password",
+      "submit": "Reset Password"
+    },
+    "register": {
+      "title": "Create Account",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Register",
+      "have_account": "Already have an account? Login here."
+    },
+    "account_confirmation": {
+      "title": "Check your email to confirm your account",
+      "message_html": "We sent an email to <span id=\"oz-confirm-account__email\" class=\"oz-confirm-account__email\"> {{ email }} </span> to confirm your account and give you access to your donation history.",
+      "rebrand_title": "To verify your account, check your email."
+    }
+  },
+  "homepage": {
+    "onboarding": {
+      "product_title": "Your product's name",
+      "product_description": "This area is used to describe your product’s details. Tell customers about the look, feel, and style of your product. Add details on color, materials used, sizing, and where it was made.",
+      "collection_title": "Your collection's name",
+      "blog_title": "Your post's title",
+      "blog_excerpt": "Your store hasn’t published any blog posts yet. A blog can be used to talk about new product launches, tips, or other news you want to share with your customers. You can check out Shopify’s ecommerce blog for inspiration and advice for your own store and blog.",
+      "blog_author": "Author name",
+      "no_content": "This section doesn’t currently include any content. Add content to this section using the sidebar."
+    }
+  },
+  "layout": {
+    "navigation": {
+      "search": "Search",
+      "toggle": "expand\/collapse",
+      "expand": "expand",
+      "collapse": "collapse"
+    },
+    "cart": {
+      "title": "Cart",
+      "items_count": {
+        "one": "item",
+        "other": "items"
+      }
+    },
+    "customer": {
+      "account": "Account",
+      "log_out": "Log out",
+      "log_in": "Log in",
+      "create_account": "Create account"
+    },
+    "footer": {
+      "social_platform": "{{ name }} on {{ platform }}"
+    }
+  },
+  "products": {
+    "product": {
+      "regular_price": "Regular price",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "quantity": "Quantity",
+      "add_to_cart": "Add to cart",
+      "back_to_collection": "Back to {{ title }}"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title_html": "Here's your {{ value }} gift card for {{ shop }}!",
+      "subtext": "Your gift card",
+      "disabled": "Disabled",
+      "expired": "Expired on {{ expiry }}",
+      "active": "Expires on {{ expiry }}",
+      "redeem_html": "Use this code at checkout to redeem your {{ value }} gift card",
+      "shop_link": "Start shopping",
+      "print": "Print this gift card",
+      "remaining_html": "{{ balance }} left",
+      "add_to_apple_wallet": "Add to Apple Wallet"
+    }
+  },
+  "date_formats": {
+    "month_day_year": "%B %d, %Y",
+    "month_day_year_time": "%m\/%d\/%Y %I:%M%p"
+  },
+  "notification": {
+    "messages": {
+      "login_success": "Welcome back! It's good to see you again.",
+      "password_reset_success": "Success! You’ve got a new password.",
+      "register_success": "Welcome! We’re so glad you’re here.",
+      "activate_success": "Welcome! We’re so glad you’re here.",
+      "ccpa_opt_out_success": "Thank you for submitting your opt out, it has been stored. You will be opted out of any future sale of your information. If you have any questions, please reach out to privacy-requests@omaze.com.",
+      "ccpa_opt_out_invalid_email": "Please submit a valid email",
+      "ccpa_opt_out_failure": "Something went wrong, please try again in a few minutes."
+    }
+  },
+  "validation_errors": {
+    "email_invalid": "Oops, that doesn't seem to be a valid email format!",
+    "email_exists": "This email address already has an account! Try logging in.",
+    "password_too_short": "Password must have at least 5 characters.",
+    "password_must_match": "Passwords must match.",
+    "account_not_found": "We couldn't find an account with that email."
+  },
+  "shopify": {
+    "checkout": {
+      "marketing": {
+        "accept_marketing_checkbox_label": "Want extra entries, winner info, impact updates and more? Check the box to sign up for emails! It's not required, you can opt out at any time and we don't sell your info to third parties."
+      },
+      "shipping": {
+        "shipping_copy": "This experience comes with the chance to win additional prizes, so if you win one we’ll ship it to you!"
+      }
+    }
+  },
+  "opt_in_copy": {
+    "signup": "Get bonus entries, winner info, impact updates and more! You can opt out at any time, and opting in isn’t required to participate with Omaze.",
+    "checkout": "By continuing, you agree to our Terms of Use, {% officialRules %}Official Rules{% end officialRules %}, Privacy Policy and Refund Policy. For State Disclosure Information, {% stateDisclosure %}click here{% end stateDisclosure %}.",
+    "rules_link": "/pages/rules"
+  },
+  "disclosures": {
+    "link": "/pages/disclosures",
+    "button_text": "Click here"
+  }
+}

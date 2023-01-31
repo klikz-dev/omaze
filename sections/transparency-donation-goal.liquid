@@ -1,0 +1,45 @@
+{% assign s = section.settings %}
+
+<section class="columns__one-full-width transparency__link-list">
+  <div class="transparency__link-list--donations">
+    <h3>Thanks to you, Omaze has raised</h3>
+    <p>{{- s.total_donations -}}</p>
+    <div class="transparency__link-list--happy-face">
+      <img
+        class="lazyload"
+        data-sizes="auto"
+        data-src="{{ s.happy_face | img_url: '812x' }}"
+        data-srcset="{% include 'c-responsive-image-url', responsive_img: s.happy_face %}"
+        alt="{{ s.happy_face.alt }}"
+      />
+    </div>
+  </div>
+  <div class="transparency__link-list--goal">
+    <h1>Our goal is to raise</h1>
+    <p>{{- s.goal -}}</p>
+    <h1>You in?</h1>
+  </div>
+</section>
+
+{% schema %}
+{
+	"name": "Transparency: Donations",
+	"settings": [
+		{
+      "type": "text",
+      "id": "total_donations",
+      "label": "Total Donations"
+    },
+    {
+      "type": "image_picker",
+      "id": "happy_face",
+      "label": "Happy Face"
+    },
+    {
+      "type": "text",
+      "id": "goal",
+      "label": "Goal"
+    }
+	]
+}
+{% endschema %}

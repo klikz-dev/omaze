@@ -1,0 +1,66 @@
+.host {
+    @apply flex flex-wrap justify-center my-0 -mx-1;
+}
+
+.host > a {
+    margin: 0 8px 28px 8px;
+    width: 156px;
+}
+
+@screen lg {
+    .host {
+        margin: 0 -12px;
+        max-width: 1104px;
+    }
+
+    .host > a {
+        margin: 0 12px 32px 12px;
+        width: 164px;
+    }
+}
+
+/* Cards per row layout classes */
+@screen md {
+    /* Padding for 0.5 card+margin on each side: (156 + 16)/2 */
+    .cardsPerRow-3--tablet {
+        padding: 0 86px;
+    }
+}
+
+@screen lg {
+    /* Undo tablet styling */
+    .cardsPerRow-3--tablet {
+        padding: 0;
+    }
+
+    /* Padding for 1 card+margin on each side: 164 + 24 */
+    .cardsPerRow-3--desktop {
+        padding: 0 188px;
+    }
+
+    /* Padding for 0.5 card+margin on each side: (164 + 24)/2 */
+    .cardsPerRow-4--desktop {
+        padding: 0 94px;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .host {
+    margin-top: 14px;
+}
+
+:global(.rebrand) .host > a {
+    margin: 0 8px 30px 8px;
+    width: 156px;
+}
+
+@screen lg {
+    :global(.rebrand) .host {
+        max-width: 1024px;
+    }
+
+    :global(.rebrand) .host > a {
+        margin: 0 12px 38px;
+        width: 156px;
+    }
+}

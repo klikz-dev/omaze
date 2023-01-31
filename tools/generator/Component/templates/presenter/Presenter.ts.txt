@@ -1,0 +1,35 @@
+import classNames from 'classnames';
+
+import styles from '../{% componentName %}.styles.css';
+
+export interface I{% presenterName %}ClassNames {
+    host: string;
+}
+
+export interface I{% presenterName %}Config {
+    className?: string;
+    dataTestId?: string;
+}
+
+export class {% presenterName %} {
+    protected className: string | undefined;
+    protected dataTestId: string | undefined;
+
+    public constructor (config: I{% presenterName %}Config) {
+        this.className = config.className;
+        this.dataTestId = config.dataTestId;
+    }
+
+    public getTestId (): string | undefined {
+        return this.dataTestId;
+    }
+
+    public getAllClassNames (): I{% presenterName %}ClassNames {
+        return {
+            host: classNames({
+                [styles.host]: true,
+                [this.className + '']: !!this.className,
+            }),
+        };
+    }
+}

@@ -1,0 +1,33 @@
+.ozc-image {
+    display: block;
+    position: relative;
+    overflow: hidden;
+
+    &__image {
+        z-index: 2;
+        display: block;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        min-height: 100%;
+
+        &--lqip {
+            z-index: 1;
+        }
+
+        &--relative {
+            position: relative;
+        }
+    }
+
+    &__placeholder {
+        z-index: 0;
+        display: block;
+        width: 100%;
+        background: transparent;
+    }
+}

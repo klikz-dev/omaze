@@ -1,0 +1,325 @@
+/**
+ * Product Related Quickview
+ *
+ * modal styles
+ * details
+ * configurable overrides
+ * content header
+ */
+
+
+/**
+ * modal styles
+ */
+ .qv {
+	 background-color: $white;
+
+	 // .qv__inner
+	 &__inner {
+		 height: 100%;
+		 padding: 0 rem(20) rem(40);
+		 max-width: 100%;
+
+		 @include apply-to(desktop) {
+			 padding: 0 0 rem(30);
+		 }
+	 }
+
+	 // .qv__close
+	 &__close {
+		 cursor: pointer;
+		 position: absolute;
+		 top: rem(18);
+		 right: rem(18);
+
+		 // .qv__close-img
+		 &-img {
+			 width: rem(24);
+		 }
+	 }
+
+	 // .qv .oz-header-light
+	 .oz-header-light {
+		 display: flex;
+		 justify-content: center;
+		 align-items: center;
+		 height: rem(60);
+		 background-color: $black-1;
+		 padding: 0 rem(20);
+		 margin: 0 rem(-20);
+
+		 @include apply-to(desktop) {
+			 margin: 0;
+		 }
+
+		 // .qv .oz-header-light span
+		 span {
+			 cursor: pointer;
+			 display: flex;
+			 align-items: center;
+			 justify-content: flex-start;
+			 color: $white;
+			 text-decoration: none;
+			 font-size: rem(14);
+			 font-weight: $light;
+			 line-height: rem(60);
+
+			 // .qv .oz-header-light span .back-icon::before
+			 .back-icon::before {
+				 content: '<';
+				 font-size: rem(26);
+				 margin-right: rem(8);
+				 font-weight: $medium;
+			 }
+		 }
+	 }
+
+	 // .qv .oz-header-logo
+	 .oz-header-logo {
+		 display: flex;
+		 flex-grow: 1;
+		 flex-basis: 100%;
+		 text-align: center;
+		 justify-content: center;
+		 align-items: center;
+	 }
+ }
+
+/**
+ * Details
+ */
+ .oz-component-customize {
+
+	 @include apply-to(desktop) {
+		 display: flex;
+		 flex-wrap: wrap;
+		 margin: 0 10%;
+	 }
+
+	 // .oz-component-customize__header
+	 &__header {
+		 align-items: center;
+		 display: flex;
+		 flex-direction: column;
+		 justify-content: center;
+		 flex-basis: 100%;
+	 }
+
+	 // .oz-customize-header .oz-shared-progress
+	 .oz-shared-progress {
+		 margin-bottom: rem(20);
+		 width: 100%;
+
+		 @include apply-to(desktop) {
+			 width: 45%;
+			 margin: 0 auto rem(80);
+		 }
+
+		 // .oz-customize-header .oz-shared-progress__bar
+		 &__bar {
+			 background-color: $gray-13;
+			 margin-bottom: rem(5);
+			 border-radius: rem(4);
+
+			 @include apply-to(desktop) {
+				 border-radius: rem(9);
+			 }
+		 }
+
+		 // .oz-customize-header .oz-shared-progress__progress
+		 &__progress {
+			 width: 37.5%;
+			 background-color: $blue-1;
+			 height: 4px;
+			 position: relative;
+			 border-radius: 4px 0 0 4px;
+
+			 @include apply-to(desktop) {
+				 height: rem(9);
+				 border-radius: rem(9) 0 0 rem(9);
+			 }
+
+			 // .oz-customize-header .oz-shared-progress__progress::after
+			 &::after {
+				 position: absolute;
+				 content: '';
+				 top: -2px;
+				 bottom: -2px;
+				 background-color: $blue-1;
+				 width: 1px;
+				 right: 0;
+
+				 @include apply-to(desktop) {
+					 top: -4px;
+					 bottom: -4px;
+				 }
+			 }
+
+		 }
+
+		 // .oz-customize-header .oz-shared-progress__steps
+		 &__steps {
+			 display: flex;
+			 text-transform: lowercase;
+			 color: $gray-14;
+		 }
+
+		 // .oz-customize-header .oz-shared-progress__step
+		 &__step {
+			 font-size: rem(14);
+			 font-weight: $light;
+			 text-align: center;
+			 flex: 1;
+			 white-space: pre-wrap;
+
+			 @include apply-to(desktop) {
+				 font-size: rem(18);
+			 }
+		 }
+	 }
+
+	 // .oz-component-customize__image
+	 &__image {
+		 margin-bottom: rem(20);
+		 text-align: center;
+
+		 @include apply-to(desktop) {
+			 flex: 1;
+			 margin-right: 5%;
+		 }
+
+		 img {
+			 max-width: 100%;
+		 }
+	 }
+
+	 // .oz-component-customize__intrinsic-ratio
+	 &__intrinsic-ratio {
+		 @include intrinsic-ratio-padding(4/3);
+	 }
+
+	 // .oz-component-customize__content
+	 &__content {
+
+		 @include apply-to(desktop) {
+			 flex: 1;
+			 margin-left: 5%;
+		 }
+	 }
+
+	 // .oz-component-customize__product
+	 &__product {
+		 font-size: rem(18);
+		 font-family: $secondary-font;
+		 font-weight: $bold;
+		 text-align: center;
+		 margin-bottom: rem(5);
+
+		 @include apply-to(desktop) {
+			 text-align: left;
+		 }
+	 }
+
+	 // .oz-component-customize__description
+	 &__description {
+		 text-align: left;
+	 }
+
+	 // .oz-component-customize .oz-btn
+	 .oz-btn {
+		 width: rem(240);
+		 margin: rem(40) auto;
+		 display: block;
+
+		 @include apply-to(desktop) {
+			 margin: rem(40) 0 0;
+		 }
+	 }
+
+	/**
+	 * Configurable overrides
+	 *
+	 * .oz-component-customize .config
+	 */
+	 .config {
+		 padding-bottom: 0;
+
+		 @include apply-to(desktop) {
+			 padding-bottom: rem(14);
+		 }
+
+		 // .oz-component-customize .config__header
+		 &__header {
+			 margin-bottom: rem(5);
+		 }
+
+		 // .oz-component-customize .config__options
+		 &__options {
+			 text-align: left;
+		 }
+
+		 // .oz-component-customize .config__group-title
+		 &__group-title {
+			 color: $black-1;
+			 font-size: rem(12);
+			 letter-spacing: normal;
+
+			 @include apply-to(desktop) {
+				 font-size: rem(14);
+			 }
+		 }
+
+		 // .oz-component-customize .config__variant
+		 &__variant {
+			 width: rem(40);
+			 height: rem(40);
+			 line-height: rem(38);
+			 margin-right: rem(5);
+		 }
+
+		 // .oz-component-customize .config__btn
+		 &__btn {
+			 background-color: $gray-13;
+			 border-color: $gray-4;
+			 font-family: $primary-font;
+			 font-weight: $light;
+			 font-size: rem(16);
+
+			 // .oz-component-customize .config__btn.is-active
+			 &.is-active {
+				 border-color: $blue-1;
+			 }
+		 }
+
+		 // .oz-component-customize .config__value-label
+		 &__value-label {
+			 font-size: rem(16);
+			 color: $gray-6;
+			 margin-bottom: rem(5);
+			 text-transform: uppercase;
+
+			 @include apply-to(desktop) {
+				 font-size: rem(18);
+			 }
+		 }
+	 }
+ }
+
+/**
+ * header
+ */
+ .oz-customize-header {
+
+	 // .oz-customize-header__title
+	 &__title {
+		 margin: rem(100) 0 rem(20);
+		 font-size: rem(22);
+		 font-family: $secondary-font;
+		 font-weight: $bold;
+
+		 @include apply-to(desktop) {
+			 font-size: rem(35);
+			 margin: rem(100) 0 rem(40);
+		 }
+	 }
+ }

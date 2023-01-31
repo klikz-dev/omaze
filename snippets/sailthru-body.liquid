@@ -1,0 +1,40 @@
+{% comment %}
+    Sailtrhu
+    * email service provider
+
+    Cookies used: YES
+    Cookie Groups:
+        * TARGETING: C0004
+
+    Script set to type="text/plain" so that it can be converted to type="text/javascript"
+    once user grants permission for cookie group. Conversion happens via the OneTrust SDK.
+    Note: Optanon is an alias for OneTrust.
+
+    The values in the `class="optanon-category-#-#-#"` correspond to the categories
+    of cookies set up in the cookie list for the site.
+
+    When listing multiple categories using this method, such as optanon-category-C0003-C0004,
+    the categories are blocked concurrently. None of the cookies in these categories will be set
+    unless the site visitor consents to all of the categories being blocked.
+{% endcomment %}
+
+{% assign scriptType = "text/javascript" %}
+{% if settings.cookie_compliance_on %}
+    {% assign scriptType = "text/plain" %}
+{% endif %}
+
+{% if settings.omaze_sailthru_api != blank %}
+    <script type="{{scriptType}}" class="optanon-category-C0004">
+        (function (window) {
+            const scriptEl = document.createElement('script');
+            scriptEl.onload = onSailthruLoad;
+            document.head.appendChild(scriptEl);
+            scriptEl.src = "{{ settings.omaze_sailthru_api }}";
+
+            function onSailthruLoad () {
+                Sailthru.init({ customerId: "{{ settings.omaze_sailthru_customerid }}" });
+            }
+        })(window);
+    </script>
+{% endif %}
+

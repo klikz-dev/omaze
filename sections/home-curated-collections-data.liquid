@@ -1,0 +1,92 @@
+<div id="homepage-app__curated-collections">
+    {% render 'home-curated-collections-skeleton' %}
+    {% render 'home-curated-collections-skeleton' %}
+    {% render 'home-curated-collections-skeleton' %}
+    {% render 'home-curated-collections-skeleton' %}
+</div>
+
+{% render 'skeleton-loading' %}
+
+<script type="text/javascript">
+    (function getCuratedCollectionsFromSettings() {
+        {% assign defaultCollectionId = section.settings.id | plus: 0 %}
+        {% assign defaultCollection = collections | where: "id", defaultCollectionId | first %}
+
+        window.__OzShopifyCuratedCollectionsData = {
+            curated: [],
+            default: {
+                url: "{{ defaultCollection.url }}",
+                displayTitle: 'Awesome Experiences',
+                products: []
+            },
+        }
+
+        var curatedCollections = [];
+
+        {% for block in section.blocks %}
+            {% if block.settings %}
+                {% assign id = block.settings.id | plus: 0 %}
+                {% assign shopifyCollection = collections | where: "id", id | first %}
+
+                var collection = {
+                    id: "{{ block.settings.id }}",
+                    url: "{{ shopifyCollection.url }}",
+                    displayTitle: "{{ block.settings.title }}",
+                };
+
+                curatedCollections.push(collection);
+            {% endif %}
+        {% endfor %}
+
+        window.__OzShopifyCuratedCollectionsData.curated = curatedCollections;
+    })();
+    SDG.SkeletonLoading.init();
+</script>
+
+{% assign ctaText = section.settings.cta_text %}
+{% assign ctaUrl = section.settings.cta_url %}
+{% if ctaText != blank or ctaUrl != blank %}
+    <section class="oz-homepage__curated-cta oz-btn__btn-wrap oz-centered">
+        <a href="{{ ctaUrl }}" class="oz-btn oz-btn--cta oz-btn--long">{{ ctaText }}</a>
+    </section>
+{% endif %}
+
+{% schema %}
+    {
+        "name": "Curated Collection(s)",
+        "class": "home-curated-collection",
+        "settings": [
+            {
+                "type": "text",
+                "id": "id",
+                "label": "Default Collection ID"
+            }, {
+                "type": "text",
+                "id": "cta_text",
+                "label": "CTA Text"
+            }, {
+                "type": "url",
+                "id": "cta_url",
+                "label": "CTA Url"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "home_curated_collection",
+                "name": "Home Curated Collection",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Curated Collection Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "id",
+                        "label": "Curated Collection ID"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

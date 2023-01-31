@@ -1,0 +1,6 @@
+<section class="hide">
+	{{ collection.title }}
+	{% for product in collection.products %}
+		{% include 'product.grid-item' %}
+	{% endfor %}
+</section>

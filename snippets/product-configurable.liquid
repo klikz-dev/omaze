@@ -1,0 +1,56 @@
+<form id="{% include 'h-namespace', id: 'addToBagForm' %}" action="/cart/add" method="post" enctype="multipart/form-data">
+
+	{% if productStatus == 'active' %}
+		<div class="config">
+			<select id="{% include 'h-namespace', id: 'productSelect' %}" class="hide" name="id">
+				{% for variant in product.variants %}
+                    {% assign standardEntryAmount = variant.sku | split: 'standard_' | last %}
+					{% if variant.available %}
+						<option data-sku="{{ variant.sku }}" value="{{ variant.id }}"{% if variant == product.selected_or_first_available_variant %} selected{% endif %}>
+							{{ standardEntryAmount }} - {{ variant.price | money_with_currency }}
+						</option>
+					{% else %}
+						<option value="{{ variant.id }}" disabled="disabled" class="is-disabled">
+							{{ standardEntryAmount }} - {{ 'products.product.sold_out' | t }}
+						</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+
+			<div id="configOptions" class="config__options">
+				{% if product.variants.size > 1 %}
+					{% for option in product.options %}
+						{% include 'product-option', swatch: option %}
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="pv-actions">
+		{% if productStatus == 'active' %}
+			<div class="pv-action pv-qty hide">
+				<label for="{% include 'h-namespace', id: 'quantity' %}" class="pv-qty__label">
+					Quantity:
+				</label>
+				<input id="{% include 'h-namespace', id: 'quantity' %}" class="pv-qty__input" type="text" name="quantity" value="1" min="1" pattern="\d*" title="Please enter numbers only" />
+				<div id="quantityMessages" class="pv-qty__messages messages"></div>
+			</div>
+
+			{% section 'product-sizeguides' %}
+		{% endif %}
+
+		<div class="pv-action pv-add">
+			<button id="{% include 'h-namespace', id: 'btnAddToBag' %}" class="pv-add__btn oz-btn oz-btn--cta oz-btn--block {% if product.available == false or productStatus == 'closed' %} is-disabled{% endif %}" type="submit" name="add"{% if product.available == false or productStatus == 'closed' %} disabled="disabled"{% endif %}>
+				<span id="{% include 'h-namespace', id: 'btnAddToBagText' %}">
+					{% if product.available == false or productStatus == 'closed' %}
+						this campaign is closed
+					{% else %}
+						buy it now
+					{% endif %}
+				</span>
+			</button>
+		</div>
+	</div>
+
+</form>

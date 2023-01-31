@@ -1,0 +1,91 @@
+/**
+ * PDP Promo banners
+ */
+
+.oz-component-promo-banner {
+    width: 100%;
+
+    @include apply-to(desktop) {
+        flex: 1;
+        padding: 20px 60px 0 60px;
+    }
+
+	// .oz-component-promo-banner__wrapper
+    &__wrapper {
+        border-bottom: 1px solid $gray-11;
+        display: flex;
+        align-items: center;
+        background-color: $white;
+
+        @include apply-to(desktop) {
+            border: 1px solid $gray-7;
+            box-shadow: $gray-7 2px 3px 3px -1px;
+        }
+    }
+
+	// .oz-component-promo-banner__icon
+    &__icon {
+        background-color: $green-3;
+        padding: rem(15) rem(8) rem(16) rem(8);
+        color: $white;
+        font-size: rem(20);
+        font-family: $secondary-font;
+
+        @include apply-to(desktop) {
+            padding: rem(16) rem(30);
+            font-size: rem(30);
+        }
+    }
+
+	// .oz-component-promo-banner__message
+    &__message {
+        flex: 1;
+        padding: 0 rem(20);
+        font-size: rem(14);
+
+        @include apply-to(desktop) {
+            font-size: rem(18);
+            font-weight: $bold;
+            text-align: center;
+        }
+
+		// .oz-component-promo-banner__message svg
+        svg {
+            position: absolute;
+            color: $pink-6;
+            width: rem(10);
+            height: rem(10);
+            transform: rotate(180deg);
+            margin-left: -8px;
+            margin-top: 3px;
+        }
+    }
+
+	// .oz-component-promo-banner--pink
+    &--pink {
+
+		// .oz-component-promo-banner--pink .oz-component-promo-banner__icon
+        .oz-component-promo-banner__icon {
+            background-color: $pink-6;
+        }
+    }
+}
+
+.oz-first-time-promotion-banner {
+
+	// .oz-first-time-promotion-banner .oz-component-promo-banner__highlight
+    .oz-component-promo-banner__highlight {
+        color: $pink-6;
+        border-bottom: 1px solid $pink-6;
+
+		// .oz-first-time-promotion-banner .oz-component-promo-banner__highlight span
+        span {
+            padding-right: 13px;
+        }
+    }
+
+	// .oz-first-time-promotion-banner.js-first-time-promotion-banner
+    &.js-first-time-promotion-banner {
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,79 @@
+{% assign meta = article.metafields %}
+{% assign bannerImageId = meta.causes.bannerImageId | json_string %}
+{% assign bannerImage = meta.causes.bannerImageSrc | json_string %}
+
+{% if bannerImageId %}
+	{% capture bannerImage %}
+		https:{{ bannerImageId | append: ".jpg" | asset_img_url: 'master' }}
+	{% endcapture %}
+{% endif %}
+
+<div id="charity_page" class="charity-page">
+	<header id="header" class="maxWidthContainer">
+		<div class="charity-hero">
+			<div class="exp-leader__img">
+				<div class="exp-leader__img-wrapper lqip-container lazy-blur">
+					<img src="{{ bannerImage }}" alt="{{- meta.causes.bannerImageAltText -}}" />
+					<img
+						class="lazyload"
+						data-sizes="auto"
+						data-src="{{- bannerImage -}}"
+						alt="{{- meta.causes.bannerImageAltText -}}"
+					/>
+				</div>
+			</div>
+			<div class="charity-info-wrap">
+				<div class="white blackBox charity-info">
+					<h1>
+						{{- article.title -}}
+					</h1>
+					<h2 class="omaze-section-header">About the cause</h2>
+					<div class="legible">                       
+                      {{- article.content -}}
+					</div>
+					<div class="single-row">
+						<h2 class="omaze-section-header">Omaze Campaigns</h2>
+						<ul id="randomProducts" class="single-row-grid">
+							{% for product in collections.experiences.products limit:10 %}
+								<li class="random-product hide">
+									<a href="{{- product.url -}}">
+										<img src="{{ product | img_url: '500x280', crop: 'center' }}" alt="{{- product.image.alt -}}">
+										<span>
+											{%- if all_products[product.handle].metafields.display.title -%}
+												{{- all_products[product.handle].metafields.display.title -}}
+											{%- endif -%}
+										</span>
+									</a>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="container main">
+		<section id="more_amazing_causes" class="more-amazing-causes">
+			<div>
+				<h2 class="omaze-section-header">More Amazing Causes</h2>
+				<div class="single-row oz-centered">
+					<ul id="randomArticles" class="single-row-grid">
+						{% for article in blogs.causes.articles limit:10 %}
+							<li class="random-article hide">
+								<a href="{{- article.url -}}">
+									<img src="{{ article.image | img_url: '500x280', crop: 'center' }}" alt="{{- article.image.alt -}}">
+									<span>
+										{{- article.title -}}
+									</span>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="see-more-exp">
+					<a href="/blogs/causes" class="btn omaze-btn">See More</a>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>

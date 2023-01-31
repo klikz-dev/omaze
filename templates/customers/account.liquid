@@ -1,0 +1,32 @@
+{% if settings.env == 'production' %}
+	{% assign ENV = 'prd'%}
+{% elsif settings.env == 'qa' %}
+    {% assign ENV = 'qa'%}
+{% else %}
+	{% assign ENV = 'stg'%}
+{% endif %}
+
+<div class="account">
+    <div class="ac-container">
+        {% if settings.member_profiles_on %}
+            {% capture token %}
+              {% include 'customer_hash'%}
+            {% endcapture %}
+            <script>
+                window.ozCustomerToken = '{{ token | strip_newlines | strip  }}';
+                window.ozCustomerId = {{ customer.id | json }};
+                window.ozCustomerEmail = {{ customer.email | json }};
+            </script>
+            <link rel="stylesheet" href="//member-profiles.{{ENV}}.omazedev.com/static/css/{{settings.member_profiles_css_chunk}}" />
+            <link rel="stylesheet" href="//member-profiles.{{ENV}}.omazedev.com/static/css/{{settings.member_profiles_css_main}}" />
+            <div id="root"></div>
+            <script src="//member-profiles.{{ENV}}.omazedev.com/static/js/{{settings.member_profiles_js_runtime}}"></script>
+            <script src="//member-profiles.{{ENV}}.omazedev.com/static/js/{{settings.member_profiles_js_chunk}}"></script>
+            <script src="//member-profiles.{{ENV}}.omazedev.com/static/js/{{settings.member_profiles_js_main}}"></script>
+        {% else %}
+            {% include 'account-tabs' %}
+
+            {% include 'account-user-info' %}
+        {% endif %}
+    </div>
+</div>

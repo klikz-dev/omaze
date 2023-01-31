@@ -1,0 +1,67 @@
+{% assign skuPrefix = item.variant.sku | split: '_' | first %}
+{% assign COMBO_ENTRIES_PREFIX = 'combo-entries' %}
+<div class="section group display-flex line-items">
+    <div class="col span_8_of_12 rebrand_col_items">
+        <div class="table__row">
+            <div class="table__cell--picture">
+                <div class="quantity-bubble">
+                    <div>{{ item.quantity }}</div>
+                </div>
+                {% if item.product.images[3] != blank %}
+                    <a href="{{ item.url | within: collections.all }}">
+                        <img class="product__picture"
+                        src="{{ item.product.images[3] | product_img_url: 'medium' }}"
+                        alt="{{ item.title }} logo" />
+                    </a>
+                {% else %}
+                    <a href="{{ item.url | within: collections.all }}">
+                        <img class="product__picture"
+                        src="{{ item.product.featured_image | img_url: 'medium' }}"
+                        alt="{{ item.title }} logo" />
+                    </a>
+                {% endif %}
+            </div>
+            <div class="table__cell--description">
+                <div class="product__experience bold">{{ item.product.title }}</div>
+                {% unless item.final_price == 0 and skuPrefix == COMBO_ENTRIES_PREFIX %}
+                    <div class="small-italic">
+                        Supporting {{ item.product.vendor | upcase }} relief efforts
+                    </div>
+                {% endunless %}
+                <div class="phone-only cart__item--remove-button">
+                    <a data-oa-id="removeFromCart"
+                        data-oa-details="product_id:{{ item.product.id }};variant_id:{{ item.variant.id }}"
+                        href="/cart/change?id={{ item.key }}&quantity=0" class="sm-font floor to-upper">
+                        remove
+                    </a>
+                </div>
+            </div>
+            <div class="table__cell--price phone-only">
+                <span class="bonus-applied__price">
+                    {% if item.final_price == 0 and skuPrefix == COMBO_ENTRIES_PREFIX %}
+                        BONUS
+                    {% else %}
+                        {{ item.final_price | times: item.quantity | money }}
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="span_2_of_12 rebrand_col_remove desktop-and-tablet display-flex standardize-height centered-v centered-h">
+        <a data-oa-id="removeFromCart"
+            data-oa-details="product_id:{{ item.product.id }};variant_id:{{ item.variant.id }}"
+            href="/cart/change?id={{ item.key }}&quantity=0">
+            <div class="cross-mark"></div>
+        </a>
+    </div>
+    <div
+        class="span_2_of_12 rebrand_col_amount desktop-and-tablet display-flex standardize-height centered-v centered-h cart__tab--amount">
+        <span class="bonus-applied__price">
+            {% if item.final_price == 0 and skuPrefix == COMBO_ENTRIES_PREFIX %}
+                BONUS
+            {% else %}
+                {{ item.final_price | times: item.quantity | money }}
+            {% endif %}
+        </span>
+    </div>
+</div>

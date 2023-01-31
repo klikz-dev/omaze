@@ -1,0 +1,47 @@
+.ozc-message-banner {
+    display: block;
+    width: 100%;
+    padding: 8px 24px;
+
+    &__content {
+        font-size: rem(16);
+        line-height: rem(20);
+        letter-spacing: .53px;
+        font-family: $primary-font;
+        font-weight: 700;
+        text-align: center;
+        color: $new-navy;
+    }
+
+    &--info {
+        background-color: $yellow-3;
+    }
+
+    &--warning {
+        background-color: $red-2;
+    }
+
+    &--error {
+        background-color: $red-4;
+    }
+
+    &--success {
+        background-color: $green-2;
+    }
+}
+
+// rebrand css
+body.rebrand {
+    .ozc-message-banner {
+        &--info {
+            background-color: $new-pink-500;
+        }
+
+        &__content {
+            font-size: rem(14);
+            line-height: rem(20);
+            font-family: $primary-font-rebrand;
+            color: $new-navy;
+        }
+    }
+}

@@ -1,0 +1,88 @@
+/**
+ * Home Hero
+ */
+
+.home-hero {
+    // .home-hero--hidden
+	&--hidden {
+		display: none;
+	}
+
+    // .home-hero__wrapper
+    &__wrapper {
+        margin-bottom: 2.25em;
+    }
+
+	// .home-hero__intrinsic-ratio
+	&__intrinsic-ratio {
+		background-color: $black-1;
+		@include intrinsic-ratio-padding(1/1);
+
+		@include apply-to(tablet) {
+			@include intrinsic-ratio-padding(16/7);
+			// @include intrinsic-ratio-padding(1920/840);
+		}
+
+		// .home-hero__intrinsic-ratio video
+		video {
+			width: 100%;
+			height: auto;
+			bottom: 0;
+			right: 0;
+		}
+	}
+
+	// .home-hero .oz-section-banner
+	.oz-section-banner {
+
+		// .home-hero .oz-section-banner__content
+		&__content {
+			color: $white;
+			position: absolute;
+			left: 50%;
+			right: 0;
+			text-align: center;
+			top: 50%;
+			transform: translateX(-50%) translateY(-50%);
+
+			// .home-hero .oz-section-banner__content--title
+			&--title {
+				font-family:  $secondary-font;
+				margin-top: 0;
+
+				@include apply-to(tablet) {
+					font-size: rem(70);
+				}
+
+				@include apply-to(desktop-large) {
+					font-size: rem(97);
+					letter-spacing: -2px;
+					line-height: 1;
+				}
+			}
+		}
+	}
+}
+
+.oz-homepage__hero-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    @include loading-skeleton(
+        $animation-delay: 3
+    );
+
+    @include apply-to(desktop) {
+        @include loading-skeleton(
+            $side-padding: 50px,
+            $title-height: 60px,
+            $line-height: 30px,
+            $line-margin-bottom: 8px,
+            $animation-delay: 3
+
+        );
+    }
+}

@@ -1,0 +1,34 @@
+{% include 'donation-data' %}
+
+<section class="oz-donation">
+    {% if PRODUCT_TYPE == PRODUCT_TYPE_DONATION %}
+        {% include 'product-donation' %}
+    {% endif %}
+</section>
+
+<!-- facebook app: start-->
+<script>
+    window.ozFacebookApiVersion = '{{ settings.facebook_api_version }}';
+    window.ozFacebookAppId = '{{ settings.facebook_app_id }}';
+
+    if (!window.ozFacebookApiVersion || !window.ozFacebookAppId) {
+        console.error('[Oz Settings]: missing settings facebook_api_version or facebook_app_id. Not setting window.fbAsyncInit.');
+    }
+
+    window.fbAsyncInit = function () {
+        const sdkVersion = window.ozFacebookApiVersion;
+        const facebookAppId = window.ozFacebookAppId;
+
+        if (!sdkVersion || !facebookAppId) {
+            return false;
+        }
+
+        FB.init({
+            appId: facebookAppId,
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: `v${sdkVersion}`,
+        });
+    };
+</script>
+<!-- facebook app: end-->

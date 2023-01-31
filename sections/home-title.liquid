@@ -1,0 +1,22 @@
+{% assign s = section.settings %}
+
+<section class="oz-home-title">
+    <div class="oz-section-title">
+        {{ s.title }}
+    </div>
+</section>
+
+{% schema %}
+    {
+        "name": "Home: Title",
+        "class": "Global Callout",
+        "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "Win life-changing prizes. Support world-changing causes."
+            }
+        ]
+    }
+{% endschema %}

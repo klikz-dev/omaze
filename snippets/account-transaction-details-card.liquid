@@ -1,0 +1,136 @@
+{% assign BONUS_ENTRIES = "bonus entries" %}
+{% assign ENTRIES = "entries" %}
+{% assign OMAZE_LEGACY_TOTAL_ENTRIES_TAG = "$omaze_legacy_total_entries" %}
+{% assign LEGACY_ORDER_PREFIX = "OL" %}
+{% assign legacyOrderNameArray = order.name | upcase | split: '-' %}
+{% assign PAID = 'paid' %}
+{% assign PAYMENT_STATUS = order.financial_status | downcase %}
+
+<div class="card transaction-details--card">
+    <p class="card-title transaction-details--title">
+        {% assign stringsArray = order.name | split: '#' %}
+        {% assign reversedStringsArray = stringsArray | reverse %}
+        {{ 'customer.order.title' | t: name: reversedStringsArray[0] }}
+    </p>
+
+    <div class="content">
+        <div class="content-title">
+            {{ 'customer.order.date' | t }}
+        </div>
+        <div class="content-text">
+            {{ order.created_at | date: format: 'month_day_year' }}
+        </div>
+    </div>
+
+    {% comment %}
+        display order total entries only for legacy orders
+    {% endcomment %}
+    {% if legacyOrderNameArray[0] == LEGACY_ORDER_PREFIX %}
+        <div class="content">
+            <div class="content-title">
+                {{ 'customer.order.campaign' | t }}
+            </div>
+            <div class="content-text campaign-title">
+                {% assign title = order.line_items.first.title | capitalize | split: " - " %}
+                {% assign cleaner_title = title.first | split: "(" %}
+
+                {{ cleaner_title.first }}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="content transaction-details--content">
+        <div class="content-title">
+            {% if settings.member_profiles_on %}
+                {{ 'customer.order.transaction_details.donation_total' | t }}
+            {% else %}
+                {{ 'customer.order.transaction_details.order_total' | t }}
+            {% endif %}
+        </div>
+        <div class="content-text">
+            {{ order.total_net_amount | money }}
+        </div>
+    </div>
+
+    {% if order.transactions.first.payment_details.credit_card_company or order.transactions.first.gateway %}
+        <div class="content transaction-details--content">
+            <div class="content-title transaction-details--sub-title">
+                {{ 'customer.order.transaction_details.payment' | t }}
+            </div>
+            <div class="content-text transaction-details--value">
+                {% if order.transactions.first.payment_details.credit_card_company %}
+                    {{ 'customer.order.transaction_details.card_details' | t: credit_card_company: order.transactions.first.payment_details.credit_card_company, last_four_digits: order.transactions.first.payment_details.credit_card_last_four_digits}}
+                {% else %}
+                    {{ order.transactions.first.gateway | capitalize }}
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% if legacyOrderNameArray[0] != LEGACY_ORDER_PREFIX %}
+        <div class="content transaction-details--content">
+            <div class="content-title transaction-details--sub-title">
+                {{ 'customer.order.transaction_details.status' | t }}
+            </div>
+            <div class="content-text transaction-details--value">
+                {% if PAYMENT_STATUS == PAID %}
+                    {{ 'customer.order.financial_status.payment_successful' | t }}
+                {% else %}
+                    {{ PAYMENT_STATUS | capitalize }}
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% comment %}
+        display order total entries only for legacy orders
+    {% endcomment %}
+    {% if legacyOrderNameArray[0] == LEGACY_ORDER_PREFIX %}
+        {% assign legacy_order_total_entries = 0 %}
+
+        {% comment %}
+            this checks the pre-2018 legacy orders which contains the total entries
+            in its title
+        {% endcomment %}
+        {% for line_item in order.line_items %}
+            {% assign line_item_title = line_item.title | downcase  %}
+            {% if line_item_title != BONUS_ENTRIES and line_item_title contains ENTRIES %}
+                {% assign titleArray = line_item_title | split: ' ' %}
+                    {% for word in titleArray %}
+                        {% assign index = forloop.index0 %}
+                        {% if word == ENTRIES %}
+                            {% assign prev_index = index | minus: 1 %}
+                            {% assign legacy_order_total_entries = titleArray[prev_index] %}
+                            {% break %}
+                        {% endif %}
+                    {% endfor %}
+                {% break %}
+            {% endif%}
+        {% endfor %}
+
+        {% comment %}
+            this checks the post-2019 legacy orders which contains the total entries
+            in the "$omaze_legacy_total_entries" tag
+        {% endcomment %}
+        {% if legacy_order_total_entries == 0 %}
+            {% for tag in order.tags %}
+                {% assign tagArray = tag | downcase | split: ':' %}
+                {% if tagArray[0] == OMAZE_LEGACY_TOTAL_ENTRIES_TAG %}
+                    {% assign legacy_order_total_entries = tagArray[1] %}
+                    {% break %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if legacy_order_total_entries != 0 %}
+            <div class="content transaction-details--content">
+                <div class="content-title transaction-details--sub-title">
+                    {{ 'customer.order.transaction_details.total_entries' | t }}
+                </div>
+                <div class="content-text transaction-details--value">
+                    {{ legacy_order_total_entries }}
+                </div>
+            </div>
+        {% endif %}
+    {% endif%}
+</div>

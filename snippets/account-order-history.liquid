@@ -1,0 +1,30 @@
+{% for order in customer.orders %}
+    <div class="order-card">
+        <div class="order-details-container">
+            <span class="order-date">{{ order.created_at | date: format: 'month_day_year' }}</span>
+            <span class="order-number">Order #: {{ order.name | replace: '#', '' }}</span>
+            {% capture totalText %}
+                {% if settings.member_profiles_on %}
+                    {{ 'customer.donation_history.donation_total' | t }}
+                {% else %}
+                    {{ 'customer.donation_history.order_total' | t }}
+                {% endif %}
+            {% endcapture %}
+            {% if order.financial_status == 'refunded' %}
+                <span class="order-total">{{ totalText }} <span class="refund">(Refunded) {{ order.total_net_amount | money }}</span><span class="strike-through">{{ order.total_refunded_amount | money }}</span></span>
+            {% else %}
+                <span class="order-total">{{ totalText }} {{ order.subtotal_price | money }}</span>
+            {% endif %}
+        </div>
+        <div class="order-link-container">
+            {% capture linkText %}
+                {% if settings.member_profiles_on %}
+                    {{ 'customer.donation_history.see_details' | t }}
+                {% else %}
+                    {{ 'customer.donation_history.order_details' | t }}
+                {% endif %}
+            {% endcapture %}
+            {{ linkText | link_to: order.customer_url }}
+        </div>
+    </div>
+{% endfor %}

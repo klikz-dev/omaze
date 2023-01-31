@@ -1,0 +1,8 @@
+{% layout = json %}
+
+{%- capture productJson -%}
+{
+	"product_json": {{ product | json }}
+}
+{%- endcapture -%}
+{% include 'h-minify', variable: productJson %}

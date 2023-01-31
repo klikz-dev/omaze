@@ -1,0 +1,10 @@
+/**
+ * iconfont
+ */
+
+@font-face {
+	font-family: 'iconfont';
+	font-style: normal;
+	font-weight: 400;
+	src: url('{{ "iconfont.woff" | asset_url }}') format('woff');
+}

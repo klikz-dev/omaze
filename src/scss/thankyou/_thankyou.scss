@@ -1,0 +1,816 @@
+.os-header {
+    &__hanging-icon {
+        margin-right: 0.75em;
+        stroke: $green-3 !important;
+    }
+}
+
+.main {
+    font-family: National;
+}
+
+.order-summary-toggle {
+    font-family: National;
+
+    outline: none;
+    &__text {
+        color: $black-2 !important;
+        font-size: rem(16);
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+    }
+    &__dropdown,
+    &__icon {
+        fill: $black-2 !important;
+    }
+}
+
+.total-recap {
+    &__final-price {
+        font-size: rem(20);
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: right;
+        color: $black-2;
+    }
+}
+
+.os-order-number {
+    font-size: rem(12);
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $black-2;
+}
+
+.section > .os-header {
+    margin-bottom: 1em;
+}
+
+.os-header {
+    &__title {
+        font-size: rem(20);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $black-2;
+    }
+}
+
+.section__content__column {
+    & > h3 {
+        font-size: rem(12);
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $black-1;
+    }
+}
+
+.btn {
+    background-color: $pink-2;
+    .btn__content {
+        font-size: rem(20);
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: $white;
+    }
+}
+.step__footer__info {
+    padding-top: rem(20);
+    margin-right: 0;
+    & a {
+        font-size: rem(12);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        color: $black-1 !important;
+    }
+}
+
+.logo__text {
+    font-size: rem(24);
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-transform: capitalize;
+}
+
+.product-rec__container {
+    padding: 0;
+    width: 100%;
+
+    // TY page has a split page format,
+    //  so at Desktop size this area resembles tablet size
+    @include apply-to(tablet) {
+        .ozc-carousel__title {
+            font-size: rem(18);
+            line-height: rem(26);
+            letter-spacing: rem(0.32);
+        }
+    }
+
+    @include apply-to(desktop) {
+        & *.product-recommendations {
+            &__list {
+                min-height: rem(227);
+            }
+        }
+    }
+}
+
+.product-recommendation {
+    &__header {
+        font-size: rem(16);
+        margin: rem(20) auto;
+    }
+}
+
+.product {
+    &__title {
+        color: $black-2;
+    }
+
+    &__anchor {
+        outline: 0;
+    }
+
+    &__description {
+        &__property {
+            /* Using important to override any Shopify applied styles */
+            display: none !important;
+        }
+    }
+
+    @include apply-to(desktop) {
+        &__description {
+            margin: rem(6) auto;
+        }
+
+        &__img {
+            width: 100%;
+        }
+
+        &__charity {
+            font-size: rem(13);
+        }
+
+        &__title {
+            font-size: rem(16);
+            line-height: rem(24);
+            height: rem(52);
+        }
+
+        &__time-tag {
+            padding: rem(5) rem(8);
+            font-size: rem(14);
+            line-height: rem(14);
+        }
+    }
+}
+
+h3.product__title {
+    color: $black-2;
+}
+
+.product-rec__button {
+    background: $white;
+    border: rem(1) solid $pink-2;
+    border-radius: rem(3);
+    color: $pink-2;
+    cursor: pointer;
+    font-family: $primary-font;
+    font-size: rem(20);
+    font-weight: $bold;
+    padding: rem(20) rem(24);
+    text-align: center;
+    transition: font-size $normal-timer $ease-1, padding $normal-timer $ease-1;
+
+    &-container {
+        display: flex;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        margin: rem(40) 0 0;
+    }
+}
+
+@include apply-to(phone) {
+    .product-rec__button {
+        width: 100%;
+    }
+}
+
+.oz-contextual-email-capture {
+    .ozc-modal.ozc-modal--animate-slide-up {
+        margin-right: rem(48);
+    }
+    .email.oz-field {
+        label {
+            font-size: rem(14);
+        }
+
+        @include apply-to(phone) {
+            .input {
+                line-height: 2rem;
+            }
+        }
+        @include apply-to(tablet) {
+            .input {
+                line-height: 2rem;
+            }
+        }
+        @include apply-to(desktop) {
+            .input {
+                line-height: normal;
+            }
+            label {
+                font-size: rem(16);
+            }
+        }
+    }
+}
+
+.oz-signup-value-proposition__list_rebrand {
+    display: none;
+}
+
+// rebrand css
+body.rebrand {
+    .step[data-step="thank_you"] {
+        .section {
+            &__header {
+                margin-bottom: rem(32);
+            }
+    
+            &__content {
+                margin: 0 !important;
+                border-top: 1px solid $new-grey-300;
+            }
+        }
+    
+        .oz-divider {
+            border-bottom: 1px solid $new-grey-300;
+            border-top: none;
+            margin: 0;
+    
+            &:last-child {
+                display: none;
+            }
+        }
+    
+        .oz-signup-value-proposition {
+            &__header {
+                font-family: $primary-font-rebrand;
+                font-size: 20px;
+                line-height: 1.5;
+                letter-spacing: 0.015rem;
+                font-weight: 700;
+                color: $new-grey;
+                margin-top: rem(32);
+                margin-bottom: rem(8);
+            }
+    
+            &__promo-offer {
+                font-family: $primary-font-rebrand;
+                font-size: 14px;
+                line-height: 1.5;
+                letter-spacing: 0.015rem;
+                font-weight: 500;
+                color: $new-grey;
+                margin-bottom: rem(12);
+                max-width: rem(472);
+            }
+    
+            &__list {
+                display: none;
+    
+                &_rebrand {
+                    display: block;
+                }
+    
+                &-item {
+                    padding-bottom: rem(8);
+                }
+    
+                &-item-icon {
+                    width: 35px;
+                    height: 35px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: rem(8);
+                }
+    
+                &-item-text {
+                    font-family: $primary-font-rebrand;
+                    font-size: rem(16);
+                    line-height: 35px;
+                    letter-spacing: 0.015rem;
+                    font-weight: 700;
+                    color: $new-grey;
+                }
+            }
+    
+            &__btn {
+                width: 100%;
+                max-width: unset;
+                padding: rem(12) rem(40);
+                border-radius: rem(76);
+                border: 2px solid $new-navy-500;
+                margin-top: rem(24);
+                margin-bottom: rem(32);
+                font-family: $primary-font-rebrand;
+                font-size: 20px;
+                line-height: 1.5;
+                letter-spacing: 0.015rem;
+                font-weight: 700;
+                color: $new-grey;
+                background-color: $white;
+                transition: none;
+    
+                &:hover {
+                    padding: rem(11) rem(39);
+                    border: 3px solid $yellow-3;
+                }
+    
+                @include apply-to(tablet) {
+                    width: fit-content;
+                }
+            }
+        }
+    
+        .ozc-carousel {
+            &__title {
+                font-family: $primary-font-rebrand;
+                font-size: 20px;
+                line-height: 1.5;
+                letter-spacing: 0.015rem;
+                font-weight: 700;
+                color: $new-grey;
+                margin: 0;
+                text-align: left;
+            }
+    
+            &__nav-info {
+                font-family: $primary-font-rebrand;
+                font-size: 14px;
+                line-height: 1.5;
+                letter-spacing: 0.015rem;
+                font-weight: 700;
+                color: $new-grey;
+            }
+    
+            &__arrow {
+                &::before {
+                    width: rem(12);
+                    height: rem(12);
+                    border-width: 0 0 rem(3) rem(3);
+                    border-color: $new-grey;
+                }
+    
+                &--next::before {
+                    border-width: rem(3) rem(3) 0 0;
+                }
+            }
+
+            .slick-track {
+                margin-left: 0;
+            }
+        }
+    
+        .product {
+            &__description {
+                margin: rem(4) auto;
+            }
+    
+            &__charity {
+                font-family: $primary-font-rebrand;
+                font-size: 14px;
+                line-height: 1.5;
+                letter-spacing: 0.015rem;
+                font-weight: 700;
+                color: $new-grey;
+                margin-bottom: rem(4);
+            }
+    
+            &__title {
+                font-family: $primary-font-rebrand;
+                font-size: 14px;
+                line-height: 1.5;
+                letter-spacing: 0.015rem;
+                font-weight: 500;
+                color: $new-grey;
+                height: unset;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+            }
+    
+            &-rec__container {
+                margin-top: rem(24);
+    
+                @include apply-to(tablet) {
+                    margin-top: rem(32);
+                }
+            }
+    
+            &-rec__button-container {
+                margin-top: rem(20);
+
+                @include apply-to(phone) {
+                    margin-top: rem(44);
+                }
+    
+                .btn {
+                    padding: rem(12) rem(32);
+                    border-radius: rem(76);
+                    background-color: $yellow-3;
+                    font-family: $primary-font-rebrand;
+                    font-size: 20px;
+                    line-height: 1.5;
+                    letter-spacing: 0.015rem;
+                    font-weight: 500;
+    
+                    &:hover {
+                        background-color: $new-yellow-800;
+                    }
+    
+                    .btn__content {
+                        color: $new-grey;
+                    }
+                }
+            }
+        }
+    }
+
+    // Thank you page footer
+    .thankyou__footer {
+        color: $white;
+        background-color: $new-navy;
+
+        h2,
+        h3,
+        p,
+        span,
+        a {
+            line-height: 1.5;
+            letter-spacing: 0.015rem;
+            font-style: normal;
+            font-family: $primary-font-rebrand;
+        }
+
+        h2 {
+            font-size: rem(24);
+            font-weight: 700;
+            margin-bottom: rem(16);
+        }
+
+        h3 {
+            font-size: rem(18);
+            font-weight: 700;
+            margin-bottom: rem(16);
+        }
+
+        p {
+            font-size: rem(18);
+            font-weight: 400;
+        }
+
+        a {
+            color: $white;
+            font-size: rem(18);
+            font-weight: 500;
+        }
+
+        &__inner {
+            width: 100%;
+            box-sizing: border-box;
+            padding: rem(24) rem(8) rem(32) rem(8);
+
+            @include apply-to(desktop) {
+                padding: rem(56) 0 rem(80) 0;
+            }
+        }
+
+        &__row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            max-width: rem(352);
+            margin-left: auto;
+            margin-right: auto;
+
+            @include apply-to(desktop) {
+                max-width: 100%;
+            }
+
+            .lg-col-6 {
+                width: 100%;
+                order: 1;
+
+                @include apply-to(desktop) {
+                    width: 50%;
+                }
+            }
+
+            .lg-col-4 {
+                width: 100%;
+                order: 2;
+
+                @include apply-to(desktop) {
+                    order: 1;
+                    width: calc(100% / 3);
+                }
+            }
+
+            .lg-col-2 {
+                width: 50%;
+                order: 2;
+
+                @include apply-to(desktop) {
+                    order: 1;
+                    width: calc(100% / 6);
+                }
+            }
+        }
+
+        .optin-container {
+            max-width: rem(352);
+            padding-bottom: rem(24);
+
+            @include apply-to(desktop) {
+                padding-bottom: rem(32);
+            }
+
+            &__middle-form {
+                position: relative;
+                margin-bottom: rem(16);
+
+                .oz-field {
+                    .oz-field__container {
+                        box-sizing: border-box;
+                        border-color: $white;
+
+                        .input {
+                            box-sizing: border-box;
+                            border-radius: 4px;
+                            padding: 29.5px 93px 7.5px 16px;
+                            font-size: rem(18);
+                            line-height: 1.5;
+                            letter-spacing: 0.015rem;
+                            font-weight: 500;
+                            font-style: normal;
+                            font-family: $primary-font-rebrand;
+                            color: $new-grey;
+
+                            &:not(:focus) ~ label {
+                                top: 50%;
+                            }
+                        }
+
+                        label {
+                            font-family: $primary-font-rebrand;
+                            padding: 0 rem(16);
+                            left: 0;
+                            top: rem(16);
+                            color: $new-grey-600;
+                        }
+
+                        &:focus-within {
+                            border-color: $new-teal-500;
+
+                            .input {
+                                caret-color: $new-grey;
+                            }
+
+                            label {
+                                color: $new-grey-700;
+                                font-size: rem(12) !important;
+                            }
+                        }
+
+                        &.has-value {
+                            label {
+                                color: $new-grey-700;
+                                top: rem(16) !important;
+                                font-size: rem(12) !important;
+                            }
+                        }
+                    }
+
+                    .email-error-message {
+                        display: none;
+                    }
+
+                    &.error {
+                        .oz-field__container {
+                            border-color: $new-red-500;
+                        }
+
+                        .email-error-message {
+                            display: block;
+                            text-align: left;
+                            margin-top: 4px;
+                            padding-left: 0;
+                            font-size: 16px;
+                            line-height: 1.5;
+                            letter-spacing: 0.015rem;
+                            font-weight: 400;
+                            font-style: normal;
+                            font-family: $primary-font-rebrand;
+                            color: $new-red-500;
+                        }
+                    }
+                }
+
+                .button {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: 15px 16px;
+                    box-sizing: border-box;
+
+                    .oz-btn {
+                        padding: 0;
+                        background-color: transparent;
+                        color: $new-grey;
+                        font-size: rem(16);
+                        line-height: 1.5;
+                        letter-spacing: 0.015rem;
+                        font-weight: 700;
+                        font-family: $primary-font-rebrand;
+                    }
+                }
+            }
+
+            &__middle-subtext {
+                span {
+                    color: $white;
+                    font-size: rem(12);
+                    line-height: 1.5;
+                    letter-spacing: 0.015rem;
+                    font-weight: 400;
+                    font-family: $primary-font-rebrand;
+                }
+            }
+        }
+
+        .footer__social {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            max-width: rem(251);
+
+            &-wrapper {
+                padding: rem(24) 0;
+                max-width: rem(352);
+                border-top: 1px solid rgba(255, 255, 255, 0.7);
+
+                @include apply-to(desktop) {
+                    padding: rem(32) 0;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+                }
+
+                h2 {
+                    margin-bottom: rem(8);
+                }
+            }
+
+            &-icon {
+                width: rem(31);
+                height: rem(31);
+                background-color: $white;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &-btn {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                &:hover {
+                    background-color: $yellow-3;
+                }
+            }
+        }
+
+        .footer__contact {
+            padding-top: rem(8);
+            padding-bottom: rem(28);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+
+            @include apply-to(tablet) {
+                padding-top: rem(24);
+                border-bottom: 0;
+            }
+
+            h3 {
+                margin-bottom: rem(8);
+            }
+        }
+
+        .footer__nav {
+            &__list-wrapper {
+                max-width: rem(164);
+                padding-top: rem(32);
+
+                @include apply-to(tablet) {
+                    padding-top: 0;
+                }
+
+                &.list-about {
+                    padding-left: rem(24);
+
+                    @include apply-to(tablet) {
+                        padding-left: 0;
+                    }
+                }
+            }
+
+            &__item {
+                margin-bottom: rem(16);
+
+                &:last-child {
+                    margin-bottom: rem(8);
+                }
+
+                a {
+                    font-size: rem(16);
+
+                    &:hover {
+                        color: $yellow-3;
+                    }
+                }
+            }
+        }
+
+        .footer__logo {
+            width: 167px;
+            margin-bottom: rem(27);
+
+            @include apply-to(tablet) {
+                margin-bottom: rem(24);
+            }
+
+            &-wrapper {
+                padding-top: rem(32);
+                margin-top: rem(24);
+                border-top: 1px solid rgba(255, 255, 255, 0.7);
+
+                @include apply-to(tablet) {
+                    padding-top: rem(36);
+                    margin-top: rem(0);
+                    border-top: 0;
+                }
+
+                a {
+                    display: block;
+                    line-height: 0;
+                }
+
+                .footer__sub-colophon {
+                    font-size: rem(12);
+                    font-weight: 400;
+                }
+            }
+        }
+
+        .footer__accredited-business {
+            width: 164px;
+
+            &-wrapper {
+                padding-top: rem(27);
+                line-height: 0;
+
+                @include apply-to(tablet) {
+                    padding-top: rem(36);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,104 @@
+{% comment %}
+    Sets up the data layer, then initializes GTM.
+    All pre-GTM data layer variables should be defined here.
+
+    Cookies used: YES
+    Cookie Groups:
+    * STRICTLY_NECESSARY: C0001
+
+    Script set to type="text/plain" so that it can be converted to type="text/javascript"
+    once user grants permission for cookie group. Conversion happens via the OneTrust SDK.
+    Note: Optanon is an alias for OneTrust.
+
+    The values in the `class="optanon-category-#-#-#"` correspond to the categories
+    of cookies set up in the cookie list for the site.
+
+    When listing multiple categories using this method, such as optanon-category-C0003-C0004,
+    the categories are blocked concurrently. None of the cookies in these categories will be set
+    unless the site visitor consents to all of the categories being blocked.
+{% endcomment %}
+
+{% if settings.gtm_enable %}
+<!-- GTM Data Layer -->
+
+    {% assign brand = "Omaze" %}
+    {% assign currency = "USD" %}
+    {% if cart && cart.currency %}
+        {% assign currency = {{cart.currency.iso_code}} %}
+    {% endif %}
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        {% comment %}
+        These variables should always be defined, on all pages:
+        https://help.shopify.com/en/themes/liquid/objects#global-objects
+        {% endcomment %}
+        dataLayer.push({
+            "canonical_url": {{ canonical_url | json }},
+            "current_page": {{ current_page | json }},
+            "handle": {{ handle | json }},
+            "page_description": {{ page_description | json }},
+            "page_title": {{ page_title | json }},
+            "current_tags": {{ current_tags | json }},
+            "cart": {{ cart | json }}
+        });
+
+        {% include 'gtm-page.js' %}
+
+        {% include 'gtm-product.js' %}
+
+        dataLayer.push({
+            "customer": {% include 'gtm-customer.js', customer: customer %}
+        });
+
+        {% if checkout %}
+
+            {% comment %}
+                As the customer object is not available with guest checkout, we dont have customer id in GA associated with
+                guest checkout orders sessions. We will use checkout_customer_id if customer.id is undefined in data layer in GTM
+            {% endcomment %}
+
+            dataLayer.push({
+                "checkout_customer_id": "{{ checkout.customer.id }}"
+            });
+
+            dataLayer.push({
+                "checkout": {% include 'gtm-checkout.js', checkout: checkout %}
+            });
+
+        {% endif %}
+
+        {% if order %}
+            dataLayer.push({
+                "order": {% include 'gtm-order.js', order: order %}
+            });
+        {% endif %}
+
+        {% comment %}
+            "first_time_accessed" will be defined on the order status page, and will only be true on the first visit:
+            https://help.shopify.com/en/manual/orders/status-tracking/first-time-accessed
+        {% endcomment %}
+        {% if first_time_accessed %}
+            dataLayer.push({
+                "first_time_accessed": {{ first_time_accessed }},
+            });
+            {% endif %}
+
+        {% include 'ga-ecommerce.js' %}
+    </script>
+
+    {% assign scriptType = "text/javascript" %}
+    {% if settings.cookie_compliance_on %}
+        {% assign scriptType = "text/plain" %}
+    {% endif %}
+
+    <!-- Google Tag Manager -->
+    <script type="{{scriptType}}" class="optanon-category-C0001">
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-{{ settings.gtm_id }}');</script>
+<!-- End Google Tag Manager -->
+{% endif %}

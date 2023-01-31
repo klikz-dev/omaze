@@ -1,0 +1,202 @@
+{% if settings.env == 'production' %}
+	{% assign ENV = 'prd'%}
+{% else %}
+	{% assign ENV = 'stg'%}
+{% endif %}
+
+<div class="account experience-dashboard-shim" id="root">
+    <div class="MembersProfile-host">
+        <div class="Grid-host">
+            <div class="GridRow-host">
+                <div class="MembersProfile-sidebar GridCell-host">
+                    <div class="Sidebar-host" id="Sidebar-host">
+                        <div class="Header-host">
+                            <div class="Avatar-host">
+                                <div class="Avatar-avatarWrapper">
+                                    <div class="Avatar-avatar">
+                                        {% if customer.first_name %}
+                                            {{ customer.first_name | slice: 0 }}{{ customer.last_name | slice: 0 }}
+                                        {% else %}
+                                            <img src="//member-profiles.{{ENV}}.omazedev.com/static/media/avatar.a2ce14a4.svg" />
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Welcome-host">
+                                {% if customer.first_name %}
+                                    Welcome back, {{ customer.first_name }}!
+                                {% else %}
+                                    Welcome, Omazer!
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="NavigationMenu-link">
+                                <a href="/account#/experiences">Your Experiences</a>
+                            </div>
+                            <div class="NavigationMenu-link">
+                                <a aria-current="page" class="NavigationMenu-active" href="/account?view=orders">
+                                    Donation History
+                                </a>
+                            </div>
+                            <div class="NavigationMenu-link">
+                                <a href="/account#/settings">Account Settings</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="MembersProfile-sidebarDivider"></div>
+                </div>
+                <div class="MembersProfile-content GridCell-host">
+                    <div id="customer_orders" class="ac-container">
+                        {% include 'account-tabs' %}
+                        <div class="order-cards donation_history">
+                        {% paginate customer.orders by 10 %}
+
+                            {% if customer.orders.size != 0 %}
+                                {% include 'account-order-history' %}
+                            {% endif %}
+
+                            <!-- pagination navigation -->
+                            {%- if paginate.pages > 1 and customer.orders.size != 0 -%}
+                                <nav role="navigation">
+                                <ol class="pagination">
+                                    {%- if paginate.previous-%}
+                                    <li class="navigator_link previous">
+                                        <a href="{{ paginate.previous.url }}">
+                                        <span aria-hidden="true">&lt;</span>
+                                        {{ 'general.pagination.previous' | t }} <span class="invisible">page</span>
+                                        </a>
+                                    </li>
+                                    {%- else -%}
+                                    <li class="navigator_link disabled hidden previous">
+                                        <span aria-hidden="true">&lt;</span>
+                                        {{ 'general.pagination.previous' | t }} <span class="invisible">page</span>
+                                    </li>
+                                    {%- endif -%}
+
+                                    {%- for part in paginate.parts -%}
+                                    {%- if part.is_link -%}
+                                        <li>
+                                        <a href="{{ part.url }}">
+                                            <span class="invisible">{{ 'general.pagination.page' | t }}</span> {{ part.title }}
+                                        </a>
+                                        </li>
+                                    {%- else -%}
+                                        {%- if part.title == paginate.current_page -%}
+                                        <li class="active" aria-current="page">
+                                            <span class="invisible">{{ 'general.pagination.page' | t }}</span> {{ part.title }}
+                                        </li>
+                                        {%- else -%}
+                                        <li>
+                                            <span class="invisible">{{ 'general.pagination.page' | t }}</span> {{ part.title }}
+                                        </li>
+                                        {%- endif -%}
+                                    {%- endif -%}
+                                    {%- endfor -%}
+
+                                    {%- if paginate.next -%}
+                                    <li class="navigator_link next">
+                                        <a href="{{ paginate.next.url }}">
+                                            {{ 'general.pagination.next' | t }} <span class="invisible">{{ 'general.pagination.page' | t }}</span>
+                                            <span aria-hidden="true">&gt;</span>
+                                        </a>
+                                    </li>
+                                    {%- else -%}
+                                    <li class="navigator_link disabled hidden next">
+                                        {{ 'general.pagination.next' | t }} <span class="invisible">{{ 'general.pagination.page' | t }}</span>
+                                        <span aria-hidden="true">&gt;</span>
+                                    </li>
+                                    {%- endif -%}
+                                </ol>
+                                </nav>
+                            {%- endif -%}
+
+                        {% endpaginate %}
+                        </div>
+                    </div>
+                    {% if customer.orders.size == 0 %}
+                        <div class="product-recommendations__container">
+                            <h1 class="order-none__header oz-section-title oz-centered">{{ 'customer.orders.none.header' | t }}</h1>
+                            <p class="order-none__desc">{{ 'customer.orders.none.start' | t }}</p>
+                            <span class="intro-text">{{ 'customer.account.intro_text' | t }}</span>
+                            <div class="product-rec__container" data-prod-rec-container=""></div>
+                            {% if settings.feature_house_focus_on  %}
+                                <a href="/" class="product-recommendations__button js-product-recommendations__button">
+                                    Enter now
+                                </a>
+                            {% else %}
+                                <a href="/collections/experiences" class="product-recommendations__button js-product-recommendations__button">
+                                    Browse all experiences
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="account-helpful-link-card">
+                        {% if settings.member_profiles_on %}
+                            {% include 'account-common-questions-card' %}
+                        {% else %}
+                            {% include 'account-helpful-link-card' %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    const rootEl = document.getElementById('root');
+    const hostEl = document.getElementById('Sidebar-host');
+
+    const rootTop = root.offsetTop + root.offsetParent.offsetTop;
+
+    let isViewable = true;
+    let atBottom = false;
+
+    window.addEventListener('scroll', function () {
+        const x = window.scrollX;
+        const y = window.scrollY;
+
+        const rootHeight = rootEl.offsetHeight;
+
+        if (isViewable && hostEl.offsetHeight > window.innerHeight - 114) {
+            isViewable = false;
+        } else if (!isViewable && hostEl.offsetHeight <= window.innerHeight - 114) {
+            isViewable = true;
+        }
+
+        const bottomOfRoot = (rootTop + rootHeight) - 64;
+        const bottomOfHost = y + hostEl.offsetHeight + 154;
+
+        if (bottomOfHost >= bottomOfRoot && !atBottom) {
+            atBottom = true;
+        }
+
+        if (bottomOfHost < bottomOfRoot && atBottom) {
+            atBottom = false;
+        }
+
+        const className = hostEl.className;
+
+        if (!isViewable) {
+            if (className !== 'Sidebar-host scrollable') {
+                hostEl.className = 'Sidebar-host scrollable';
+            }
+        } else {
+            if (atBottom && className !== 'Sidebar-host bottom') {
+                hostEl.className = 'Sidebar-host bottom';
+            } else if (!atBottom && className !== 'Sidebar-host') {
+                hostEl.className = 'Sidebar-host';
+            }
+        }
+    });
+})(window);
+</script>
+
+<script>
+    (function (window) {
+        window.addEventListener('DOMContentLoaded', () => {
+            SDG.AccountOrders.init();
+        });
+    }(window));
+</script>

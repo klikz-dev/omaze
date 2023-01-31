@@ -1,0 +1,31 @@
+{% comment %} CONSTANTS {% endcomment%}
+{%- assign PRODUCT_TYPE_DONATION = 'donation' -%}
+{%- assign INTERNAL_TAG_PREFIX = '$' -%}
+{% comment %} Product Type {% endcomment %}
+{%- assign PRODUCT_TYPE = product.type | downcase -%}
+{% comment %} Get product tags {% endcomment %}
+{%- assign PRODUCT_TAGS = product.tags | join: '' | downcase -%}
+{% comment %} Filter Internal Tags from Product Tags {% endcomment %}
+{% capture FILTERED_PRODUCT_TAGS %}{% for tag in product.tags %}{% unless tag contains INTERNAL_TAG_PREFIX %}{{ tag }}{% if forloop.last == false %},{% endif%}{% endunless %}{% endfor %}{% endcapture %}
+
+{% comment %} Capture and output product/image JSON {% endcomment %}
+{%- capture productJson -%}
+<script type="text/javascript">
+    var PRODUCT_JSON = {{ product | json }};
+    var productJson = PRODUCT_JSON;
+    var PRODUCT_IMAGE_JSON = [
+            {% for image in product.images %}
+                {% unless forloop.first %},{% endunless %}
+                {
+                    src: '{{ image.src | product_img_url: "master" }}',
+                    alt: '{{ image.alt | escape }}',
+                    ratio: '{{ 100 | divided_by: image.aspect_ratio }}%'
+                }
+            {% endfor %}
+        ];
+</script>
+{%- endcapture -%}
+{%- include 'h-minify', variable: productJson -%}
+
+{% comment %} Meta Keys {% endcomment %}
+{% assign PRODUCT_META = product.metafields.donation %}

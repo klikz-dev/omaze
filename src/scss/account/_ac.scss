@@ -1,0 +1,381 @@
+/**
+ * account
+ */
+
+// customer info
+@import "_account-user-info.scss";
+
+// customer order history/list
+@import "_account-order-history.scss";
+
+// container
+.container--account {
+    max-width: em(940) + (#{map-get($ac-gutter, null)} * 2);
+    @include gutters($ac-gutter);
+}
+
+// globals / misc
+
+// form column
+.ac-form-col {
+    margin: 0 auto em(50);
+    max-width: em(375);
+}
+
+// form action
+.ac-form-action {
+    padding-top: em(10);
+}
+
+// heading
+.ac-hdg {
+    margin-top: 0;
+    @include mqstyle("font-size", $ac-heading-font-size);
+}
+
+// button link
+.ac-btn-link {
+    font-family: $primary-font;
+    font-size: 1rem;
+}
+
+// small icon
+.ac-icon-sm {
+    &::before {
+        top: rem(-1);
+    }
+}
+
+/**
+ * messages
+ */
+
+// message, errors
+.message,
+.errors {
+    padding: rem(16);
+    text-align: left;
+    @include mqstyle("font-size", $size-p);
+    @include mqstyle("line-height", $lineheight-p);
+
+    ul {
+        font-size: rem(14);
+        font-style: italic;
+        list-style-type: none;
+        letter-spacing: rem(0.4);
+        font-weight: 500;
+        margin: 0;
+        padding: 0;
+    }
+
+    p {
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: underline;
+    }
+}
+
+// message
+.message {
+    // .message--ac
+    &--ac {
+        margin-top: rem(15);
+    }
+
+    // .message--success
+    &--success {
+        background-color: $green-2;
+    }
+}
+
+// errors
+.errors {
+    background-color: rgba($color: $red-4, $alpha: 0.1);
+    color: $red-4;
+    margin-bottom: rem(32);
+}
+
+.oz-account-call-out {
+    background: $blue-11;
+    padding: rem(15);
+    text-align: left;
+    color: $black-2;
+    display: flex;
+    justify-content: space-between;
+}
+
+// error
+.error {
+    color: $red-1;
+}
+
+/**
+ * style select
+ */
+.style-select {
+    .ss-dropdown {
+        max-height: rem(310);
+        overflow-y: auto;
+    }
+}
+
+/**
+ * transitions
+ */
+
+// Message fade
+.message-fade-enter-active,
+.message-fade-leave-active {
+    transform: translate3d(0, 0, 0);
+    transition: all $normal-timer $ease-1;
+}
+
+.message-fade-enter,
+.message-fade-leave-to {
+    opacity: 0;
+    transform: translate3d(0, rem(30), 0);
+}
+
+// Component fade
+.component-fade-enter-active,
+.component-fade-leave-active {
+    @include apply-to(tablet) {
+        transition: opacity $fast-timer $ease-1;
+    }
+}
+
+.component-fade-enter-active {
+    @include apply-to(phone) {
+        transition: opacity $fast-timer $ease-1;
+    }
+}
+
+.component-fade-enter,
+.component-fade-leave-to {
+    opacity: 0;
+}
+
+/**
+ * omaze userProfile styles
+ */
+.userProfileStatus {
+    height: rem(100);
+    padding: 5rem;
+}
+
+.userProfileWrapper {
+    padding: 1em 2em;
+}
+
+.userProfileData {
+    padding: 5rem;
+}
+
+.txnLineItem {
+    display: block;
+}
+
+.txnDate,
+.userTotalDonated {
+    font-weight: $bold;
+}
+
+// accounts page
+.account {
+    color: $black-2;
+    background-color: $white;
+    @include apply-to(tablet) {
+        margin: auto;
+    }
+}
+
+.ac-container {
+    max-width: rem(900);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 rem(15) rem(32) rem(23);
+    margin-top: rem(40);
+
+    @include apply-to(desktop) {
+        margin-top: rem(53);
+        max-width: rem(1104);
+        padding: 0;
+        padding-bottom: rem(32);
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width: rem(1200)) {
+    .ac-container {
+        width: 100%;
+    }
+}
+
+.ac-greeting {
+    width: rem(30);
+    height: rem(40);
+    font-family: $secondary-font;
+    font-size: rem(24);
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    opacity: 0.87;
+    line-height: 1.25;
+    letter-spacing: rem(0.24);
+    color: $black-2;
+    width: 100%;
+    margin-bottom: rem(4);
+
+    @include apply-to(desktop) {
+        padding-left: rem(188);
+        font-size: rem(32);
+    }
+}
+
+.ac-email {
+    font-family: $primary-font;
+    font-size: rem(18);
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $black-2;
+    margin-bottom: rem(12);
+
+    @include apply-to(desktop) {
+        padding-left: rem(188);
+        margin-bottom: rem(29);
+    }
+}
+
+.ac-tabs {
+    display: flex;
+    height: rem(49);
+    margin-top: rem(4);
+    margin-bottom: rem(20);
+
+    @include apply-to(desktop) {
+        padding-left: rem(188);
+    }
+
+    &.orders-page {
+        margin-bottom: 0;
+        @include apply-to(desktop) {
+            padding-left: rem(188);
+            margin-bottom: rem(30);
+            margin-top: 0;
+        }
+    }
+
+    .ac-tab {
+        font-weight: bold;
+        width: rem(135);
+        height: rem(21);
+        color: $black-2-fade-2;
+        border-bottom: solid rem(2);
+    }
+
+    .tab {
+        width: rem(135);
+        padding: rem(17) 0 rem(11) 0;
+
+        @include apply-to(desktop) {
+            padding: 0;
+            padding-bottom: rem(11);
+        }
+
+        :hover {
+            cursor: pointer;
+            color: $secondary-color;
+            border-bottom-color: $secondary-color;
+        }
+    }
+
+    .tab-text {
+        width: rem(135);
+        height: rem(21);
+        font-family: $primary-font;
+        font-size: rem(18);
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $black-2-fade-2;
+        border-bottom: solid rem(2) $black-2-fade-2;
+        padding-bottom: rem(6);
+
+        @include apply-to(desktop) {
+            font-size: rem(22);
+        }
+    }
+
+    .tab-text.active {
+        color: $secondary-color !important;
+        border-bottom: solid rem(2) $secondary-color;
+    }
+
+    &.has-profiles {
+        .tab {
+            width: auto;
+            margin-right: rem(24);
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        .tab-text {
+            width: auto;
+            font-size: rem(20);
+            white-space: nowrap;
+        }
+    }
+}
+
+.ac-breadcrumb {
+    display: flex;
+    align-items: center;
+    margin-bottom: rem(32);
+
+    @include apply-to(desktop) {
+        padding-left: rem(188);
+    }
+
+    .arrow {
+        font-size: 22px;
+    }
+
+    a {
+        font-family: $primary-font;
+        font-size: rem(16);
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: rem(19);
+        letter-spacing: rem(0.4);
+        text-align: right;
+        color: $secondary-color;
+    }
+}
+
+.ac-donation-history {
+    text-transform: capitalize;
+    font-size: rem(24);
+    line-height: rem(32);
+    margin-bottom: rem(0);
+
+    @include apply-to(desktop) {
+        margin-bottom: rem(32);
+        font-size: rem(32);
+        line-height: rem(40);
+    }
+}

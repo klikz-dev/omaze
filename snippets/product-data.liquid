@@ -1,0 +1,74 @@
+{% comment %} Get product tags {% endcomment %}
+{%- assign tags = product.tags | join: '' | downcase -%}
+{% comment %} Filter Internal Tags from Product Tags {% endcomment %}
+{% assign internalTagPrefix = '$' %}
+{% capture tagsExcludingInternalTags %}{% for tag in product.tags %}{% unless tag contains internalTagPrefix %}{{ tag }}{% if forloop.last == false %},{% endif%}{% endunless %}{% endfor %}{% endcapture %}
+
+{% comment %}
+Capture and output product/image JSON
+{% endcomment %}
+{%- capture productJson -%}
+<script type="text/javascript">
+	var productJson = {{ product | json }},
+		imageJson = [
+			{% for image in product.images %}
+				{% unless forloop.first %},{% endunless %}
+				{
+					src: '{{ image.src | product_img_url: "master" }}',
+					alt: '{{ image.alt | escape }}',
+					ratio: '{{ 100 | divided_by: image.aspect_ratio }}%'
+				}
+			{% endfor %}
+		];
+</script>
+{%- endcapture -%}
+{%- include 'h-minify', variable: productJson -%}
+
+{% comment %}
+Swatch file extension
+{% endcomment %}
+{% assign swatchFileExtension = 'png' %}
+
+{% comment %}
+Meta Keys
+{% endcomment %}
+{% assign meta = product.metafields %}
+
+{% comment %}
+Tags
+{% endcomment %}
+{% assign productStatus = 'unknown' %}
+{% assign sweepstakeDatesStart = '' %}
+{% assign sweepstakeDatesEnd = '' %}
+{% assign sweepstakeDatesWinnerAnnounce = '' %}
+{% assign sweepstakeDatesExperience = '' %}
+
+{% for tag in product.tags %}
+	{% assign downTag = tag | downcase %}
+	{% assign statusPrefix = '$oz_sweepstake_status:' %}
+	{% assign startDatePrefix = '$oz_sweepstake_dates-start:' %}
+	{% assign endDatePrefix = '$oz_sweepstake_dates-end:' %}
+	{% assign experienceDatePrefix = '$oz_sweepstake_dates-experience:' %}
+	{% assign winnerAnnounceDatePrefix = '$oz_sweepstake_dates-winner-announce:' %}
+
+	{% if downTag contains statusPrefix %}
+		{% assign productStatus = downTag | remove_first: statusPrefix %}
+    {% endif %}
+
+	{% if downTag contains startDatePrefix %}
+		{% assign sweepstakeDatesStart = tag | remove_first: startDatePrefix %}
+	{% endif %}
+
+	{% if downTag contains endDatePrefix %}
+		{% assign sweepstakeDatesEnd = tag | remove_first: endDatePrefix %}
+	{% endif %}
+
+	{% if downTag contains experienceDatePrefix %}
+		{% assign sweepstakeDatesExperience = tag | remove_first: experienceDatePrefix %}
+	{% endif %}
+
+	{% if downTag contains winnerAnnounceDatePrefix %}
+		{% assign sweepstakeDatesWinnerAnnounce = tag | remove_first: winnerAnnounceDatePrefix %}
+	{% endif %}
+
+{% endfor %}

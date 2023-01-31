@@ -1,0 +1,22 @@
+/**
+ * header height
+ */
+$header-height: (
+	null: 85,
+	'smallest-phone': 81,
+	'tablet': 98,
+	'desktop': 163,
+	'desktop-large': 165
+);
+
+/**
+ * footer height
+ * @type {[type]}
+ */
+$footer-height-above: (
+	null: 60,
+	'desktop': 100
+);
+
+// Product
+$product-mobile-actions: 69;

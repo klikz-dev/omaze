@@ -1,0 +1,69 @@
+/**
+ * lazy load class
+ */
+
+ .lqip-container {
+
+     .lqip-img {
+         opacity: 1;
+     }
+ }
+
+.lazyload,
+.lazyloading {
+	opacity: 0;
+	transition:opacity $normal-timer ease-in-out;
+}
+
+.lazyloaded {
+	opacity: 1;
+	transition: opacity 300ms;
+}
+
+// .lazy-blur
+.lazy-blur {
+	position: relative;
+
+	// .lazy-blur img
+	img {
+		position: absolute;
+
+		// .lazy-blur:first-child
+		&:first-child {
+			filter: blur(10px);
+		}
+	}
+}
+
+/**
+ * loading animation
+ */
+@keyframes rotating {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/**
+ * is loading
+ */
+.is-loading {
+	position:relative;
+
+	&::before {
+		content: '';
+		@extend %loading;
+	}
+
+	// .is-loading--white
+	&--white {
+
+		// .is-loading--white::before
+		&::before {
+			background-image:url(asset('loading-white.svg'));
+		}
+	}
+}

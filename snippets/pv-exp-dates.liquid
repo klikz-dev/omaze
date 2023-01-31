@@ -1,0 +1,24 @@
+<div class="exp-details__dates">
+    <div class="exp-details__date exp-details__date-end">
+        <div class="exp-details__date-label">
+            closes
+        </div>
+        <div class="js-formattable-date exp-details__date-value"
+            data-date="{{ meta.experience.end_date }}"
+            data-format="mmmm:dd:yyyy">
+        </div>
+
+    </div>
+    <div class="exp-details__date exp-details__date-winner-announce">
+        <div class="exp-details__date-label">
+            winner announced
+        </div>
+        <div class="exp-details__date-value">
+            AROUND
+            <span class="js-formattable-date"
+                data-date="{{ meta.experience.winner_announce_date }}"
+                data-format="mmmm:dd:yyyy">
+            </span>
+        </div>
+    </div>
+</div>

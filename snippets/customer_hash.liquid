@@ -1,0 +1,12 @@
+{% comment %}
+	Check if the Customer is logged in
+{% endcomment %}
+
+{% if customer  %}
+  {% comment %}
+  	Generate Customer hash to be pass as a Authorization header in every to
+		call to our Public API
+  {% endcomment %}
+
+  {{ customer.id | append: customer.email | append: settings.omaze_app_proxy_secret_key | md5 }}
+{% endif %}

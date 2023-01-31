@@ -1,0 +1,119 @@
+.ozsg {
+    .ozc-winner-card {
+        text-align: center;
+    }
+
+    .ozc-winner-card__header {
+        margin-bottom: 24px;
+
+        @include apply-to(desktop) {
+            margin-bottom: 34px;
+        }
+    }
+
+    .ozc-winner-card__header h2 {
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: .36px;
+        color: $blue-3;
+        display: inline-block;
+        margin: auto;
+
+        @include apply-to(desktop) {
+            font-size: 32px;
+            line-height: 40px;
+            letter-spacing: .24px;
+            max-width: 100%;
+        }
+    }
+
+    .ozc-winner-card__header h2:after {
+        content: '';
+        display: block;
+        width: 100%;
+        margin: auto;
+
+        background-image: url("//images.omaze.com/web/assets/images/static/features/more-winners/prize-page/squiggly-line.png");
+        background-repeat: repeat-x;
+        background-size: auto 4px;
+        height: 6px;
+        margin-top: 3px;
+
+        @include apply-to(desktop) {
+            width: 110%;
+            margin-left: -5%;
+            margin-top: 5px;
+        }
+    }
+
+    .ozc-winner-card__prize-announcement-winner {
+        font-family: $primary-font;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: .32px;
+        margin-bottom: 6px;
+
+        @include apply-to(desktop) {
+            font-size: 22px;
+            line-height: 32px;
+            letter-spacing: .44px;
+            margin-bottom: 6px;
+        }
+    }
+
+    .ozc-winner-card__prize-announcement-prize {
+        font-family: $primary-font;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: .32px;
+
+        @include apply-to(desktop) {
+            font-size: 22px;
+            line-height: 32px;
+            letter-spacing: .44px;
+        }
+    }
+
+    .ozc-winner-card__image {
+        margin-top: 24px;
+        margin-bottom: 0;
+
+        @include apply-to(desktop) {
+            margin-top: 32px;
+        }
+    }
+
+    .ozc-winner-card__description {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: .3px;
+        margin-top: 12px;
+        margin-bottom: 0;
+        text-align: left;
+
+        @include apply-to(desktop) {
+            margin-top: 32px;
+            font-size: 20px;
+            line-height: 32px;
+            letter-spacing: .4px;
+        }
+    }
+
+    .ozc-winner-card__announce-date {
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: .4px;
+        font-style: italic;
+        margin-top: 16px;
+        margin-bottom: 0;
+        text-align: center;
+
+        @include apply-to(desktop) {
+            font-size: 16px;
+            line-height: 22px;
+            letter-spacing: .53px;
+            margin-top: 24px;
+        }
+    }
+}

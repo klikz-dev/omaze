@@ -1,0 +1,27 @@
+{% assign s = section.settings %}
+
+<div id="unavailablecontent">
+  <main class="oz-unavailable-content">
+    <p> {{ s.unavailable_main }} </p>
+    <p> {{ s.unavailable_text }} </p>
+  </main>
+</div>
+
+{% schema %}
+  {
+    "name": "Unavailable Page Content",
+    "settings": [
+      {
+        "id": "unavailable_main",
+        "type": "textarea",
+        "label": "Main"
+      },
+      {
+        "id": "unavailable_text",
+        "type": "text",
+        "label": "Link Text",
+        "default": "If you feel you’ve received this page in error, please <a href=\"mailto:weloveyou@omaze.com\">email us.</a>"
+      }
+    ]
+  }
+{% endschema %}

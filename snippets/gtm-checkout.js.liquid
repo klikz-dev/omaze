@@ -1,0 +1,82 @@
+{% comment %}
+  "checkout" will be defined on each step of the checkout flow:
+  https://help.shopify.com/en/themes/liquid/objects/checkout
+
+  "checkout" cannot be passed through the liquid JSON filter.
+  Each checkout object contains both a customer, and an order object.
+  Each of these lead to circular references to nested order and customer objects, repsectively.
+  We exclude the customer and order attributes for this reason.
+{% endcomment %}
+
+{
+  "applied_gift_cards": {{ checkout.applied_gift_cards | json }},
+  "attributes": {{ checkout.attributes | json }},
+  "billing_address": {{ checkout.billing_address | json }},
+  "buyer_accepts_marketing": {{ checkout.buyer_accepts_marketing | json }},
+  "cart_level_discount_applications": {{ checkout.cart_level_discount_applications | json }},
+  "discount_applications": {{ checkout.discount_applications | json }},
+  "discounts_amount": {{ checkout.discounts_amount | json }},
+  "discounts_savings": {{ checkout.discounts_savings | json }},
+  "email": {{ checkout.email | json }},
+  "gift_cards_amount": {{ checkout.gift_cards_amount | json }},
+  "id": {{ checkout.id | json }},
+  "line_items": [
+    {% for line_item in checkout.line_items %}
+        {
+            "discount_allocations":{{ line_item.discount_allocations | json }},
+            "final_line_price":{{ line_item.final_line_price | json }},
+            "final_price":{{ line_item.final_price | json }},
+            "fulfillment":{{ line_item.fulfillment | json }},
+            "fulfillment_service": {{ line_item.fulfillment_service | json }},
+            "gift_card":{{ line_item.gift_card | json }},
+            "grams":{{ line_item.grams | json }},
+            "key":{{ line_item.key | json }},
+            "line_level_discount_allocations": {{ line_item.line_level_discount_allocations | json }},
+            "message":{{ line_item.message | json }},
+            "options_with_values":{{ line_item.options_with_values | json }},
+            "original_line_price": {{ line_item.original_line_price | json }},
+            "original_price":{{ line_item.original_price | json }},
+            "product":{{ line_item.product | json }},
+            "product_id":{{ line_item.product_id | json }},
+            "properties":{{ line_item.properties | json }},
+            "quantity":{{ line_item.quantity | json }},
+            "requires_shipping": {{ line_item.requires_shipping | json }},
+            "sku":{{ line_item.sku | json }},
+            "successfully_fulfilled_quantity": {{ line_item.successfully_fulfilled_quantity | json }},
+            "taxable":{{ line_item.taxable | json }},
+            "title":{{ line_item.title | json }},
+            "total_discount":{{ line_item.total_discount | json }},
+            "unit_price":{{ line_item.unit_price | json }},
+            "url":{{ line_item.url | json }},
+            "variant":{{ line_item.variant | json }},
+            "variant_id":{{ line_item.variant_id | json }},
+            "vendor":{{ line_item.vendor | json }},
+            "id":{{ line_item.id | json }}
+        },
+    {% endfor %}
+  ],
+  "line_items_subtotal_price": {{ checkout.line_items_subtotal_price | json }},
+  "name": {{ checkout.name | json }},
+  "note": {{ checkout.note | json }},
+  "order_id": {{ checkout.order_id | json }},
+  "order_name": {{ checkout.order_name | json }},
+  "order_number": {{ checkout.order_number | json }},
+  "requires_shipping": {{ checkout.requires_shipping | json }},
+  "shipping_address": {{ checkout.shipping_address | json }},
+  "shipping_method": {{ checkout.shipping_method | json }},
+  "shipping_methods": {{ checkout.shipping_methods | json }},
+  "shipping_price": {{ checkout.shipping_price | json }},
+  "tax_price": {{ checkout.tax_price | json }},
+  "total_price": {{ checkout.total_price | json }},
+  "transactions": {{ checkout.transaction | json }},
+  "tax_lines": [
+    {% for tax_line in checkout.tax_lines %}
+      {
+        "price": {{ tax_line.price | json }},
+        "rate": {{ tax_line.rate | json }},
+        "rate_percentage": {{ tax_line.rate_percentage | json }},
+        "title": {{ tax_line.title | json }}
+      },
+    {% endfor %}
+  ]
+}

@@ -1,0 +1,18 @@
+<header class="pv-header">
+
+	{% include 'product-price' %}
+
+	{% if product.vendor != blank %}
+		<div class="pv-header__wrap">
+			<p class="pv-brand-intro">
+				{{ meta.product.benefit_text }}
+			</p>
+			<p class="pv-brand">
+				{{ product.vendor }}
+			</p>
+
+			{% include 'product-details' %}
+		</div>
+	{% endif %}
+
+</header>

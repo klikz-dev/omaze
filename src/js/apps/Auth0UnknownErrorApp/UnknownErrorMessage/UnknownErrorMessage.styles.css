@@ -1,0 +1,87 @@
+.container {
+    @apply pt-7 m-auto;
+    max-width: 386px;
+}
+
+@screen md {
+    .title {
+        @apply pt-7;
+    }
+    .support {
+        font-size: 18px;
+    }
+}
+
+.title {
+    @apply text-secondary-contrast;
+    font-family: Clan, sans-serif;
+    font-size: 24px;
+    line-height: 32px;
+    margin-bottom: 48px;
+    letter-spacing: 0.18px;
+}
+
+.action {
+    @apply block mb-3 font-bold;
+    font-size: 16px;
+}
+
+.support {
+    margin-bottom: 112px;
+}
+
+.title span,
+a {
+    @apply text-primary;
+}
+
+a {
+    @apply underline;
+}
+
+:global(.rebrand #js-auth0-unknown-error-app__root) .container {
+    padding-top: 20px;
+}
+
+@screen md {
+    :global(.rebrand #js-auth0-unknown-error-app__root) .container {
+        padding-top: 53px;
+    }
+}
+
+:global(.rebrand #js-auth0-unknown-error-app__root) .title {
+    font-family: 'Gellix', Roboto, sans-serif;
+    font-size: 24px;
+    padding-top:0;
+    margin-top: 0px;
+    line-height: 36px;
+    margin-bottom: 35px;
+    color: #090F15;
+}
+
+@screen md {
+    :global(.rebrand #js-auth0-unknown-error-app__root) .title {
+        font-size: 30px;
+        line-height: 43px;
+        margin-bottom: 45px;
+    }
+}
+
+:global(.rebrand #js-auth0-unknown-error-app__root) .title span{
+    color: #0193A7;
+}
+
+:global(.rebrand #js-auth0-unknown-error-app__root) .action {
+    margin-bottom: 17px;
+}
+
+:global(.rebrand #js-auth0-unknown-error-app__root) a {
+    color: #090F15;
+    font-weight: bold;
+    border-bottom: 2px solid #3B5C6B;
+    text-decoration: none;
+}
+
+:global(.rebrand #js-auth0-unknown-error-app__root) a:hover,:global(.rebrand #js-auth0-unknown-error-app__root) a:focus{
+    border-bottom: 2px solid transparent;
+}

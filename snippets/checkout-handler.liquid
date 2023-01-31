@@ -1,0 +1,103 @@
+<script>
+
+$(document).on('page:load', function() {
+  SDG.AccessRestrictions.init({
+    ineligibleCountries: {{- settings.oz_access_ineligible_countries | json -}},
+    ineligibleRegions: {{- settings.oz_access_ineligible_regions | json -}},
+    env: '{{- settings.env -}}',
+  });
+  SDG.AccessRestrictions.restrictAccess();
+
+  SDG.Checkout.Content.Compliance.init();
+  SDG.Checkout.Content.LineItems.init();
+  SDG.Checkout.Marketing.OptIn.init();
+  SDG.Checkout.Content.ContactInformation.init({
+    disclosureLink: "{{ 'disclosures.link' | t }}",
+    optIn: {
+      copy: "{{ 'opt_in_copy.checkout' | t }}",
+      rulesLink: "{{ 'opt_in_copy.rules_link' | t }}",
+    },
+    shipping: {
+      copy: "{{ 'shopify.checkout.shipping.shipping_copy' | t }}",
+    },
+  });
+  SDG.Checkout.Content.Header.init();
+  SDG.Checkout.Content.Footer.init();
+  SDG.Checkout.Content.Customize.init();
+
+  SDG.Email.ContextualCapture.load();
+});
+
+$(document).on('page:load page:change', function() {
+  SDG.Checkout.LoadCountries.init({
+    ineligibleCountries: {{- settings.oz_access_ineligible_countries | json -}},
+  });
+  SDG.Checkout.Content.LineItems.update();
+
+  SDG.Checkout.Content.Compliance.changeFreeToBonus();
+  SDG.Checkout.Content.Compliance.removeMonetaryValueAssociation();
+});
+
+// NOTE: Seems there is a bug with {{ checkout.line_items | json }}
+//       returns null.
+//       see: https://community.shopify.com/c/Shopify-APIs-SDKs/Liquid-Checkout-Object-JSON-filter-return-quot-nulls-quot-s-for/td-p/663544
+// NOTE: Unable to use Shopify.checkout.line_items (js object)
+//       because that doesn't contain the full product object
+//       resorting to using liquid.
+window.checkout_line_items = [];
+
+{% for item in checkout.line_items %}
+  var item = {
+    id: "{{item.id}}",
+    vendor: "{{item.vendor}}",
+    title: "{{item.title}}",
+    variant_id: "{{item.variant_id}}",
+    variant: {{item.variant | json}},
+    url: "{{item.url}}",
+    sku: "{{item.sku}}",
+    product: {{item.product | json}},
+    product_id: "{{item.product_id}}",
+    {%comment%}
+    unit_price_measurement: {{item.unit_price_measurement}},
+    unit_price: "{{item.unit_price}}",
+    taxable: {{item.taxable}},
+    successfully_fulfilled_quantity: {{item.successfully_fulfilled_quantity}},
+    requires_shipping: {{item.requires_shipping}},
+    quantity: {{item.quantity}},
+    properties: {{item.properties | json}},
+    original_price: {{item.original_price}},
+    original_line_price: {{item.original_line_price}},
+    options_with_values: {{item.options_with_values | json}},
+    message: "{{item.message}}",
+    line_level_total_discount: {{item.line_level_total_discount}},
+    line_level_discount_allocations: {{item.line_level_discount_allocations | json}},
+    key: "{{item.key}}",
+    image: "{{item.image}}",
+    grams: {{item.grams}},
+    gift_card: {{item.gift_card}},
+    fulfillment_service: "{{item.fulfillment_service}}",
+    fulfillment: {{item.fulfillment | json}},
+    final_price: {{item.final_price}},
+    final_line_price: {{item.final_line_price}},
+    discount_allocations: {{item.discount_allocations | json}}
+    {%endcomment%}
+  }
+
+window.checkout_line_items.push(item);
+{% endfor %}
+
+{% if settings.thank_you_page_profile_onboarding_callouts_on %}
+  {% if customer.id == null %}
+    window.SDG.SignupValueProposition.init({
+      showCreateAccountButton: true,
+      showCreateAccountHeader: true,
+      showPromoOffer: true,
+      showDividers: true,
+      placement: {
+        position: 'afterend',
+        referenceSelector: '.section__header.os-header',
+      }
+    });
+  {% endif %}
+{% endif %}
+</script>

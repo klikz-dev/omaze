@@ -1,0 +1,120 @@
+{% assign s = section.settings %}
+
+<section class="js-content-wrap shipping oz-campaign-infotabs__section" id="shipping">
+	<div class="oz-campaign-infotabs__heading-wrapper">
+		<div class="oz-campaign-infotabs__header">
+			{{ s.shipping_title }}
+		</div>
+		<div>
+			<div id="locationSelect" class="oz-campaign-infotabs__select js-location-select desktop-only">
+				<span class="js-location-text oz-campaign-infotabs__select-text">
+					{{ section.blocks[0].settings.location_name }}
+				</span>
+				<i class="icon icon--caret-down"></i>
+			</div>
+			<div id="locationDrop" class="oz-campaign-infotabs__dropdown js-location-drop">
+
+				{% for block in section.blocks %}
+					{% assign b = block.settings %}
+
+					<div class="js-location{% if forloop.index0 == 0 %} oz-selected{% endif %}" data-id="{{ b.location_name | camelcase }}">
+						{{ b.location_name }}
+					</div>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+
+	{% for block in section.blocks %}
+		{% assign b = block.settings %}
+		{% assign locationId = b.location_name | camelcase %}
+
+		<div id="{{ locationId }}" class="js-location-content oz-campaign-infotabs__content oz-campaign-infotabs__location{% if forloop.index0 == 0 %} active-location{% endif %}">
+			<div class="oz-campaign-infotabs__subheader">
+				Shipping Information
+			</div>
+
+			{% if b.info_text contains '<p>' %}
+				{{ b.info_text }}
+			{% else %}
+				<p>
+					{{ b.info_text }}
+				</p>
+			{% endif %}
+
+			<div class="oz-campaign-infotabs__subheader">
+				Return Policy
+			</div>
+
+			{% if b.return_text contains '<p>' %}
+				{{ b.return_text }}
+			{% else %}
+				<p>
+					{{ b.return_text }}
+				</p>
+			{% endif %}
+
+			<table>
+				<tbody>
+					<tr>
+						<th class="oz-campaign-infotabs__t-header">Style</th>
+						<th class="oz-campaign-infotabs__t-header">1st Item</th>
+						<th class="oz-campaign-infotabs__t-header">Each Add'l</th>
+					</tr>
+					<tr>
+						<td class="">Unisex Crew Neck</td>
+						<td class="">{{ b.first_price }}</td>
+						<td class="">{{ b.additional_price }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	{% endfor %}
+</section>
+
+{% schema %}
+{
+	"name": "Shipping",
+	"settings": [
+		{
+			"type": "text",
+			"id": "shipping_title",
+			"label": "Section Title"
+		}
+	],
+	"blocks": [
+		{
+			"type": "location",
+			"name": "Location",
+			"settings": [
+				{
+					"type": "text",
+					"id": "location_name",
+					"label": "Location Name"
+				},
+				{
+					"type": "textarea",
+					"id": "info_text",
+					"label": "Shipping Information"
+				},
+				{
+					"type": "textarea",
+					"id": "return_text",
+					"label": "Return Policy"
+				},
+				{
+					"type": "text",
+					"id": "first_price",
+					"label": "First Item Price"
+				},
+				{
+					"type": "text",
+					"id": "additional_price",
+					"label": "Additional Item Price"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

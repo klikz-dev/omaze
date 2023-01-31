@@ -1,0 +1,123 @@
+/**
+ * Experiences grid/cards
+ */
+
+// .oz-exp-card-container
+.oz-exp-card-container {
+    display: block;
+    list-style: none;
+    width: 100%;
+    margin: 0 auto;
+
+    @include apply-to(desktop) {
+        width: 80%;
+    }
+
+	// .oz-exp-card-container .oz-card
+    .oz-card {
+
+		// .oz-exp-card-container .oz-card__content
+        &__content {
+            height: rem(50);
+        }
+    }
+}
+
+// .oz-exp-card
+.oz-exp-card {
+    border: 1px solid $gray-7;
+    border-radius: 3px;
+    width: 100%;
+    text-align: left;
+    position: relative;
+    display: inline-block;
+    margin: rem(10) rem(10) rem(30);
+    box-shadow: 2px 1px 1px 0px rgba($black-1, 0.18);
+
+
+	// .oz-exp-card a
+    a {
+        text-decoration: none;
+        display: block;
+    }
+
+	// .oz-exp-card__img
+    &__img {
+        overflow: hidden;
+        @include intrinsic-ratio-padding(330/185);
+
+        & > img {
+            display: block;
+            max-width: 100%;
+        }
+    }
+
+	// .oz-exp-card__content
+    &__content {
+        padding: rem(10);
+        position: relative;
+        white-space: normal;
+        height: rem(58);
+        background: $white;
+
+		// .oz-exp-card__content::after
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: rem(20);
+            bottom: 100%;
+            width: 0;
+            height: 0;
+            border-bottom: rem(14) solid $white;
+            border-top: rem(10) solid transparent;
+            border-left: rem(14) solid transparent;
+            border-right: rem(14) solid transparent;
+        }
+
+        @include apply-to(tablet) {
+            padding-bottom: rem(20);
+            height: rem(76);
+        }
+    }
+
+	// .oz-exp-card__subtitle
+    &__subtitle {
+        margin: 0;
+        font-family: $primary-font;
+        font-style: italic;
+        font-size: 0.9rem;
+		font-weight: $light;
+        color: $blue-1;
+
+        @include apply-to(tablet) {
+            font-size: 0.9rem;
+        }
+    }
+
+	// .oz-exp-card__title
+    &__title {
+        margin: 0;
+        font-family: $primary-font;
+        font-size: 1rem;
+		font-weight: $bold;
+        color: $black-1;
+
+        @include apply-to(tablet) {
+            font-size: 1.2rem;
+        }
+    }
+
+	// .oz-exp-card__banner
+    &__banner {
+        top: rem(10);
+        right: rem(10);
+		font-size: rem(11.2);
+		opacity: 0;
+		transition: opacity .24s ease-in;
+
+        @include apply-to(tablet) {
+            font-size: rem(12.8);
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.cta {
+    font-family: 'Gellix';
+    padding-top: 12px;
+    padding-bottom: 14px;
+    border-radius: 76px;
+    letter-spacing: 0.015rem;
+    line-height: 30px;
+}
+
+.cta:hover {
+    background-color: var(--yellow800);
+}
+
+.cta:focus {
+    border: 4px solid var(--blueFocus);
+}
+
+.cta:active {
+    background: var(--yellow200);
+}

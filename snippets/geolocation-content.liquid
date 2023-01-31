@@ -1,0 +1,398 @@
+{% comment %}
+    * summary
+        - given a user's geo-location, injects a <styles> tag with CSS based on rules passed in through a config
+        - default behaviors:
+            * CSS added for the targeted selector: 'display: block'
+            * max wait limit: 8 seconds
+            * fallback action: apply 'default' segment on error or after max wait limit
+
+    * dependencies:
+        - window.ozGeolocation: geolocation-head.liquid must be loaded to call ozGeolocation.getData()
+        - settings.oz_geolocation_content_conf: valid config must exist
+
+    * config
+        - features
+            - config is an array of objects
+            - each config object represent a feature to be evaluated independently
+
+        - feature properties
+            - {string} [name] - feature name
+            - {string} [placeholder] - css selector of placeholder element. If exists, will be hidden once feature is rendered.
+            - {number} [waitLimit=8000] - time to wait before throwing error (in milliseconds)
+            - {boolean|Object} [onError] - action to take in case of an error or waitLimit reached
+                * if undefined: try to apply 'default' segment
+                * else if falsy: do nothing
+                * else if object: apply segment object
+            - {Array} segments - array of objects representing each targeted location (a geo-segment)
+
+        - segment properties
+            - {string} [name] - segment name
+                * the default segment must be named 'default'; otherwise name is optional
+                * if 'default' segment exists, it will apply to locations not matched by other segments
+            - {Object} location - location data to identify targeted region
+                * currently accepts: COUNTRY_CODE & REGION_CODE
+                * can be either a string with single symbole - 'gb' - or an array - ['gb', 'us']
+                * exactly 1 COUNTRY_CODE is required with REGION_CODE (1, and no more than 1)
+                * a match must be found per each existing key (COUNTRY_CODE, REGION_CODE ...) for the location to be a match
+            - {Object} target - where and how to apply strategy if geo-location matches
+                * {string} selectors - string representing CSS selectors of targeted objects. Comma separated if more than one.
+                * {string} [css] - string representing the CSS styles to apply to the targeted selectors.
+                    - defualts to 'display: block !important'
+
+
+    examples:
+        * location:
+            1. only in GB
+                location: {
+                    COUNTRY_CODE: 'gb',
+                },
+
+            2. only in usa in California
+                location: {
+                    COUNTRY_CODE: 'us',
+                    REGION_CODE: 'ca',
+                },
+
+            3. in any of these US states
+                location: {
+                    COUNTRY_CODE: 'us',
+                    REGION_CODE: ['ca', 'al', 'ny', 'nj']
+                },
+
+            * this can be extended to match other avilable keys, like:
+                - zipCode or zipCode list
+                - continent
+                - language
+
+        * settings[geolocation_content_conf]
+            1. Home Page with segments: UK / Souther US states / default
+                [
+                    {
+                        name: 'homePage',
+                        segments: [
+                            {
+                                name: 'uk house',
+                                location: {
+                                    COUNTRY_CODE: 'gb',
+                                },
+                                target: {
+                                    selectors: '#oz-homepage-hero--uk',
+                                },
+                            },
+                            {
+                                name: 'sourthern states',
+                                location: {
+                                    COUNTRY_CODE: 'us',
+                                    REGION_CODE: ['tx', 'fl', 'al', 'ga', 'ms'],
+                                },
+                                target: {
+                                    selectors: '#oz-homepage-hero--southern',
+                                },
+                            },
+                            {
+                                name: 'default',
+                                target: {
+                                    selectors: '#oz-homepage-hero-default',
+                                },
+                            }
+                        ],
+                    },
+                ];
+
+            2. Home Page with
+                * custom Error/Failure segment
+                * placeholder Element to be hidden
+                * max wait of 3 seconds
+                [
+                    {
+                        name: 'homePage',
+                        placeholder: 'oz-homepage__hero-placeholder',
+                        waitLimit: 3000,
+                        onError: {
+                            target: {
+                                selectors: '#oz-homepage-hero--default',
+                                css: 'border: 10px solid blue;'
+                            },
+                        },
+                        segments: [
+                            {
+                                name: 'uk house',
+                    ...
+
+            3. Home Page
+                * does nothing on Error (no default / no fallback)
+                [
+                    {
+                        name: 'homePage',
+                        onError: false,
+                        segments: [
+                            {
+                                name: 'uk house',
+                    ...
+{% endcomment %}
+
+<script type='text/javascript' id='oz-geolocation-content'>
+    (function (window) {
+        const DEFAULT_SEGMENT_NAME = 'default';
+        const DEFAULT_CSS = 'display: block !important';
+        const DEFAULT_WAIT_LIMIT_MS = 8000;
+
+        let geoFeatures = {{ settings.oz_geolocation_content_conf | json }};
+
+        if (!geoFeatures) {
+            return false;
+        }
+
+        if (!window.ozGeolocation) {
+            console.error('[OZ GEO-CONTENT] window.ozGeolocation not available');
+
+            return false;
+        }
+
+        function parseJsonString (str) {
+            try {
+                return JSON.parse(str);
+            } catch (e) {}
+
+            return false;
+        }
+
+        function validateConfig () {
+            if (typeof(geoFeatures) === 'string') {
+                geoFeatures = parseJsonString(geoFeatures);
+            }
+
+            if (!geoFeatures) {
+                console.error('[OZ GEO-CONTENT validateConfig] config must be valid JSON');
+
+                return false;
+            }
+
+            if (!Array.isArray(geoFeatures)) {
+                console.error('[OZ GEO-CONTENT validateConfig] config must be an array');
+
+                return false;
+            }
+
+            return geoFeatures.every(feature => {
+                if (!Array.isArray(feature.segments)) {
+                    console.error(`[OZ GEO-CONTENT validateConfig] segments array missing [feature: ${feature.name}]`);
+
+                    return false;
+                }
+
+                return feature.segments.every(segment => {
+                    const segmentAndFeature = `[segment: ${segment.name}] [feature: ${feature.name}]`;
+
+                    if (segment.name === DEFAULT_SEGMENT_NAME) {
+                        if (!segment.target || !segment.target.selectors) {
+                            console.error(`[OZ GEO-CONTENT validateConfig] target.selectors missing ${segmentAndFeature}`);
+
+                            return false;
+                        }
+
+                        if (segment.location) {
+                            console.error(`[OZ GEO-CONTENT validateConfig] default does not accept location ${segmentAndFeature}`);
+
+                            return false;
+                        }
+
+                        return true;
+                    }
+
+                    const locations = segment.location && Object.values(segment.location);
+
+                    if (!locations || !locations.length) {
+                        console.error(`[OZ GEO-CONTENT validateConfig] location missing ${segmentAndFeature}`);
+
+                        return false;
+                    }
+
+                    const locationValid = locations && locations.every((location) => {
+                        return typeof(location) === 'string' || Array.isArray(location);
+                    });
+
+                    if (!locationValid) {
+                        console.error(`[OZ GEO-CONTENT validateConfig] invalid location ${segmentAndFeature}`);
+
+                        return false;
+                    }
+
+                    if (!segment.target || !segment.target.selectors) {
+                        console.error(`[OZ GEO-CONTENT validateConfig] target.selectors missing ${segmentAndFeature}`);
+
+                        return false;
+                    }
+
+                    if (segment.location.REGION_CODE) {
+                        const country = segment.location.COUNTRY_CODE;
+                        const singleCountry = typeof(country) === 'string' || (Array.isArray(country) && country.length === 1);
+
+                        if (!singleCountry) {
+                            console.error(`[OZ GEO-CONTENT validateConfig] exactly 1 country required with region ${segmentAndFeature}`);
+
+                            return false;
+                        }
+                    }
+
+                    return true;
+                });
+            });
+        }
+
+        function normalizeString (string) {
+            return typeof(string) === 'string' && string.toLowerCase().trim();
+        }
+
+        function stringsMatch (s1, s2) {
+            const string1 = normalizeString(s1);
+            const string2 = normalizeString(s2);
+
+            if (!string1 || !string2) {
+                return false;
+            }
+
+            return string1 === string2;
+        }
+
+        function locationKeyMatches (key, locations, geoData) {
+            if (!geoData || !geoData[key]) {
+                console.error('[OZ GEO-CONTENT locationKeyMatches] ozGeolocation.data invalid');
+
+                return false;
+            }
+
+            if  (typeof(locations) === 'string') {
+                locations = [locations];
+            }
+
+            return locations.some((location) => {
+                return stringsMatch(geoData[key], location);
+            });
+        }
+
+        function getDefaultSegment (segments) {
+            return segments.find(segment => {
+                return segment.name === DEFAULT_SEGMENT_NAME;
+            });
+        }
+
+        function getErrorSegment (feature) {
+            const ON_ERROR_PROPERTY = 'onError';
+            const errorConfig = feature[ON_ERROR_PROPERTY];
+
+            // if undefined, show 'default'
+            if (errorConfig === undefined) {
+                return getDefaultSegment(feature.segments);
+            }
+
+            // if falsy, do nothing
+            if (!errorConfig) {
+                return false;
+            }
+
+            // otherwise, validate and use the config
+            if (!errorConfig.target || !errorConfig.target.selectors) {
+                console.error(`[OZ GEO-CONTENT getErrorSegment] invalid onError segment [feature: ${feature.name}]`);
+
+                return false;
+            }
+
+            return errorConfig;
+        }
+
+        function applyFeature (segment, feature) {
+            if (!segment) {
+                return false;
+            }
+
+            const targetSelectors = segment.target.selectors;
+            const styleEl = window.document.createElement('style');
+            const placeholderSelector = feature && feature.placeholder;
+
+            let css = `${targetSelectors} { ${ segment.target.css || DEFAULT_CSS } }`;
+
+            if (placeholderSelector) {
+                css = `${css} ${placeholderSelector} { display: none; }`;
+            }
+
+            styleEl.type = 'text/css';
+            styleEl.innerHTML = css;
+
+            window.document.head.appendChild(styleEl);
+        }
+
+        function getMatchingSegment (segments, geoData) {
+            return segments.find(segment => {
+                if (segment.name === DEFAULT_SEGMENT_NAME) {
+                    return false;
+                }
+
+                return Object.keys(segment.location).every(key => {
+                    return locationKeyMatches(key, segment.location[key], geoData);
+                });
+            });
+        }
+
+        function getTargetedSegment (feature, geoData) {
+            const matchingSegment = getMatchingSegment(feature.segments, geoData);
+
+            if (matchingSegment) {
+                return matchingSegment;
+            }
+
+            const defaultSegment = getDefaultSegment(feature.segments);
+
+            if (defaultSegment) {
+                return defaultSegment;
+            }
+
+            return false;
+        }
+
+        function applyFeatures () {
+            const features = Object.values(geoFeatures);
+
+            features.forEach((feature) => {
+                const waitLimit = feature.waitLimit || DEFAULT_WAIT_LIMIT_MS;
+
+                window.ozGeolocation
+                    .getData(waitLimit)
+                    .then((data) => {
+                        const targetedSegment = getTargetedSegment(feature, data);
+
+                        if (!targetedSegment) {
+                            return false;
+                        }
+
+                        return applyFeature(targetedSegment, feature);
+                    })
+                    .catch((error) => {
+                        console.warn(`[OZ GEO-CONTENT] feature: ${feature.name}: ${error}`);
+
+                        return featureOnError(feature);
+                    });
+            });
+        }
+
+        function featureOnError (feature) {
+            if (!feature) {
+                return false;
+            }
+
+            const targetedSegment = getErrorSegment(feature);
+
+            if (!targetedSegment) {
+                return false;
+            }
+
+            console.info(`[OZ GEO-CONTENT featureOnError] rendering fallback strategy for feature: ${feature.name}`);
+
+            return applyFeature(targetedSegment, feature);
+        }
+
+        if (validateConfig()) {
+            applyFeatures();
+        }
+    })(window);
+</script>

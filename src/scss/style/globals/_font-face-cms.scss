@@ -1,0 +1,13 @@
+/**
+ * Privacy Page
+ */
+
+@font-face {
+  font-family: 'National Regular';
+  font-style: normal;
+  font-weight: 400;
+  src: url('{{ "NationalRegular.eot" | asset_url }}');
+  src: url('{{ "NationalRegular.eot?" | asset_url }}') format("eot"),
+  url('{{ "NationalRegular.woff" | asset_url }}') format("woff"),
+  url('{{ "NationalRegular.ttf" | asset_url }}') format("truetype");
+}

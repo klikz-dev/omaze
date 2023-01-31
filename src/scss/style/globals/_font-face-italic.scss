@@ -1,0 +1,10 @@
+// National Light Italic
+@font-face {
+	font-family: 'National Italic';
+	font-style: normal;
+	font-weight: 400;
+	src: url('{{ "NationalLightItalic.eot" | asset_url }}');
+	src: url('{{ "NationalLightItalic.eot?" | asset_url }}') format('eot'),
+		url('{{ "NationalLightItalic.woff" | asset_url }}') format('woff'),
+		url('{{ "NationalLightItalic.ttf" | asset_url }}') format('truetype'),
+}

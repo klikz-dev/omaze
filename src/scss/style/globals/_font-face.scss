@@ -1,0 +1,116 @@
+/*
+//////////////////////////////////////////////////////////////////////
+Font Face
+//////////////////////////////////////////////////////////////////////
+*/
+
+// Clan Medium
+@font-face {
+	font-family: 'Clan';
+	font-style: normal;
+	font-weight: 400;
+	src: url('{{ "ClanOTMedium.eot" | asset_url }}');
+	src: url('{{ "ClanOTMedium.eot?" | asset_url }}') format('eot'),
+		url('{{ "ClanOTMedium.woff" | asset_url }}') format('woff'),
+		url('{{ "ClanOTMedium.ttf" | asset_url }}') format('truetype');
+}
+
+// Clan Web Black
+@font-face {
+	font-family: 'Clan';
+	font-style: normal;
+	font-weight: 700;
+	src: url('{{ "ClanWebBlack.eot" | asset_url }}');
+	src: url('{{ "ClanWebBlack.eot?" | asset_url }}') format('eot'),
+		url('{{ "ClanWebBlack.woff" | asset_url }}') format('woff'),
+		url('{{ "ClanWebBlack.ttf" | asset_url }}') format('truetype');
+}
+
+// National Bold
+@font-face {
+	font-family: 'National';
+	font-style: normal;
+	font-weight: 700;
+	src: url('{{ "NationalBold.eot" | asset_url }}');
+	src: url('{{ "NationalBold.eot?" | asset_url }}') format('eot'),
+		url('{{ "NationalBold.woff" | asset_url }}') format('woff'),
+		url('{{ "NationalBold.ttf" | asset_url }}') format('truetype');
+}
+
+// National Light
+@font-face {
+	font-family: 'National';
+	font-style: normal;
+	font-weight: 300;
+	src: url('{{ "NationalLight.eot" | asset_url }}');
+	src: url('{{ "NationalLight.eot?" | asset_url }}') format('eot'),
+		url('{{ "NationalLight.woff" | asset_url }}') format('woff'),
+		url('{{ "NationalLight.ttf" | asset_url }}') format('truetype');
+}
+
+// National Book
+@font-face {
+	font-family: 'National';
+	font-style: normal;
+	font-weight: 400;
+	src: url('{{ "NationalBook.eot" | asset_url }}');
+	src: url('{{ "NationalBook.eot?" | asset_url }}') format('eot'),
+		url('{{ "NationalBook.woff" | asset_url }}') format('woff'),
+		url('{{ "NationalBook.ttf" | asset_url }}') format('truetype');
+}
+
+// Showtime
+@font-face {
+    font-family: 'Showtime';
+    font-style: normal;
+	src: url('{{ "ShowtimeRegular.eot" | asset_url }}');
+    src: url('{{ "ShowtimeRegular.eot?" | asset_url }}') format('eot'),
+		url('{{ "ShowtimeRegular.woff" | asset_url }}') format('woff'),
+		url('{{ "ShowtimeRegular.ttf" | asset_url }}') format('truetype');
+}
+
+/*
+//////////////////////////////////////////////////////////////////////
+Gellix
+//////////////////////////////////////////////////////////////////////
+*/
+
+@font-face {
+    font-family: "Gellix";
+    font-style: normal;
+    font-weight: 400;
+    src: url("//assets.omaze.com/fonts/gellix/GellixRegular.woff") format('woff'),
+        url("//assets.omaze.com/fonts/gellix/GellixRegular.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: "Gellix";
+    font-style: italic;
+    font-weight: 400;
+    src: url("//assets.omaze.com/fonts/gellix/GellixRegularItalic.woff") format('woff'),
+        url("//assets.omaze.com/fonts/gellix/GellixRegularItalic.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: "Gellix";
+    font-style: normal;
+    font-weight: 500;
+    src: url("//assets.omaze.com/fonts/gellix/GellixMedium.woff") format('woff'),
+        url("//assets.omaze.com/fonts/gellix/GellixMedium.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: "Gellix";
+    font-style: normal;
+    font-weight: 700;
+    src: url("//assets.omaze.com/fonts/gellix/GellixBold.woff") format('woff'),
+        url("//assets.omaze.com/fonts/gellix/GellixBold.woff2") format('woff2');
+}
+
+@font-face {
+    font-family: "Gellix";
+    font-style: normal;
+    font-weight: 900;
+    src: url("//assets.omaze.com/fonts/gellix/GellixBlack.woff") format('woff'),
+        url("//assets.omaze.com/fonts/gellix/GellixBlack.woff2") format('woff2');
+}

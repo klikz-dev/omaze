@@ -1,0 +1,245 @@
+{% assign form_name = "create_customer" %}
+{% if settings.auth0_on == false %}
+<div class="oz-page" id="acLogin">
+	<div class="oz-login-app" id="accountSection">
+		<div class="oz-section oz-section--fixed-width">
+			<h1 class="oz-section__page-title oz-section__page-title--register-account">Create your Omaze account!</h1>
+
+			{% if settings.profile_onboarding_callouts_on %}
+				<h3 class="oz-section__promo-code">Sign up today and score 150 extra chances to win the experience of your dreams</h3>
+			{% endif %}
+
+			<div class="oz-section__inner oz-section__content" id="acRegisterForm">
+				{% if settings.omaze_social_login_on == false %}
+					<div class='oxi-social-login'></div>
+				{% endif %}
+				{% form 'create_customer' %}
+				<div class="oz-divider oz-or-divider"><span class="oz-divider__text">or</span></div>
+				<input type="hidden" id="returnToInput" name="return_to" value="" />
+				{% if form.errors %}
+					{% for field in form.errors %}
+						{% if form.errors.messages[field] contains "included to verify your email address" %}
+							{% assign activation_error = true %}
+							<script>this.isActivationMailSent = true;</script>
+						{% endif %}
+					{% endfor %}
+					{% unless activation_error == true %}
+						<div class="oz-account-call-out">
+							{% for field in form.errors %}
+								{% if form.errors.messages[field] contains "email address is already associated" %}
+									<input type="hidden" id="hasAccount" value="" />
+									<div>
+										You’re already a member!
+									</div>
+									<div>
+										<b>Sign in now</b>
+									</div>
+								{% endif %}
+							{% endfor %}
+						</div>
+					{% endunless %}
+				{% endif %}
+				<div>
+					<div class="oz-field">
+						<div
+							id="registerEmailContainer"
+							class="oz-field__container{% if form.errors contains 'email' %} error{% endif %}"
+						>
+							<input
+								id="registerEmail"
+								class="input{% if form.errors contains 'email' %} error{% endif %}"
+								type="email"
+								name="customer[email]"
+								{% if form.email %}
+								value="{{ form.email }}"
+								{% endif %}
+								autocorrect="off"
+								autocapitalize="off"
+								autocomplete="email"
+								autofocus
+								required
+							/>
+							<label for="registerEmail">
+								{{'customer.register.email' | t}}
+							</label>
+						</div>
+						<span id="existingAccountError" class="error" style="display: none;">Account already exists for this email!</span>
+					</div>
+					<div class="oz-field">
+						<div
+							class="oz-field__container{% if form.errors contains 'password' %} error{% endif %}"
+						>
+							<input
+								id="registerPassword"
+								class="input{% if form.errors contains 'password' %} error{% endif %}"
+								type="password"
+								name="customer[password]"
+								required
+							/>
+							<span
+								id="togglePasswordVisibility"
+								class="toggle-password-visibility"
+								>show</span
+							>
+
+							<label for="registerPassword">
+								{{ 'customer.register.password' | t }}
+							</label>
+						</div>
+						<div id="passwordHint" class="oz-field__container--hint-text"></div>
+					</div>
+					<input type="hidden" name="checkout_url" value="" />
+
+					<div class="oz-field oz-field--btn">
+						<button id="create-acct-btn" class="oz-btn oz-btn--block" type="submit">
+							Create account
+						</button>
+					</div>
+					<div class="oz-checkbox__container">
+						<div class="oz-checkbox">
+							<input
+								class="inp-cbx"
+								id="js-cbx"
+								type="checkbox"
+								style="display: none;"
+								name="customer[accepts_marketing]"
+							/>
+							<label id="cbx-clicker" class="cbx" for="cbx"
+								><span>
+									<svg
+										width="12px"
+										height="10px"
+										viewbox="0 0 12 10"
+									>
+										<polyline
+											points="1.5 6 4.5 9 10.5 1"
+										></polyline>
+									</svg>
+								</span>
+							</label>
+							<span class="oz-checkbox-text">
+								{{ 'opt_in_copy.signup' | t }}
+							</span
+							>
+						</div>
+					</div>
+				</div>
+				<div class="oz-divider"></div>
+				<div class="oz-fine-print oz-fine-print--center">
+					<p>Already have an account?</p>
+					<a
+						href="/account/login"
+						id="customer_login_link"
+						class="oz-btn-link oz-btn-link--block oz-btn-link--large oz-btn-link--secondary"
+					>
+						<span class="btn__label">Sign in</span>
+					</a>
+				</div>
+				{% endform %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const node = document.getElementsByName('checkout_url')[0];
+	node.value = document.referrer;
+	(function() {
+		function setDefaultCheckbox(geoData) {
+			const COUNTRY_CODE = geoData && geoData.COUNTRY_CODE;
+
+			if (!COUNTRY_CODE) {
+				console.error('[REGISTER setDefaultCheckbox] ozGeolocation country data not available')
+
+				return false;
+			}
+
+			if (COUNTRY_CODE.toUpperCase() === US) {
+				document.getElementById(cbxID).checked = true;
+			}
+		}
+
+		var cbxID = 'js-cbx';
+		var US = 'US';
+		var cbxClicker = 'cbx-clicker';
+		var createAcctBtnId = 'create-acct-btn';
+		var recreateUserAcctKey = 'recreate-acct-user';
+		var checkbox = document.getElementById(cbxID);
+		checkbox.checked = false;
+
+		document
+			.getElementById(cbxClicker)
+			.addEventListener('click', function() {
+				checkbox.checked = !checkbox.checked;
+			});
+
+        function geoTargeting() {
+            if (!window.ozGeolocation) {
+                /* eslint-disable-next-line  no-console */
+                console.error('[Register geoTargeting] window.ozGeolocation not available');
+
+                return false;
+            }
+
+            window.ozGeolocation
+                .getData()
+                .then(setDefaultCheckbox)
+                .catch(() => {
+                    // eslint-disable-next-line no-console
+                    console.error('[Register geoTargeting] ozGeolocation data missing');
+                });
+        }
+
+		function navigateToActivateMessage() {
+			var customerEmail = "you";
+			if (this.isActivationMailSent) {
+				customerEmail = window.localStorage.getItem(recreateUserAcctKey);
+				window.localStorage.removeItem(recreateUserAcctKey);
+				window.location.href = `/pages/create-account-message?email=${customerEmail}`;
+			}
+		}
+
+		function saveRecreateAccountUserEmail() {
+			if (!this.isActivationMailSent) {
+				var registerEmailElement = document.getElementById("registerEmail");
+				var customerEmail = "you";
+				if (registerEmailElement && registerEmailElement.value) {
+					customerEmail = registerEmailElement.value;
+					window.ozLocalStorageSet(recreateUserAcctKey, customerEmail);
+				}
+			}
+		}
+
+		const createAccBtnElement = document.getElementById(createAcctBtnId);
+
+		if (createAccBtnElement) {
+			createAccBtnElement.addEventListener('click', function() {
+				saveRecreateAccountUserEmail();
+			});
+		}
+
+		navigateToActivateMessage();
+		geoTargeting();
+	})();
+
+	window.addEventListener("DOMContentLoaded", function() {
+
+		{% if settings.profile_onboarding_callouts_on %}
+			{% if customer.id == null %}
+				window.SDG.SignupValueProposition.init({
+					placement: {
+						position: 'afterend',
+						referenceSelector: '.oz-section__promo-code',
+					}
+				});
+			{% endif %}
+		{% endif %}
+
+	});
+
+	window.onload = function() {
+		var registerPassword = 'registerPassword';
+		window.addPasswordVisibilityListeners(registerPassword);
+	}
+</script>
+{%  endif %}

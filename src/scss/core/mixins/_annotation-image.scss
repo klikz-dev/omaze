@@ -1,0 +1,39 @@
+/// Annotation Image
+/// Applies an image against an elements wrapper
+/// @param {String} $contentEl - Select for the content element
+/// @param {String} $url - background image url
+/// @param {Number} $width - background image width
+/// @param {Number} $height - background image height
+/// @param {Number} $top - background image position top
+/// @param {Number} $left - background image position left
+
+@mixin annotation-image($contentEl, $url, $width, $height, $top, $left) {
+
+    position: relative;
+    text-align: center;
+
+    padding: $height 0;
+
+    > #{$contentEl} {
+        padding: 0;
+        margin: 0 auto;
+        display: inline-block;
+        position: relative;
+
+        &:before {
+            display: block;
+            content: '';
+
+            position: absolute;
+            top: $top;
+            left: $left;
+            width: $width;
+            height: $height;
+
+            background-image: url($url);
+            background-repeat: no-repeat;
+            background-size: auto 100%;
+            background-position: 0px 0px;
+        }
+    }
+}

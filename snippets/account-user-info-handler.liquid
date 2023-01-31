@@ -1,0 +1,39 @@
+<script>
+    const PASSWORD_RESET_CLASS = '.reset-password-card__value__action';
+    const PASSWORD_RESET_EL = document.querySelector(PASSWORD_RESET_CLASS);
+
+    // TODO: Is there a better way to achieve this without this api call?
+    // Can't figure out another to trigger the email
+    function resetPassword() {
+        const PASSWORD_RECOVER_URL = '/account/recover';
+        const SUCCESS = 'success';
+        const FAILURE = 'failure';
+        const MESSAGE_TYPE_KEY = 'msgType';
+        const email = '{{ customer.email }}';
+
+        return fetch(PASSWORD_RECOVER_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email })
+        }).then(response => response);
+    }
+
+    PASSWORD_RESET_EL.addEventListener('click', () => {
+        resetPassword()
+            .then(response => {
+                if (response.ok && response.status === 200) {
+                    window.ozLocalStorageSet(MESSAGE_TYPE_KEY, SUCCESS);
+                    window.location.reload();
+                } else {
+                    window.ozLocalStorageSet(MESSAGE_TYPE_KEY, FAILURE);
+                    window.location.reload();
+                }
+            })
+            .catch(err => {
+                window.ozLocalStorageSet(MESSAGE_TYPE_KEY, FAILURE);
+                window.location.reload();
+            });
+    });
+</script>

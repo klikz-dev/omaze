@@ -1,0 +1,64 @@
+/*
+////////////////////////////////////////////////////////////////////////////////
+--------------------------------------------------------------------------------
+Grid layout
+--------------------------------------------------------------------------------
+////////////////////////////////////////////////////////////////////////////////
+*/
+.page {
+	&__container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin: rem(24) auto rem(16);
+		padding: 0 rem(16);
+		max-width: rem(360);
+		box-sizing: border-box;
+
+		@include apply-to(tablet) {
+			max-width: rem(704);
+		}
+
+		@include apply-to(desktop) {
+			max-width: rem(1152);
+			padding: 0 rem(24);
+		}
+	}
+
+	&__header {
+		text-align: center;
+	}
+	&__content {
+		p, span {
+			line-height: rem(32);
+			font-size: rem(20);
+		}
+	}
+}
+
+.page__title {
+    text-align: center;
+}
+
+//rebrand
+body.rebrand {
+    .page {
+        &__container {
+            margin: 43px auto;
+            padding: 0;
+            max-width: 1440px;
+
+            @include apply-to(phone) {
+                margin: 27px auto;
+            }
+        }
+
+        &__title {
+            text-align: left;
+        }
+    }
+
+    .optin-container{
+        margin-top:0;
+    }
+}

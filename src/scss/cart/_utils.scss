@@ -1,0 +1,48 @@
+.secondary-color {
+    color: $secondary-color;
+}
+.primary-color {
+    color: $primary-color;
+}
+.display-flex {
+    display: flex;
+}
+
+.centered-v {
+    align-items: center;
+}
+
+.centered-h {
+    justify-content: center;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+.to-upper {
+    text-transform: uppercase;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.sm-font {
+    font-size: 12px;
+}
+
+.pb-40 {
+    padding-bottom: 40px
+}
+
+.ital {
+    font-style: italic;
+}

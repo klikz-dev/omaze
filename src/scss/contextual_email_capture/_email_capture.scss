@@ -1,0 +1,143 @@
+.oz-contextual-email-capture.ozc-modal__mask {
+    align-items: start;
+    padding-top: rem(70);
+}
+.oz-contextual-email-capture {
+    .ozc-modal {
+        width: rem(328);
+        max-height: 100%;
+        @include apply-to(tablet) {
+            width: rem(500);
+        }
+
+        @include apply-to(desktop) {
+            width: rem(540);
+        }
+    }
+    .email_capture_container {
+        padding: 0 rem(24);
+
+        @include apply-to(tablet) {
+            padding: 0 rem(86);
+        }
+
+        @include apply-to(desktop) {
+            padding: 0 rem(94);
+        }
+
+        &__title {
+            font-family: $primary-font;
+            font-size: rem(20);
+            font-weight: 500;
+            text-align: center;
+            color: $black-1;
+            margin-bottom: rem(8);
+        }
+        &__message {
+            font-family: $secondary-font;
+            font-size: rem(24);
+            font-weight: 900;
+            text-align: center;
+            color: $black-1;
+            margin-top: 0;
+            margin-bottom: rem(24);
+        }
+        &__image {
+            margin-bottom: rem(24);
+
+            .ozc-image {
+                width: rem(156);
+                height: auto;
+                margin: auto;
+
+                @include apply-to(desktop) {
+                    width: rem(164);
+                    height: rem(164);
+                }
+            }
+        }
+        &__legal {
+            font-family: $primary-font;
+            font-style: italic;
+            font-size: rem(12);
+            font-weight: 500;
+            text-align: center;
+            color: $gray-6;
+            display: block;
+            margin-bottom: rem(24);
+            line-height: rem(14);
+
+            @include apply-to(tablet) {
+                margin-bottom: rem(32);
+            }
+
+            @include apply-to(desktop) {
+                margin-bottom: rem(32);
+            }
+        }
+        &__legal.link {
+            text-decoration: underline;
+        }
+        &__legal.link:hover {
+            cursor: pointer;
+        }
+
+        input {
+            box-sizing: border-box;
+        }
+
+        .oz-field.error {
+            .oz-field__container {
+                border-color: $red-1;
+            }
+            label {
+                color: $red-1;
+            }
+            .email-error-message {
+                display: block;
+            }
+        }
+
+        .email-error-message {
+            display: none;
+            text-align: left;
+            padding-left: rem(14);
+            padding-top: rem(10);
+            font-size: rem(14);
+            color: $red-1;
+        }
+        .email.oz-field {
+            margin-bottom: rem(16);
+        }
+
+        .button {
+            margin-bottom: rem(13);
+
+            @include apply-to(tablet) {
+                margin-bottom: rem(24);
+            }
+
+            @include apply-to(desktop) {
+                margin-bottom: rem(24);
+            }
+        }
+
+        .button-loader.cec{
+            width: 25%;
+            display: block;
+            margin: auto;
+            @include apply-to(desktop) {
+                width: 40%;
+            }
+        }
+
+        .btn-loading {
+            background-color: rgba(234, 39, 134, 0.7);
+        }
+    }
+}
+
+
+.hidden {
+    display: none !important;
+}

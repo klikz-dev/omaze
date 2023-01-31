@@ -1,0 +1,171 @@
+<div class="main__footer">
+    <div class="footer__logo">
+        <a href="/">
+            <img class="checkout-footer__logo" src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }}" />
+        </a>
+
+        <div class="footer__sub-colophon">
+            Copyright &copy; {{ 'now' | date: '%Y' }}, Omaze, Inc.
+            All Rights Reserved.
+        </div>
+    </div>
+
+    <div class="footer__links">
+        <a href="/pages/official-rules">Official Rules</a>
+        <a href="/pages/terms-of-use">Terms of Use</a>
+        <a href="/pages/privacy-policy">Privacy Policy</a>
+    </div>
+</div>
+
+{% if settings.rebrandFooter_active == true %}
+<div class="thankyou__footer">
+    <div class="wrap">
+        <div class="thankyou__footer__inner">
+            <div class="thankyou__footer__row">
+                <div class="thankyou__footer__col lg-col-6">
+                    <div id="checkout_optin"></div>
+                    <div class="footer__social-wrapper">
+                        <h2>JOIN THE COMMUNITY</h2>
+                        <ul class="footer__social">
+                            <li class="footer__social-icon">
+                                <a
+                                    href="https://facebook.com/omaze/"
+                                    class="footer__social-icon-btn js-footer__social-icon-btn"
+                                    data-social-link-title="facebook">
+                                    <i class="icon icon--facebook-new"></i>
+                                </a>
+                            </li>
+                            <li class="footer__social-icon">
+                                <a
+                                    href="https://instagram.com/omaze/"
+                                    class="footer__social-icon-btn js-footer__social-icon-btn"
+                                    data-social-link-title="instagram">
+                                    <i class="icon icon--instagram-new"></i>
+                                </a>
+                            </li>
+                            <li class="footer__social-icon">
+                                <a
+                                    href="https://www.youtube.com/user/teamomaze/"
+                                    class="footer__social-icon-btn js-footer__social-icon-btn"
+                                    data-social-link-title="youtube">
+                                    <i class="icon icon--youtube-new"></i>
+                                </a>
+                            </li>
+                            <li class="footer__social-icon">
+                                <a
+                                    href="https://twitter.com/omaze/"
+                                    class="footer__social-icon-btn js-footer__social-icon-btn"
+                                    data-social-link-title="twitter">
+                                    <i class="icon icon--twitter-new"></i>
+                                </a>
+                            </li>
+                            <li class="footer__social-icon">
+                                <a
+                                    href="https://www.tiktok.com/@omazeofficial"
+                                    class="footer__social-icon-btn js-footer__social-icon-btn"
+                                    data-social-link-title="tiktok">
+                                    <i class="icon icon--tiktok-new"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thankyou__footer__col lg-col-2">
+                    <div class="footer__nav__list-wrapper">
+                        <h3>PRIZES</h3>
+                        <ul class="footer__nav__list">
+                            <li class="footer__nav__item">
+                                <a href="/collections/cars/">Cars</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/collections/celebrity/">Celebrity</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/collections/cash-prizes/">Financial Freedom</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/collections/houses/">Houses</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/collections/travel/">Travel</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/collections/experiences/">See All Prizes</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thankyou__footer__col lg-col-2">
+                    <div class="footer__nav__list-wrapper list-about">
+                        <h3>ABOUT</h3>
+                        <ul class="footer__nav__list">
+                            <li class="footer__nav__item">
+                                <a href="/pages/about-us/">About Us</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/collections/winners/">Winners</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="https://impact.omaze.com/">Impact</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="https://boards.greenhouse.io/omaze/">Careers</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thankyou__footer__col lg-col-2">
+                    <div class="footer__nav__list-wrapper">
+                        <h3>SUPPORT</h3>
+                        <ul class="footer__nav__list">
+                            <li class="footer__nav__item">
+                                <a href="/pages/rules/">Official Rules</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/pages/privacy">Privacy Policy</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/pages/terms">Terms of Use</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/pages/disclosures">State Disclosures</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="https://support.omaze.com/hc/en-us">Help Center</a>
+                            </li>
+                            <li class="footer__nav__item">
+                                <a href="/pages/do-not-sell-my-personal-information">Do Not Sell My Personal Information</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="thankyou__footer__col lg-col-6">
+                    <div class="footer__contact">
+                        <h3>Need help?</h3>
+                        <p>Email our support team at</p>
+                        <a class="text-link" href="mailto:weloveyou@omaze.com">weloveyou@omaze.com</a>
+                    </div>
+                </div>
+                <div class="thankyou__footer__col lg-col-4">
+                    <div class="footer__logo-wrapper">
+                        <a href="/">
+                            <img class="footer__logo" src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }}" />
+                        </a>
+    
+                        <div class="footer__sub-colophon">
+                            <span>
+                                Copyright &copy; {{ 'now' | date: '%Y' }}, Omaze, Inc. All Rights Reserved.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="thankyou__footer__col lg-col-2">
+                    <div class="footer__accredited-business-wrapper">
+                        <img class="footer__accredited-business" src="{{ 'accredited-business.png' | asset_url }}" alt="Accredited Business" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

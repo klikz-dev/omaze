@@ -1,0 +1,49 @@
+<header id="hdr" class="hdr{% if settings.promo_banner%} hdr--promo{% endif %}">
+	{% if settings.promo_enable %}
+	<section class="promo">
+		<a href="{{ settings.page_url }}" class="promo__link">
+			<img class="promo__image promo__image--desktop lazyload" data-srcset="{{ settings.promo_background | img_url: "767x"}} 1x, {{ settings.promo_background | img_url: 'master' }} 2x" alt="Banner">
+			<img class="promo__image promo__image--mobile lazyload" data-srcset="{{ settings.promo_background_mobile | img_url: "767x"}} 1x, {{ settings.promo_background_mobile | img_url: 'master' }} 2x" alt="Banner">
+			<h3 class="promo__text promo__text--desktop">{{ settings.promo_text }}</h3>
+			<h3 class="promo__text promo__text--mobile">{{ settings.promo_text_mobile }}</h3>
+		</a>
+	</section>
+	{% endif %}
+	<div class="oz-nav js-oz-nav">
+        <div class="hdr__logo-mobile mobile-only">
+            {% include 'header-logo' %}
+        </div>
+		<div id="hamburgerNav" class="phone hamburger js-hamburger">
+            <img src="{{ 'hamburger.svg' | asset_url }}" alt="Menu" />
+		</div>
+		<div class="hdr__con con">
+			<div class="hdr__logo">
+                {% include 'header-logo' %}
+            </div>
+		</div>
+        <div class="hdr__actions-container">
+            <div class="nav__user mobile-only">
+                {% capture user_icon %}
+                    <img class="nav__user-icon" src="{{ 'user.svg' | asset_url }}" alt="Go to My Account" />
+                {% endcapture %}
+
+                {% if customer %}
+                    <div id="oz_nav_btn_account_menu_toggle">
+                        {{ user_icon }}
+                    </div>
+
+                    {% include 'nav-account-menu' %}
+                {% else %}
+                    <a href="/account/login" class="js-nav-btn--login js-nav-btn--login-analytics">
+                        {{ user_icon }}
+                    </a>
+                {% endif %}
+            </div>
+            <div class="nav__mobile-cart mobile-only">
+                {% include 'cart-icon' %}
+            </div>
+        </div>
+
+        {% include 'nav' %}
+	</div>
+</header>

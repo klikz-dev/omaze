@@ -1,0 +1,59 @@
+<script>
+// SCRIPT TO HANDLE REDIRECTION AFTER USER SIGNUP / PASSWORD RESET / ACCOUNT ACTIVATION
+
+var loginPathName = '/account/login';
+var registerPathName = '/account/register';
+var activatePathName = '/account/activate';
+var resetPathName = '/account/reset';
+var challengePathName = '/challenge';
+var recoverMessagePathName = '/pages/recover-account-message';
+
+var currentPathName = window.location.pathname;
+var customerEmail = '{{ customer.email }}';
+var returnUrl = window.localStorage.getItem('returnUrl') || '/';
+
+var authenticationPathNameList = [
+	loginPathName,
+	registerPathName,
+	challengePathName,
+	activatePathName,
+	resetPathName,
+	recoverMessagePathName
+];
+var pathsBlacklistedForRedirect = ["/account/invalid_token"];
+
+const IS_AUTH_PATH = authenticationPathNameList.some((path) => {
+	return currentPathName.includes(path);
+});
+
+if (IS_AUTH_PATH) {
+    if (!customerEmail || (customerEmail && currentPathName.includes(resetPathName))) {
+	    window.ozLocalStorageSet("authenticationPathName", currentPathName);
+    } else {
+		window.location.replace(returnUrl);
+	}
+} else if (!pathsBlacklistedForRedirect.includes(currentPathName)) {
+	window.ozLocalStorageSet("returnUrl", currentPathName);
+	window.ozLocalStorageSet("authenticationPathName", "");
+}
+
+// Attach return url link if page loaded is register / challenge page
+if (returnUrl) {
+	if (currentPathName === registerPathName) {
+		var returnToInput = document.getElementById("returnToInput");
+		returnToInput.value = "/account/register";
+	}
+	if (currentPathName === challengePathName) {
+		var returnInput = document.createElement("input");
+		returnInput.type = "hidden";
+		returnInput.name = "return_to";
+		returnInput.value = "/account/register";
+		var captchaForm = document.getElementsByTagName("form")[0];
+		captchaForm.appendChild(returnInput);
+	}
+	if (currentPathName.includes(resetPathName)) {
+		var returnToInput = document.getElementById("resetPasswordRedirect");
+		returnToInput.value = returnUrl;
+	}
+}
+</script>

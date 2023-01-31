@@ -1,0 +1,20 @@
+.container {
+    @apply mt-3 flex flex-col text-center items-center w-screen;
+}
+
+@screen lg {
+    .container {
+        @apply mt-5;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .container {
+    margin-top: 40px;
+}
+
+@screen lg {
+    :global(.rebrand) .container {
+        margin-top: 84px;
+    }
+}

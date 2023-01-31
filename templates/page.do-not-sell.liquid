@@ -1,0 +1,159 @@
+<section
+    id="page_{{ page.handle | replace : '-','_' }}"
+    class="page page--{{ page.handle }}"
+>
+    <div class="page__container">
+        <div class="page__header">
+            <h1 class="page__title">{{ page.title }}</h1>
+        </div>
+        <div class="page__rte rte">{{ page.content }}</div>
+        <div class="do_not_sell-form">
+            <form id="doNotSellForm" name="doNotSellForm">
+                <div class="do_not_sell-form-row">
+                    <div class="oz-field">
+                        <div class="oz-field__container">
+                            <input
+                                id="name"
+                                class="input"
+                                type="text"
+                                name="name"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                required
+                            />
+                            <label for="name">
+                                Enter Name
+                            </label>
+                        </div>
+                    </div>
+                    <div class="oz-field">
+                        <div id="email-container" class="oz-field__container">
+                            <input
+                                id="email"
+                                class="input"
+                                type="email"
+                                name="email"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                required
+                            />
+                            <label for="email">
+                                Enter Email Address
+                            </label>
+                        </div>
+                        <label id="email-error" class="error" style="display: none;">
+                            Please enter a valid email address
+                        </label>
+                    </div>
+                </div>
+                <div class="do_not_sell-form-row">
+                    <div class="oz-field">
+                        <div class="oz-field__container">
+                            <input
+                                id="zip_code"
+                                class="input"
+                                type="text"
+                                name="zip"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                required
+                            />
+                            <label for="zip">
+                                Enter Zip Code
+                            </label>
+                        </div>
+                    </div>
+                    <div class="oz-field">
+                        <div class="oz-field__container select has-value">
+                            <select
+                                id="state"
+                                class="input"
+                                name="state"
+                                autocorrect="off"
+                                autocapitalize="off"
+                                required
+                            >
+                                <option label="Alabama" value="Alabama">Alabama</option>
+                                <option label="Alaska" value="Alaska">Alaska</option>
+                                <option label="American Samoa" value="American Samoa">American Samoa</option>
+                                <option label="Arizona" value="Arizona">Arizona</option>
+                                <option label="Arkansas" value="Arkansas">Arkansas</option>
+                                <option label="Armed Forces Americas" value="Armed Forces Americas">Armed Forces Americas</option>
+                                <option label="Armed Forces Europe" value="Armed Forces Europe">Armed Forces Europe</option>
+                                <option label="Armed Forces Pacific" value="Armed Forces Pacific">Armed Forces Pacific</option>
+                                <option selected="selected" label="California" value="California">California</option>
+                                <option label="Colorado" value="Colorado">Colorado</option>
+                                <option label="Connecticut" value="Connecticut">Connecticut</option>
+                                <option label="Delaware" value="Delaware">Delaware</option>
+                                <option label="District of Columbia" value="District of Columbia">District of Columbia</option>
+                                <option label="Federated States of Micronesia" value="Federated States of Micronesia">Federated States of Micronesia</option>
+                                <option label="Florida" value="Florida">Florida</option>
+                                <option label="Georgia" value="Georgia">Georgia</option>
+                                <option label="Guam" value="Guam">Guam</option>
+                                <option label="Hawaii" value="Hawaii">Hawaii</option>
+                                <option label="Idaho" value="Idaho">Idaho</option>
+                                <option label="Illinois" value="Illinois">Illinois</option>
+                                <option label="Indiana" value="Indiana">Indiana</option>
+                                <option label="Iowa" value="Iowa">Iowa</option>
+                                <option label="Kansas" value="Kansas">Kansas</option>
+                                <option label="Kentucky" value="Kentucky">Kentucky</option>
+                                <option label="Louisiana" value="Louisiana">Louisiana</option>
+                                <option label="Maine" value="Maine">Maine</option>
+                                <option label="Marshall Islands" value="Marshall Islands">Marshall Islands</option>
+                                <option label="Maryland" value="Maryland">Maryland</option>
+                                <option label="Massachusetts" value="Massachusetts">Massachusetts</option>
+                                <option label="Michigan" value="Michigan">Michigan</option>
+                                <option label="Minnesota" value="Minnesota">Minnesota</option>
+                                <option label="Mississippi" value="Mississippi">Mississippi</option>
+                                <option label="Missouri" value="Missouri">Missouri</option>
+                                <option label="Montana" value="Montana">Montana</option>
+                                <option label="Nebraska" value="Nebraska">Nebraska</option>
+                                <option label="Nevada" value="Nevada">Nevada</option>
+                                <option label="New Hampshire" value="New Hampshire">New Hampshire</option>
+                                <option label="New Jersey" value="New Jersey">New Jersey</option>
+                                <option label="New Mexico" value="New Mexico">New Mexico</option>
+                                <option label="New York" value="New York">New York</option>
+                                <option label="North Carolina" value="North Carolina">North Carolina</option>
+                                <option label="North Dakota" value="North Dakota">North Dakota</option>
+                                <option label="Northern Mariana Islands" value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                <option label="Ohio" value="Ohio">Ohio</option>
+                                <option label="Oklahoma" value="Oklahoma">Oklahoma</option>
+                                <option label="Oregon" value="Oregon">Oregon</option>
+                                <option label="Palau" value="Palau">Palau</option>
+                                <option label="Pennsylvania" value="Pennsylvania">Pennsylvania</option>
+                                <option label="Puerto Rico" value="Puerto Rico">Puerto Rico</option>
+                                <option label="Rhode Island" value="Rhode Island">Rhode Island</option>
+                                <option label="South Carolina" value="South Carolina">South Carolina</option>
+                                <option label="South Dakota" value="South Dakota">South Dakota</option>
+                                <option label="Tennessee" value="Tennessee">Tennessee</option>
+                                <option label="Texas" value="Texas">Texas</option>
+                                <option label="Utah" value="Utah">Utah</option>
+                                <option label="Vermont" value="Vermont">Vermont</option>
+                                <option label="Virgin Islands" value="Virgin Islands">Virgin Islands</option>
+                                <option label="Virginia" value="Virginia">Virginia</option>
+                                <option label="Washington" value="Washington">Washington</option>
+                                <option label="West Virginia" value="West Virginia">West Virginia</option>
+                                <option label="Wisconsin" value="Wisconsin">Wisconsin</option>
+                                <option label="Wyoming" value="Wyoming">Wyoming</option>
+                            </select>
+                            <label for="state">
+                                Enter State
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="do_not_sell-form-button">
+                    <div class="button">
+                        <button
+                            id="do_not_sell-submit-button"
+                            class="oz-btn oz-btn--block"
+                            type="submit"
+                        >
+                            <span class="btn__label" id="submit-text">Submit</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

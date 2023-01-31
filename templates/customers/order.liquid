@@ -1,0 +1,29 @@
+{% assign LEGACY_ORDER_PREFIX = "OL" %}
+<div class="order-summary-container">
+    <div class="full-width">
+        <div class="image-container">
+            <div class="nav-bar">
+                <a href="/account?view=orders">
+                    <span class="arrow">&lt;</span>
+                    <span class="text">{{ 'customer.order.return' | t }}</span>
+                </a>
+            </div>
+        </div>
+        <div class="content-container">
+            {% include 'account-transaction-details-card' %}
+            {% comment %}
+                this hides order list items for legacy orders which starts
+                with "OL-"
+            {% endcomment %}
+            {% assign stringsArray = order.name | upcase | split: '-' %}
+            {% if stringsArray[0] != LEGACY_ORDER_PREFIX %}
+                {% include 'account-order-details-card' %}
+            {% endif%}
+            {% if settings.member_profiles_on %}
+                {% include 'account-common-questions-card' %}
+            {% else %}
+                {% include 'account-helpful-link-card' %}
+            {% endif %}
+        </div>
+    </div>
+</div>

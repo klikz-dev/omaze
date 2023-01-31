@@ -1,0 +1,11 @@
+{% capture logo %}
+    <img src="{{ 'logo.svg' | asset_url }}" alt="{{ shop.name }}" />
+{% endcapture %}
+
+{% if template == 'index' %}
+    {{ logo }}
+{% else %}
+    <a {% if template != 'page.unavailable' %} href="/" {% endif %} class="hdr__logo-link">
+        {{ logo }}
+    </a>
+{% endif %}

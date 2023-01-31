@@ -1,0 +1,72 @@
+### OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.idea/
+
+### Node modules
+node_modules
+
+### Code coverage
+coverage
+
+### Local config files
+config.yml
+theme.lock
+
+### Theme Settings data store
+config/settings_data.json
+
+### Logs
+*.log
+
+### Build Artifacts
+build/*
+
+### Assets
+### (the assets directory is used by Shopify as '/public')
+###
+### the following are a list of built JS files (safe to ignore)
+assets/*.js
+assets/*.min.js
+assets/*.map
+assets/*.chunk*
+assets/*.ejs
+assets/*.graphql
+assets/HomepageApp-slick.*.woff
+assets/HomepageApp-slick.*.eot
+assets/HomepageApp-slick.*.ttf
+
+### the following are a list of built scss.liquid files (safe to ignore)
+assets/*.scss.liquid
+
+### the following are a list of built/copied svg files (safe to ignore)
+assets/*.svg
+
+### the following are a list of imgs files (safe to ignore)
+assets/*.png
+assets/*.jpg
+
+### Zipped theme for deployment to a new shop
+### (deprecated deployment process)
+omaze-theme.zip
+
+### Shopify Plugin Files
+templates/404.preSEOManager.liquid
+snippets/SEOManager-404.liquid
+snippets/SEOMetaManager.liquid
+snippets/shappify-bdl-load-bundle.liquid
+snippets/shappify-bdl-min-price.liquid
+snippets/shappify-bdl-no-select.liquid
+snippets/*App.liquid
+templates/search.SEOManagerProductMeta.liquid
+templates/search.SEOManagerTags.liquid
+
+### IDE
+.vscode
+
+.npmrc

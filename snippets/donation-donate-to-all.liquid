@@ -1,0 +1,40 @@
+<!-- NOTE: Only Supported use case is on a Collection Page -->
+<!-- REQUIRED: to set donationPricingOptions liquid variable before including this file -->
+<!-- REQUIRED: to set causeLogoUrls liquid variable before including this file -->
+<!-- REQUIRED: to set causeTitles liquid variable before including this file -->
+<!-- REQUIRED: to set count liquid variable before including this file -->
+{% assign pricingOptions = donationPricingOptions %}
+{% assign logoUrls = causeLogoUrls %}
+{% assign titles = causeTitles %}
+{% assign totalProducts = count %}
+{% capture index %}{% increment index %}{% endcapture %}
+
+<div class="oz-donation__donate-to-all">
+    <h3>
+        Make a donation to split evenly among these causes.
+    </h3>
+    <div class="oz-donation-donate-to-all__img">
+        {% for logoUrl in logoUrls %}
+            {% unless logoUrl == blank %}
+                {% assign title = titles[forloop.index] %}
+                <img src="{{ logoUrl | product_img_url: 'medium'}}" alt="{{ title }} logo"/>
+            {% endunless %}
+        {% endfor %}
+    </div>
+    <h4>Select donation amount</h4>
+    <div class="oz-donation-donate-to-all__ctas">
+        {% for priceOption in pricingOptions %}
+            {% unless priceOption == blank %}
+                <button
+                    class="oz-donation-donate-to-all__cta oz-btn"
+                    data-donation-amount="{{ priceOption | divided_by: totalProducts }}"
+                    data-oa-id="donationDTAButton"
+                    data-oa-track="click"
+                    data-oa-details="ga_label:{% increment index %}"
+                >
+                    {{ priceOption | money_without_trailing_zeros }}
+                </button>
+            {% endunless %}
+        {% endfor %}
+    </div>
+</div>

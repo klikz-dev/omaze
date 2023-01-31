@@ -1,0 +1,212 @@
+/**
+ * Styles for text from cms text fields
+ */
+
+.oz-wysigyg {
+
+    ul {
+        list-style-position: outside;
+        list-style-type: initial;
+
+        li {
+            margin-left: 1em;
+        }
+    }
+
+    h1 {
+        font-size: rem(14);
+        font-family: $primary-font;
+		font-weight: $bold;
+        margin-bottom: 4px;
+
+        @include apply-to(tablet) {
+            font-size: rem(18);
+        }
+    }
+
+    p,
+	div {
+        font-size: rem(16);
+		margin: 0 0 rem(24.3);
+
+        @include apply-to(tablet) {
+            font-size: rem(18);
+        }
+    }
+
+    b,
+    strong {
+        font-weight: $bold;
+    }
+}
+
+.oz-wysigyg-text {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $secondary-font;
+        font-weight: $bold;
+        color: $black-2;
+    }
+
+    h1 {
+        font-size: 4.5rem;
+        line-height: 1.11;
+        letter-spacing: 0.4px;
+
+        @include apply-to(desktop) {
+            font-size: 6rem;
+            line-height: 1.08;
+            letter-spacing: 0.4px;
+        }
+    }
+
+    h2 {
+        font-size: 3rem;
+        line-height: 1.17;
+        letter-spacing: 0.4px;
+
+        @include apply-to(desktop) {
+            font-size: 4.5rem;
+            line-height: 1.11;
+            letter-spacing: 0.4px;
+        }
+    }
+
+    h3 {
+        font-size: 2rem;
+        line-height: 1.25;
+        letter-spacing: 0.4px;
+
+        @include apply-to(desktop) {
+            font-size: 3rem;
+            line-height: 1.17;
+            letter-spacing: 0.4px;
+        }
+    }
+
+    h4 {
+        font-size: 1.5rem;
+        line-height: 1.33;
+        letter-spacing: 0.18px;
+
+        @include apply-to(desktop) {
+            font-size: 2rem;
+            line-height: 1.25;
+            letter-spacing: 0.4px;
+        }
+    }
+
+    h5 {
+        font-size: 1.125rem;
+        line-height: 1.44;
+        letter-spacing: 0.32px;
+
+        @include apply-to(desktop) {
+            font-size: 1.5rem;
+            line-height: 1.33;
+            letter-spacing: 0.18px;
+        }
+    }
+
+    h6 {
+        font-size: 1.125rem;
+        line-height: 1.44;
+        letter-spacing: 0.32px;
+    }
+
+    p {
+        font-family: $primary-font;
+        color: $black-2;
+
+        font-size: 1rem;
+        line-height: 1.5;
+        letter-spacing: 0.32px;
+
+        font-weight: normal;
+        font-style: normal;
+
+        @include apply-to(desktop) {
+            font-size: 1.125rem;
+            line-height: 1.44;
+        }
+    }
+
+    blockquote {
+        font-family: $primary-font;
+        color: $black-2;
+
+        font-size: 0.875rem;
+        line-height: 1.29;
+        letter-spacing: 0.4px;
+
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    a {
+        color: $pink-6;
+        text-decoration: underline;
+        font-weight: 700;
+    }
+}
+
+//rebrand
+$animate: all 0.5s ease-in-out;
+
+body.rebrand {
+    .oz-wysigyg-text {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: $primary-font-rebrand;
+            color: $new-grey;
+        }
+
+        h4 {
+            font-size: rem(24);
+            line-height: 1.5;
+
+            @include apply-to(desktop) {
+                font-size: rem(30);
+            }
+        }
+
+        a {
+            display: inline-block;
+            color: $new-grey;
+            font-size: rem(18);
+            line-height: 1.5;
+            text-decoration: unset;
+            padding-bottom: 2px;
+            border-bottom: 4px solid $yellow-3;
+            position: relative;
+
+            &:before {
+                content: "";
+                position: absolute;
+                bottom: -4px;
+                width: 0px;
+                height: 4px;
+                margin: 5px 0 0;
+                transition: $animate;
+                opacity: 0;
+                background-color: $yellow-3;
+            }
+
+            &:hover {
+                border-color: transparent;
+                &:before {
+                    width: 100%;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

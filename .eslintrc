@@ -1,0 +1,50 @@
+// https://eslint.org/docs/user-guide/configuring
+{
+    "root": true,
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true
+    },
+    "extends": ["eslint:recommended"],
+
+    "rules": {
+        "object-shorthand": ["error", "consistent"],
+        "comma-dangle": ["error", "always-multiline"],
+        "no-console": "warn",
+        "quotes": ["error", "single"],
+        "object-property-newline": [
+            "error",
+            { "allowAllPropertiesOnSameLine": false }
+        ]
+    },
+    "globals": {
+        "_": true,
+        "$script": true,
+        "accountAddresses": true,
+        "accountCountryOptionTags": true,
+        "accountOrders": true,
+        "accountUrl": true,
+        "assetUrl": true,
+        "bagItems": true,
+        "BIS": true,
+        "customerEmail": true,
+        "customerName": true,
+        "define": true,
+        "FB": true,
+        "collectionName": true,
+        "fileUrl": true,
+        "homeFundraisers": true,
+        "imageJson": true,
+        "isPaginated": true,
+        "jQuery": true,
+        "pageHandle": true,
+        "path": true,
+        "productJson": true,
+        "SDG": true,
+        "Shopify": true,
+        "IntelliSuggest": true,
+        "ssId": true
+    }
+}

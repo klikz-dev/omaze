@@ -1,0 +1,17 @@
+import { createEmptyMock, IMockedComponent } from '@omaze/test';
+import React, { FunctionComponent, ReactElement } from 'react';
+
+const { {% componentName %}: Original{% componentName %} }: any = jest.requireActual('../{% componentName %}.component');
+const {% componentName %}Props: jest.MockedFunction<any> = jest.fn();
+
+export const {% componentName %}: IMockedComponent = (props: any): ReactElement => {
+    {% componentName %}Props(props);
+
+    return <Mocked{% componentName %} {...props} />;
+};
+
+{% componentName %}.displayName = Original{% componentName %}.displayName;
+
+{% componentName %}.testingProps = {% componentName %}Props;
+
+export const Mocked{% componentName %}: FunctionComponent = createEmptyMock(Original{% componentName %});

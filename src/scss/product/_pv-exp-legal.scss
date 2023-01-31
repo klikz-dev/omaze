@@ -1,0 +1,215 @@
+/**
+ * exp legal
+ */
+
+.exp-legal {
+    position: relative;
+    overflow: hidden;
+    display: block;
+
+    summary {
+        list-style: none;
+
+        @include apply-to(desktop) {
+            cursor: pointer;
+        }
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+	// .exp-legal .oz-section-title
+    .oz-section-title {
+        font-size: rem(16);
+        margin: 0 0 rem(16);
+        position: relative;
+
+        @include apply-to(tablet) {
+            font-size: rem(30);
+			margin: 0 0 rem(30);
+        }
+    }
+
+    details > summary >.oz-section-title::after {
+        content: url(asset('open-icon-white.svg'));
+        position: absolute;
+        margin-left: 10px;
+        top: 16px;
+        transition: transform 0.3s ease;
+
+        @include apply-to(desktop) {
+            content: url(asset('open-icon-black.svg'));
+            margin-left: 20px;
+            top: -1px
+        }
+    }
+
+    details[open] > summary > .oz-section-title::after {
+        transform: rotate(45deg);
+    }
+
+	// .exp-legal__message
+    &__message {
+        font-size: rem(16);
+        margin-top: rem(10);
+    }
+
+	// .exp-legal__legal-content-wrapper
+    &__legal-content-wrapper {
+        margin: $VERTICAL_SPACE;
+        display: block;
+        position: relative;
+        overflow: hidden;
+
+        @include apply-to(desktop) {
+            margin: $VERTICAL_SPACE $HORIZ_SPACE;
+        }
+    }
+
+	// .exp-legal__legal-content
+    &__legal-content {
+        padding-bottom: rem(20);
+
+        & > h5 {
+            font-size: rem(16);
+            font-weight: $bold;
+            margin: 0;
+        }
+
+        & > p {
+            margin-bottom: rem(10);
+            line-height: 1.2;
+            font-size: rem(16);
+        }
+
+        a {
+			color: $pink-6;
+			text-decoration: underline;
+			&:active,
+			&:focus,
+			&:hover,
+			&:visited {
+				color: $pink-1;
+			}
+        }
+
+        b,
+        strong {
+            font-weight: $bold;
+        }
+
+        ul {
+            list-style-position: outside;
+            list-style-type: initial;
+
+            li {
+                margin-left: rem(18);
+            }
+        }
+    }
+
+	// .exp-legal__btn
+    &__btn {
+        display: table;
+        font-size: rem(16);
+        margin: 0 auto rem(50) 0;
+    }
+
+	// .exp-legal__toggle-btn
+    &__toggle-btn {
+        display: none;
+        z-index: 2;
+        cursor: pointer;
+        text-decoration: underline;
+        color: #555;
+        position: absolute;
+        bottom: 0;
+        right: 5%;
+    }
+
+	// .exp-legal__overlay
+    &__overlay {
+		background: linear-gradient(to top, $white 0, $white 20%, rgba(255, 255, 255, 0) 100%);
+        z-index: 1;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: rem(100);
+    }
+}
+
+// rebrand css
+body.rebrand {
+    .exp-legal {
+        .oz-section-title {
+            padding: 0 rem(80);
+            text-align: left;
+            margin-bottom: 24px;
+            color: $new-grey;
+            font-family: $primary-font-rebrand;
+            font-size: rem(36);
+            line-height: 1.5;
+            letter-spacing: 0.015rem;
+            font-weight: 700;
+            text-transform: lowercase;
+
+            &::first-letter {
+                text-transform: capitalize;
+            }
+
+            @include apply-to(phone) {
+                padding: 14.5px 24px;
+                background-color: $new-navy-50;
+                font-size: rem(18);
+            }
+        }
+
+        details > summary >.oz-section-title {
+            @include apply-to(tablet) {
+                text-align: center;
+            }
+
+            &::after {
+                content: '';
+                width: 16px;
+                height: 16px;
+                top: 21px;
+                background-size: 24px;
+                background-image: url(asset('open-icon-black.svg'));
+                background-repeat: no-repeat;
+                background-size: contain;
+                margin-left: 8.5px;
+
+                @include apply-to(tablet) {
+                    width: 24px;
+                    height: 24px;
+                    top: 18px;
+                    margin-left: 15px;
+                }
+            }
+        }
+
+        .exp-legal__legal-content-wrapper {
+            margin: rem(24) rem(80) rem(28);
+
+            @include apply-to(phone) {
+                margin: rem(24) rem(24) rem(0);
+            }
+
+            p {
+                font-size: rem(14);
+            }
+        }
+    }
+
+    .optin-container {
+        display: none;
+    }
+
+    .phone-only.exp-donate-button-wrapper--secondary {
+        display: none;
+    }
+}

@@ -1,0 +1,44 @@
+<aside id="lotteryModal" class="modal js-modal">
+	<div class="modal__inner oz-lottery-modal ">
+		<div class="oz-lottery-modal__header">
+			<span class="oz-lottery-spinner-informational__close-button">
+				<span class="js-modal-close">
+					<img class="oz-lottery-spinner-informational__close-img" src="{{ 'close-icon.png' | asset_img_url }}" alt="close">
+				</span>
+			</span>
+
+			<div class="oz-lottery-spinner-informational__header">
+				<h1>{{ settings.lottery_modal_title }}</h1>
+			</div>
+		</div>
+		<div class="oz-lottery-modal__content">
+			<div class="oz-lottery-spinner-informational__content">
+				<div class="oz-informational-content__wrapper">
+					<div class="oz-informational-content__wheel">
+						<img data-src="{{ settings.lottery_modal_img | img_url: '500x' }}" class="lazyload">
+					</div>
+
+					<div class="oz-informational-content__copy">
+						<p>{{ settings.lottery_modal_desc }}</p>
+					</div>
+
+					<div class="oz-informational-content__call-to-action">
+						<span class="oz-btn oz-btn--cta js-modal-close">
+							{{ settings.lottery_modal_btn }}
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="oz-lottery-modal__footer">
+			<oz-lottery-modal-footer>
+				<div class="oz-lottery-spinner-informational__footer">
+					<a target="_blank" href="{{ settings.lottery_modal_url }}">
+						<p>{{ settings.lottery_modal_link }}</p>
+					</a>
+				</div>
+			</oz-lottery-modal-footer>
+		</div>
+	</div>
+</aside>
+<div id="lotteryModalOverlay" class="oz-lottery-modal__overlay modal-overlay"></div>

@@ -1,0 +1,81 @@
+{% comment %}
+  "order" will be defined on the order status page. Instances of it can also be found within customer.orders:
+  https://help.shopify.com/en/themes/liquid/objects/order
+
+  It cannot be passed through the JSON filter due to a circular reference. Each order object contains a customer object, which contains an order object, etc.
+  For this reason, we exclude the "customer" attribute entirely.
+  If an order object is present on the page, then a customer object should also be present separately, so nesting it here is redundant.
+  See Shopify's docs for more detail: https://help.shopify.com/en/themes/liquid/objects/customer
+{% endcomment %}
+
+{
+  "attributes": {{ order.attributes | json }},
+  "billing_address": {{ order.billing_address | json }},
+  "cancelled": {{ order.cancelled | json }},
+  "cancelled_at": {{ order.cancelled_at | json }},
+  "cancel_reason": {{ order.cancel_reason | json }},
+  "cancel_reason_label": {{ order.cancel_reason_label | json }},
+  "cart_level_discount_applications": {{ order.cart_level_discount_applications | json }},
+  "created_at": {{ order.created_at | json }},
+  "customer_url": {{ order.customer_url | json }},
+  "discount_applications": {{ order.discount_applications | json }},
+  "email": {{ order.email | json }},
+  "financial_status": {{ order.financial_status | json }},
+  "financial_status_label": {{ order.financial_status_label | json }},
+  "fulfillment_status": {{ order.fulfillment_status | json }},
+  "fulfillment_status_label": {{ order.fulfillment_status_label | json }},
+  "line_items": [
+    {% for line_item in order.line_items %}
+        {
+            "discount_allocations":{{ line_item.discount_allocations | json }},
+            "final_line_price":{{ line_item.final_line_price | json }},
+            "final_price":{{ line_item.final_price | json }},
+            "fulfillment":{{ line_item.fulfillment | json }},
+            "fulfillment_service": {{ line_item.fulfillment_service | json }},
+            "gift_card":{{ line_item.gift_card | json }},
+            "grams":{{ line_item.grams | json }},
+            "key":{{ line_item.key | json }},
+            "line_level_discount_allocations": {{ line_item.line_level_discount_allocations | json }},
+            "message":{{ line_item.message | json }},
+            "options_with_values":{{ line_item.options_with_values | json }},
+            "original_line_price": {{ line_item.original_line_price | json }},
+            "original_price":{{ line_item.original_price | json }},
+            "product":{{ line_item.product | json }},
+            "product_id":{{ line_item.product_id | json }},
+            "properties":{{ line_item.properties | json }},
+            "quantity":{{ line_item.quantity | json }},
+            "requires_shipping": {{ line_item.requires_shipping | json }},
+            "sku":{{ line_item.sku | json }},
+            "successfully_fulfilled_quantity": {{ line_item.successfully_fulfilled_quantity | json }},
+            "taxable":{{ line_item.taxable | json }},
+            "title":{{ line_item.title | json }},
+            "total_discount":{{ line_item.total_discount | json }},
+            "unit_price":{{ line_item.unit_price | json }},
+            "url":{{ line_item.url | json }},
+            "variant":{{ line_item.variant | json }},
+            "variant_id":{{ line_item.variant_id | json }},
+            "vendor":{{ line_item.vendor | json }},
+            "id":{{ line_item.id | json }}
+        },
+    {% endfor %}
+  ],
+  "line_items_subtotal_price": {{ order.line_items_subtotal_price | json }},
+  "location": {{ order.location | json }},
+  "name": {{ order.name | json }},
+  "note": {{ order.note | json }},
+  "order_number": {{ order.order_number | json }},
+  "order_status_url": {{ order.order_status_url | json }},
+  "phone": {{ order.phone | json }},
+  "shipping_address": {{ order.shipping_address | json }},
+  "shipping_methods": {{ order.shipping_methods | json }},
+  "shipping_price": {{ order.shipping_price | json }},
+  "subtotal_price": {{ order.subtotal_price | json }},
+  "tags": {{ order.tags | json }},
+  "tax_lines": {{ order.tax_lines | json }},
+  "tax_price": {{ order.tax_price | json }},
+  "total_discounts": {{ order.total_discounts | json }},
+  "total_net_amount": {{ order.total_net_amount | json }},
+  "total_price": {{ order.total_price | json }},
+  "total_refunded_amount": {{ order.total_refunded_amount | json }},
+  "transactions": {{ order.transactions | json }}
+}

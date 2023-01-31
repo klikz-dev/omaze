@@ -1,0 +1,45 @@
+<div id="gallery" class="pv-gallery">
+
+	<div class="oz-campaign-heading">
+		<img src="{{ meta.product.campaign_thumbnail | file_img_url }}">
+		<div class="oz-campaign-heading__content">
+			<div class="oz-celebrity-name">{{ meta.product.celebrity_name }}</div>
+			<h2>{{ product.title }}</h2>
+		</div>
+	</div>
+
+	<div class="oz-campaign-heading__price oz-centered hide-desktop">
+		{% if productStatus == 'active' %}
+	        {{ product.price | money }}
+		{% endif %}
+	</div>
+
+	<div id="photos" class="pv-gallery__items js-shop-photos">
+		{% for image in product.images %}
+			<div class="pv-gallery__item">
+				<div class="intrinsic-ratio intrinsic-ratio--product-shop">
+					<div class="intrinsic-ratio__fill intrinsic-ratio__fill--middle">
+						<img class="lazyload" data-sizes="auto" data-srcset="{% include 'c-responsive-image-url', responsive_img: image.src, namespace: 'product' %}" alt="{{ image.alt | escape }}" />
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	<div class="pv-gallery__thumbs js-shop-thumbs desktop-only">
+		{% for image in product.images %}
+			{% if forloop.index0 < 6 %}
+				<div class="pv-gallery__thumb js-thumb">
+					<div class="intrinsic-ratio intrinsic-ratio--product-shop">
+						<div class="intrinsic-ratio__fill intrinsic-ratio__fill--middle">
+							<img class="lazyload js-thumb-img" data-sizes="auto" data-srcset="{% include 'c-responsive-image-url', responsive_img: image.src, namespace: 'product' %}" alt="{{ image.alt | escape }}" />
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+
+	{% include 'product-info-tabs', view: 'desktop' %}
+
+</div>

@@ -1,0 +1,126 @@
+/**
+ * Banner Section
+ */
+
+.banner__intrinsic-ratio {
+	@include intrinsic-ratio-padding(1/1);
+
+	@include apply-to(tablet) {
+		@include intrinsic-ratio-padding(774.8/339);
+	}
+
+	// .banner__intrinsic-ratio--press
+	&--press {
+
+		@include apply-to(tablet) {
+			@include intrinsic-ratio-padding(2.392/1);
+		}
+	}
+
+	// .banner__intrinsic-ratio--about
+	&--about {
+		@include intrinsic-ratio-padding(1.785/1);
+
+		@include apply-to(tablet) {
+			@include intrinsic-ratio-padding(2.399/1);
+		}
+	}
+
+	// .banner__intrinsic-ratio--article
+	&--article {
+		@include intrinsic-ratio-padding(1.785/1);
+
+		@include apply-to(tablet) {
+			@include intrinsic-ratio-padding(1130/399);
+		}
+
+		@include apply-to(desktop) {
+			@include intrinsic-ratio-padding(2.786/1);
+			min-width: auto;
+		}
+	}
+
+	// .banner__intrinsic-ratio--winners
+	&--winners {
+		@include intrinsic-ratio-padding(1.754/1);
+		min-width: auto;
+
+		@include apply-to(tablet) {
+			@include intrinsic-ratio-padding(1.754/1);
+		}
+
+		@include apply-to(desktop) {
+			@include intrinsic-ratio-padding(3.076/1);
+		}
+
+		// .banner__intrinsic-ratio--winners-thumbnail
+		&-thumbnail {
+
+			@include apply-to(phone) {
+				padding-bottom: 0;
+			}
+
+			@include apply-to(tablet) {
+				padding-bottom: 0;
+			}
+
+			@include apply-to(desktop) {
+				padding-bottom: 0;
+			}
+		}
+	}
+
+	// .banner__intrinsic-ratio--works
+	&--works {
+
+		@include apply-to(tablet) {
+			@include intrinsic-ratio-padding(2.4/1);
+		}
+
+		// .banner__intrinsic-ratio--works-step
+		&-step {
+
+			@include apply-to(mobile) {
+				@include intrinsic-ratio-padding(1.6/1);
+			}
+
+			@include apply-to(tablet) {
+				@include intrinsic-ratio-padding(1.6/1);
+			}
+
+			@include apply-to(desktop) {
+				@include intrinsic-ratio-padding(1/1);
+			}
+
+			// .banner__intrinsic-ratio--works-step-desktop
+			&-desktop {
+
+				@include apply-to(desktop) {
+					position: absolute;
+					bottom: 0;
+				}
+			}
+		}
+
+		// .banner__intrinsic-ratio-works-how
+		&-how {
+
+			@include apply-to(mobile) {
+				@include intrinsic-ratio-padding(0.75/1);
+			}
+		}
+	}
+
+	// .banner__intrinsic-ratio--who
+	&--who {
+
+		@include apply-to(tablet) {
+			@include intrinsic-ratio-padding(2.6/1);
+		}
+	}
+
+	// .banner__intrinsic-ratio--sponsor
+	&--sponsor {
+		background-color: transparent;
+	}
+}

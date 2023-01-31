@@ -1,0 +1,14 @@
+<script>
+    function setPathNamesInLocalStorage () {
+        const OZ_STORAGE_KEY_PREVIOUS_PATH = 'OZ_PREVIOUS_PATH_NAME';
+        const OZ_STORAGE_KEY_CURRENT_PATH = 'OZ_CURRENT_PATH_NAME';
+
+        const currentPathBefore = window.localStorage.getItem(OZ_STORAGE_KEY_CURRENT_PATH) || "";
+        const currentPath = window.location.pathname;
+
+        window.ozLocalStorageSet(OZ_STORAGE_KEY_PREVIOUS_PATH, currentPathBefore);
+        window.ozLocalStorageSet(OZ_STORAGE_KEY_CURRENT_PATH, currentPath);
+    }
+
+    setPathNamesInLocalStorage();
+</script>

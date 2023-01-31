@@ -1,0 +1,88 @@
+/**
+ * legal pages template
+ */
+
+body.rebrand #main .template--legal-pages {
+    margin-left: 168px;
+    margin-right: 168px;
+
+    @include apply-to(phone) {
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+
+    h1,h2,h3,h4,h5,h6{
+        margin: 0;
+        font-family: $rebrand-primary-font;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin-bottom: 27px;
+        line-height: 50px;
+
+        @include apply-to(phone) {
+            font-size: 30px;
+            line-height: 36px;
+        }
+    }
+
+    h2,h1.page__title {
+        font-size: 30px;
+        margin-bottom: 11px;
+        line-height: 40px;
+
+        @include apply-to(phone) {
+            font-size: 24px;
+        }
+    }
+
+    h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        line-height: 34px;
+
+        @include apply-to(phone) {
+            font-size: 20px;
+            line-height: 30px;
+        }
+    }
+
+    h4 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        line-height: 30px;
+
+        @include apply-to(phone) {
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom:6px;
+        }
+    }
+
+    h5 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        line-height: 30px;
+
+        @include apply-to(phone) {
+            font-size: 16px;
+        }
+    }
+
+    blockquote{
+        text-align: center;
+        p{
+            font-style: italic;
+            font-size:16px;
+            @include apply-to(phone) {
+                font-size: 14px;
+            }
+        }
+    }
+
+    ul,
+    ol {
+        margin-left: 23px;
+    }
+}

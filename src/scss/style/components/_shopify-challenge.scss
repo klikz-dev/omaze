@@ -1,0 +1,15 @@
+/*
+///////////////////////////////////////////////////////////
+Shopify Challenge (reCAPTCHA)
+///////////////////////////////////////////////////////////
+*/
+.shopify-challenge {
+
+	&__container { // .shopify-challenge__container
+		padding-top: em(50);
+	}
+
+	&__error { // .shopify-challenge__error
+		margin-bottom: 0;
+	}
+}

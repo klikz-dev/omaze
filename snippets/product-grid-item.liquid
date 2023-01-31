@@ -1,0 +1,59 @@
+{% include 'product-data' %}
+
+<a data-oa-id="clickProduct"
+   data-oa-details="product_id:{{ product.id }}" class="oz-simple-card oz-card-experience" href="{{ product.url }}" title="{{ product.title }}">
+
+    <div class="oz-simple-card__img oz-simple-card__section oz-simple-card__section--full-width">
+        <div class="oz-aspect--16-9">
+            <img class="lazyload" data-sizes="auto" data-src="{{ product | img_url: '812x' }}" data-src="{% include 'c-responsive-image-url', responsive_img: product %}" alt="{{ product.image.alt }}">
+        </div>
+
+        {% if productStatus == 'closed' %}
+            {% assign TAG_CLASS = "is-closed-campaign" %}
+            {% if settings.rebrand_active == true %}
+                {% assign TAG_LABEL = "Winner Pending" %}
+                {% else %}
+                {% assign TAG_LABEL = "WINNER PENDING" %}
+            {% endif %}
+            {% if meta.experience.has_winner == "true" %}
+                {% assign TAG_CLASS = "is-closed-campaign see-who-won" %}
+                {% if settings.rebrand_active == true %}
+                    {% assign TAG_LABEL = "See who won!" %}
+                {% else %}
+                    {% assign TAG_LABEL = "SEE WHO WON!" %}
+                {% endif %}
+            {% endif %}
+            <div class="{{ TAG_CLASS }}" data-has-winner="{{ meta.experience.has_winner }}">{{ TAG_LABEL }}</div>
+        {% endif %}
+
+        {% if sweepstakeDatesEnd %}
+            {% assign nowTimestamp = 'now' | date: '%s' %}
+            {% assign endDate = sweepstakeDatesEnd | date: "%s" %}
+            {% assign TWO_DAYS_IN_HOURS = 48 %}
+            {% assign MAX_DAYS_DIFF = 7 %}
+            {% assign timeDifference = endDate | minus: nowTimestamp %}
+            {% assign timeDifference = endDate | minus: nowTimestamp %}
+            {% assign hourDifference = timeDifference | divided_by: 3600.0 | ceil %}
+            {% assign dayDifference = hourDifference | divided_by: 24.0 | ceil %}
+            {% if hourDifference > 0 and dayDifference <= MAX_DAYS_DIFF %}
+                <div class="has-time-remaining-campaign">
+                    {% if hourDifference == 1 %}
+                        {{ hourDifference }} hour left!
+                    {% elsif hourDifference <= TWO_DAYS_IN_HOURS %}
+                        {{ hourDifference }} hours left!
+                    {% elsif dayDifference <= MAX_DAYS_DIFF %}
+                        {{ dayDifference }} days left!
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="oz-simple-card__content oz-simple-card__section">
+        <h4 class="oz-simple-card__sub-title oz-overflow-ellipsis">
+            Support {{ product.vendor }}
+        </h4>
+        <h3 class="oz-simple-card__title">
+            {{- product.title -}}
+        </h3>
+    </div>
+</a>

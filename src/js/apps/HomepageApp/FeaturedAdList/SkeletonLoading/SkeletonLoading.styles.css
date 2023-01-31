@@ -1,0 +1,65 @@
+.headline1 {
+    height: 34px;
+}
+
+.headline2 {
+    height: 34px;
+    margin-top: 10px;
+}
+
+.subtitle1 {
+    height: 18px;
+}
+
+.subtitle2 {
+    height: 18px;
+}
+
+.link {
+    margin-top: 28px;
+    border-radius: 76px;
+}
+
+@screen md {
+    .image {
+        background: #E5E5E5;
+    }
+
+    .headline1 {
+        height: 56px;
+    }
+
+    .headline2 {
+        height: 56px;
+    }
+
+    .subtitle1 {
+        height: 22px;
+    }
+
+    .subtitle2 {
+        height: 22px;
+    }
+
+    .content {
+        top: 50%;
+    }
+}
+
+@screen lg {
+    .headline1 {
+        height: 80px;
+    }
+
+    .headline2 {
+        height: 80px;
+    }
+
+    .subtitle1 {
+        height: 32px;
+    }
+
+    .subtitle2 {
+        height: 32px;
+    }
+}

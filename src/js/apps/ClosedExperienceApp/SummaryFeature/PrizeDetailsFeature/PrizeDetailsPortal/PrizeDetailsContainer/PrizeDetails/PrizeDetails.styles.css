@@ -1,0 +1,113 @@
+.titleContainer {
+    @apply inline-flex;
+}
+
+.title {
+    @apply type-subtitle1 text-black text-center underline;
+
+    letter-spacing: 0.4px;
+    line-height: 19px;
+}
+
+.prizeDetailsContainer {
+    @apply text-center;
+}
+
+.prizeDetailsButton {
+    @apply p-0 mb-2;
+}
+
+.prizeDetailsButton:focus {
+    @apply outline-none;
+}
+
+.prizeDetailsListContainer {
+    @apply mb-2 w-full;
+}
+
+.prizeDetailsListContainer ul {
+    @apply text-left list-disc;
+}
+
+.prizeDetailsListContainer ul > li,
+.prizeDetailsListContainer ul > li > * {
+    @apply type-caption;
+
+    line-height: 18px;
+    color: #000;
+}
+
+.prizeDetailsListContainer a {
+    @apply type-caption underline text-left inline-block w-full mt-2;
+
+    line-height: 18px;
+    color: #000;
+}
+
+.prizeDetailsListContainer br {
+    @apply hidden;
+}
+
+.icon {
+    @apply inline-block ml-1/2 w-1;
+
+    transition: transform 0.3s ease;
+}
+
+.expandIcon {
+    transform: rotate(45deg);
+}
+
+@screen lg {
+    .prizeDetailsListContainer {
+        @apply ml-2;
+    }
+}
+
+/* rebrand css */
+:global(.rebrand) .prizeDetailsButton {
+    margin-bottom: 12px;
+}
+
+:global(.rebrand) .prizeDetailsButton div {
+    padding: 0;
+}
+
+:global(.rebrand) .prizeDetailsCollapse {
+    margin-bottom: 16px;
+}
+
+:global(.rebrand) .title {
+    color: #090F15;
+    font-family: Gellix,Roboto,sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.015rem;
+    font-weight: 700;
+}
+
+:global(.rebrand) .icon {
+    margin-left: 6px;
+}
+
+:global(.rebrand) .prizeDetailsListContainer {
+    margin-bottom: 24px;
+    font-size: 14px;
+    text-align: left;
+}
+
+@screen md {
+    :global(.rebrand) .title {
+        font-size: 14px;
+    }
+}
+
+@screen lg {
+    :global(.rebrand) .prizeDetailsCollapse {
+        margin-bottom: 8px;
+    }
+
+    :global(.rebrand) .prizeDetailsListContainer {
+        @apply ml-0;
+    }
+}

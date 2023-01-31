@@ -1,0 +1,169 @@
+.contact-info-card {
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 $black-1-fade;
+    background-color: $white;
+    padding: 32px 28.5px 29px 24px;
+    margin-bottom: 20px;
+    border: solid 1px $gray-16;
+    width: 344px;
+
+    @include apply-to(desktop) {
+        margin-left: 168px;
+    }
+}
+
+.contact-info-card__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.contact-info-card__header__title {
+    height: 27px;
+    font-family: $primary-font;
+    font-size: 22px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.8px;
+    color: $black-1;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.contact-info-card__name, .contact-info-card__email {
+    margin: 0;
+    padding: 0;
+    height: 21px;
+    font-family: $primary-font;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $black-1;
+}
+
+.contact-info-card__name {
+    margin-top: 15px;
+}
+
+.contact-info-card__email {
+    margin-top: 4px;
+}
+
+.contact-info-card__field {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px 0 0 0;
+}
+
+.contact-info-card__field__label {
+    height: 17px;
+    font-family: $primary-font;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $black-1;
+    margin: 0px 0 4px 0;
+    text-transform: capitalize;
+}
+
+.contact-info-card__field__value {
+    height: 21px;
+    font-family: $primary-font;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $black-1;
+    margin: 4px 0 0 0;
+}
+
+// reset password card
+.reset-password-card {
+    font-family: $primary-font;
+    height: 153px;
+    width: 344px;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border: solid 1px $gray-16;
+    background-color: $white;
+    padding: 32px 28.5px 40px 24px;
+
+    @include apply-to(desktop) {
+        margin-left: 168px;
+    }
+}
+
+.reset-password-card__header {
+    padding: 0;
+    text-transform: uppercase;
+    height: 27px;
+    font-family: $primary-font;
+    font-size: 22px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.8px;
+    color: $black-2;
+}
+
+.reset-password-card__field {
+    padding: 0;
+    text-transform: capitalize;
+}
+
+.reset-password-card__label {
+    margin: 20px 0 6px 0;
+    font-size: 14px;
+    font-family: $primary-font;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $black-2;
+}
+
+.reset-password-card__value {
+    margin: 6px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.reset-password-card__value__text {
+    font-family: $primary-font;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 3.8px;
+    color: $black-2;
+    margin: 0;
+}
+
+.reset-password-card__value__action {
+    width: 95px;
+    height: 17px;
+    font-family: $primary-font;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $pink-6;
+    text-transform: capitalize;
+    cursor: pointer;
+}

@@ -1,0 +1,29 @@
+<section>
+  <div class="transparency__content-block">
+    {% for block in section.blocks %}
+      {% assign currentBlockIndex = forloop.index | minus: 1 %}
+      {% assign ContentBlockText = block.settings.content_block %}
+      {% include 'transparency-block-handler' %}
+      <p class="block-{{ currentBlockIndex }}"></p>
+    {% endfor %}
+  </div>
+</section>
+ 
+{% schema %}
+{
+	"name": "Transparency: Block",
+  "blocks": [
+    {
+      "name": "Content Block",
+      "type": "content-block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "content_block",
+          "label": "Content Block"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
